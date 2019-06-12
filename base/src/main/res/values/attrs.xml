@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="BaseErrView">
+        <attr name="image_src" format="reference"/>
+
+        <attr name="title_str" format="string"/>
+        <attr name="title_color" format="color"/>
+        <attr name="title_size" format="dimension"/>
+
+        <attr name="content_str" format="string"/>
+        <attr name="content_color" format="color"/>
+        <attr name="content_size" format="dimension"/>
+
+        <attr name="btn_text" format="string"/>
+        <attr name="btn_shape" format="reference"/>
+        <attr name="btn_text_size" format="dimension"/>
+        <attr name="btn_text_color" format="color"/>
+    </declare-styleable>
+</resources>

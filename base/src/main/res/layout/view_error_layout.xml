@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:parentTag="android.widget.LinearLayout"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_err"
+        android:layout_width="wrap_content"
+        android:src="@drawable/wifi_icon"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_err_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:textColor="#a1abbc"
+        android:text="网络错误"/>
+
+    <TextView
+        android:id="@+id/tv_err_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="13sp"
+        android:textColor="#a1abbc"
+        android:text="请检查是否打开网络"/>
+
+    <Button
+        android:id="@+id/btn_err"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="刷新"
+        android:background="@drawable/rect_bf3f4f6_r2"
+        android:textColor="#333333"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>
