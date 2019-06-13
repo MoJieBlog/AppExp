@@ -17,9 +17,10 @@ ext {
     extMultidex = "com.android.support:multidex:1.0.3"
     // okhttp 依赖
     extOkhttp = 'com.squareup.okhttp3:okhttp:3.14.0'
+
     // glide 依赖
-    extGlide = "com.github.bumptech.glide:glide:4.8.0"
-    extGlideCompiler = "com.github.bumptech.glide:compiler:4.8.0"
+    extGlide  = 'com.github.bumptech.glide:glide:4.5.0'
+    extGlideCompiler = 'com.github.bumptech.glide:compiler:4.5.0'
     // Rx
     extRxJava = 'io.reactivex.rxjava2:rxjava:2.2.7'
     extRxAndroid = 'io.reactivex.rxjava2:rxandroid:2.1.1'

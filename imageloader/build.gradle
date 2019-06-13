@@ -1,32 +1,32 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
+
+
     defaultConfig {
-        applicationId "com.lzp.appexp"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation extAppcompatV7
-    implementation extConstraint
-
-    implementation extEventBus
-    implementation project(path: ':utils')
-
-
     implementation extGlide
     annotationProcessor extGlideCompiler
 }

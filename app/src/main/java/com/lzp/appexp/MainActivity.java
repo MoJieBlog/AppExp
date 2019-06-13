@@ -20,31 +20,5 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP, new PermissionListenerAdapter() {
-            @Override
-            public void onGranted() {
-                super.onGranted();
-                LogUtils.e(TAG,"获取权限成功");
-            }
-
-            /*@Override
-            public void onDenied(List<String> deniedPermissions) {
-                super.onDenied(deniedPermissions);
-                LogUtils.e(TAG,"获取权限失败");
-            }*/
-        });
-
-        PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP, new PermissionListener() {
-            @Override
-            public void onGranted() {
-                LogUtils.e(TAG,"获取权限成功");
-            }
-
-            @Override
-            public void onDenied(List<String> deniedPermissions) {
-                LogUtils.e(TAG,"获取权限失败");
-            }
-        });
     }
 }
