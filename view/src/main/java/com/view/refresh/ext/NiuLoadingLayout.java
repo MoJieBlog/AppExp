@@ -194,7 +194,7 @@ public class NiuLoadingLayout extends View {
         paint = new TextPaint();
         paint.setColor(paintColor);
         paint.setStrokeWidth(5);
-        paint.setTextSize(80f);
+        paint.setTextSize(120f);
         paint.setAntiAlias(true);
         paint.setStrokeCap(Paint.Cap.ROUND);//设置画笔末端为圆形 BUTT：无线帽   ROUND：圆形线帽    SQUARE：方形线帽
         paint.setStrokeJoin(Paint.Join.ROUND);//设置画笔转弯处我圆形 MITER：锐角 ROUND：圆弧  BEVEL：斜线
