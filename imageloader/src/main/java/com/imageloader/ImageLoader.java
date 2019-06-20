@@ -37,10 +37,6 @@ public class ImageLoader implements ILoader,IImageLoader{
         ImageLoader.application = application;
     }
 
-    @Override
-    public IImageLoader load(String url) {
-        return null;
-    }
 
     @Override
     public IImageLoader into(View view) {
@@ -73,7 +69,7 @@ public class ImageLoader implements ILoader,IImageLoader{
     }
 
     @Override
-    public IImageLoader listener(LoadListener listener) {
+    public IImageLoader listener(IMGLoadListener listener) {
         return null;
     }
 
@@ -104,6 +100,11 @@ public class ImageLoader implements ILoader,IImageLoader{
 
     @Override
     public IImageLoader<File> asFile() {
+        return null;
+    }
+
+    @Override
+    public ILoader load(String url) {
         return null;
     }
 

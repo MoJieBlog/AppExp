@@ -12,11 +12,12 @@ import java.io.File;
  */
 public interface ILoader {
 
+    IImageLoader<Bitmap> load(String url);
+
     IImageLoader<Bitmap> asBitmap();
     IImageLoader<Drawable> asDrawable();
     IImageLoader<Gif> asGif();
     IImageLoader<File> asFile();
-
 
     //功能，设置网络请求
     ILoader setRequestClient();

@@ -8,7 +8,7 @@ import android.view.View;
 import com.imageloader.Gif;
 import com.imageloader.IImageLoader;
 import com.imageloader.ILoader;
-import com.imageloader.LoadListener;
+import com.imageloader.IMGLoadListener;
 
 import java.io.File;
 
@@ -28,10 +28,6 @@ public class GlideLoader implements ILoader,IImageLoader {
     private GlideLoader() {
     }
 
-    @Override
-    public IImageLoader load(String url) {
-        return null;
-    }
 
     @Override
     public IImageLoader into(View view) {
@@ -64,7 +60,7 @@ public class GlideLoader implements ILoader,IImageLoader {
     }
 
     @Override
-    public IImageLoader listener(LoadListener listener) {
+    public IImageLoader listener(IMGLoadListener listener) {
         return null;
     }
 
@@ -95,6 +91,11 @@ public class GlideLoader implements ILoader,IImageLoader {
 
     @Override
     public IImageLoader<File> asFile() {
+        return null;
+    }
+
+    @Override
+    public ILoader load(String url) {
         return null;
     }
 

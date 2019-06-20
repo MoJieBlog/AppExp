@@ -29,5 +29,6 @@ dependencies {
 
     implementation extAnnotations
     implementation extGlide
+    implementation extOkhttp
     annotationProcessor extGlideCompiler
 }

@@ -1,6 +1,7 @@
 package com.imageloader;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 /**
  * @describe
@@ -9,6 +10,33 @@ import android.content.Context;
  */
 public class Test {
     void test(Context context){
-        ImageLoader.with(context);
+
+        ImageLoader.get(context).asBitmap().listener(new IMGLoadListener<Bitmap>() {
+            @Override
+            public void success(Bitmap bitmap) {
+
+            }
+
+            @Override
+            public void fail(Exception e) {
+
+            }
+        });
+
+        ImageLoader.get(context).load("").listener(new IMGLoadListener<Bitmap>() {
+            @Override
+            public void success(Bitmap bitmap) {
+
+            }
+
+            @Override
+            public void fail(Exception e) {
+
+            }
+        });
+
     }
+
+
+
 }

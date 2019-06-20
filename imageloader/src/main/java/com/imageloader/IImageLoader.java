@@ -9,16 +9,15 @@ import android.view.View;
  */
 public interface IImageLoader<T> {
 
-   // void displayImage(Context context, String url, View view,int errHolder,int placeHolder,boolean needCache);
-
-    IImageLoader load(String url);
+    IImageLoader<T> load(String url);
     IImageLoader into(View view);
     IImageLoader placeHolder(int res);
     IImageLoader errHolder(int res);
     IImageLoader width(int width);
     IImageLoader height(int height);
     IImageLoader skipMemory(int needMemory);
-    IImageLoader<T> listener(LoadListener<T> listener);
+
+    IImageLoader<T> listener(IMGLoadListener<T> listener);
     void display();
     void load();
 }

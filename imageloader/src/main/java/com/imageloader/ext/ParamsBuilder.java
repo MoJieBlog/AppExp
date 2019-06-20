@@ -2,7 +2,7 @@ package com.imageloader.ext;
 
 import android.view.View;
 
-import com.imageloader.LoadListener;
+import com.imageloader.IMGLoadListener;
 
 /**
  * @describe
@@ -18,5 +18,5 @@ public class ParamsBuilder<T> {
     int width;
     int height;
     boolean skipMemory;
-    LoadListener<T> loadListener;
+    IMGLoadListener<T> loadListener;
 }
