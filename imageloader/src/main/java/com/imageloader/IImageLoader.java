@@ -15,9 +15,10 @@ public interface IImageLoader<T> {
     IImageLoader errHolder(int res);
     IImageLoader width(int width);
     IImageLoader height(int height);
-    IImageLoader skipMemory(int needMemory);
+    IImageLoader skipMemory(boolean needMemory);
 
     IImageLoader<T> listener(IMGLoadListener<T> listener);
     void display();
     void load();
+
 }

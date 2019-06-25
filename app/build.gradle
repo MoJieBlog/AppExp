@@ -26,9 +26,8 @@ dependencies {
     implementation extEventBus
     implementation project(path: ':utils')
     implementation project(path: ':view')
+    implementation project(path: ':imageloader')
 
     implementation extAnnotations
-    implementation extGlide
     implementation extOkhttp
-    annotationProcessor extGlideCompiler
 }

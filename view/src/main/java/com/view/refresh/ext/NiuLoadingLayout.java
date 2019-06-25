@@ -30,7 +30,7 @@ public class NiuLoadingLayout extends View {
     private int paintColor = Color.RED;
 
    // private String content = "\uE906";//公司字体要钱
-    private String content = "GO";
+    private String content = "NIU";
 
     private Path textPath,//文字的path
             dstPath;//已画出部分的path

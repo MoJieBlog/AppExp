@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.imageloader.Gif;
 import com.imageloader.IImageLoader;
 import com.imageloader.ILoader;
 import com.imageloader.IMGLoadListener;
+import com.imageloader.ImageLoaderConfig;
 
 import java.io.File;
 
@@ -20,48 +22,58 @@ import java.io.File;
 public class GlideLoader implements ILoader,IImageLoader {
 
 
+    private ParamsBuilder paramsBuilder;
+
     public static GlideLoader get(Context context){
-        //paramBuilder.context(context);
-        return new GlideLoader();
+        return new GlideLoader(context);
     }
 
-    private GlideLoader() {
+    private GlideLoader(Context context) {
+        paramsBuilder = new ParamsBuilder();
+        paramsBuilder.context = context;
     }
 
 
     @Override
     public IImageLoader into(View view) {
-        return null;
+        paramsBuilder.view = view;
+        return this;
     }
 
     @Override
     public IImageLoader placeHolder(int res) {
-        return null;
+        paramsBuilder.placeHolder = res;
+        return this;
     }
 
     @Override
     public IImageLoader errHolder(int res) {
-        return null;
+        paramsBuilder.errHolder = res;
+        return this;
     }
 
     @Override
     public IImageLoader width(int width) {
-        return null;
+        paramsBuilder.width = width;
+        return this;
     }
 
     @Override
     public IImageLoader height(int height) {
-        return null;
+        paramsBuilder.height = height;
+        return this;
     }
 
     @Override
-    public IImageLoader skipMemory(int needMemory) {
-        return null;
+    public IImageLoader skipMemory(boolean needMemory) {
+        paramsBuilder.skipMemory = needMemory;
+        return this;
     }
 
     @Override
     public IImageLoader listener(IMGLoadListener listener) {
-        return null;
+        paramsBuilder.loadListener = listener;
+        return this;
     }
 
     @Override
@@ -75,62 +87,51 @@ public class GlideLoader implements ILoader,IImageLoader {
     }
 
     @Override
+    public IImageLoader<Bitmap> load(String url) {
+        paramsBuilder.url = url;
+        return this;
+    }
+
+    @Override
     public IImageLoader<Bitmap> asBitmap() {
-        return null;
+        paramsBuilder.imgType = ParamsBuilder.ImgType.Bitmap;
+        return this;
     }
 
     @Override
     public IImageLoader<Drawable> asDrawable() {
-        return null;
+        paramsBuilder.imgType = ParamsBuilder.ImgType.Drawable;
+        return this;
     }
 
     @Override
     public IImageLoader<Gif> asGif() {
-        return null;
+        paramsBuilder.imgType = ParamsBuilder.ImgType.Gif;
+        return this;
     }
 
     @Override
     public IImageLoader<File> asFile() {
-        return null;
+        paramsBuilder.imgType = ParamsBuilder.ImgType.File;
+        return this;
     }
 
     @Override
-    public ILoader load(String url) {
-        return null;
+    public void clearCache() {
+        Glide.get(paramsBuilder.context).clearDiskCache();
+        Glide.get(paramsBuilder.context).clearMemory();
     }
 
     @Override
-    public ILoader setRequestClient() {
+    public void init(ImageLoaderConfig config) {
+        //TODO 初始化
+    }
+
+
+    @Override
+    public String getDiskCachePath() {
         return null;
     }
 
-    @Override
-    public ILoader setCacheRule() {
-        return null;
-    }
 
-    @Override
-    public ILoader clearCache() {
-        return null;
-    }
-
-    @Override
-    public ILoader setMaxMemoryCacheSize() {
-        return null;
-    }
-
-    @Override
-    public ILoader setMaxDiskCacheSize() {
-        return null;
-    }
-
-    @Override
-    public ILoader getDiskCachePath() {
-        return null;
-    }
-
-    @Override
-    public ILoader setDiskCachePath() {
-        return null;
-    }
 }

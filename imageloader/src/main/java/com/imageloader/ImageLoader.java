@@ -1,6 +1,5 @@
 package com.imageloader;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -15,131 +14,103 @@ import java.io.File;
  * @author: lixiaopeng
  * @Date: 2019-06-13
  */
-public class ImageLoader implements ILoader,IImageLoader{
+public class ImageLoader implements ILoader{
 
-    private static Application application;
-
-
-    private static ILoader loader;
+    private ILoader loader;
 
 
-    public static ILoader get(Context context){
+
+    public static ImageLoader get(Context context){
+        return new ImageLoader(context);
+    }
+
+
+    private ImageLoader(Context context) {
         loader = GlideLoader.get(context);
-        return loader;
-    }
-
-
-    private ImageLoader() {
-    }
-
-
-    public static void init(Application application) {
-        ImageLoader.application = application;
-    }
-
-
-    @Override
-    public IImageLoader into(View view) {
-        return null;
     }
 
     @Override
-    public IImageLoader placeHolder(int res) {
-        return null;
+    public void init(ImageLoaderConfig config) {
+        loader.init(config);
     }
 
     @Override
-    public IImageLoader errHolder(int res) {
-        return null;
-    }
-
-    @Override
-    public IImageLoader width(int width) {
-        return null;
-    }
-
-    @Override
-    public IImageLoader height(int height) {
-        return null;
-    }
-
-    @Override
-    public IImageLoader skipMemory(int needMemory) {
-        return null;
-    }
-
-    @Override
-    public IImageLoader listener(IMGLoadListener listener) {
-        return null;
-    }
-
-    @Override
-    public void display() {
-
-    }
-
-    @Override
-    public void load() {
-
+    public IImageLoader<Bitmap> load(String url) {
+        return loader.load(url);
     }
 
     @Override
     public IImageLoader<Bitmap> asBitmap() {
-        return null;
+        return loader.asBitmap();
     }
 
     @Override
     public IImageLoader<Drawable> asDrawable() {
-        return null;
+        return loader.asDrawable();
     }
 
     @Override
     public IImageLoader<Gif> asGif() {
-        return null;
+        return loader.asGif();
     }
 
     @Override
     public IImageLoader<File> asFile() {
-        return null;
+        return loader.asFile();
     }
 
     @Override
-    public ILoader load(String url) {
-        return null;
+    public void clearCache() {
+        loader.clearCache();
     }
 
     @Override
-    public ILoader setRequestClient() {
-        return null;
+    public String getDiskCachePath() {
+        return loader.getDiskCachePath();
     }
 
     @Override
-    public ILoader setCacheRule() {
-        return null;
+    public IImageLoader into(View view) {
+        return loader.into(view);
     }
 
     @Override
-    public ILoader clearCache() {
-        return null;
+    public IImageLoader placeHolder(int res) {
+        return loader.placeHolder(res);
     }
 
     @Override
-    public ILoader setMaxMemoryCacheSize() {
-        return null;
+    public IImageLoader errHolder(int res) {
+        return loader.errHolder(res);
     }
 
     @Override
-    public ILoader setMaxDiskCacheSize() {
-        return null;
+    public IImageLoader width(int width) {
+        return loader.width(width);
     }
 
     @Override
-    public ILoader getDiskCachePath() {
-        return null;
+    public IImageLoader height(int height) {
+        return loader.height(height);
     }
 
     @Override
-    public ILoader setDiskCachePath() {
-        return null;
+    public IImageLoader skipMemory(boolean needMemory) {
+        return loader.skipMemory(needMemory);
+    }
+
+    @Override
+    public IImageLoader listener(IMGLoadListener listener) {
+        return loader.listener(listener);
+    }
+
+    @Override
+    public void display() {
+        loader.display();
+    }
+
+    @Override
+    public void load() {
+        loader.load();
     }
 }

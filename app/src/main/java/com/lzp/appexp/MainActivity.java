@@ -1,16 +1,16 @@
 package com.lzp.appexp;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.imageloader.ImageLoader;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.ext.NiuLoadingLayout;
 
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     NiuLoadingLayout niuLoadingLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,21 +32,26 @@ public class MainActivity extends AppCompatActivity {
         niuLoadingLayout = findViewById(R.id.niu);
 
 
-        GlideRequests with = GlideApp.with(this);
-        GlideRequest<Bitmap> bitmapGlideRequest = GlideApp.with(this).asBitmap();
+        ImageView imageView = findViewById(R.id.iv);
 
+        ImageLoader.get(this)
+                .load("http://pic37.nipic.com/20140113/8800276_184927469000_2.png")
+                .placeHolder(R.mipmap.ic_launcher_round)
+                .errHolder(R.mipmap.ic_launcher_round)
+                .into(imageView)
+                .display();
 
-        GlideApp.with(this).asBitmap().load("");
-
-
-
-
+        ImageLoader.get(this)
+                .asBitmap()
+                .load("")
+                .listener(null)
+                .load();
 
 
         findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // niuLoadingLayout.start();
+                // niuLoadingLayout.start();
             }
         });
 
@@ -61,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         refreshLayout.stopRefresh();
                     }
-                },5000);
+                }, 5000);
             }
         });
 
@@ -82,10 +88,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        /*List<Call> calls = okHttpClient.dispatcher().queuedCalls();
-        Call call = calls.get(0);
-        Request request = call.request();
-        Object tag = request.tag();
-        call.cancel();*/
     }
 }
