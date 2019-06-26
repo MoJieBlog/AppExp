@@ -10,14 +10,6 @@ import com.imageloader.ImageLoader;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.ext.NiuLoadingLayout;
 
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -33,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         ImageView imageView = findViewById(R.id.iv);
+
 
         ImageLoader.get(this)
                 .load("http://pic37.nipic.com/20140113/8800276_184927469000_2.png")
@@ -71,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        OkHttpClient okHttpClient = new OkHttpClient();
+        /*OkHttpClient okHttpClient = new OkHttpClient();
 
         Request request = new Request.Builder().url("").tag("").build();
         Call call = okHttpClient.newCall(request);
@@ -85,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
 
             }
-        });
+        });*/
 
 
     }

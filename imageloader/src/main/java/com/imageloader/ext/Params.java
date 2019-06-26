@@ -10,7 +10,7 @@ import com.imageloader.IMGLoadListener;
  * @author: lixiaopeng
  * @Date: 2019-06-14
  */
-public class ParamsBuilder {
+public class Params {
 
     Context context;
     String url;
@@ -23,6 +23,10 @@ public class ParamsBuilder {
     IMGLoadListener loadListener;
     int imgType;
 
+
+    public Params() {
+
+    }
 
     public Context getContext() {
         return context;

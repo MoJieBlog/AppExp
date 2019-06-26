@@ -29,5 +29,6 @@ dependencies {
     implementation project(path: ':imageloader')
 
     implementation extAnnotations
-    implementation extOkhttp
+    implementation extGlide
+    annotationProcessor extGlideCompiler
 }

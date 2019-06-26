@@ -32,7 +32,10 @@ public class DefaultRefreshLayout extends LoadingLayout {
     public void init() {
         loadingLayout = new NiuLoadingLayout(getContext());
         loadingLayout.setVisibility(VISIBLE);
-        animViewWidth = animViewHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60,
+        animViewHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60,
+                mResources.getDisplayMetrics());
+
+        animViewWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100,
                 mResources.getDisplayMetrics());
         LayoutParams lp = new LayoutParams(animViewWidth, animViewHeight);
         lp.gravity = Gravity.CENTER;
@@ -52,19 +55,19 @@ public class DefaultRefreshLayout extends LoadingLayout {
 
     @Override
     public void onMove(float moveOffset, boolean isRefreshing) {
-        if (loadingLayout!=null)
-        loadingLayout.startAnimation((int) (moveOffset*100/animViewHeight));
+        if (loadingLayout != null)
+            loadingLayout.startAnimation((int) (moveOffset * 100 / animViewHeight));
     }
 
     @Override
     public void onRefreshing() {
-        if (loadingLayout!=null)
-        loadingLayout.repeatAnimation();
+        if (loadingLayout != null)
+            loadingLayout.repeatAnimation();
     }
 
     @Override
     public void onRefreshFinish() {
-        if (loadingLayout!=null)
+        if (loadingLayout != null)
             loadingLayout.stopAnimation();
     }
 
