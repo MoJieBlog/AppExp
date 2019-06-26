@@ -15,13 +15,13 @@ public class Params {
     Context context;
     String url;
     View view;
-    int placeHolder;
-    int errHolder;
+    int placeHolder = 0;
+    int errHolder = 0;
     int width;
     int height;
-    boolean skipMemory;
+    boolean skipMemory = false;
     IMGLoadListener loadListener;
-    int imgType;
+    int imgType = ImgType.Drawable;
 
 
     public Params() {

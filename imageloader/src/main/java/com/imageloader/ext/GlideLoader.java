@@ -3,7 +3,6 @@ package com.imageloader.ext;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -94,29 +93,55 @@ public class GlideLoader implements ILoader, IImageLoader {
     @SuppressLint("CheckResult")
     @Override
     public void display() {
-        RequestOptions opt = new RequestOptions()
-                .diskCacheStrategy(params.skipMemory ? DiskCacheStrategy.NONE : DiskCacheStrategy.RESOURCE)
-                .skipMemoryCache(params.skipMemory);
-
-        RequestManager manager = Glide.with(params.context);
-        if (params.imgType==Params.ImgType.Bitmap){
-            RequestBuilder<Bitmap> bitmapRequestBuilder = manager
-                    .asBitmap()
-                    .load(params.url)
-                    .apply(opt);
-
-            if (params.view instanceof ImageView){
-                bitmapRequestBuilder.into((ImageView) params.view);
-            }else{
-                bitmapRequestBuilder.into(new ViewTarget<View,Bitmap>(params.view) {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap bitmap, @Nullable Transition<? super Bitmap> transition) {
-                        params.view.setBackground(new BitmapDrawable(params.view.getResources(),bitmap));
-                    }
-                });
-            }
+        RequestOptions opt = new RequestOptions();
+        opt.diskCacheStrategy(params.skipMemory ? DiskCacheStrategy.NONE : DiskCacheStrategy.RESOURCE);
+        opt.skipMemoryCache(params.skipMemory);
+        if (params.placeHolder!=0){
+            opt.placeholder(params.placeHolder);
         }
-        // .apply(opt);
+
+        if (params.errHolder!=0){
+            opt.error(params.errHolder);
+        }
+
+        if (params.width!=0&&params.height!=0){
+            opt.override(params.width, params.height);
+        }
+
+
+        RequestManager with = Glide.with(params.context);
+
+        RequestBuilder requestBuilder = with.load(params.url).apply(opt);
+
+       // RequestBuilder<Drawable> requestBuilder = with.load(params.url).apply(opt);
+
+        /*if (params.loadListener!=null){
+            requestBuilder.listener(new RequestListener<imgType>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                    params.loadListener.fail(e);
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                    params.loadListener.success(drawable);
+                    return false;
+                }
+            });
+        }*/
+
+
+        if (params.view instanceof ImageView) {
+            requestBuilder.into((ImageView) params.view);
+        } else {
+            requestBuilder.into(new ViewTarget<View, Drawable>(params.view) {
+                @Override
+                public void onResourceReady(@NonNull Drawable drawable, @Nullable Transition transition) {
+                    params.view.setBackground(drawable);
+                }
+            });
+        }
     }
 
     @Override
