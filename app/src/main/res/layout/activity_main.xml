@@ -36,6 +36,12 @@
                     android:layout_height="100dp"
                     android:scaleType="centerCrop"
                     android:id="@+id/iv"/>
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/iv1"/>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </com.view.refresh.SwipeRefreshLayout>

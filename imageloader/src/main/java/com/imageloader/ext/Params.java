@@ -21,7 +21,6 @@ public class Params {
     int height;
     boolean skipMemory = false;
     IMGLoadListener loadListener;
-    int imgType = ImgType.Drawable;
 
 
     public Params() {
@@ -62,16 +61,5 @@ public class Params {
 
     public IMGLoadListener getLoadListener() {
         return loadListener;
-    }
-
-    public int getImgType() {
-        return imgType;
-    }
-
-    interface ImgType{
-        int Bitmap = 1;
-        int Drawable = 2;
-        int Gif = 3;
-        int File = 4;
     }
 }

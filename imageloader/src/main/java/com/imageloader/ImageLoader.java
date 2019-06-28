@@ -1,7 +1,6 @@
 package com.imageloader;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
@@ -35,33 +34,13 @@ public class ImageLoader implements ILoader{
     }
 
     @Override
-    public IImageLoader<Bitmap> load(String url) {
-        return loader.load(url);
-    }
-
-    @Override
-    public IImageLoader<Bitmap> asBitmap() {
-        return loader.asBitmap();
-    }
-
-    @Override
-    public IImageLoader<Drawable> asDrawable() {
-        return loader.asDrawable();
-    }
-
-    @Override
-    public IImageLoader<Gif> asGif() {
-        return loader.asGif();
-    }
-
-    @Override
-    public IImageLoader<File> asFile() {
-        return loader.asFile();
-    }
-
-    @Override
     public void clearCache() {
         loader.clearCache();
+    }
+
+    @Override
+    public IImageLoader load(String url) {
+        return loader.load(url);
     }
 
     @Override
@@ -100,17 +79,22 @@ public class ImageLoader implements ILoader{
     }
 
     @Override
-    public IImageLoader listener(IMGLoadListener listener) {
-        return loader.listener(listener);
-    }
-
-    @Override
     public void display() {
         loader.display();
     }
 
     @Override
-    public void load() {
-        loader.load();
+    public void download() {
+        loader.download();
+    }
+
+    @Override
+    public void download(IMGLoadListener<File> listener) {
+        loader.download(listener);
+    }
+
+    @Override
+    public void display(IMGLoadListener<Drawable> listener) {
+        loader.display(listener);
     }
 }

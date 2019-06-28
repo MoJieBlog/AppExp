@@ -1,14 +1,28 @@
 package com.lzp.appexp;
 
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.imageloader.IMGLoadListener;
 import com.imageloader.ImageLoader;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.ext.NiuLoadingLayout;
+
+import java.io.File;
+import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,20 +39,34 @@ public class MainActivity extends AppCompatActivity {
 
 
         ImageView imageView = findViewById(R.id.iv);
+        final ImageView imageView1 = findViewById(R.id.iv1);
+        final String url = "http://pic37.nipic.com/20140113/8800276_184927469000_2.png";
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Glide.with(MainActivity.this).asFile()
+                            .load(new URL(url))
+                            .listener(new RequestListener<File>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<File> target, boolean b) {
+                            Log.e(TAG, "onLoadFailed: ");
+                            return false;
+                        }
 
-        ImageLoader.get(this)
-                .load("http://pic37.nipic.com/20140113/8800276_184927469000_2.png")
-                .placeHolder(R.mipmap.ic_launcher_round)
-                .errHolder(R.mipmap.ic_launcher_round)
-                .into(imageView)
-                .display();
+                        @Override
+                        public boolean onResourceReady(File file, Object o, Target<File> target, DataSource dataSource, boolean b) {
+                            Log.e(TAG, "onResourceReady: "+file.getPath());
+                            return false;
+                        }
+                    }).submit(100,100);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
-        ImageLoader.get(this)
-                .asBitmap()
-                .load("")
-                .listener(null)
-                .load();
 
 
         findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {

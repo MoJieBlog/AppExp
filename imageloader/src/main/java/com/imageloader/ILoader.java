@@ -1,10 +1,5 @@
 package com.imageloader;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-
-import java.io.File;
-
 /**
  * @describe
  * @author: lixiaopeng
@@ -12,15 +7,7 @@ import java.io.File;
  */
 public interface ILoader extends IImageLoader {
 
-    IImageLoader<Bitmap> load(String url);
-
-    IImageLoader<Bitmap> asBitmap();
-
-    IImageLoader<Drawable> asDrawable();
-
-    IImageLoader<Gif> asGif();
-
-    IImageLoader<File> asFile();
+    IImageLoader load(String url);
 
     //功能，获取硬盘缓存路径
     String getDiskCachePath();
