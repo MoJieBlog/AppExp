@@ -147,9 +147,15 @@ public class GlideLoader implements ILoader, IImageLoader {
 
     @Override
     public void download(final IMGLoadListener<File> listener) {
+        RequestOptions opt = new RequestOptions();
+       // opt.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+        if (params.width != 0 && params.height != 0) {
+            opt.override(params.width, params.height);
+        }
 
         RequestBuilder<File> apply = Glide.with(params.context)
                 .asFile()
+                .apply(opt)
                 .load(params.url);
 
         if (listener != null) {
@@ -167,16 +173,7 @@ public class GlideLoader implements ILoader, IImageLoader {
                 }
             });
         }
-
-        try {
-            if (params.width != 0 && params.height != 0) {
-                apply.submit(params.width, params.height).get();
-            } else {
-                apply.submit().get();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        apply.submit();
     }
 
     @Override

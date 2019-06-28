@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.imageloader.IMGLoadListener;
 import com.imageloader.ImageLoader;
@@ -46,8 +47,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
+
+                   /* RequestOptions opt = new RequestOptions();
                     Glide.with(MainActivity.this).asFile()
-                            .load(new URL(url))
+                            .apply(opt)
+                            .load(url)
                             .listener(new RequestListener<File>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<File> target, boolean b) {
@@ -60,7 +64,20 @@ public class MainActivity extends AppCompatActivity {
                             Log.e(TAG, "onResourceReady: "+file.getPath());
                             return false;
                         }
-                    }).submit(100,100);
+                    }).submit();*/
+
+                    ImageLoader.get(MainActivity.this).load(url)
+                            .download(new IMGLoadListener<File>() {
+                        @Override
+                        public void success(File file) {
+                            Log.e(TAG, "onResourceReady: "+file.getPath());
+                        }
+
+                        @Override
+                        public void fail(Exception e) {
+                            Log.e(TAG, "onLoadFailed: ");
+                        }
+                    });
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
