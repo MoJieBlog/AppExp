@@ -13,6 +13,7 @@
 
 ### 期待书写方式
 #### 配置选项，初始化
+可以自由搭配选项，不搭配使用默认选项
 ```java
         ImageLoaderConfig config = new ImageLoaderConfig.ImageLoaderConfigBuilder()
                 .setCacheRule(null)
@@ -25,6 +26,7 @@
 
 ```
 #### 图片下载
+可以自由搭配，不搭配使用默认
 ```java
 ImageLoader.get(this)
            .load(url)
@@ -41,6 +43,7 @@ ImageLoader.get(this)
        }).load();
 ```
 #### 图片展示
+自由搭配
 ```java
 ImageLoader.get(context)
            .display(url)
