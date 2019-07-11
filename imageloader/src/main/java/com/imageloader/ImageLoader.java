@@ -1,100 +1,53 @@
 package com.imageloader;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.view.View;
 
-import com.imageloader.ext.GlideLoader;
-
-import java.io.File;
+import com.imageloader.ext.GlideImageLoader;
+import com.imageloader.interfaces.IDisplay;
+import com.imageloader.interfaces.IImageLoader;
+import com.imageloader.interfaces.ILoader;
 
 /**
  * @describe
  * @author: lixiaopeng
  * @Date: 2019-06-13
  */
-public class ImageLoader implements ILoader{
+public class ImageLoader implements IImageLoader{
 
-    private ILoader loader;
+    private IImageLoader imageLoader;
 
-
-
-    public static ImageLoader get(Context context){
+    public static IImageLoader get(Context context){
         return new ImageLoader(context);
     }
 
-
     private ImageLoader(Context context) {
-        loader = GlideLoader.get(context);
+        imageLoader = GlideImageLoader.get(context);
+    }
+
+
+    @Override
+    public ILoader load(String url) {
+        return imageLoader.load(url);
     }
 
     @Override
-    public void init(ImageLoaderConfig config) {
-        loader.init(config);
-    }
-
-    @Override
-    public void clearCache() {
-        loader.clearCache();
-    }
-
-    @Override
-    public IImageLoader load(String url) {
-        return loader.load(url);
+    public IDisplay display(String url) {
+        return imageLoader.display(url);
     }
 
     @Override
     public String getDiskCachePath() {
-        return loader.getDiskCachePath();
+        return imageLoader.getDiskCachePath();
     }
 
     @Override
-    public IImageLoader into(View view) {
-        return loader.into(view);
+    public void clearCache() {
+        imageLoader.clearCache();
     }
 
     @Override
-    public IImageLoader placeHolder(int res) {
-        return loader.placeHolder(res);
+    public void init(ImageLoaderConfig config) {
+        imageLoader.init(config);
     }
 
-    @Override
-    public IImageLoader errHolder(int res) {
-        return loader.errHolder(res);
-    }
-
-    @Override
-    public IImageLoader width(int width) {
-        return loader.width(width);
-    }
-
-    @Override
-    public IImageLoader height(int height) {
-        return loader.height(height);
-    }
-
-    @Override
-    public IImageLoader skipMemory(boolean needMemory) {
-        return loader.skipMemory(needMemory);
-    }
-
-    @Override
-    public void display() {
-        loader.display();
-    }
-
-    @Override
-    public void download() {
-        loader.download();
-    }
-
-    @Override
-    public void download(IMGLoadListener<File> listener) {
-        loader.download(listener);
-    }
-
-    @Override
-    public void display(IMGLoadListener<Drawable> listener) {
-        loader.display(listener);
-    }
 }

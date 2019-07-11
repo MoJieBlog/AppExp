@@ -26,17 +26,14 @@ public final class PermissionUtils {
      * @param permissions 权限集合
      */
     public static boolean hasPermissions(Activity activity, String[] permissions) {
-        List<String> deniedPermissions = new ArrayList<>();
+        boolean hasPer = true;
         for (String permission : permissions) {
             if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
-                deniedPermissions.add(permission);
+                hasPer = false;
+                break;
             }
         }
-        if (deniedPermissions.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return hasPer;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.imageloader;
+package com.imageloader.interfaces;
 
 /**
  * @describe

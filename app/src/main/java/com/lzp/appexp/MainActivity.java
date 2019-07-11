@@ -1,130 +1,145 @@
 package com.lzp.appexp;
 
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
-import com.imageloader.IMGLoadListener;
+import com.imageloader.interfaces.IMGLoadListener;
 import com.imageloader.ImageLoader;
+import com.utils.permission.PermissionConstant;
+import com.utils.permission.PermissionListener;
+import com.utils.permission.PermissionUtils;
 import com.view.refresh.SwipeRefreshLayout;
-import com.view.refresh.ext.NiuLoadingLayout;
+import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
 
 import java.io.File;
-import java.net.URL;
-import java.util.concurrent.ExecutionException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    NiuLoadingLayout niuLoadingLayout;
+    final String url = "http://pic37.nipic.com/20140113/8800276_184927469000_2.png";
 
+    
+    SwipeRefreshLayout refreshLayout;
+
+    private RecyclerView rcv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        niuLoadingLayout = findViewById(R.id.niu);
 
-
-        ImageView imageView = findViewById(R.id.iv);
-        final ImageView imageView1 = findViewById(R.id.iv1);
-        final String url = "http://pic37.nipic.com/20140113/8800276_184927469000_2.png";
-
-        new Thread(new Runnable() {
+        PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP, new PermissionListener() {
             @Override
-            public void run() {
-                try {
+            public void onGranted() {
 
-                   /* RequestOptions opt = new RequestOptions();
-                    Glide.with(MainActivity.this).asFile()
-                            .apply(opt)
-                            .load(url)
-                            .listener(new RequestListener<File>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<File> target, boolean b) {
-                            Log.e(TAG, "onLoadFailed: ");
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(File file, Object o, Target<File> target, DataSource dataSource, boolean b) {
-                            Log.e(TAG, "onResourceReady: "+file.getPath());
-                            return false;
-                        }
-                    }).submit();*/
-
-                    ImageLoader.get(MainActivity.this).load(url)
-                            .download(new IMGLoadListener<File>() {
-                        @Override
-                        public void success(File file) {
-                            Log.e(TAG, "onResourceReady: "+file.getPath());
-                        }
-
-                        @Override
-                        public void fail(Exception e) {
-                            Log.e(TAG, "onLoadFailed: ");
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-
-
-        findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // niuLoadingLayout.start();
-            }
-        });
-
-        final SwipeRefreshLayout refreshLayout = findViewById(R.id.refresh);
-
-        refreshLayout.setCanRefresh(true);
-
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
+                new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        refreshLayout.stopRefresh();
+
+
+                        loadPic();
+
+
                     }
-                }, 5000);
+                }).start();
+
+            }
+
+            @Override
+            public void onDenied(List<String> deniedPermissions) {
+
             }
         });
 
-        /*OkHttpClient okHttpClient = new OkHttpClient();
 
-        Request request = new Request.Builder().url("").tag("").build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        
+        rcv = findViewById(R.id.rcv);
+        refreshLayout = findViewById(R.id.refresh);
+
+        refreshLayout.setCanRefresh(true);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onRefresh() {
 
             }
+        });
+        rcv.setLayoutManager(new GridLayoutManager(this,3));
+        rcv.setAdapter(new MAdapter());
+    }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
+    private void loadPic() {
 
+       ImageLoader.get(this).load(url).listener(new IMGLoadListener<File>() {
+           @Override
+           public void success(File file) {
+               Log.e(TAG, "success: "+file.getPath());
+           }
+
+           @Override
+           public void fail(Exception e) {
+               Log.e(TAG, "fail: ");
+           }
+       }).load();
+    }
+
+    class MAdapter extends RecyclerView.Adapter{
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View inflate = LayoutInflater.from(MainActivity.this).inflate(R.layout.test_item, viewGroup, false);
+            return new MyViewHolder(inflate);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+            MyViewHolder holder = (MyViewHolder) viewHolder;
+            ImageLoader.get(MainActivity.this)
+                    .display(url)
+                    .placeHolder(R.mipmap.ic_launcher_round)
+                    .errHolder(R.mipmap.ic_launcher)
+                    .into(holder.testIv)
+                    .display();
+        }
+
+        @Override
+        public int getItemCount() {
+            return 8;
+        }
+
+        class MyViewHolder extends RecyclerView.ViewHolder{
+
+            ImageView testIv;
+            public MyViewHolder(@NonNull View itemView) {
+                super(itemView);
+                testIv = itemView.findViewById(R.id.testIv);
+
+                testIv.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this,TestActivity.class);
+                        ActivityOptionsCompat options = ActivityOptionsCompat
+                                .makeSceneTransitionAnimation(MainActivity.this,
+                                        v,"testImg");
+                        startActivity(intent,options.toBundle());
+                    }
+                });
             }
-        });*/
-
-
+        }
     }
 }

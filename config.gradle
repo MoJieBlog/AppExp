@@ -20,7 +20,7 @@ ext {
     extOkhttp = 'com.squareup.okhttp3:okhttp:3.14.0'
 
     // glide 依赖
-    extGlide  = 'com.github.bumptech.glide:glide:4.8.0'
+    extGlide = 'com.github.bumptech.glide:glide:4.8.0'
     extGlideCompiler = 'com.github.bumptech.glide:compiler:4.8.0'
     // Rx
     extRxJava = 'io.reactivex.rxjava2:rxjava:2.2.7'
@@ -33,4 +33,7 @@ ext {
     extButterknifeGradlePlugin = "com.jakewharton:butterknife-gradle-plugin:9.0.0"
 
     extEventBus = 'org.greenrobot:eventbus:3.1.1'
+
+    debugLeakCanary = 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseLeakCanary = 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }

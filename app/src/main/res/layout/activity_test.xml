@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".TestActivity">
 
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:transitionName="testImg"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher_round" />
 
     <TextView
         android:layout_width="wrap_content"

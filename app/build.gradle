@@ -22,11 +22,15 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation extAppcompatV7
     implementation extConstraint
+    implementation extRecyclerviewV7
 
     implementation extEventBus
     implementation project(path: ':utils')
     implementation project(path: ':view')
     implementation project(path: ':imageloader')
+
+    releaseImplementation releaseLeakCanary
+    debugImplementation debugLeakCanary
 
     implementation extAnnotations
     implementation extGlide

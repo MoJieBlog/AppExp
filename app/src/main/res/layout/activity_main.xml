@@ -7,45 +7,16 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <com.view.refresh.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v4.widget.NestedScrollView
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
-                <Button
-                    android:id="@+id/btn_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="开始"/>
-                <com.view.refresh.ext.NiuLoadingLayout
-                    android:id="@+id/niu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="centerCrop"
-                    android:id="@+id/iv"/>
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="centerCrop"
-                    android:id="@+id/iv1"/>
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+            android:layout_height="match_parent"/>
     </com.view.refresh.SwipeRefreshLayout>
-
 
 
 </LinearLayout>
