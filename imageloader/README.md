@@ -1,5 +1,29 @@
 ## 图片加载框架
-### 期待效果
+## 期待效果
+### 期待功能
+* 图片下载
+* 图片展示
+* 设置缓存路径
+* 清除缓存路径
+* 设置网络请求（httpClient）
+* 缓存策略
+* 设置最大内存缓存
+* 设置最大磁盘缓存
+* 清除缓存
+
+### 期待书写方式
+#### 配置选项，初始化
+```java
+        ImageLoaderConfig config = new ImageLoaderConfig.ImageLoaderConfigBuilder()
+                .setCacheRule(null)
+                .setDiskCachePath("")
+                .setMaxDiskCacheSize(500*1024)
+                .setMaxMemoryCacheSize(50*1024)
+                .setRequestClient(null)
+                .build();
+        ImageLoader.get(this).init(config);
+
+```
 #### 图片下载
 ```java
 ImageLoader.get(this)
@@ -37,3 +61,6 @@ ImageLoader.get(context)
            })
            .into(holder.testIv);
 ```
+
+### 实现过程
+
