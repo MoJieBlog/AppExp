@@ -18,7 +18,7 @@ public class TestActivity extends AppCompatActivity {
 
         ImageView iv = findViewById(R.id.iv);
 
-        ImageLoader.get(this).display("http://pic37.nipic.com/20140113/8800276_184927469000_2.png").into(iv).display();
+        ImageLoader.get(this).display("http://pic37.nipic.com/20140113/8800276_184927469000_2.png").into(iv);
     }
 
     @Override

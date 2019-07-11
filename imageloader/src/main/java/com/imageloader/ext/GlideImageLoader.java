@@ -78,7 +78,6 @@ public class GlideImageLoader implements IImageLoader {
         private Context context;
         private String url;
 
-        private View view;
         private int placeHolder = 0;
         private int errHolder = 0;
         private int width = 0,height = 0;
@@ -91,11 +90,6 @@ public class GlideImageLoader implements IImageLoader {
             this.context = context;
         }
 
-        @Override
-        public IDisplay into(View view) {
-            this.view = view;
-            return this;
-        }
 
         @Override
         public IDisplay placeHolder(int res) {
@@ -129,7 +123,7 @@ public class GlideImageLoader implements IImageLoader {
         }
 
         @Override
-        public void display() {
+        public void into(View view) {
             RequestOptions opt = new RequestOptions();
             opt.diskCacheStrategy(needMemory ? DiskCacheStrategy.NONE : DiskCacheStrategy.RESOURCE);
             opt.skipMemoryCache(needMemory);

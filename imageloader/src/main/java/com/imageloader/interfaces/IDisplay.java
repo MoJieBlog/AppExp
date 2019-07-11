@@ -9,12 +9,10 @@ import android.view.View;
  * @Date: 2019-07-11
  */
 public interface IDisplay {
-    IDisplay into(View view);
+    void into(View view);
     IDisplay placeHolder(int res);
     IDisplay errHolder(int res);
     IDisplay size(int width,int height);
     IDisplay skipMemory(boolean needMemory);
     IDisplay listener(IMGLoadListener<Drawable> listener);
-
-    void display();
 }

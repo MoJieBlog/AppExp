@@ -84,7 +84,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadPic() {
 
-       ImageLoader.get(this).load(url).listener(new IMGLoadListener<File>() {
+       ImageLoader.get(this)
+               .load(url)
+               .listener(new IMGLoadListener<File>() {
            @Override
            public void success(File file) {
                Log.e(TAG, "success: "+file.getPath());
@@ -113,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     .display(url)
                     .placeHolder(R.mipmap.ic_launcher_round)
                     .errHolder(R.mipmap.ic_launcher)
-                    .into(holder.testIv)
-                    .display();
+                    .into(holder.testIv);
         }
 
         @Override
