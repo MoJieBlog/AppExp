@@ -1,7 +1,5 @@
 package com.imageloader.interfaces;
 
-import android.app.Application;
-
 import com.imageloader.ImageLoaderConfig;
 
 /**

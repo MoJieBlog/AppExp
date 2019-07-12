@@ -41,7 +41,7 @@ public class ImageLoaderConfig {
         return rule;
     }
 
-    public static class ImageLoaderConfigBuilder implements ConfigImp{
+    public static class ImageLoaderConfigBuilder implements ConfigImp {
 
         private long maxMemoryCacheSize;
         private long maxDiskCacheSize;
@@ -49,8 +49,8 @@ public class ImageLoaderConfig {
         private Object client;
         private Object rule;
 
-        public ImageLoaderConfig build(){
-            return new ImageLoaderConfig(maxMemoryCacheSize,maxDiskCacheSize,diskCachePath,client,rule);
+        public ImageLoaderConfig build() {
+            return new ImageLoaderConfig(maxMemoryCacheSize, maxDiskCacheSize, diskCachePath, client, rule);
         }
 
 
@@ -85,7 +85,7 @@ public class ImageLoaderConfig {
         }
     }
 
-    public interface ConfigImp{
+    public interface ConfigImp {
         //功能，设置网络请求
         ImageLoaderConfigBuilder setRequestClient(Object client);
 

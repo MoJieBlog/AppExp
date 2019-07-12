@@ -13,6 +13,6 @@ public interface IDisplay {
     IDisplay placeHolder(int res);
     IDisplay errHolder(int res);
     IDisplay size(int width,int height);
-    IDisplay skipMemory(boolean needMemory);
+    IDisplay needMemory(boolean needMemory);
     IDisplay listener(IMGLoadListener<Drawable> listener);
 }

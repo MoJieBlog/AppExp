@@ -19,6 +19,7 @@ import com.bumptech.glide.request.target.CustomViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.imageloader.ImageLoaderConfig;
+import com.imageloader.ImageLoaderUtils;
 import com.imageloader.interfaces.IDisplay;
 import com.imageloader.interfaces.IImageLoader;
 import com.imageloader.interfaces.ILoader;
@@ -37,12 +38,23 @@ public class GlideImageLoader implements IImageLoader {
 
     private Context context;
 
+    public static ImageLoaderConfig config;
+
     public static GlideImageLoader get(Context context) {
         return new GlideImageLoader(context);
     }
 
     private GlideImageLoader(Context context) {
         this.context = context;
+        if (config==null){
+            config = new ImageLoaderConfig.ImageLoaderConfigBuilder()
+                    .setCacheRule(null)
+                    .setDiskCachePath(ImageLoaderUtils.getStorageDirectory(context) + "/" + context.getPackageName() + "/GlideDisk")
+                    .setMaxDiskCacheSize(100*1024*1024)
+                    .setMaxMemoryCacheSize(50*1024*1024)
+                    .setRequestClient(null)
+                    .build();
+        }
     }
 
     @Override
@@ -63,9 +75,8 @@ public class GlideImageLoader implements IImageLoader {
 
     @Override
     public void init(ImageLoaderConfig config) {
-
+        GlideImageLoader.config = config;
     }
-
 
     @Override
     public String getDiskCachePath() {
@@ -81,7 +92,7 @@ public class GlideImageLoader implements IImageLoader {
         private int placeHolder = 0;
         private int errHolder = 0;
         private int width = 0,height = 0;
-        private boolean needMemory;
+        private boolean needMemory = true;
         private IMGLoadListener<Drawable> listener;
 
 
@@ -111,7 +122,7 @@ public class GlideImageLoader implements IImageLoader {
         }
 
         @Override
-        public IDisplay skipMemory(boolean needMemory) {
+        public IDisplay needMemory(boolean needMemory) {
             this.needMemory = needMemory;
             return this;
         }
@@ -125,8 +136,8 @@ public class GlideImageLoader implements IImageLoader {
         @Override
         public void into(View view) {
             RequestOptions opt = new RequestOptions();
-            opt.diskCacheStrategy(needMemory ? DiskCacheStrategy.NONE : DiskCacheStrategy.RESOURCE);
-            opt.skipMemoryCache(needMemory);
+            opt.diskCacheStrategy(needMemory ? DiskCacheStrategy.RESOURCE : DiskCacheStrategy.NONE);
+            opt.skipMemoryCache(!needMemory);
             if (placeHolder != 0) {
                 opt.placeholder(placeHolder);
             }

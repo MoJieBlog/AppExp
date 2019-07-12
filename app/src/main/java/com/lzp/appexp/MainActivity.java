@@ -1,6 +1,7 @@
 package com.lzp.appexp;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
            @Override
            public void fail(Exception e) {
-               Log.e(TAG, "fail: ");
+               Log.e(TAG, "fail: "+e.getMessage());
            }
        }).load();
     }
@@ -113,8 +114,21 @@ public class MainActivity extends AppCompatActivity {
             MyViewHolder holder = (MyViewHolder) viewHolder;
             ImageLoader.get(MainActivity.this)
                     .display(url)
+                   // .size(300,300)
+                    .needMemory(true)
                     .placeHolder(R.mipmap.ic_launcher_round)
                     .errHolder(R.mipmap.ic_launcher)
+                    .listener(new IMGLoadListener<Drawable>() {
+                        @Override
+                        public void success(Drawable drawable) {
+
+                        }
+
+                        @Override
+                        public void fail(Exception e) {
+
+                        }
+                    })
                     .into(holder.testIv);
         }
 

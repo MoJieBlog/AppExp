@@ -21,7 +21,7 @@ public class PermissionActivity extends Activity {
     private static PermissionListener permissionListener;
     private static String[] permissions;
 
-    public static void setPermissionListener(PermissionListener permissionListener){
+    public static void setPermissionListener(PermissionListener permissionListener) {
         PermissionActivity.permissionListener = permissionListener;
     }
 
@@ -48,20 +48,24 @@ public class PermissionActivity extends Activity {
                 }
             }
             if (deniedPermissions.isEmpty()) {
-                if (permissionListener!=null)permissionListener.onGranted();
+                if (permissionListener != null) permissionListener.onGranted();
             } else {
-                if (permissionListener!=null)permissionListener.onDenied(deniedPermissions);
+                if (permissionListener != null) permissionListener.onDenied(deniedPermissions);
             }
             finish();
-            overridePendingTransition(0,0);
+            overridePendingTransition(0, 0);
         }
     }
 
+    @Override
+    public void finish() {
+        permissionListener = null;
+        permissions = null;
+        super.finish();
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        permissionListener = null;
-        permissions = null;
     }
 }

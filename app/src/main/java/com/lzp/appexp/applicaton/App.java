@@ -1,9 +1,12 @@
 package com.lzp.appexp.applicaton;
 
 import android.app.Application;
+import android.content.Context;
+import android.os.Environment;
 
 import com.imageloader.ImageLoader;
 import com.imageloader.ImageLoaderConfig;
+import com.imageloader.ImageLoaderUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.utils.BuildConfig;
 import com.utils.Utils;
@@ -32,9 +35,9 @@ public class App extends Application {
 
         ImageLoaderConfig config = new ImageLoaderConfig.ImageLoaderConfigBuilder()
                 .setCacheRule(null)
-                .setDiskCachePath("")
-                .setMaxDiskCacheSize(500*1024)
-                .setMaxMemoryCacheSize(50*1024)
+                .setDiskCachePath(ImageLoaderUtils.getStorageDirectory(this) + "/" + this.getPackageName() + "/GlideDisk")
+                .setMaxDiskCacheSize(100*1024*1024)
+                .setMaxMemoryCacheSize(50*1024*1024)
                 .setRequestClient(null)
                 .build();
         ImageLoader.get(this).init(config);
