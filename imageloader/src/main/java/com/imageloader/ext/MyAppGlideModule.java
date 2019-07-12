@@ -1,7 +1,6 @@
 package com.imageloader.ext;
 
 import android.content.Context;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -12,6 +11,7 @@ import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
 import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.module.AppGlideModule;
+import com.imageloader.ImageLoaderUtils;
 
 /**
  * @describe
@@ -39,7 +39,7 @@ public class MyAppGlideModule extends AppGlideModule {
 
             String diskPath;
             if (TextUtils.isEmpty(GlideImageLoader.config.getDiskCachePath())) {
-                diskPath = getStorageDirectory(context) + "/" + context.getPackageName() + "/GlideDisk";
+                diskPath = ImageLoaderUtils.getDefaultDiskCachePath(context);
             } else {
                 diskPath = GlideImageLoader.config.getDiskCachePath();
             }
@@ -56,7 +56,7 @@ public class MyAppGlideModule extends AppGlideModule {
         } else {
             builder.setMemoryCache(new LruResourceCache(defaultMemoryCacheSizeBytes));
             builder.setDiskCache(
-                    new DiskLruCacheFactory(getStorageDirectory(context) + "/" + context.getPackageName() + "/GlideDisk", defaultDiskCacheSizeBytes)
+                    new DiskLruCacheFactory(ImageLoaderUtils.getDefaultDiskCachePath(context), defaultDiskCacheSizeBytes)
             );
         }
     }
@@ -69,16 +69,5 @@ public class MyAppGlideModule extends AppGlideModule {
     @Override
     public boolean isManifestParsingEnabled() {
         return super.isManifestParsingEnabled();
-    }
-
-    //外部路径
-    private String sdRootPath = Environment.getExternalStorageDirectory().getPath();
-    private String appRootPath = null;
-
-    private String getStorageDirectory(Context context) {
-        //手机app路径
-        appRootPath = context.getCacheDir().getPath();
-        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ?
-                sdRootPath : appRootPath;
     }
 }

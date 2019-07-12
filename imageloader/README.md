@@ -17,11 +17,11 @@
 ```java
         //Application的onCreate中
         ImageLoaderConfig config = new ImageLoaderConfig.ImageLoaderConfigBuilder()
-                .setCacheRule(null)
-                .setDiskCachePath("")
+                .setCacheRule(null)//Glide使用二级缓存，基本上满足需求，暂时不打算完善
+                .setDiskCachePath(path)
                 .setMaxDiskCacheSize(500*1024)
                 .setMaxMemoryCacheSize(50*1024)
-                .setRequestClient(null)
+                .setRequestClient(null)//等待封装okhttp之后完善，基本上确定传httpClient对象
                 .build();
         ImageLoader.get(this).init(config);
 
@@ -99,4 +99,8 @@ ImageLoader.get(context)
 ```
 然后就是具体的建造者实现了
 
-#### 2.2 图片加载实现
+### 2.2 图片加载实现
+先搭个架子，一个图片加载器应该有的功能包括：
+* 初始化，根据配置做初始化
+* 清除缓存
+* 获取缓存路径

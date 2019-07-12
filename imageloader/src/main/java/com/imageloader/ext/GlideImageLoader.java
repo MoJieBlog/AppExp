@@ -46,15 +46,6 @@ public class GlideImageLoader implements IImageLoader {
 
     private GlideImageLoader(Context context) {
         this.context = context;
-        if (config==null){
-            config = new ImageLoaderConfig.ImageLoaderConfigBuilder()
-                    .setCacheRule(null)
-                    .setDiskCachePath(ImageLoaderUtils.getStorageDirectory(context) + "/" + context.getPackageName() + "/GlideDisk")
-                    .setMaxDiskCacheSize(100*1024*1024)
-                    .setMaxMemoryCacheSize(50*1024*1024)
-                    .setRequestClient(null)
-                    .build();
-        }
     }
 
     @Override
@@ -64,7 +55,7 @@ public class GlideImageLoader implements IImageLoader {
 
     @Override
     public IDisplay display(String url) {
-        return new GlideDisplay(context,url);
+        return new GlideDisplay(context, url);
     }
 
     @Override
@@ -80,7 +71,11 @@ public class GlideImageLoader implements IImageLoader {
 
     @Override
     public String getDiskCachePath() {
-        return "";
+        if (config!=null){
+            return config.getDiskCachePath();
+        }else{
+            return ImageLoaderUtils.getDefaultDiskCachePath(context);
+        }
     }
 
 
@@ -91,7 +86,7 @@ public class GlideImageLoader implements IImageLoader {
 
         private int placeHolder = 0;
         private int errHolder = 0;
-        private int width = 0,height = 0;
+        private int width = 0, height = 0;
         private boolean needMemory = true;
         private IMGLoadListener<Drawable> listener;
 
@@ -198,7 +193,7 @@ public class GlideImageLoader implements IImageLoader {
 
         private Context context;
         private String url;
-        private int width = 0,height = 0;
+        private int width = 0, height = 0;
         private IMGLoadListener<File> listener;
 
         public GlideLoader(Context context, String url) {

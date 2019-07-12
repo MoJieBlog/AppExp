@@ -1,8 +1,6 @@
 package com.lzp.appexp.applicaton;
 
 import android.app.Application;
-import android.content.Context;
-import android.os.Environment;
 
 import com.imageloader.ImageLoader;
 import com.imageloader.ImageLoaderConfig;
@@ -35,7 +33,7 @@ public class App extends Application {
 
         ImageLoaderConfig config = new ImageLoaderConfig.ImageLoaderConfigBuilder()
                 .setCacheRule(null)
-                .setDiskCachePath(ImageLoaderUtils.getStorageDirectory(this) + "/" + this.getPackageName() + "/GlideDisk")
+                .setDiskCachePath(ImageLoaderUtils.getDefaultDiskCachePath(this))
                 .setMaxDiskCacheSize(100*1024*1024)
                 .setMaxMemoryCacheSize(50*1024*1024)
                 .setRequestClient(null)

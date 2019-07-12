@@ -17,4 +17,14 @@ public final class ImageLoaderUtils {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ?
                 sdRootPath : appRootPath;
     }
+
+    public static String getDefaultDiskCachePath(Context context){
+        StringBuilder builder = new StringBuilder();
+        builder.append(getStorageDirectory(context));
+        builder.append("/");
+        builder.append(context.getPackageName());
+        builder.append("/");
+        builder.append("glideDisk");
+        return builder.toString();
+    }
 }
