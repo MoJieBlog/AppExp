@@ -8,7 +8,7 @@ import android.os.Environment;
  * @author: lixiaopeng
  * @Date: 2019-07-12
  */
-public class ImageLoaderUtils {
+public final class ImageLoaderUtils {
 
     public static String getStorageDirectory(Context context) {
         //手机app路径

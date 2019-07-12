@@ -5,7 +5,7 @@ package com.imageloader;
  * @author: lixiaopeng
  * @Date: 2019-06-25
  */
-public class ImageLoaderConfig {
+public final class ImageLoaderConfig {
 
     private long maxMemoryCacheSize;
     private long maxDiskCacheSize;

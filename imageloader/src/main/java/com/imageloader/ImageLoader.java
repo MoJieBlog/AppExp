@@ -12,7 +12,7 @@ import com.imageloader.interfaces.ILoader;
  * @author: lixiaopeng
  * @Date: 2019-06-13
  */
-public class ImageLoader implements IImageLoader{
+public final class ImageLoader implements IImageLoader{
 
     private IImageLoader imageLoader;
 
