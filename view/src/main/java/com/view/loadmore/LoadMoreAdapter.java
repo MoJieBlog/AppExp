@@ -80,8 +80,10 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 1+mGetItemCount();
     }
+
+    protected abstract int mGetItemCount();
 
     /**
      * 绑定加载更多数据

@@ -46,8 +46,8 @@ public class TestAdapter extends LoadMoreAdapter {
     }
 
     @Override
-    public int getItemCount() {
-        return super.getItemCount()+size;
+    protected int mGetItemCount() {
+        return size;
     }
 
     @Override
