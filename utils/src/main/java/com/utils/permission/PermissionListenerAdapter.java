@@ -17,7 +17,7 @@ public abstract class PermissionListenerAdapter implements PermissionListener{
     }
 
     @Override
-    public void onDenied(List<String> deniedPermissions) {
+    public void onDenied(List<String> deniedPermissions,boolean neverTips) {
         LogUtils.e(TAG, "onDenied: 权限获取失败");
     }
 }

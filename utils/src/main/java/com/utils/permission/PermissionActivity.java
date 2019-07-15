@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
@@ -42,7 +43,11 @@ public class PermissionActivity extends Activity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == Utils.getPermissionRequestCode()) {
             List<String> deniedPermissions = new ArrayList<>();
+            boolean neverRequest = false;
             for (String permission : permissions) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(PermissionActivity.this,permission)){
+                    neverRequest = true;
+                }
                 if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                     deniedPermissions.add(permission);
                 }
@@ -50,7 +55,7 @@ public class PermissionActivity extends Activity {
             if (deniedPermissions.isEmpty()) {
                 if (permissionListener != null) permissionListener.onGranted();
             } else {
-                if (permissionListener != null) permissionListener.onDenied(deniedPermissions);
+                if (permissionListener != null) permissionListener.onDenied(deniedPermissions,neverRequest);
             }
             finish();
             overridePendingTransition(0, 0);

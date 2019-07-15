@@ -17,6 +17,7 @@ public interface PermissionListener {
      * 没有权限
      *
      * @param deniedPermissions 拒绝的权限的列表
+     * @param neverTips         拒绝并且不再提醒
      */
-    void onDenied(List<String> deniedPermissions);
+    void onDenied(List<String> deniedPermissions, boolean neverTips);
 }
