@@ -1,15 +1,13 @@
 ## 图片加载框架
-## 1 期待效果
-### 1.1 期待功能
-* 图片下载
-* 图片展示
-* 设置缓存路径
-* 清除缓存路径
-* 设置网络请求（httpClient）
-* 缓存策略
-* 设置最大内存缓存
-* 设置最大磁盘缓存
-* 清除缓存
+### 1.1 实现功能
+* 图片下载(done)
+* 图片展示(done)
+* 设置缓存路径(done)
+* 设置网络请求（等待网络封装完成）
+* 缓存策略(暂时不支持)
+* 设置最大内存缓存(done)
+* 设置最大磁盘缓存(done)
+* 清除缓存(done)
 
 ### 1.2 书写方式
 #### 1.2.1 配置选项，初始化
@@ -34,12 +32,12 @@ ImageLoader.get(this)
            .listener(new IMGLoadListener<File>() {
               @Override
               public void success(File file) {
-                  Log.e(TAG, "success: "+file.getPath());
+                  Log.d(TAG, "success: "+file.getPath());
               }
 
               @Override
              public void fail(Exception e) {
-                  Log.e(TAG, "fail: ");
+                  Log.d(TAG, "fail: ");
               }
        }).load();
 ```
