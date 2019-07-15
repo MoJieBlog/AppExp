@@ -13,4 +13,11 @@
         android:scaleType="centerCrop"
         android:layout_marginBottom="5dp"
         android:src="@mipmap/ic_launcher_round"/>
+
+    <TextView
+        android:id="@+id/tv"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12w3"/>
 </LinearLayout>

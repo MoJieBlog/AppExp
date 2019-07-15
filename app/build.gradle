@@ -10,10 +10,45 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+
+    signingConfigs {
+        debug {
+            /*storeFile file('./appExp.jks')
+            storePassword "appExp123"
+            keyAlias "appExp"
+            keyPassword "appExp123"*/
+        }
         release {
+            /*storeFile file('./appExp.jks')
+            storePassword "appExp123"
+            keyAlias "appExp"
+            keyPassword "appExp123"*/
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            debuggable false
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def buildName = "appExp"
+            def type = variant.buildType.name
+            def releaseApkName = buildName + '_' + type + "_" + versionName + '.apk'
+            outputFileName = releaseApkName
         }
     }
 }
