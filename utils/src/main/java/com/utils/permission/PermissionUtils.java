@@ -48,9 +48,14 @@ public final class PermissionUtils {
         }
         return true;
     }
+
+
+    public static void getPermission(Activity activity, String[] permissions){
+        getPermission(activity,permissions,null);
+    }
     /**
      * 获取权限
-     *
+     *getPermission
      * @param activity
      * @param permissions
      */

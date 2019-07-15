@@ -60,7 +60,13 @@ public class GlideImageLoader implements IImageLoader {
 
     @Override
     public void clearCache() {
-        Glide.get(context).clearDiskCache();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (context != null)
+                    Glide.get(context).clearDiskCache();
+            }
+        }).start();
         Glide.get(context).clearMemory();
     }
 
@@ -71,9 +77,9 @@ public class GlideImageLoader implements IImageLoader {
 
     @Override
     public String getDiskCachePath() {
-        if (config!=null){
+        if (config != null) {
             return config.getDiskCachePath();
-        }else{
+        } else {
             return ImageLoaderUtils.getDefaultDiskCachePath(context);
         }
     }

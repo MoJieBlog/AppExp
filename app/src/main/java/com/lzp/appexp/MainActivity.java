@@ -9,24 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.imageloader.interfaces.IMGLoadListener;
 import com.imageloader.ImageLoader;
+import com.imageloader.interfaces.IMGLoadListener;
 import com.utils.permission.PermissionConstant;
-import com.utils.permission.PermissionListener;
 import com.utils.permission.PermissionUtils;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
-
-import java.io.File;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,32 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP, new PermissionListener() {
-            @Override
-            public void onGranted() {
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-
-
-                        loadPic();
-
-
-                    }
-                }).start();
-
-            }
-
-            @Override
-            public void onDenied(List<String> deniedPermissions) {
-
-            }
-        });
-
-
-        
+        PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
         rcv = findViewById(R.id.rcv);
         refreshLayout = findViewById(R.id.refresh);
 
@@ -81,23 +50,6 @@ public class MainActivity extends AppCompatActivity {
         });
         rcv.setLayoutManager(new GridLayoutManager(this,3));
         rcv.setAdapter(new MAdapter());
-    }
-
-    private void loadPic() {
-
-       ImageLoader.get(this)
-               .load(url)
-               .listener(new IMGLoadListener<File>() {
-           @Override
-           public void success(File file) {
-               Log.e(TAG, "success: "+file.getPath());
-           }
-
-           @Override
-           public void fail(Exception e) {
-               Log.e(TAG, "fail: "+e.getMessage());
-           }
-       }).load();
     }
 
     class MAdapter extends RecyclerView.Adapter{
