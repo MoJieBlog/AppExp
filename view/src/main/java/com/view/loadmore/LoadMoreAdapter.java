@@ -6,9 +6,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.GridLayoutManager.SpanSizeLookup;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.view.R;
+
+import java.util.List;
 
 /**
  * 加载更多适配器
@@ -30,6 +33,8 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     protected LoadMoreRecyclerView mLoadMoreRecyclerview;
     protected Context context;
 
+    private LayoutManager layoutManager;
+
     public LoadMoreAdapter(Context context) {
         this.context = context;
     }
@@ -38,6 +43,18 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         mLoadMoreRecyclerview = (LoadMoreRecyclerView) recyclerView;
+        layoutManager = mLoadMoreRecyclerview.getLayoutManager();
+        //解决网格占一整行
+        if (layoutManager instanceof GridLayoutManager) {
+            final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    int itemViewType = getItemViewType(position);
+                    return itemViewType == TYPE_LOADMORE ? gridLayoutManager.getSpanCount() : 1;
+                }
+            });
+        }
     }
 
 
@@ -58,7 +75,8 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position, @NonNull List payloads) {
+       // super.onBindViewHolder(viewHolder, position, payloads);
         // 预加载处理
         int loadmoreStatus = mLoadMoreRecyclerview.getLoadmoreStatus();
         if (mLoadMoreRecyclerview.isPreLoad()
@@ -70,17 +88,38 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
             }
         }
 
+        //解决瀑布流加载更多占一整行
+        if(layoutManager instanceof StaggeredGridLayoutManager){
+            StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+            ViewGroup.LayoutParams targetParams = viewHolder.itemView.getLayoutParams();
+            StaggeredGridLayoutManager.LayoutParams StaggerLayoutParams;
+            if (targetParams != null) {
+                StaggerLayoutParams =
+                        new StaggeredGridLayoutManager.LayoutParams(targetParams.width, targetParams.height);
+            } else {
+                StaggerLayoutParams =
+                        new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+            StaggerLayoutParams.setFullSpan(true);
+        }
+
         if (viewHolder.getItemViewType() == TYPE_LOADMORE) {
             bindLoadmoreViewHolder(viewHolder);
             return;
         } else {
-            mOnBindViewHolder(viewHolder, position);
+            mOnBindViewHolder(viewHolder, position,null);
         }
     }
 
     @Override
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
+        onBindViewHolder(viewHolder,position,null);
+    }
+
+    @Override
     public int getItemCount() {
-        return 1+mGetItemCount();
+        return 1 + mGetItemCount();
     }
 
     protected abstract int mGetItemCount();
@@ -155,6 +194,6 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
 
     protected abstract RecyclerView.ViewHolder mOnCreateViewHolder(@NonNull ViewGroup parent, int viewType);
 
-    protected abstract void mOnBindViewHolder(ViewHolder viewHolder, int position);
+    protected abstract void mOnBindViewHolder(ViewHolder viewHolder, int position,List payloads);
 
 }

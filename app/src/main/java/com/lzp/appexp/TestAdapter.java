@@ -19,6 +19,8 @@ import com.imageloader.ImageLoader;
 import com.imageloader.interfaces.IMGLoadListener;
 import com.view.loadmore.LoadMoreAdapter;
 
+import java.util.List;
+
 /**
  * @describe
  * @author: lixiaopeng
@@ -28,7 +30,7 @@ public class TestAdapter extends LoadMoreAdapter {
 
     final String url = "http://pic37.nipic.com/20140113/8800276_184927469000_2.png";
 
-    private int size = 10;
+    private int size = 15;
 
 
     public void loadMore() {
@@ -37,7 +39,7 @@ public class TestAdapter extends LoadMoreAdapter {
     }
 
     public void refresh() {
-        size = 10;
+        size = 15;
         notifyDataSetChanged();
     }
 
@@ -57,7 +59,7 @@ public class TestAdapter extends LoadMoreAdapter {
     }
 
     @Override
-    protected void mOnBindViewHolder(ViewHolder viewHolder, int position) {
+    protected void mOnBindViewHolder(ViewHolder viewHolder, int position, List p) {
         MyViewHolder holder = (MyViewHolder) viewHolder;
 
         holder.tv.setText(String.valueOf(position));
