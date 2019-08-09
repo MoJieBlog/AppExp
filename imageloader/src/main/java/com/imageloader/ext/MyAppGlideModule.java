@@ -22,7 +22,7 @@ import com.imageloader.ImageLoaderUtils;
 public class MyAppGlideModule extends AppGlideModule {
 
     final int defaultDiskCacheSizeBytes = 1024 * 1024 * 200; // 100 MB
-    final int defaultMemoryCacheSizeBytes = 1024 * 1024 * 50; // 100 MB
+    final int defaultMemoryCacheSizeBytes = 1024 * 1024 * 50; // 50 MB
 
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {

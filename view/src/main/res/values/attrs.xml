@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SwipeRefreshLayout">
-        <attr name="enabled" format="boolean"/>
+        <attr name="enabled" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="HalfCircleView">
+        <attr name="radius" format="dimension" />
+        <attr name="bgColor" format="color" />
+        <attr name="direction" format="integer">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="right" value="2" />
+            <enum name="left" value="3" />
+        </attr>
+    </declare-styleable>
 </resources>

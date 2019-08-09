@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
+    <com.view.HalfCircleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#aaaaaa"
+        app:direction="bottom"
+        app:bgColor="@color/colorAccent"
+        app:radius="100dp" />
+
     <com.view.refresh.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
@@ -15,7 +24,7 @@
         <com.view.loadmore.LoadMoreRecyclerView
             android:id="@+id/rcv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </com.view.refresh.SwipeRefreshLayout>
 
 

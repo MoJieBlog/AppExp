@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        Log.e(TAG, "onCreate: "+TestE.WEXIN.name());
         PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
         rcv = findViewById(R.id.rcv);
 

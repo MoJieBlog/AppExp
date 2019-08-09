@@ -26,7 +26,7 @@ public class App extends Application {
             //You should not init your app in this process.
             return;
         }
-        LeakCanary.install(this);
+       // LeakCanary.install(this);
 
 
         Utils.init(this, BuildConfig.DEBUG);
