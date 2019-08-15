@@ -69,6 +69,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     private LoadingLayout headLoadingLayout;
 
     private float moveOffset = 0;
+    private int freshViewType = 0;
 
     private ValueAnimator resetHeaderAnimator;
 
@@ -85,22 +86,34 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         mDecelerateInterpolator = new DecelerateInterpolator(DECELERATE_INTERPOLATION_FACTOR);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SwipeRefreshLayout);
+        freshViewType = typedArray.getInteger(R.styleable.SwipeRefreshLayout_fresh_type,0);
         setEnabled(typedArray.getBoolean(R.styleable.SwipeRefreshLayout_enabled, true));
         typedArray.recycle();
 
-        createLoadingLayout();
+        addView(createLoadingLayout());
 
         mNestedScrollingParentHelper = new NestedScrollingParentHelper(this);
 
         mNestedScrollingChildHelper = new NestedScrollingChildHelper(this);
         setNestedScrollingEnabled(true);
-
     }
 
-    private void createLoadingLayout() {
-        headLoadingLayout = new DefaultRefreshLayout(getContext());
-        headLoadingLayout.setRefreshLayoutInstance(this);
-        addView(headLoadingLayout);
+    private LoadingLayout createLoadingLayout() {
+        if (freshViewType==0){
+            if (headLoadingLayout==null){
+                headLoadingLayout = new DefaultRefreshLayout(getContext());
+                headLoadingLayout.setRefreshLayoutInstance(this);
+            }
+        }/* else if(freshViewType==1){
+
+        }*/else{
+            if (headLoadingLayout==null){
+                headLoadingLayout = new DefaultRefreshLayout(getContext());
+                headLoadingLayout.setRefreshLayoutInstance(this);
+            }
+        }
+
+        return headLoadingLayout;
     }
 
     public void setOnRefreshListener(OnRefreshListener listener) {

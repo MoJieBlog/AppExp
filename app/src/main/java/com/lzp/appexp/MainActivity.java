@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.util.Log;
 
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
@@ -17,22 +16,23 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-
-
-
     SwipeRefreshLayout refreshLayout;
 
     TestAdapter mAdapter;
 
     private LoadMoreRecyclerView rcv;
 
+    TestView testView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        testView = findViewById(R.id.testView);
 
-        Log.e(TAG, "onCreate: "+TestE.WEXIN.name());
+        testView.setTest();
+
         PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
         rcv = findViewById(R.id.rcv);
 

@@ -2,6 +2,9 @@
 <resources>
     <declare-styleable name="SwipeRefreshLayout">
         <attr name="enabled" format="boolean" />
+        <attr name="fresh_type" format="integer">
+            <enum name="fresh_default" value="0"/>
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="HalfCircleView">
