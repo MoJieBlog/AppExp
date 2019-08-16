@@ -26,7 +26,6 @@ public abstract class LoadingLayout  extends FrameLayout implements ILoadingLayo
         super(context, attrs);
         mContext = context;
         mResources = context.getResources();
-        createViewPlaceHolder();
         init();
     }
 
@@ -41,21 +40,4 @@ public abstract class LoadingLayout  extends FrameLayout implements ILoadingLayo
 
     public abstract void init();
 
-    public abstract int getViewWidth();
-
-    public abstract int getViewHeight();
-
-    // 加载更多完成并显示对应文案
-    public void onLoadMoreText(String text) {
-    }
-
-    public boolean isLoadMoreFailure(){
-        return false;
-    }
-
-    private void createViewPlaceHolder() {
-        View viewPlaceHolder = new View(mContext);
-        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        addView(viewPlaceHolder, lp);
-    }
 }

@@ -44,16 +44,6 @@ public class DefaultRefreshLayout extends LoadingLayout {
     }
 
     @Override
-    public int getViewWidth() {
-        return getResources().getDisplayMetrics().widthPixels;
-    }
-
-    @Override
-    public int getViewHeight() {
-        return animViewHeight;
-    }
-
-    @Override
     public void onMove(float moveOffset, boolean isRefreshing) {
         if (loadingLayout != null)
             loadingLayout.startAnimation((int) (moveOffset * 100 / animViewHeight));
@@ -72,7 +62,7 @@ public class DefaultRefreshLayout extends LoadingLayout {
     }
 
     @Override
-    public void setTagerViewHeight(int height) {
+    public void setTargetViewHeight(int height) {
 
     }
 
@@ -82,7 +72,7 @@ public class DefaultRefreshLayout extends LoadingLayout {
     }
 
     @Override
-    public int getDesHeight(Context context) {
+    public int getDesHeight() {
         return animViewHeight;
     }
 }

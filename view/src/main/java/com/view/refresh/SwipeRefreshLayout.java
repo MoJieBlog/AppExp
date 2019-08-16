@@ -98,7 +98,11 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         setNestedScrollingEnabled(true);
     }
 
-    private LoadingLayout createLoadingLayout() {
+    /**
+     * 配置刷新头部
+     * @return
+     */
+    protected LoadingLayout createLoadingLayout() {
         if (freshViewType==0){
             if (headLoadingLayout==null){
                 headLoadingLayout = new DefaultRefreshLayout(getContext());
@@ -161,7 +165,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
 
             headLoadingLayout.layout((width / 2 - headWidth / 2), -headHeight, (width / 2 + headWidth / 2), 0);
 
-            headLoadingLayout.setTagerViewHeight(child.getMeasuredHeight());
+            headLoadingLayout.setTargetViewHeight(child.getMeasuredHeight());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -185,7 +189,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         headLoadingLayout.measure(
                 MeasureSpec.makeMeasureSpec(getMeasuredWidth() - getPaddingLeft() - getPaddingRight(),
                         MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(headLoadingLayout.getDesHeight(getContext()),
+                MeasureSpec.makeMeasureSpec(headLoadingLayout.getDesHeight(),
                         MeasureSpec.EXACTLY));
     }
 
@@ -421,7 +425,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
 
     private void forceResetHeader() {
 
-        ValueAnimator animator = ValueAnimator.ofInt(getScrollY(), -headLoadingLayout.getViewHeight());
+        ValueAnimator animator = ValueAnimator.ofInt(getScrollY(), -headLoadingLayout.getDesHeight());
         animator.setDuration(400);
         animator.setInterpolator(mDecelerateInterpolator);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

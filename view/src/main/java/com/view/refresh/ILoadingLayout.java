@@ -33,7 +33,7 @@ public interface ILoadingLayout {
      *
      * @param height child高度
      */
-    public void setTagerViewHeight(int height);
+    public void setTargetViewHeight(int height);
 
     /**
      * 设置刷新布局的实例索引
@@ -43,6 +43,6 @@ public interface ILoadingLayout {
     /**
      * 获取loadinglayout的高度
      */
-    public int getDesHeight(Context context);
+    public int getDesHeight();
 
 }
