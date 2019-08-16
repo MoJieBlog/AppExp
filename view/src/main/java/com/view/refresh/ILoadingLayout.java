@@ -1,6 +1,5 @@
 package com.view.refresh;
 
-import android.content.Context;
 import android.view.View;
 
 /**
