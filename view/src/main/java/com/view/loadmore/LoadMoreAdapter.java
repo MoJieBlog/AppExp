@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutManager;
@@ -17,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.view.R;
+import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         mLoadMoreRecyclerview = (LoadMoreRecyclerView) recyclerView;
         layoutManager = mLoadMoreRecyclerview.getLayoutManager();
@@ -64,9 +64,8 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
         return super.getItemViewType(position);
     }
 
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_LOADMORE) {
             return new LoadmoreViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_loadmore, parent, false));
         } else {
@@ -75,21 +74,22 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position, @NonNull List payloads) {
-       // super.onBindViewHolder(viewHolder, position, payloads);
+    public void onBindViewHolder(ViewHolder viewHolder, int position, List payloads) {
+        // super.onBindViewHolder(viewHolder, position, payloads);
         // 预加载处理
-        int loadmoreStatus = mLoadMoreRecyclerview.getLoadmoreStatus();
+        int loadmoreStatus = mLoadMoreRecyclerview.getLoadMoreStatus();
         if (mLoadMoreRecyclerview.isPreLoad()
-                && (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_SUCCESS || loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE)) {
-            int toBottomItemCount = getItemCount() - 2 - position;
+                && (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_SUCCESS
+                || loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE)) {
+            int toBottomItemCount = getItemCount() - position;
             if (toBottomItemCount <= LoadMoreRecyclerView.PRE_LOAD_COUNT) {
-                mLoadMoreRecyclerview.setLoadmoreStatus(LoadMoreRecyclerView.LM_LOADING);
+                mLoadMoreRecyclerview.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOADING);
                 notifyLoadmore();
             }
         }
 
         //解决瀑布流加载更多占一整行
-        if(layoutManager instanceof StaggeredGridLayoutManager){
+        if (layoutManager instanceof StaggeredGridLayoutManager) {
             StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
             ViewGroup.LayoutParams targetParams = viewHolder.itemView.getLayoutParams();
             StaggeredGridLayoutManager.LayoutParams StaggerLayoutParams;
@@ -105,16 +105,16 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
         }
 
         if (viewHolder.getItemViewType() == TYPE_LOADMORE) {
-            bindLoadmoreViewHolder(viewHolder);
+            bindLoadMoreViewHolder(viewHolder);
             return;
         } else {
-            mOnBindViewHolder(viewHolder, position,null);
+            mOnBindViewHolder(viewHolder, position, null);
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
-        onBindViewHolder(viewHolder,position,null);
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+        onBindViewHolder(viewHolder, position, null);
     }
 
     @Override
@@ -129,10 +129,10 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
      *
      * @param viewHolder
      */
-    private void bindLoadmoreViewHolder(RecyclerView.ViewHolder viewHolder) {
+    private void bindLoadMoreViewHolder(ViewHolder viewHolder) {
         LoadmoreViewHolder holder = (LoadmoreViewHolder) viewHolder;
-        final int loadmoreStatus = mLoadMoreRecyclerview.getLoadmoreStatus();
-        switch (mLoadMoreRecyclerview.getLoadmoreStatus()) {
+        final int loadmoreStatus = mLoadMoreRecyclerview.getLoadMoreStatus();
+        switch (mLoadMoreRecyclerview.getLoadMoreStatus()) {
             case LoadMoreRecyclerView.LM_LOAD_COMPLETE:
                 holder.loadmoreTitle.setText(context.getResources().getString(R.string.load_complete));
                 holder.loadmoreView.setVisibility(View.GONE);
@@ -149,19 +149,17 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
                 holder.loadmoreTitle.setText(context.getString(R.string.loading));
                 holder.loadmoreView.setVisibility(View.VISIBLE);
                 break;
+            case LoadMoreRecyclerView.LM_LOAD_NON:
+                holder.loadmoreTitle.setText("");
+                holder.loadmoreView.setVisibility(View.GONE);
+                break;
 
         }
-        Drawable loadmoreBg = mLoadMoreRecyclerview.getLoadmoreBgDrawable();
-        if (loadmoreBg == null) {
-            loadmoreBg = new ColorDrawable(Color.parseColor("#f5f6f7"));
-            mLoadMoreRecyclerview.setLoadmoreBgDrawable(loadmoreBg);
-        }
-        holder.itemView.setBackground(loadmoreBg);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE || loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_SUCCESS) {
-                    mLoadMoreRecyclerview.setLoadmoreStatus(LoadMoreRecyclerView.LM_LOADING);
+                    mLoadMoreRecyclerview.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOADING);
                     notifyItemChanged(getItemCount() - 1);
                     notifyLoadmore();
                 }
@@ -173,27 +171,38 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
      * 通知加载更多
      */
     private void notifyLoadmore() {
-        LoadMoreRecyclerView.OnLoadmoreListener onLoadmoreListener = mLoadMoreRecyclerview.getOnLoadmoreListener();
-        if (onLoadmoreListener != null) {
+        OnLoadMoreListener onLoadmoreListener = mLoadMoreRecyclerview.getOnLoadmoreListener();
+        if (mLoadMoreRecyclerview.getOnLoadmoreListener() != null) {
             onLoadmoreListener.onLoadmore();
         }
     }
 
 
-    static class LoadmoreViewHolder extends RecyclerView.ViewHolder {
+    static class LoadmoreViewHolder extends ViewHolder {
 
         ProgressBar loadmoreView;
         TextView loadmoreTitle;
 
-        public LoadmoreViewHolder(@NonNull View itemView) {
+        public LoadmoreViewHolder(View itemView) {
             super(itemView);
             loadmoreView = itemView.findViewById(R.id.loadmore);
             loadmoreTitle = itemView.findViewById(R.id.tv_loadmore_title);
         }
     }
 
-    protected abstract RecyclerView.ViewHolder mOnCreateViewHolder(@NonNull ViewGroup parent, int viewType);
+    /**
+     * @param parent
+     * @param viewType
+     * @return
+     * @see RecyclerView.Adapter#onCreateViewHolder(ViewGroup, int)
+     */
+    protected abstract ViewHolder mOnCreateViewHolder(ViewGroup parent, int viewType);
 
-    protected abstract void mOnBindViewHolder(ViewHolder viewHolder, int position,List payloads);
-
+    /**
+     * @param viewHolder
+     * @param position
+     * @param payloads
+     * @see RecyclerView.Adapter#onBindViewHolder(ViewHolder, int, List)
+     */
+    protected abstract void mOnBindViewHolder(ViewHolder viewHolder, int position, List payloads);
 }

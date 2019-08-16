@@ -645,10 +645,6 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         public void onRefresh();
     }
 
-    public interface OnLoadMoreListener {
-        public void onLoadMore();
-    }
-
     public interface IHeaderScroll {
         public void onHeaderScroll(float scrollY);
     }

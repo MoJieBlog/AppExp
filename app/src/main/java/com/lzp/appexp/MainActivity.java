@@ -8,7 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
 import com.view.loadmore.LoadMoreRecyclerView;
-import com.view.loadmore.LoadMoreRecyclerView.OnLoadmoreListener;
+import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
 
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 }, 2000);
             }
         });
-        rcv.setOnLoadmoreListener(new OnLoadmoreListener() {
+        rcv.setOnLoadmoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadmore() {
                 new Handler().postDelayed(new Runnable() {
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                rcv.stopLoadmore();
+                                rcv.stopLoadMore();
                                 mAdapter.loadMore();
                             }
                         });
