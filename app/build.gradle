@@ -58,6 +58,7 @@ dependencies {
     implementation extAppcompatV7
     implementation extConstraint
     implementation extRecyclerviewV7
+    implementation extDesign
 
     implementation extEventBus
     implementation project(path: ':utils')

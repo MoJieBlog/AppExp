@@ -20,6 +20,11 @@
         app:bgColor="@color/colorAccent"
         app:radius="100dp" />
 
+    <com.view.DashBoardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#000000"/>
     <com.view.refresh.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
