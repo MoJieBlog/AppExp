@@ -24,7 +24,7 @@
 ## View
 * 加载更多的recyclerView
 * PhotoView
-* 仿SwipeRefreshLayout写的刷新头部
+* 仿SwipeRefreshLayout写的刷新头部,系统SwipeRefreshLayout支持刷新场景都支持，支持扩展，配合加载更多的recyclerView可实现刷新加载更多的recyclerView功能。
 * 仪表盘（doing）
 * 半圆
 * 加载中的View,IOS的菊花加载
