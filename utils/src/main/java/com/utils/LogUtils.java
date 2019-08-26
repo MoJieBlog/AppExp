@@ -9,7 +9,7 @@ import android.util.Log;
  */
 public final class LogUtils {
 
-    public static boolean enable = false;
+    private static boolean enable = false;
 
     public static void init(boolean debug) {
         enable = debug;
