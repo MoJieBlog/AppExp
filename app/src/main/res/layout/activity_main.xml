@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
+    <com.view.LinearGradientTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:id="@+id/tv"
+        android:text="这是一条测试渐变的文案这是一条测试渐变的文案这是一条测试渐变的文案这是一条测试渐变的文案"
+        android:textSize="29sp"/>
     <com.lzp.appexp.TestView
         android:layout_width="match_parent"
         android:layout_height="10dp"

@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
+import com.view.LinearGradientTextView;
 import com.view.loadmore.LoadMoreRecyclerView;
 import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 import com.view.refresh.SwipeRefreshLayout;
@@ -24,12 +25,25 @@ public class MainActivity extends AppCompatActivity {
 
     TestView testView;
 
+    LinearGradientTextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         testView = findViewById(R.id.testView);
+
+        tv = findViewById(R.id.tv);
+
+        /*tv.post(new Runnable() {
+            @Override
+            public void run() {
+                tv.setGradientColor(0,0,tv.getMeasuredWidth(),0,0xffffff00,0xff00ffff);
+            }
+        });*/
+        tv.verticalGradient(0xffff00ff,0xffffffff,true);
+
 
         testView.setTest();
 
@@ -44,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new TestAdapter(this);
 
         rcv.setAdapter(mAdapter);
+
+        rcv.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOAD_SUCCESS);
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
