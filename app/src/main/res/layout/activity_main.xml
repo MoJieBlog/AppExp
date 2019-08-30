@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#e60012"/>
 
     <com.view.LinearGradientTextView
         android:layout_width="match_parent"

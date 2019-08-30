@@ -27,4 +27,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation extAppcompatV7
+    implementation extConstraint
+    implementation extDesign
+    implementation project(path: ':utils')
 }
