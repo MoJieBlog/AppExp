@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">view</string>
-    <!--<string name="load_complete">已全部加载完成</string>
+    <string name="load_complete">已全部加载完成</string>
     <string name="click_load">点击加载更多</string>
     <string name="load_failure">加载失败，点击加载</string>
-    <string name="loading">正在加载</string>-->
+    <string name="loading">正在加载</string>
 
 
-    <string name="load_complete">""</string>
+   <!-- <string name="load_complete">""</string>
     <string name="click_load">""</string>
     <string name="load_failure">""</string>
-    <string name="loading">""</string>
+    <string name="loading">""</string>-->
 </resources>

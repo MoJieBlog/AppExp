@@ -1,7 +1,6 @@
 package com.view.loadmore;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -61,23 +60,22 @@ public class LoadMoreRecyclerView extends RecyclerView {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     LayoutManager layoutManager = getLayoutManager();
                     int itemCount = layoutManager.getItemCount();
-                    if (layoutManager instanceof LinearLayoutManager){
+                    //GridLayoutManager 继承 LinearLayoutManager
+                    if (layoutManager instanceof LinearLayoutManager) {
                         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
                         int lastItemPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-                        if (lastItemPosition == (itemCount - 1-PRE_LOAD_COUNT) && isSlidingUpward) {
+                        if (lastItemPosition == (itemCount - 1 - PRE_LOAD_COUNT) && isSlidingUpward) {
                             //加载更多
                             onLoading();
                         }
-                    }else if(layoutManager instanceof GridLayoutManager){
-                        GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
-                        int lastItemPosition = gridLayoutManager.findLastCompletelyVisibleItemPosition();
-                        if (lastItemPosition == (itemCount - 1-PRE_LOAD_COUNT) && isSlidingUpward) {
-                            //加载更多
-                            onLoading();
-                        }
-                    }else if(layoutManager instanceof StaggeredGridLayoutManager){
+                    }else if (layoutManager instanceof StaggeredGridLayoutManager) {
                         StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
-                        staggeredGridLayoutManager.findLastCompletelyVisibleItemPositions()
+                        int[] last = new int[staggeredGridLayoutManager.getSpanCount()];
+                        staggeredGridLayoutManager.findLastCompletelyVisibleItemPositions(last);
+                        if ((last[0] == (itemCount - 1 - PRE_LOAD_COUNT) || last[1] == (itemCount - 1 - PRE_LOAD_COUNT)) && isSlidingUpward) {
+                            //加载更多
+                            onLoading();
+                        }
                     }
                 }
             }
@@ -108,6 +106,9 @@ public class LoadMoreRecyclerView extends RecyclerView {
 
     public void stopLoadMore() {
         stopLoadMore(LM_LOAD_SUCCESS);
+        if (getAdapter() != null) {
+            getAdapter().notifyItemChanged(getAdapter().getItemCount() - 1);
+        }
     }
 
     public void stopLoadMore(int loadmoreStatus) {

@@ -1,6 +1,7 @@
 package com.view.loadmore;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutManager;
@@ -54,8 +55,12 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
                 }
             });
         }
-    }
 
+        if (layoutManager instanceof StaggeredGridLayoutManager){
+            StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+        }
+
+    }
 
     @Override
     public int getItemViewType(int position) {
@@ -70,6 +75,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_LOADMORE) {
+
             return new LoadmoreViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_loadmore, parent, false));
         } else {
             return mOnCreateViewHolder(parent, viewType);
@@ -78,36 +84,26 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position, List payloads) {
-        // super.onBindViewHolder(viewHolder, position, payloads);
-        // 预加载处理
-        /*int loadmoreStatus = mLoadMoreRecyclerview.getLoadMoreStatus();
-        if (mLoadMoreRecyclerview.isPreLoad()
-                && (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_SUCCESS
-                || loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE)) {
-            int toBottomItemCount = getItemCount() - position;
-            if (toBottomItemCount <= LoadMoreRecyclerView.PRE_LOAD_COUNT) {
-                mLoadMoreRecyclerview.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOADING);
-                notifyLoadmore();
-            }
-        }*/
 
-        //解决瀑布流加载更多占一整行
-        if (layoutManager instanceof StaggeredGridLayoutManager) {
-            StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
-            ViewGroup.LayoutParams targetParams = viewHolder.itemView.getLayoutParams();
-            StaggeredGridLayoutManager.LayoutParams StaggerLayoutParams;
-            if (targetParams != null) {
-                StaggerLayoutParams =
-                        new StaggeredGridLayoutManager.LayoutParams(targetParams.width, targetParams.height);
-            } else {
-                StaggerLayoutParams =
-                        new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT);
-            }
-            StaggerLayoutParams.setFullSpan(true);
-        }
 
         if (viewHolder.getItemViewType() == TYPE_LOADMORE) {
+            //解决瀑布流加载更多占一整行
+            if (layoutManager instanceof StaggeredGridLayoutManager) {
+                StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+                ViewGroup.LayoutParams targetParams = viewHolder.itemView.getLayoutParams();
+                StaggeredGridLayoutManager.LayoutParams staggerLayoutParams;
+                if (targetParams != null) {
+                    staggerLayoutParams =
+                            new StaggeredGridLayoutManager.LayoutParams(targetParams.width, targetParams.height);
+                } else {
+                    staggerLayoutParams =
+                            new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT);
+                }
+                staggerLayoutParams.setFullSpan(true);
+                viewHolder.itemView.setLayoutParams(staggerLayoutParams);
+            }
+
             bindLoadMoreViewHolder(viewHolder);
             return;
         } else {
@@ -141,7 +137,6 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
                 holder.loadmoreView.setVisibility(View.GONE);
                 break;
             case LoadMoreRecyclerView.LM_LOAD_SUCCESS:
-                Log.e(TAG, "bindLoadMoreViewHolder: LM_LOAD_SUCCESS");
                 holder.loadmoreTitle.setText(context.getString(R.string.click_load));
                 holder.loadmoreView.setVisibility(View.GONE);
                 break;
@@ -150,7 +145,6 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
                 holder.loadmoreView.setVisibility(View.GONE);
                 break;
             case LoadMoreRecyclerView.LM_LOADING:
-                Log.e(TAG, "bindLoadMoreViewHolder: LM_LOADING");
                 holder.loadmoreTitle.setText(context.getString(R.string.loading));
                 holder.loadmoreView.setVisibility(View.VISIBLE);
                 break;
