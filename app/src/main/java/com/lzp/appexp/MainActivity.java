@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private LoadMoreRecyclerView rcv;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,20 +45,18 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
+
         rcv = findViewById(R.id.rcv);
 
 
         refreshLayout = findViewById(R.id.refresh);
         refreshLayout.setCanRefresh(true);
 
-        rcv.setLayoutManager(new GridLayoutManager(this,2));
+        //rcv.setLayoutManager(new GridLayoutManager(this,2));
+        rcv.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new TestAdapter(this);
 
         rcv.setAdapter(mAdapter);
-
-        rcv.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOAD_SUCCESS);
-
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                     }
-                }, 2000);
+                }, 1000);
             }
         });
         rcv.setOnLoadmoreListener(new OnLoadMoreListener() {

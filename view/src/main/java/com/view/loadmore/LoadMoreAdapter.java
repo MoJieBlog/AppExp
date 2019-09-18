@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
 
+    private static final String TAG = "LoadMoreAdapter";
     /**
      * 加载更多条目类型
      */
@@ -58,7 +60,11 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         if (position == getItemCount() - 1) return TYPE_LOADMORE;
-        return super.getItemViewType(position);
+        if (super.getItemViewType(position)==TYPE_LOADMORE){
+            throw new IllegalArgumentException(TYPE_LOADMORE+" has been declared to load more.Please chose anther number.");
+        }else{
+            return super.getItemViewType(position);
+        }
     }
 
     @Override
@@ -74,7 +80,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(ViewHolder viewHolder, int position, List payloads) {
         // super.onBindViewHolder(viewHolder, position, payloads);
         // 预加载处理
-        int loadmoreStatus = mLoadMoreRecyclerview.getLoadMoreStatus();
+        /*int loadmoreStatus = mLoadMoreRecyclerview.getLoadMoreStatus();
         if (mLoadMoreRecyclerview.isPreLoad()
                 && (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_SUCCESS
                 || loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE)) {
@@ -83,7 +89,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
                 mLoadMoreRecyclerview.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOADING);
                 notifyLoadmore();
             }
-        }
+        }*/
 
         //解决瀑布流加载更多占一整行
         if (layoutManager instanceof StaggeredGridLayoutManager) {
@@ -135,6 +141,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
                 holder.loadmoreView.setVisibility(View.GONE);
                 break;
             case LoadMoreRecyclerView.LM_LOAD_SUCCESS:
+                Log.e(TAG, "bindLoadMoreViewHolder: LM_LOAD_SUCCESS");
                 holder.loadmoreTitle.setText(context.getString(R.string.click_load));
                 holder.loadmoreView.setVisibility(View.GONE);
                 break;
@@ -143,6 +150,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
                 holder.loadmoreView.setVisibility(View.GONE);
                 break;
             case LoadMoreRecyclerView.LM_LOADING:
+                Log.e(TAG, "bindLoadMoreViewHolder: LM_LOADING");
                 holder.loadmoreTitle.setText(context.getString(R.string.loading));
                 holder.loadmoreView.setVisibility(View.VISIBLE);
                 break;
