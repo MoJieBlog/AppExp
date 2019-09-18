@@ -32,12 +32,11 @@ public class LoadMoreRecyclerView extends RecyclerView {
     /**
      * 距离底部条目个数（触发预加载）
      */
-    static final int PRE_LOAD_COUNT = 5;
+    static final int PRE_LOAD_COUNT = 1;
     private int loadMoreStatus = LM_LOAD_NON;
     private OnLoadMoreListener onLoadmoreListener;
     // 是否预加载
     private boolean isPreLoad = true;
-    private Drawable loadmoreBgDrawable;
 
 
     public LoadMoreRecyclerView(@NonNull Context context) {
@@ -58,9 +57,9 @@ public class LoadMoreRecyclerView extends RecyclerView {
 
     public void stopLoadMore(int loadmoreStatus){
         setLoadMoreStatus(loadmoreStatus);
-        if (getAdapter() != null){
+        /*if (getAdapter() != null){
             getAdapter().notifyItemChanged(getAdapter().getItemCount() - 1);
-        }
+        }*/
     }
 
     public void setLoadMoreStatus(int loadMoreStatus) {
@@ -85,14 +84,6 @@ public class LoadMoreRecyclerView extends RecyclerView {
 
     public void setOnLoadmoreListener(OnLoadMoreListener onLoadmoreListener) {
         this.onLoadmoreListener = onLoadmoreListener;
-    }
-
-    public Drawable getLoadmoreBgDrawable() {
-        return loadmoreBgDrawable;
-    }
-
-    public void setLoadMoreBgDrawable(Drawable loadmoreBgDrawable) {
-        this.loadmoreBgDrawable = loadmoreBgDrawable;
     }
 
     public interface OnLoadMoreListener {

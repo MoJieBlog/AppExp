@@ -6,37 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="#e60012"/>
-
-    <com.view.LinearGradientTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:id="@+id/tv"
-        android:text="这是一条测试渐变的文案这是一条测试渐变的文案这是一条测试渐变的文案这是一条测试渐变的文案"
-        android:textSize="29sp"/>
-    <com.lzp.appexp.TestView
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:id="@+id/testView"/>
-
-    <com.view.HalfCircleView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#aaaaaa"
-        app:direction="bottom"
-        app:bgColor="@color/colorAccent"
-        app:radius="100dp" />
-
-    <com.view.DashBoardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="#000000"/>
     <com.view.refresh.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"

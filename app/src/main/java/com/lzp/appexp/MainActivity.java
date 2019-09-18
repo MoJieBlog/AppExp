@@ -27,9 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     private LoadMoreRecyclerView rcv;
 
-    TestView testView;
-
-    LinearGradientTextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +43,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-
-        testView = findViewById(R.id.testView);
-
-        tv = findViewById(R.id.tv);
-
-        /*tv.post(new Runnable() {
-            @Override
-            public void run() {
-                tv.setGradientColor(0,0,tv.getMeasuredWidth(),0,0xffffff00,0xff00ffff);
-            }
-        });*/
-        tv.verticalGradient(0xffff00ff,0xffffffff,true);
-
-
-        testView.setTest();
 
         PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
         rcv = findViewById(R.id.rcv);
