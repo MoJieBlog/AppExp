@@ -18,9 +18,9 @@ public class LoadMoreRecyclerView extends RecyclerView {
     private static final String TAG = "LoadMoreRecyclerView";
     public static final int LM_LOAD_NON = 0;
     /**
-     * 加载成功
+     * 点击加载
      */
-    public static final int LM_LOAD_SUCCESS = 1;
+    public static final int LM_CLICK_LOAD = 1;
     /**
      * 加载失败
      */
@@ -37,14 +37,13 @@ public class LoadMoreRecyclerView extends RecyclerView {
      * 距离底部条目个数（触发预加载）
      */
 
-    static final int PRE_LOAD_COUNT = 0;
+    static final int PRE_LOAD_COUNT = 5;
     private int loadMoreStatus = LM_LOAD_NON;
     private OnLoadMoreListener onLoadmoreListener;
     // 是否预加载
     private boolean canLoad = true;
 
-    /***是否想上滚动****/
-    private boolean isSlidingUpward = false;
+    private int lastPosition = 0;
 
     public LoadMoreRecyclerView(@NonNull Context context) {
         this(context, null);
@@ -57,24 +56,20 @@ public class LoadMoreRecyclerView extends RecyclerView {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    LayoutManager layoutManager = getLayoutManager();
-                    int itemCount = layoutManager.getItemCount();
-                    //GridLayoutManager 继承 LinearLayoutManager
-                    if (layoutManager instanceof LinearLayoutManager) {
-                        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
-                        int lastItemPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-                        if (lastItemPosition == (itemCount - 1 - PRE_LOAD_COUNT) && isSlidingUpward) {
-                            //加载更多
-                            onLoading();
+
+                LayoutManager layoutManager = getLayoutManager();
+                int itemCount = layoutManager.getItemCount();
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {//静止的时候再加载更多
+                    //因为有底部
+                    if (canLoadMore(itemCount)){
+                        Log.e(TAG, "onScrollStateChanged: 开始加载更多");
+                        setLoadMoreStatus(LoadMoreRecyclerView.LM_LOADING);
+                        if (getAdapter() != null) {
+                            getAdapter().notifyItemChanged(getAdapter().getItemCount() - 1);
                         }
-                    }else if (layoutManager instanceof StaggeredGridLayoutManager) {
-                        StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
-                        int[] last = new int[staggeredGridLayoutManager.getSpanCount()];
-                        staggeredGridLayoutManager.findLastCompletelyVisibleItemPositions(last);
-                        if ((last[0] == (itemCount - 1 - PRE_LOAD_COUNT) || last[1] == (itemCount - 1 - PRE_LOAD_COUNT)) && isSlidingUpward) {
-                            //加载更多
-                            onLoading();
+                        if (getOnLoadmoreListener() != null) {
+                            onLoadmoreListener.onLoadmore();
                         }
                     }
                 }
@@ -83,29 +78,37 @@ public class LoadMoreRecyclerView extends RecyclerView {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                isSlidingUpward = dy > 0;
+                LayoutManager layoutManager = getLayoutManager();
+                int itemCount = layoutManager.getItemCount();
+
+                if (layoutManager instanceof LinearLayoutManager) {
+                    LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+                    lastPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+
+                } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+                    StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+                    int[] last = new int[staggeredGridLayoutManager.getSpanCount()];
+
+                    int[] lastCompletelyVisibleItemPositions = staggeredGridLayoutManager.findLastCompletelyVisibleItemPositions(last);
+                    int max = Math.max(lastCompletelyVisibleItemPositions[0], lastCompletelyVisibleItemPositions[1]);
+                    lastPosition = max;
+                }
             }
         });
 
     }
 
-    public void onLoading() {
-        Log.e(TAG, "onLoading: 开始加载更多");
-        if (canLoad
-                && (getLoadMoreStatus() != LoadMoreRecyclerView.LM_LOAD_COMPLETE
-                && getLoadMoreStatus() != LoadMoreRecyclerView.LM_LOADING)) {
-            Log.e(TAG, "onLoading: loading");
-            setLoadMoreStatus(LoadMoreRecyclerView.LM_LOADING);
-            getAdapter().notifyDataSetChanged();
-            if (getOnLoadmoreListener() != null) {
-                onLoadmoreListener.onLoadmore();
-            }
-        }
-
+    private boolean canLoadMore(int itemCount){
+        Log.e(TAG, "canLoadMore: "+lastPosition);
+        return canLoad
+                &&(getLoadMoreStatus() == LoadMoreRecyclerView.LM_LOAD_NON
+                || getLoadMoreStatus() == LoadMoreRecyclerView.LM_LOAD_FAILURE)
+                && itemCount > 1
+                && lastPosition > (itemCount - 1 - PRE_LOAD_COUNT);
     }
 
     public void stopLoadMore() {
-        stopLoadMore(LM_LOAD_SUCCESS);
+        stopLoadMore(LM_LOADING);
         if (getAdapter() != null) {
             getAdapter().notifyItemChanged(getAdapter().getItemCount() - 1);
         }
@@ -127,6 +130,7 @@ public class LoadMoreRecyclerView extends RecyclerView {
     }
 
     public void setCanLoad(boolean canLoad) {
+        this.loadMoreStatus = canLoad?LM_LOADING:LM_LOAD_COMPLETE;
         this.canLoad = canLoad;
     }
 

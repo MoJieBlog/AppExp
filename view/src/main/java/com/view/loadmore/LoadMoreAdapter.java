@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -135,29 +136,34 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
             case LoadMoreRecyclerView.LM_LOAD_COMPLETE:
                 holder.loadmoreTitle.setText(context.getResources().getString(R.string.load_complete));
                 holder.loadmoreView.setVisibility(View.GONE);
+                holder.loadMoreLayout.setVisibility(View.VISIBLE);
                 break;
-            case LoadMoreRecyclerView.LM_LOAD_SUCCESS:
+            case LoadMoreRecyclerView.LM_CLICK_LOAD:
                 holder.loadmoreTitle.setText(context.getString(R.string.click_load));
                 holder.loadmoreView.setVisibility(View.GONE);
+                holder.loadMoreLayout.setVisibility(View.VISIBLE);
                 break;
             case LoadMoreRecyclerView.LM_LOAD_FAILURE:
                 holder.loadmoreTitle.setText(context.getString(R.string.load_failure));
                 holder.loadmoreView.setVisibility(View.GONE);
+                holder.loadMoreLayout.setVisibility(View.VISIBLE);
                 break;
             case LoadMoreRecyclerView.LM_LOADING:
                 holder.loadmoreTitle.setText(context.getString(R.string.loading));
                 holder.loadmoreView.setVisibility(View.VISIBLE);
+                holder.loadMoreLayout.setVisibility(View.VISIBLE);
                 break;
             case LoadMoreRecyclerView.LM_LOAD_NON:
                 holder.loadmoreTitle.setText("");
                 holder.loadmoreView.setVisibility(View.GONE);
+                holder.loadMoreLayout.setVisibility(View.GONE);
                 break;
 
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE || loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_SUCCESS) {
+                if (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE || loadmoreStatus == LoadMoreRecyclerView.LM_CLICK_LOAD) {
                     mLoadMoreRecyclerview.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOADING);
                     notifyItemChanged(getItemCount() - 1);
                     notifyLoadmore();
@@ -181,11 +187,13 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
 
         ProgressBar loadmoreView;
         TextView loadmoreTitle;
+        LinearLayout loadMoreLayout;
 
         public LoadmoreViewHolder(View itemView) {
             super(itemView);
             loadmoreView = itemView.findViewById(R.id.loadmore);
             loadmoreTitle = itemView.findViewById(R.id.tv_loadmore_title);
+            loadMoreLayout = itemView.findViewById(R.id.loadMoreLayout);
         }
     }
 

@@ -60,42 +60,46 @@ public class MainActivity extends AppCompatActivity {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                refreshLayout.stopRefresh();
-                                mAdapter.refresh();
-                            }
-                        });
-                    }
-                }, 1000);
+                freshType = 0;
+                getData();
             }
         });
         rcv.setOnLoadmoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadmore() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                mAdapter.loadMore();
-                                if (mAdapter.mGetItemCount()>30){
-                                    rcv.stopLoadMore(LoadMoreRecyclerView.LM_LOAD_COMPLETE);
-                                }else{
-                                    rcv.stopLoadMore();
-                                }
-                            }
-                        });
-                    }
-                }, 3000);
+                freshType = 1;
+                getData();
             }
         });
 
+    }
+
+    private int freshType = 0;
+
+    private void getData(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (freshType==0){
+                            mAdapter.refresh();
+                            refreshLayout.stopRefresh();
+                        }else{
+                            mAdapter.loadMore();
+                            rcv.stopLoadMore();
+                        }
+
+                        if (mAdapter.mGetItemCount()>30){
+                            rcv.setCanLoad(false);
+                        }else{
+                            rcv.setCanLoad(true);
+                        }
+                    }
+                });
+            }
+        }, 1000);
     }
 }
