@@ -3,7 +3,6 @@ package com.view.loadmore;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -16,32 +15,38 @@ import android.util.Log;
 public class LoadMoreRecyclerView extends RecyclerView {
 
     private static final String TAG = "LoadMoreRecyclerView";
+
+    /**
+     * 不可加载更多
+     */
     public static final int LM_LOAD_NON = 0;
     /**
      * 点击加载
      */
     public static final int LM_CLICK_LOAD = 1;
+
+    /**
+     * 自动加载
+     */
+    public static final int LM_AUTO_LOAD = 2;
+
     /**
      * 加载失败
      */
-    public static final int LM_LOAD_FAILURE = 2;
+    public static final int LM_LOAD_FAILURE = 3;
     /**
      * 加载完成
      */
-    public static final int LM_LOAD_COMPLETE = 3;
-    /**
-     * 加载中
-     */
-    public static final int LM_LOADING = 4;
+    public static final int LM_LOAD_COMPLETE = 4;
+
     /**
      * 距离底部条目个数（触发预加载）
      */
+    static final int PRE_LOAD_COUNT = 0;
 
-    static final int PRE_LOAD_COUNT = 5;
     private int loadMoreStatus = LM_LOAD_NON;
+
     private OnLoadMoreListener onLoadmoreListener;
-    // 是否预加载
-    private boolean canLoad = true;
 
     private int lastPosition = 0;
 
@@ -62,14 +67,14 @@ public class LoadMoreRecyclerView extends RecyclerView {
 
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {//静止的时候再加载更多
                     //因为有底部
-                    if (canLoadMore(itemCount)){
+                    if (canLoadMore(itemCount)) {
                         Log.e(TAG, "onScrollStateChanged: 开始加载更多");
-                        setLoadMoreStatus(LoadMoreRecyclerView.LM_LOADING);
+                        setLoadMoreStatus(LoadMoreRecyclerView.LM_AUTO_LOAD);
                         if (getAdapter() != null) {
                             getAdapter().notifyItemChanged(getAdapter().getItemCount() - 1);
                         }
                         if (getOnLoadmoreListener() != null) {
-                            onLoadmoreListener.onLoadmore();
+                            onLoadmoreListener.onLoadMore();
                         }
                     }
                 }
@@ -98,27 +103,11 @@ public class LoadMoreRecyclerView extends RecyclerView {
 
     }
 
-    private boolean canLoadMore(int itemCount){
-        Log.e(TAG, "canLoadMore: "+lastPosition);
-        return canLoad
-                &&(getLoadMoreStatus() == LoadMoreRecyclerView.LM_LOAD_NON
-                || getLoadMoreStatus() == LoadMoreRecyclerView.LM_LOAD_FAILURE)
+    private boolean canLoadMore(int itemCount) {
+        Log.e(TAG, "canLoadMore: " + lastPosition);
+        return getLoadMoreStatus() == LoadMoreRecyclerView.LM_AUTO_LOAD
                 && itemCount > 1
-                && lastPosition > (itemCount - 1 - PRE_LOAD_COUNT);
-    }
-
-    public void stopLoadMore() {
-        stopLoadMore(LM_LOADING);
-        if (getAdapter() != null) {
-            getAdapter().notifyItemChanged(getAdapter().getItemCount() - 1);
-        }
-    }
-
-    public void stopLoadMore(int loadmoreStatus) {
-        setLoadMoreStatus(loadmoreStatus);
-        if (getAdapter() != null) {
-            getAdapter().notifyItemChanged(getAdapter().getItemCount() - 1);
-        }
+                && lastPosition >= (itemCount - 1 - PRE_LOAD_COUNT);
     }
 
     public void setLoadMoreStatus(int loadMoreStatus) {
@@ -127,11 +116,6 @@ public class LoadMoreRecyclerView extends RecyclerView {
 
     public int getLoadMoreStatus() {
         return loadMoreStatus;
-    }
-
-    public void setCanLoad(boolean canLoad) {
-        this.loadMoreStatus = canLoad?LM_LOADING:LM_LOAD_COMPLETE;
-        this.canLoad = canLoad;
     }
 
     public OnLoadMoreListener getOnLoadmoreListener() {
@@ -143,7 +127,7 @@ public class LoadMoreRecyclerView extends RecyclerView {
     }
 
     public interface OnLoadMoreListener {
-        public void onLoadmore();
+        public void onLoadMore();
     }
 
 }

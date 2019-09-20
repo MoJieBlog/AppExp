@@ -5,8 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Window;
 import android.view.WindowManager;
@@ -56,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         //rcv.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new TestAdapter(this);
 
+        getData();
+
         rcv.setAdapter(mAdapter);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         });
         rcv.setOnLoadmoreListener(new OnLoadMoreListener() {
             @Override
-            public void onLoadmore() {
+            public void onLoadMore() {
                 freshType = 1;
                 getData();
             }
@@ -83,19 +83,16 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
                         if (freshType==0){
                             mAdapter.refresh();
                             refreshLayout.stopRefresh();
                         }else{
                             mAdapter.loadMore();
-                            rcv.stopLoadMore();
                         }
-
                         if (mAdapter.mGetItemCount()>30){
-                            rcv.setCanLoad(false);
+                            rcv.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOAD_COMPLETE);
                         }else{
-                            rcv.setCanLoad(true);
+                            rcv.setLoadMoreStatus(LoadMoreRecyclerView.LM_AUTO_LOAD);
                         }
                     }
                 });

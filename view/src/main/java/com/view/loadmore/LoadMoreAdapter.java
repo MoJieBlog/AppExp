@@ -1,13 +1,11 @@
 package com.view.loadmore;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -148,7 +146,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
                 holder.loadmoreView.setVisibility(View.GONE);
                 holder.loadMoreLayout.setVisibility(View.VISIBLE);
                 break;
-            case LoadMoreRecyclerView.LM_LOADING:
+            case LoadMoreRecyclerView.LM_AUTO_LOAD:
                 holder.loadmoreTitle.setText(context.getString(R.string.loading));
                 holder.loadmoreView.setVisibility(View.VISIBLE);
                 holder.loadMoreLayout.setVisibility(View.VISIBLE);
@@ -164,7 +162,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 if (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE || loadmoreStatus == LoadMoreRecyclerView.LM_CLICK_LOAD) {
-                    mLoadMoreRecyclerview.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOADING);
+                    mLoadMoreRecyclerview.setLoadMoreStatus(LoadMoreRecyclerView.LM_AUTO_LOAD);
                     notifyItemChanged(getItemCount() - 1);
                     notifyLoadmore();
                 }
@@ -178,7 +176,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     private void notifyLoadmore() {
         OnLoadMoreListener onLoadmoreListener = mLoadMoreRecyclerview.getOnLoadmoreListener();
         if (mLoadMoreRecyclerview.getOnLoadmoreListener() != null) {
-            onLoadmoreListener.onLoadmore();
+            onLoadmoreListener.onLoadMore();
         }
     }
 
