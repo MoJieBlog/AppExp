@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.R;
+import com.utils.SizeUtils;
 
 /**
  * @describe
@@ -22,6 +23,7 @@ import com.base.R;
  */
 public class ActionBarView extends RelativeLayout implements OnClickListener {
 
+    private final int ACTIONBAR_HEIGHT = 45;
     //左侧按钮
     private LinearLayout actionBarLeftLayout;
     private TextView actionBarLeftText;
@@ -37,13 +39,14 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
 
     private ActionBarClickListener actionBarClickListener;
 
+    private int viewHeight;
     public ActionBarView(Context context) {
         this(context, null);
     }
 
     public ActionBarView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
+        viewHeight = SizeUtils.dip2px(context,ACTIONBAR_HEIGHT);
         initView();
         setEvent();
     }
@@ -70,6 +73,12 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
         actionBarRightImg.setOnClickListener(this);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(LayoutParams.MATCH_PARENT,
+                MeasureSpec.makeMeasureSpec(viewHeight,MeasureSpec.EXACTLY));
+    }
 
     public void setActionBarClickListener(ActionBarClickListener actionBarClickListener) {
         this.actionBarClickListener = actionBarClickListener;
@@ -96,6 +105,14 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
     }
 
     /*********以下为View的颜色，文字，图片资源设置**********/
+
+    public void setActionBarBg(int color){
+        setBackgroundColor(color);
+    }
+
+    public void setActionBarBgRes(int colorRes){
+        setActionBarBg(getResources().getColor(colorRes));
+    }
 
     public void setLeftTextEnable(boolean enable) {
         setLeftTextEnable(enable,

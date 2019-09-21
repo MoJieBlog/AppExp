@@ -12,6 +12,7 @@ import android.view.WindowManager;
 
 import com.base.compat.ActionBarView;
 import com.base.compat.ActionBarView.ActionBarClickAdapter;
+import com.base.compat.StatusBarView;
 import com.view.loadmore.LoadMoreRecyclerView;
 import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 import com.view.refresh.SwipeRefreshLayout;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private LoadMoreRecyclerView rcv;
 
     ActionBarView actionBar;
+    StatusBarView statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +50,19 @@ public class MainActivity extends AppCompatActivity {
 
         rcv = findViewById(R.id.rcv);
         actionBar = findViewById(R.id.actionBar);
+        statusBarView = findViewById(R.id.statusBarView);
 
+
+        statusBarView.setBgColorRes(R.color.color_status_bar);
+        actionBar.setActionBarBgRes(R.color.color_actionbar_bg);
 
         actionBar.setTitleVisible(View.VISIBLE);
         actionBar.setSubTitleVisible(View.VISIBLE);
         actionBar.setLeftImgVisible(View.VISIBLE);
         actionBar.setRightTextVisible(View.VISIBLE);
-        actionBar.setTitleText("标题");
-        actionBar.setRightText("左侧");
+        actionBar.setTitleTextColor(Color.WHITE);
+        actionBar.setTitleText("标题标题标题");
+        actionBar.setRightText("右侧");
 
 
         actionBar.setActionBarClickListener(new ActionBarClickAdapter() {
