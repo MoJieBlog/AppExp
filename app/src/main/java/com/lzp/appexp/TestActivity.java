@@ -9,9 +9,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetBehavior.BottomSheetCallback;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -26,26 +31,45 @@ public class TestActivity extends AppCompatActivity {
     TextView tv;
     Button btn;
 
+    NestedScrollView scrollView;
+    BottomSheetBehavior behavior;
+
     private static final String TAG = "TestActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+/*
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(Color.WHITE);
+        window.setStatusBarColor(Color.WHITE);*/
 
         setContentView(R.layout.activity_test);
 
         ImageView iv = findViewById(R.id.iv);
+        scrollView = findViewById(R.id.scrollView);
 
         ImageLoader.get(this).display("http://pic37.nipic.com/20140113/8800276_184927469000_2.png").into(iv);
 
         btn = findViewById(R.id.btn);
+
+        behavior = BottomSheetBehavior.from(scrollView);
+        behavior.setHideable(false);
+       // behavior.setSkipCollapsed(false);
+        behavior.setBottomSheetCallback(new BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View view, int i) {
+                Log.e(TAG, "onStateChanged: "+i);
+            }
+
+            @Override
+            public void onSlide(@NonNull View view, float v) {
+                Log.e(TAG, "onSlide: "+v);
+            }
+        });
 
         btn.setOnClickListener(new OnClickListener() {
             @Override
@@ -69,7 +93,7 @@ public class TestActivity extends AppCompatActivity {
                 .setContentTitle("测试")
                 .setContentText("66666666")
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setOngoing(true)
+                .setOngoing(false)
                 .setProgress(100,0,false)
                 .setAutoCancel(false)
                 .setOnlyAlertOnce(true)

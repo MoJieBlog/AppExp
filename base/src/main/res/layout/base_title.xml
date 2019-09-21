@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@color/color_actionbar_bg"
+    tools:parentTag="android.widget.RelativeLayout">
+
+    <LinearLayout
+        android:id="@+id/actionBarLeftLayout"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/actionBarLeftText"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:textSize="@dimen/size_actionbar_left"
+            android:textColor="@color/color_actionbar_left_text"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:text="cancel"/>
+
+        <ImageView
+            android:id="@+id/actionBarLeftImg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:minWidth="42dp"
+            android:src="@mipmap/actionbar_back_dark"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/actionBarTitleLayout"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/actionBarTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title"
+            android:textColor="@color/color_actionbar_title"
+            android:text="title"/>
+
+        <TextView
+            android:id="@+id/actionBarSubTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:visibility="gone"
+            android:textColor="@color/color_actionbar_subtitle"
+            android:textSize="@dimen/size_sub_title"
+            android:text="subTitle"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/actionBarRightLayout"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/actionBarRightText"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="15dp"
+            android:textSize="@dimen/size_actionbar_right"
+            android:visibility="gone"
+            android:textColor="@color/color_actionbar_right_text"
+            android:layout_height="match_parent"
+            android:text="save"/>
+
+        <ImageView
+            android:id="@+id/actionBarRightImg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="15dp"
+            android:minWidth="42dp"
+            android:visibility="gone"
+            android:src="@mipmap/action_close_dark"/>
+    </LinearLayout>
+
+</merge>

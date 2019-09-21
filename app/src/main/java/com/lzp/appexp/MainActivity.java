@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.base.compat.ActionBarView;
+import com.base.compat.ActionBarView.ActionBarClickAdapter;
 import com.view.loadmore.LoadMoreRecyclerView;
 import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 import com.view.refresh.SwipeRefreshLayout;
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private LoadMoreRecyclerView rcv;
 
-
+    ActionBarView actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +47,55 @@ public class MainActivity extends AppCompatActivity {
 
 
         rcv = findViewById(R.id.rcv);
+        actionBar = findViewById(R.id.actionBar);
+
+
+        actionBar.setTitleVisible(View.VISIBLE);
+        actionBar.setSubTitleVisible(View.VISIBLE);
+        actionBar.setLeftImgVisible(View.VISIBLE);
+        actionBar.setRightTextVisible(View.VISIBLE);
+        actionBar.setTitleText("标题");
+        actionBar.setRightText("左侧");
+
+
+        actionBar.setActionBarClickListener(new ActionBarClickAdapter() {
+            @Override
+            public void onClickTitle(View v) {
+                super.onClickTitle(v);
+            }
+
+            @Override
+            public void onClickSubTitle(View v) {
+                super.onClickSubTitle(v);
+            }
+
+            @Override
+            public void onClickLeftText(View v) {
+                super.onClickLeftText(v);
+            }
+
+            @Override
+            public void onClickLeftImg(View v) {
+                super.onClickLeftImg(v);
+            }
+
+            @Override
+            public void onClickRightText(View v) {
+                super.onClickRightText(v);
+            }
+
+            @Override
+            public void onClickRightImg(View v) {
+                super.onClickRightImg(v);
+            }
+        });
 
 
         refreshLayout = findViewById(R.id.refresh);
         refreshLayout.setCanRefresh(true);
 
-       // rcv.setLayoutManager(new GridLayoutManager(this,2));
-        rcv.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        // rcv.setLayoutManager(new GridLayoutManager(this,2));
+        rcv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         //rcv.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new TestAdapter(this);
 
@@ -76,22 +121,22 @@ public class MainActivity extends AppCompatActivity {
 
     private int freshType = 0;
 
-    private void getData(){
+    private void getData() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (freshType==0){
+                        if (freshType == 0) {
                             mAdapter.refresh();
                             refreshLayout.stopRefresh();
-                        }else{
+                        } else {
                             mAdapter.loadMore();
                         }
-                        if (mAdapter.mGetItemCount()>30){
+                        if (mAdapter.mGetItemCount() > 30) {
                             rcv.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOAD_COMPLETE);
-                        }else{
+                        } else {
                             rcv.setLoadMoreStatus(LoadMoreRecyclerView.LM_AUTO_LOAD);
                         }
                     }

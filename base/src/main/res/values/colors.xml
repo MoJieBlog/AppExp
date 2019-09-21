@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--statusBar-->
+    <color name="color_status_bar">#141d26</color>
+    <!--actionBar-->
+    <color name="color_actionbar_bg">#141d26</color>
+    <color name="color_actionbar_left_text">#ffffff</color>
+    <color name="color_actionbar_left_text_not_enable">#55ffffff</color>
+    <color name="color_actionbar_title">#ffffff</color>
+    <color name="color_actionbar_subtitle">#ffffff</color>
+    <color name="color_actionbar_right_text">#ffffff</color>
+    <color name="color_actionbar_right_text_not_enable">#55ffffff</color>
+
+
     <color name="color_a1abbc">#a1abbc</color>
     <color name="color_333333">#333333</color>
+    <color name="color_141d26">#141d26</color>
 </resources>
