@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.R;
+import com.utils.PhoneUtils;
 import com.utils.SizeUtils;
 
 /**
@@ -23,7 +25,7 @@ import com.utils.SizeUtils;
  */
 public class ActionBarView extends RelativeLayout implements OnClickListener {
 
-    private final int ACTIONBAR_HEIGHT = 45;
+    private static final String TAG = "ActionBarView";
     //左侧按钮
     private LinearLayout actionBarLeftLayout;
     private TextView actionBarLeftText;
@@ -39,14 +41,12 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
 
     private ActionBarClickListener actionBarClickListener;
 
-    private int viewHeight;
     public ActionBarView(Context context) {
         this(context, null);
     }
 
     public ActionBarView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        viewHeight = SizeUtils.dip2px(context,ACTIONBAR_HEIGHT);
         initView();
         setEvent();
     }
@@ -71,13 +71,6 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
         actionBarSubTitleText.setOnClickListener(this);
         actionBarRightText.setOnClickListener(this);
         actionBarRightImg.setOnClickListener(this);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(LayoutParams.MATCH_PARENT,
-                MeasureSpec.makeMeasureSpec(viewHeight,MeasureSpec.EXACTLY));
     }
 
     public void setActionBarClickListener(ActionBarClickListener actionBarClickListener) {
@@ -187,6 +180,26 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
         setTitleText(getResources().getString(res));
     }
 
+    public void setSubTitleSize(float size) {
+        actionBarSubTitleText.setTextSize(size);
+    }
+
+    public void setSubTitleTextColor(int color) {
+        actionBarSubTitleText.setTextColor(color);
+    }
+
+    public void setSubTitleTextColorRes(int colorRes) {
+        setSubTitleTextColor(getResources().getColor(colorRes));
+    }
+
+    public void setSubTitleText(String text) {
+        actionBarSubTitleText.setText(text);
+    }
+
+    public void setSubTitleTextRes(int res) {
+        setSubTitleText(getResources().getString(res));
+    }
+
     public void setRightTextSize(float size) {
         actionBarRightText.setTextSize(size);
     }
@@ -237,7 +250,7 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
     }
 
     public void setRightTextVisible(int show){
-        actionBarLeftText.setVisibility(show);
+        actionBarRightText.setVisibility(show);
     }
 
     public void setRightImgVisible(int show){
@@ -271,16 +284,17 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
 
         @Override
         public void onClickTitle(View v) {
-
+            Log.d(TAG, "onClickTitle: ");
         }
 
         @Override
         public void onClickSubTitle(View v) {
-
+            Log.d(TAG, "onClickSubTitle: ");
         }
 
         @Override
         public void onClickLeftText(View v) {
+            Log.d(TAG, "onClickLeftText: ");
             if (v.getContext() instanceof Activity) {
                 ((Activity) v.getContext()).finish();
             }
@@ -288,6 +302,7 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
 
         @Override
         public void onClickLeftImg(View v) {
+            Log.d(TAG, "onClickLeftImg: ");
             if (v.getContext() instanceof Activity) {
                 ((Activity) v.getContext()).finish();
             }
@@ -295,12 +310,12 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
 
         @Override
         public void onClickRightText(View v) {
-
+            Log.d(TAG, "onClickRightText: ");
         }
 
         @Override
         public void onClickRightImg(View v) {
-
+            Log.d(TAG, "onClickRightImg: ");
         }
     }
 

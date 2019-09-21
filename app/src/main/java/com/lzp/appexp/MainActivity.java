@@ -61,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setLeftImgVisible(View.VISIBLE);
         actionBar.setRightTextVisible(View.VISIBLE);
         actionBar.setTitleTextColor(Color.WHITE);
-        actionBar.setTitleText("标题标题标题");
-        actionBar.setRightText("右侧");
+        actionBar.setTitleText("main title");
+        actionBar.setSubTitleText("main subTitle");
+        actionBar.setRightText("right text");
 
 
         actionBar.setActionBarClickListener(new ActionBarClickAdapter() {
