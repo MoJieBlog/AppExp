@@ -114,6 +114,7 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
     }
 
     public void setLeftTextEnable(boolean enable, int enableTextColor, int notEnableTextColor) {
+        actionBarLeftText.setEnabled(enable);
         actionBarLeftText.setTextColor(enable ? enableTextColor : notEnableTextColor);
     }
 
@@ -124,7 +125,8 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
     }
 
     public void setRightTextEnable(boolean enable, int enableTextColor, int notEnableTextColor) {
-
+        actionBarRightText.setEnabled(enable);
+        actionBarRightText.setTextColor(enable ? enableTextColor : notEnableTextColor);
     }
 
     public void setLeftTextSize(float size) {
