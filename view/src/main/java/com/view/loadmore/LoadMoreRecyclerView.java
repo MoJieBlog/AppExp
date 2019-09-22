@@ -50,6 +50,8 @@ public class LoadMoreRecyclerView extends RecyclerView {
 
     private int lastPosition = 0;
 
+    private boolean isLoading = false;
+
     public LoadMoreRecyclerView(@NonNull Context context) {
         this(context, null);
     }
@@ -68,6 +70,7 @@ public class LoadMoreRecyclerView extends RecyclerView {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {//静止的时候再加载更多
                     //因为有底部
                     if (canLoadMore(itemCount)) {
+                        isLoading = true;
                         Log.e(TAG, "onScrollStateChanged: 开始加载更多");
                         setLoadMoreStatus(LoadMoreRecyclerView.LM_AUTO_LOAD);
                         if (getAdapter() != null) {
@@ -105,9 +108,14 @@ public class LoadMoreRecyclerView extends RecyclerView {
 
     private boolean canLoadMore(int itemCount) {
         Log.e(TAG, "canLoadMore: " + lastPosition);
-        return getLoadMoreStatus() == LoadMoreRecyclerView.LM_AUTO_LOAD
+        return !isLoading &&
+                getLoadMoreStatus() == LoadMoreRecyclerView.LM_AUTO_LOAD
                 && itemCount > 1
                 && lastPosition >= (itemCount - 1 - PRE_LOAD_COUNT);
+    }
+
+    public void stopLoad(){
+        isLoading = false;
     }
 
     public void setLoadMoreStatus(int loadMoreStatus) {

@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                             refreshLayout.stopRefresh();
                         } else {
                             mAdapter.loadMore();
+                            rcv.stopLoad();
                         }
                         if (mAdapter.mGetItemCount() > 30) {
                             rcv.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOAD_COMPLETE);
