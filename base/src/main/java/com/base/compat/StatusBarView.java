@@ -5,10 +5,12 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.utils.PhoneUtils;
+import com.utils.SizeUtils;
 
 /**
  * @describe
@@ -18,6 +20,7 @@ import com.utils.PhoneUtils;
 public class StatusBarView  extends View {
 
     private int statusBarHeight;
+    private int statusBarWidth;
 
     private int bgColor = 0xffffff;
 
@@ -27,6 +30,8 @@ public class StatusBarView  extends View {
 
     public StatusBarView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+
+        statusBarWidth = PhoneUtils.getWinWide(context);
         statusBarHeight = PhoneUtils.getStatusBarHeight(context);
     }
 
@@ -35,7 +40,7 @@ public class StatusBarView  extends View {
         int mode = MeasureSpec.getMode(heightMeasureSpec);
         if (mode==MeasureSpec.AT_MOST||mode==MeasureSpec.UNSPECIFIED){
             int height = MeasureSpec.makeMeasureSpec(statusBarHeight, mode);
-            setMeasuredDimension(LayoutParams.MATCH_PARENT,height);
+            setMeasuredDimension(statusBarWidth,height);
         }else{
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
