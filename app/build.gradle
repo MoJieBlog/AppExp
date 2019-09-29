@@ -66,6 +66,7 @@ dependencies {
     implementation project(path: ':view')
     implementation project(path: ':imageloader')
 
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     releaseImplementation releaseLeakCanary
     debugImplementation debugLeakCanary
 
