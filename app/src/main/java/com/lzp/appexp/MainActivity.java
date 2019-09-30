@@ -1,5 +1,6 @@
 package com.lzp.appexp;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -90,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClickRightText(View v) {
                 super.onClickRightText(v);
+                Intent intent = new Intent(MainActivity.this,KLineActivity.class);
+                startActivity(intent);
             }
 
             @Override

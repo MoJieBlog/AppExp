@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0f0f0f"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="15dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="106dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="20dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="35dp"
+                android:background="@drawable/gap_line_14ffffff"
+                android:layerType="software" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.1dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="35dp"
+                android:background="@drawable/gap_line_14ffffff"
+                android:layerType="software" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.1dp"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="35dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/gap_line_14ffffff"
+                android:layerType="software" />
+
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="12dp"
+                android:layout_gravity="right"
+                android:includeFontPadding="false"
+                android:text="4 bar"
+                android:textColor="#95a4b3"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical|right"
+                android:includeFontPadding="false"
+                android:text="2 bar"
+                android:textColor="#95a4b3"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom|right"
+                android:includeFontPadding="false"
+                android:text="0 bar"
+                android:textColor="#95a4b3"
+                android:textSize="11sp" />
+
+        </FrameLayout>
+
+        <com.lzp.appexp.KLineView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:orientation="horizontal">
+
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/color_a1abbc" />
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/color_a1abbc" />
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/color_a1abbc" />
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/color_a1abbc" />
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/color_a1abbc" />
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/color_a1abbc" />
+
+
+        </com.lzp.appexp.KLineView>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -64,6 +64,9 @@ public class TestAdapter extends LoadMoreAdapter {
 
         holder.tv.setText(String.valueOf(position));
 
+        if (position==0){
+
+        }
         ImageLoader.get(context)
                 .display(url)
                 // .size(300,300)
