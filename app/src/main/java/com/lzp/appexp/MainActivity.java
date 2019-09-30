@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClickRightText(View v) {
                 super.onClickRightText(v);
-                Intent intent = new Intent(MainActivity.this,KLineActivity.class);
+                Intent intent = new Intent(MainActivity.this,KLineActivityNew.class);
                 startActivity(intent);
             }
 
