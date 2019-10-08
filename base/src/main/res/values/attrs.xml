@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="BaseErrView">
+    <declare-styleable name="BaseStatusView">
         <attr name="image_src" format="reference"/>
 
         <attr name="title_str" format="string"/>
