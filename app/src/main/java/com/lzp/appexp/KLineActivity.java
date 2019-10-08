@@ -39,12 +39,16 @@ public class KLineActivity extends BaseActivity {
     }
 
     private void getData() {
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 1000; i++) {
+            if (i==200){
+                Point point = new Point(System.currentTimeMillis(), 3.3f, true);
+                point.setShowDate(true);
+                this.point.add(point);
+            }else
             if (i % 2 == 0) {
                 point.add(new Point(System.currentTimeMillis(),1.3f,false));
             } else if (i % 3 == 0) {
-                Point point = new Point(System.currentTimeMillis(), 3.3f, true);
-                point.setShowDate(true);
+                Point point = new Point(System.currentTimeMillis(), 3.3f, false);
                 this.point.add(point);
             }else {
                 point.add(new Point(System.currentTimeMillis(),2.3f,false));

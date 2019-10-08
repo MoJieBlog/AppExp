@@ -20,7 +20,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1.1dp"
+                android:layout_height="1dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginRight="35dp"
                 android:background="@drawable/gap_line_14ffffff"
@@ -29,7 +29,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1.1dp"
+                android:layout_height="1dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="35dp"
                 android:background="@drawable/gap_line_14ffffff"
@@ -37,10 +37,10 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1.1dp"
+                android:layout_height="1dp"
                 android:layout_gravity="bottom"
                 android:layout_marginRight="35dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginBottom="4dp"
                 android:background="@drawable/gap_line_14ffffff"
                 android:layerType="software" />
 
@@ -77,7 +77,7 @@
         <com.view.kline.KLineView
             android:id="@+id/kLinView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="120dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="52dp"
             android:background="#00000000">

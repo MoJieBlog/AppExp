@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 
 import com.view.R;
 
@@ -19,10 +20,16 @@ import java.util.ArrayList;
 public class KLineAdapter extends RecyclerView.Adapter {
 
     private ArrayList<Point> points = new ArrayList<>();
+    private int itemWidth = 30;
+
     public void refreshData(ArrayList<Point> points) {
         this.points.clear();
         this.points.addAll(points);
         notifyDataSetChanged();
+    }
+
+    public void setItemWidth(int itemWidth) {
+        this.itemWidth = itemWidth;
     }
 
     @NonNull
@@ -35,12 +42,11 @@ public class KLineAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         KLineViewHolder holder = (KLineViewHolder) viewHolder;
-        if (i>0){
-            holder.klineItem.refreshData(points.get(i-1),points.get(i));
-        }else{
-            holder.klineItem.refreshData(points.get(0),points.get(0));
+        if (i > 0) {
+            holder.klineItem.refreshData(points.get(i - 1), points.get(i));
+        } else {
+            holder.klineItem.refreshData(null, points.get(0));
         }
-        holder.klineItem.setIsLast(i==points.size()-1);
     }
 
     @Override
@@ -49,9 +55,10 @@ public class KLineAdapter extends RecyclerView.Adapter {
     }
 
 
-    class KLineViewHolder extends RecyclerView.ViewHolder{
+    class KLineViewHolder extends RecyclerView.ViewHolder {
 
         KLineItemView klineItem;
+
         public KLineViewHolder(@NonNull View itemView) {
             super(itemView);
             klineItem = itemView.findViewById(R.id.klineItem);

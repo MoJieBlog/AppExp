@@ -1,6 +1,8 @@
 package com.view.kline;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -8,6 +10,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.State;
 import android.text.TextPaint;
 import android.util.Log;
@@ -15,6 +18,7 @@ import android.view.View;
 
 import com.utils.DateTimeUtils;
 import com.utils.SizeUtils;
+import com.view.R;
 
 import java.util.ArrayList;
 
@@ -31,7 +35,12 @@ public class KLineItemDecoration extends RecyclerView.ItemDecoration {
     private int textHeight;//显示底部文字的高度
     private ArrayList<Point> points = new ArrayList<>();
 
+    private float lineHeight;
+
     private int textWidth;
+
+    private int endImgSize;
+    private Bitmap endImg;
 
     public KLineItemDecoration(Context context) {
         textPaint = new TextPaint();
@@ -42,13 +51,24 @@ public class KLineItemDecoration extends RecyclerView.ItemDecoration {
         linePaint.setColor(0xff95a4b3);
         linePaint.setStyle(Style.FILL_AND_STROKE);
         linePaint.setAntiAlias(true);
-        linePaint.setStrokeWidth(2);
+        linePaint.setStrokeWidth(1);
+
+        lineHeight = SizeUtils.dip2px(context, 100);
+        endImg = BitmapFactory.decodeResource(context.getResources(), R.mipmap.kline_end);
+        endImgSize = endImg.getWidth();
     }
 
     @Override
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull State state) {
         super.getItemOffsets(outRect, view, parent, state);
         outRect.bottom = textHeight;
+        LayoutManager layoutManager = parent.getLayoutManager();
+        if (points.size()>0&&layoutManager.getPosition(view)==points.size()-1){
+            Log.e(TAG, "getItemOffsets: ");
+            outRect.right = endImgSize/2;
+        }else{
+            outRect.right = 0;
+        }
     }
 
     @Override
@@ -76,11 +96,21 @@ public class KLineItemDecoration extends RecyclerView.ItemDecoration {
                     textPaint.getTextBounds(title, 0, title.length(), rect);
                     textWidth = rect.right - rect.left;
                     if (point.isShowDate()) {
-                        c.drawText(title, child.getLeft() + rect.left / 2, child.getBottom() + textHeight - (rect.height() / 2), textPaint);
+                        c.drawText(title, ((child.getLeft()+child.getRight()-(rect.right-rect.left)))/2, child.getBottom() + textHeight - (rect.height() / 2), textPaint);
                     }
                 }
+
+                if (position==points.size()-1){
+                    Log.e(TAG, "onDrawOver: ");
+                    c.drawBitmap(endImg,child.getRight()-endImgSize/2,computeY(point.getValue())-endImgSize/2,linePaint);
+                }
+
             }
         }
+    }
+
+    private float computeY(float value) {
+        return lineHeight - lineHeight * value / 4;
     }
 
     public void refreshData(ArrayList<Point> points) {

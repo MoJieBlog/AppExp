@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -18,9 +17,6 @@ public class KLineView extends RecyclerView {
 
     //一个View宽度显示多少个点
     private static final String TAG = "KLineView";
-
-    //显示多少条目
-    private final int POINT_COUNT = 60;
 
     private KLineItemDecoration itemDecoration;
 
@@ -45,6 +41,11 @@ public class KLineView extends RecyclerView {
         itemDecoration.refreshData(points);
         adapter = new KLineAdapter();
         setAdapter(adapter);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
     }
 
     public void refreshPoint(ArrayList<Point> pointList) {
