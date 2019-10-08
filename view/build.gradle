@@ -28,4 +28,5 @@ dependencies {
 
     implementation extAppcompatV7
     implementation extRecyclerviewV7
+    implementation project(path: ':utils')
 }

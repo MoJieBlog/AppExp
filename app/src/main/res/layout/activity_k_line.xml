@@ -16,7 +16,6 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="106dp"
-            android:layout_marginTop="6dp"
             android:layout_marginBottom="20dp">
 
             <View
@@ -41,7 +40,7 @@
                 android:layout_height="1.1dp"
                 android:layout_gravity="bottom"
                 android:layout_marginRight="35dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="6dp"
                 android:background="@drawable/gap_line_14ffffff"
                 android:layerType="software" />
 
@@ -75,51 +74,16 @@
 
         </FrameLayout>
 
-        <com.lzp.appexp.KLineView
+        <com.view.kline.KLineView
+            android:id="@+id/kLinView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#00000000"
-            android:orientation="horizontal">
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="52dp"
+            android:background="#00000000">
 
 
-            <View
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:background="@color/color_a1abbc" />
-
-            <View
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:background="@color/color_a1abbc" />
-
-            <View
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:background="@color/color_a1abbc" />
-
-            <View
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:background="@color/color_a1abbc" />
-
-            <View
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:background="@color/color_a1abbc" />
-
-            <View
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:background="@color/color_a1abbc" />
-
-
-        </com.lzp.appexp.KLineView>
+        </com.view.kline.KLineView>
 
     </RelativeLayout>
 

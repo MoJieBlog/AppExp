@@ -94,13 +94,6 @@ public class HorizontalLinearLayout extends LinearLayout {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        Log.e(TAG, "onDraw: ");
-        canvas.clipRect(0,0,getScrollY(),SizeUtils.dip2px(getContext(),200));
-        super.onDraw(canvas);
-    }
-
-    @Override
     public boolean onTouchEvent(MotionEvent event) {
         velocityTracker.addMovement(event);
         int x = (int) event.getX();
@@ -115,7 +108,6 @@ public class HorizontalLinearLayout extends LinearLayout {
             case MotionEvent.ACTION_MOVE:
                 int dx = x - lastX;
 
-                Log.e(TAG, "getScrollX: "+getScrollX()+"dx : "+dx);
                 if (getScrollX() - dx <= 0) {
                     dx = 0;
                 }
@@ -148,7 +140,6 @@ public class HorizontalLinearLayout extends LinearLayout {
             if (scrollX>=canScrollXMax){
                 scrollX = canScrollXMax;
             }
-            Log.e(TAG, "computeScroll: "+scrollX);
             scrollTo(scrollX, scroller.getCurrY());
             postInvalidate();
         }

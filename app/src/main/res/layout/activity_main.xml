@@ -21,6 +21,7 @@
 
         <com.view.loadmore.LoadMoreRecyclerView
             android:id="@+id/rcv"
+            android:background="@color/color_a1abbc"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.view.refresh.SwipeRefreshLayout>

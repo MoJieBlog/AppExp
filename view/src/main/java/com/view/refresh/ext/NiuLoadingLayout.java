@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
-import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.text.Layout;
 import android.text.TextPaint;
@@ -16,7 +15,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.view.SizeUtils;
+import com.utils.SizeUtils;
 
 /**
  * @describe

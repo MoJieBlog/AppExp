@@ -6,7 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,6 +18,8 @@ import com.view.loadmore.LoadMoreRecyclerView;
 import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
+
+import com.view.kline.KLineItemDecoration;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClickTitle(View v) {
                 super.onClickTitle(v);
+                Intent intent = new Intent(MainActivity.this,KLineActivity.class);
+                startActivity(intent);
             }
 
             @Override
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClickRightText(View v) {
                 super.onClickRightText(v);
-                Intent intent = new Intent(MainActivity.this,KLineActivityNew.class);
+                Intent intent = new Intent(MainActivity.this, HorizontalScrollableLinearLayoutActivity.class);
                 startActivity(intent);
             }
 
@@ -106,8 +110,9 @@ public class MainActivity extends AppCompatActivity {
         refreshLayout.setCanRefresh(true);
 
         // rcv.setLayoutManager(new GridLayoutManager(this,2));
-        rcv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        //rcv.setLayoutManager(new LinearLayoutManager(this));
+        //rcv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        rcv.setLayoutManager(new LinearLayoutManager(this));
+
         mAdapter = new TestAdapter(this);
 
         getData();

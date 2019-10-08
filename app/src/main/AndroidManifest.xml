@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/appTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".KLineActivityNew"></activity>
+        <activity android:name=".HorizontalScrollableLinearLayoutActivity"></activity>
         <activity android:name=".TestActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
