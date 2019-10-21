@@ -1,4 +1,4 @@
-package com.base.view.errorview;
+package com.base.view.statusview;
 
 
 import android.content.Context;
@@ -21,7 +21,7 @@ import com.base.R;
  * @author Li Xiaopeng
  * @date 2019/1/3
  */
-public class BaseErrView extends LinearLayout implements IErrView {
+public class BaseStatusView extends LinearLayout implements IStatusView {
 
     protected Context context;
     protected Resources resources;
@@ -46,31 +46,31 @@ public class BaseErrView extends LinearLayout implements IErrView {
     protected int defaultBtnTextSize;
     protected int defaultBtnTextColor;
 
-    public BaseErrView(Context context) {
+    public BaseStatusView(Context context) {
         this(context, null);
     }
 
-    public BaseErrView(Context context, @Nullable AttributeSet attrs) {
+    public BaseStatusView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         this.context = context;
         resources = context.getResources();
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaseErrView);
-        defaultImageRes = typedArray.getResourceId(R.styleable.BaseErrView_image_src, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaseStatusView);
+        defaultImageRes = typedArray.getResourceId(R.styleable.BaseStatusView_image_src, 0);
 
-        defaultTitleStr = typedArray.getString(R.styleable.BaseErrView_title_str);
-        defaultTitleColor = typedArray.getColor(R.styleable.BaseErrView_title_color, resources.getColor(R.color.color_a1abbc));
-        defaultTitleSize = typedArray.getDimensionPixelSize(R.styleable.BaseErrView_title_size, 15);
+        defaultTitleStr = typedArray.getString(R.styleable.BaseStatusView_title_str);
+        defaultTitleColor = typedArray.getColor(R.styleable.BaseStatusView_title_color, resources.getColor(R.color.color_a1abbc));
+        defaultTitleSize = typedArray.getDimensionPixelSize(R.styleable.BaseStatusView_title_size, 15);
 
-        defaultContentStr = typedArray.getString(R.styleable.BaseErrView_content_str);
-        defaultContentColor = typedArray.getColor(R.styleable.BaseErrView_content_color, resources.getColor(R.color.color_a1abbc));
-        defaultContentSize = typedArray.getDimensionPixelSize(R.styleable.BaseErrView_content_size, 13);
+        defaultContentStr = typedArray.getString(R.styleable.BaseStatusView_content_str);
+        defaultContentColor = typedArray.getColor(R.styleable.BaseStatusView_content_color, resources.getColor(R.color.color_a1abbc));
+        defaultContentSize = typedArray.getDimensionPixelSize(R.styleable.BaseStatusView_content_size, 13);
 
-        defaultBtnTextStr = typedArray.getString(R.styleable.BaseErrView_btn_text);
-        defaultBtnShapeRes = typedArray.getResourceId(R.styleable.BaseErrView_btn_shape,R.drawable.rect_bf3f4f6_r2);
-        defaultBtnTextSize = typedArray.getDimensionPixelSize(R.styleable.BaseErrView_btn_text_size,15);
-        defaultBtnTextColor = typedArray.getColor(R.styleable.BaseErrView_btn_text_color,resources.getColor(R.color.color_333333));
+        defaultBtnTextStr = typedArray.getString(R.styleable.BaseStatusView_btn_text);
+        defaultBtnShapeRes = typedArray.getResourceId(R.styleable.BaseStatusView_btn_shape,R.drawable.rect_bf3f4f6_r2);
+        defaultBtnTextSize = typedArray.getDimensionPixelSize(R.styleable.BaseStatusView_btn_text_size,15);
+        defaultBtnTextColor = typedArray.getColor(R.styleable.BaseStatusView_btn_text_color,resources.getColor(R.color.color_333333));
         typedArray.recycle();
 
         init();

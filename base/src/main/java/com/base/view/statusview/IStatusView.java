@@ -1,4 +1,4 @@
-package com.base.view.errorview;
+package com.base.view.statusview;
 
 import android.graphics.Bitmap;
 
@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
  * @author Li Xiaopeng
  * @date 2019/1/3
  */
-public interface IErrView {
+public interface IStatusView {
 
     void setImageRes(int imageRes);
     void setImageBitmap(Bitmap bmp);

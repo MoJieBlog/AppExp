@@ -44,7 +44,6 @@ public class HalfCircleView extends View {
     private float viewHeight;
 
 
-
     private float[] rids = new float[8];
 
     public HalfCircleView(Context context) {
@@ -55,7 +54,7 @@ public class HalfCircleView extends View {
         super(context, attrs);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.HalfCircleView);
         radius = typedArray.getDimension(R.styleable.HalfCircleView_radius, radius);
-        bgColor = typedArray.getColor(R.styleable.HalfCircleView_bgColor,bgColor);
+        bgColor = typedArray.getColor(R.styleable.HalfCircleView_bgColor, bgColor);
         direction = typedArray.getInt(R.styleable.HalfCircleView_direction, direction);
         typedArray.recycle();
 
@@ -131,18 +130,34 @@ public class HalfCircleView extends View {
         canvas.drawPath(path, paint);
     }
 
+    /**
+     * 设置填充色
+     * @param bgColor
+     */
     public void setBgColor(int bgColor) {
         this.bgColor = bgColor;
         paint.setColor(bgColor);
         postInvalidate();
     }
 
+    /**
+     * 设置半径，宽高会根据半径改变
+     * @param radius
+     */
     public void setRadius(float radius) {
         this.radius = radius;
         initPath();
         postInvalidate();
     }
 
+    /**
+     * 设置方向
+     *
+     * @param direction {@link HalfCircleView#TOP}
+     *                  {@link HalfCircleView#RIGHT}
+     *                  {@link HalfCircleView#BOTTOM}
+     *                  {@link HalfCircleView#LEFT}
+     */
     public void setDirection(int direction) {
         this.direction = direction;
         initPath();
