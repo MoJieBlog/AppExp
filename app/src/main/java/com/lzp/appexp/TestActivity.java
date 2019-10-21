@@ -1,107 +1,61 @@
 package com.lzp.appexp;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationChannelGroup;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetBehavior.BottomSheetCallback;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.imageloader.ImageLoader;
 
 public class TestActivity extends AppCompatActivity {
-    TextView tv;
-    Button btn;
-
-    NestedScrollView scrollView;
-    BottomSheetBehavior behavior;
-
     private static final String TAG = "TestActivity";
+
+    private NestedScrollView scrollView;
+    private HomeBottomSheetBehavior behavior;
+
+    private LinearLayout llTop;
+    private ImageView iv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-/*
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(Color.WHITE);*/
-
         setContentView(R.layout.activity_test);
 
-        ImageView iv = findViewById(R.id.iv);
-        scrollView = findViewById(R.id.scrollView);
+        findView();
 
-        ImageLoader.get(this).display("http://pic37.nipic.com/20140113/8800276_184927469000_2.png").into(iv);
+        ImageLoader.get(this).display("https://www.baidu.com/img/bd_logo1.png").into(iv);
 
-        btn = findViewById(R.id.btn);
 
-        behavior = BottomSheetBehavior.from(scrollView);
-        behavior.setHideable(false);
-       // behavior.setSkipCollapsed(false);
-        behavior.setBottomSheetCallback(new BottomSheetCallback() {
+        behavior = HomeBottomSheetBehavior.from(scrollView);
+       // behavior.setHideable(true);
+       //  behavior.setSkipCollapsed(false);
+        behavior.setBottomSheetCallback(new HomeBottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
-                Log.e(TAG, "onStateChanged: "+i);
+                Log.e(TAG, "onStateChanged: " + i);
             }
 
             @Override
             public void onSlide(@NonNull View view, float v) {
-                Log.e(TAG, "onSlide: "+v);
+                Log.e(TAG, "onSlide: " + v);
+
+                llTop.setAlpha(1-v);
+
+                iv.setScaleX(Math.max((1-v),0.5f));
+                iv.setScaleY(Math.max((1-v),0.5f));
             }
         });
 
-        btn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showNotification();
-            }
-        });
     }
-    Builder notificationBuilder;
 
-    private void showNotification() {
-        NotificationManager mManager = (NotificationManager)
-                this.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String name = "NiuAppDownload";
-            NotificationChannel channel = new NotificationChannel("app", name, NotificationManager.IMPORTANCE_DEFAULT);
-            mManager.createNotificationChannel(channel);
-        }
-        Builder notificationBuilder = new Builder(this, "app");
-        Notification mNotification = notificationBuilder
-                .setContentTitle("测试")
-                .setContentText("66666666")
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setOngoing(false)
-                .setProgress(100,0,false)
-                .setAutoCancel(false)
-                .setOnlyAlertOnce(true)
-                .build();
-
-        mManager.notify(1,mNotification);
-        mManager.notify(2,mNotification);
-        mManager.notify(3,mNotification);
+    private void findView() {
+        iv = findViewById(R.id.iv);
+        scrollView = findViewById(R.id.scrollView);
+        llTop = findViewById(R.id.llTop);
     }
 
     @Override

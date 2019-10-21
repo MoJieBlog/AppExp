@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class TestAdapter extends LoadMoreAdapter {
 
-    final String url = "http://pic37.nipic.com/20140113/8800276_184927469000_2.png";
+    final String url = "https://www.baidu.com/img/bd_logo1.png";
 
     private int size = 15;
 

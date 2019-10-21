@@ -14,12 +14,12 @@ import android.view.WindowManager;
 import com.base.compat.ActionBarView;
 import com.base.compat.ActionBarView.ActionBarClickAdapter;
 import com.base.compat.StatusBarView;
+import com.utils.permission.PermissionConstant;
+import com.utils.permission.PermissionUtils;
 import com.view.loadmore.LoadMoreRecyclerView;
 import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
-
-import com.view.kline.KLineItemDecoration;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
             //设置状态栏颜色
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+
+        PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
 
         setContentView(R.layout.activity_main);
 
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 getData();
             }
         });
+
 
     }
 

@@ -3,6 +3,11 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion rootProject.ext.extCompileSdkVersion
 
+    compileOptions {
+        targetCompatibility rootProject.ext.javaVersion
+        sourceCompatibility rootProject.ext.javaVersion
+    }
+
     defaultConfig {
         minSdkVersion rootProject.ext.extMinSdkVersion
         targetSdkVersion rootProject.ext.extTargetSdkVersion
@@ -10,7 +15,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     buildTypes {
@@ -20,17 +25,12 @@ android {
         }
     }
 
-    compileOptions {
-        targetCompatibility rootProject.ext.javaVersion
-        sourceCompatibility rootProject.ext.javaVersion
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation extAppcompatV7
-    implementation extAnnotations
-    implementation extGlide
-    annotationProcessor extGlideCompiler
+    implementation extRecyclerviewV7
+    implementation project(path: ':utils')
 }

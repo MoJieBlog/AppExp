@@ -1,14 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.extCompileSdkVersion
     defaultConfig {
         applicationId "com.lzp.appexp"
-        minSdkVersion 16
-        targetSdkVersion 28
+        minSdkVersion rootProject.ext.extMinSdkVersion
+        targetSdkVersion rootProject.ext.extTargetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        targetCompatibility rootProject.ext.javaVersion
+        sourceCompatibility rootProject.ext.javaVersion
     }
 
     signingConfigs {
