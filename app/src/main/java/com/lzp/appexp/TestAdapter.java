@@ -104,7 +104,7 @@ public class TestAdapter extends LoadMoreAdapter {
                     Intent intent = new Intent(context, TestActivity.class);
                     ActivityOptionsCompat options = ActivityOptionsCompat
                             .makeSceneTransitionAnimation((Activity) context,
-                                    v, "testImg");
+                                    v, Constants.TRANSITION_HOME);
                     context.startActivity(intent, options.toBundle());
                 }
             });

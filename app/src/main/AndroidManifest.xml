@@ -18,16 +18,24 @@
         android:theme="@style/appTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".HorizontalScrollableLinearLayoutActivity"></activity>
-        <activity android:name=".TestActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".TestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".KLineActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".KLineActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TestActivityNew"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

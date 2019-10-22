@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">appexp</string>
+    <string name="transition_home">transition_home</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.lzp.appexp;
+package com.lzp.appexp.behavior;
 
 import android.content.Context;
 import android.os.Build.VERSION;
@@ -635,10 +635,10 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
 
     public interface BottomSheetCallback {
 
-        default void onStateChanged(@NonNull View var1, int var2) {
+        default void onStateChanged(@NonNull View view, int state) {
         }
 
-        default void onSlide(@NonNull View var1, float var2) {
+        default void onSlide(@NonNull View view, float rate) {
         }
     }
 }

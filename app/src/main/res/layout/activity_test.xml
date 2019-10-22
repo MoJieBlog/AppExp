@@ -14,21 +14,21 @@
         android:orientation="vertical"
         android:background="#a1bb3c"
         android:gravity="center"
-        android:layout_height="450dp">
+        android:layout_height="350dp">
         <ImageView
             android:id="@+id/iv"
             android:layout_width="200dp"
-            android:layout_height="100dp"
-            android:transitionName="testImg"
+            android:layout_height="200dp"
+            android:transitionName="@string/transition_home"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/ngt_1" />
 
     </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        app:layout_behavior="com.lzp.appexp.HomeBottomSheetBehavior"
+        app:layout_behavior="com.lzp.appexp.behavior.HomeBottomSheetBehavior"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"

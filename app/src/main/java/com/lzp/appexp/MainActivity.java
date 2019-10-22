@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.Window;
@@ -13,6 +12,7 @@ import android.view.WindowManager;
 
 import com.base.compat.ActionBarView;
 import com.base.compat.ActionBarView.ActionBarClickAdapter;
+import com.base.compat.BaseActivity;
 import com.base.compat.StatusBarView;
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
@@ -21,7 +21,7 @@ import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
 

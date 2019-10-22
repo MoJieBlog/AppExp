@@ -17,10 +17,11 @@ import com.utils.Utils;
 public class App extends Application {
 
 
+    private static Application application;
     @Override
     public void onCreate() {
         super.onCreate();
-
+        application = this;
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             //You should not init your app in this process.
@@ -39,5 +40,9 @@ public class App extends Application {
                 .setRequestClient(null)
                 .build();
         ImageLoader.get(this).init(config);
+    }
+
+    public static Application getApplication(){
+        return application;
     }
 }
