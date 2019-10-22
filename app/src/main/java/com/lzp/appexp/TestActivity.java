@@ -15,7 +15,7 @@ public class TestActivity extends AppCompatActivity {
     private static final String TAG = "TestActivity";
 
     private NestedScrollView scrollView;
-    private HomeBottomSheetBehavior behavior;
+    private MyBehavior behavior;
 
     private LinearLayout llTop;
     private ImageView iv;
@@ -30,10 +30,10 @@ public class TestActivity extends AppCompatActivity {
         ImageLoader.get(this).display("https://www.baidu.com/img/bd_logo1.png").into(iv);
 
 
-        behavior = HomeBottomSheetBehavior.from(scrollView);
+        behavior = MyBehavior.from(scrollView);
        // behavior.setHideable(true);
        //  behavior.setSkipCollapsed(false);
-        behavior.setBottomSheetCallback(new HomeBottomSheetBehavior.BottomSheetCallback() {
+        behavior.setBottomSheetCallback(new MyBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
                 Log.e(TAG, "onStateChanged: " + i);
@@ -43,7 +43,7 @@ public class TestActivity extends AppCompatActivity {
             public void onSlide(@NonNull View view, float v) {
                 Log.e(TAG, "onSlide: " + v);
 
-                llTop.setAlpha(1-v);
+                llTop.setAlpha(Math.max((1-v),0.5f));
 
                 iv.setScaleX(Math.max((1-v),0.5f));
                 iv.setScaleY(Math.max((1-v),0.5f));

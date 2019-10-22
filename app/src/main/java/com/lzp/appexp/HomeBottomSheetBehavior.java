@@ -83,8 +83,6 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     public HomeBottomSheetBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-
-
         this.dragCallback = new NamelessClass_1();
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BottomSheetBehavior_Layout);
         TypedValue value = a.peekValue(R.styleable.BottomSheetBehavior_Layout_behavior_peekHeight);
@@ -458,7 +456,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
 
     public final void setPeekHeight(int peekHeight) {
         boolean layout = false;
-        if (peekHeight == -1) {
+        if (peekHeight == PEEK_HEIGHT_AUTO) {
             if (!this.peekHeightAuto) {
                 this.peekHeightAuto = true;
                 layout = true;
@@ -480,7 +478,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     }
 
     public final int getPeekHeight() {
-        return this.peekHeightAuto ? -1 : this.peekHeight;
+        return this.peekHeightAuto ? PEEK_HEIGHT_AUTO : this.peekHeight;
     }
 
     public void setHideable(boolean hideable) {
@@ -576,8 +574,8 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         } else if (child.getTop() < this.collapsedOffset) {
             return false;
         } else {
-            float newTop = (float)child.getTop() + yvel * 0.1F;
-            return Math.abs(newTop - (float)this.collapsedOffset) / (float)this.peekHeight > 0.5F;
+            float newTop = (float)child.getTop() + yvel * HIDE_FRICTION;
+            return Math.abs(newTop - (float)this.collapsedOffset) / (float)this.peekHeight > HIDE_THRESHOLD;
         }
     }
 
@@ -765,7 +763,6 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
             } else {
                 HomeBottomSheetBehavior.this.setStateInternal(this.targetState);
             }
-
         }
     }
 
