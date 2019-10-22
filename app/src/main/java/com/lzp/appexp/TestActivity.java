@@ -1,5 +1,6 @@
 package com.lzp.appexp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
@@ -15,7 +16,7 @@ public class TestActivity extends AppCompatActivity {
     private static final String TAG = "TestActivity";
 
     private NestedScrollView scrollView;
-    private MyBehavior behavior;
+    private HomeBottomSheetBehavior behavior;
 
     private LinearLayout llTop;
     private ImageView iv;
@@ -30,10 +31,10 @@ public class TestActivity extends AppCompatActivity {
         ImageLoader.get(this).display("https://www.baidu.com/img/bd_logo1.png").into(iv);
 
 
-        behavior = MyBehavior.from(scrollView);
-       // behavior.setHideable(true);
+        behavior = HomeBottomSheetBehavior.from(scrollView);
+        //behavior.setHideable(true);
        //  behavior.setSkipCollapsed(false);
-        behavior.setBottomSheetCallback(new MyBehavior.BottomSheetCallback() {
+        behavior.setBottomSheetCallback(new HomeBottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
                 Log.e(TAG, "onStateChanged: " + i);
