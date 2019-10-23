@@ -35,6 +35,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".TestActivityNew"
+            android:theme="@style/transparentTheme"
             android:screenOrientation="portrait" />
     </application>
 

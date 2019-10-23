@@ -1,19 +1,24 @@
 package com.lzp.appexp;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.NestedScrollView;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.base.compat.BaseActivity;
-import com.imageloader.ImageLoader;
 import com.lzp.appexp.behavior.HomeBottomSheetBehavior;
+import com.lzp.appexp.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
 
 public class TestActivity extends BaseActivity {
     private static final String TAG = "TestActivity";
@@ -21,6 +26,7 @@ public class TestActivity extends BaseActivity {
     private NestedScrollView scrollView;
     private HomeBottomSheetBehavior behavior;
 
+    private CoordinatorLayout rootView;
     private LinearLayout llTop;
     private ImageView iv;
 
@@ -32,14 +38,8 @@ public class TestActivity extends BaseActivity {
 
         findView();
 
-       // ImageLoader.get(this).display("https://www.baidu.com/img/bd_logo1.png").into(iv);
-
-
-
         behavior = HomeBottomSheetBehavior.from(scrollView);
-        //behavior.setHideable(true);
-        //  behavior.setSkipCollapsed(false);
-        behavior.setBottomSheetCallback(new HomeBottomSheetBehavior.BottomSheetCallback() {
+        behavior.setBottomSheetCallback(new BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
                 Log.e(TAG, "onStateChanged: " + i);
@@ -48,26 +48,47 @@ public class TestActivity extends BaseActivity {
             @Override
             public void onSlide(@NonNull View view, float rate) {
                 Log.e(TAG, "onSlide: " + rate);
-
-                if (rate >= 0) {
+                if (rate >= 0) {//上半部分位移
                     llTop.setAlpha(Math.max((1 - rate), 0.5f));
-
                     iv.setScaleX(Math.max((1 - rate), 0.5f));
                     iv.setScaleY(Math.max((1 - rate), 0.5f));
-                }else{
+                }else{//下半部分位移
                     if (Math.abs(rate)>0.2f&&!open){
                         open = true;
                         Intent intent = new Intent(TestActivity.this, TestActivityNew.class);
-                        ActivityOptionsCompat options = ActivityOptionsCompat
-                                .makeSceneTransitionAnimation((Activity) TestActivity.this,
-                                        iv, Constants.TRANSITION_HOME);
-                        TestActivity.this.startActivity(intent, options.toBundle());
+                        transitionTo(intent);
                     }
                 }
 
             }
         });
 
+        iv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TestActivity.this, TestActivityNew.class);
+                transitionTo(intent);
+            }
+        });
+
+
+        setTransition();
+
+    }
+
+
+    private void setTransition() {
+        if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+            Fade fade = new Fade();
+            fade.setDuration(1000);
+            getWindow().setEnterTransition(fade);
+        }
+    }
+
+    void transitionTo(Intent i) {
+        ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                new Pair<>(iv, Constants.TRANSITION_HOME));
+        startActivity(i, transitionActivityOptions.toBundle());
     }
 
     @Override
@@ -82,11 +103,12 @@ public class TestActivity extends BaseActivity {
         iv = findViewById(R.id.iv);
         scrollView = findViewById(R.id.scrollView);
         llTop = findViewById(R.id.llTop);
+        rootView = findViewById(R.id.rootView);
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+       // super.onBackPressed();
         supportFinishAfterTransition();
     }
 }
