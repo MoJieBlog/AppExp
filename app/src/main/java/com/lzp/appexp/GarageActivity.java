@@ -19,7 +19,7 @@ import com.lzp.appexp.transition.PositionTransition;
  * @author: lixiaopeng
  * @Date: 2019-10-22
  */
-public class TestActivityNew extends BaseActivity {
+public class GarageActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class TestActivityNew extends BaseActivity {
         if (VERSION.SDK_INT >= VERSION_CODES.O) {//8.0透明背景崩溃
             setTheme(R.style.appTheme);
         }
-        setContentView(R.layout.activity_test_new);
+        setContentView(R.layout.activity_garage);
         setTransition();
     }
 
@@ -50,13 +50,13 @@ public class TestActivityNew extends BaseActivity {
         TransitionSet transitionSet = new TransitionSet();
 
         Transition changePos = new PositionTransition();
-        changePos.setDuration(1000);
+        changePos.setDuration(300);
         changePos.addTarget(R.id.car);
         transitionSet.addTransition(changePos);
 
         GarageEnterTransition enterTransition = new GarageEnterTransition();
         enterTransition.addTarget(R.id.car);
-        enterTransition.setDuration(1000);
+        enterTransition.setDuration(300);
         transitionSet.addTransition(enterTransition);
 
         return transitionSet;
@@ -67,13 +67,13 @@ public class TestActivityNew extends BaseActivity {
         TransitionSet transitionSet = new TransitionSet();
 
         Transition changePos = new PositionTransition();
-        changePos.setDuration(1000);
+        changePos.setDuration(300);
         changePos.addTarget(R.id.car);
         transitionSet.addTransition(changePos);
 
         GarageReturnTransition returnTransition = new GarageReturnTransition();
         returnTransition.addTarget(R.id.car);
-        returnTransition.setDuration(1000);
+        returnTransition.setDuration(300);
         transitionSet.addTransition(returnTransition);
 
         return transitionSet;

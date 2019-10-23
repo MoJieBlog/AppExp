@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".HorizontalScrollableLinearLayoutActivity"></activity>
         <activity
-            android:name=".TestActivity"
+            android:name=".CarActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
@@ -34,7 +34,7 @@
             android:name=".KLineActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TestActivityNew"
+            android:name=".GarageActivity"
             android:theme="@style/transparentTheme"
             android:screenOrientation="portrait" />
     </application>

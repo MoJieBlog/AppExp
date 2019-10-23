@@ -20,8 +20,8 @@ import com.base.compat.BaseActivity;
 import com.lzp.appexp.behavior.HomeBottomSheetBehavior;
 import com.lzp.appexp.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
 
-public class TestActivity extends BaseActivity {
-    private static final String TAG = "TestActivity";
+public class CarActivity extends BaseActivity {
+    private static final String TAG = "CarActivity";
 
     private NestedScrollView scrollView;
     private HomeBottomSheetBehavior behavior;
@@ -34,7 +34,7 @@ public class TestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_car);
 
         findView();
 
@@ -55,7 +55,7 @@ public class TestActivity extends BaseActivity {
                 }else{//下半部分位移
                     if (Math.abs(rate)>0.2f&&!open){
                         open = true;
-                        Intent intent = new Intent(TestActivity.this, TestActivityNew.class);
+                        Intent intent = new Intent(CarActivity.this, GarageActivity.class);
                         transitionTo(intent);
                     }
                 }
@@ -66,7 +66,7 @@ public class TestActivity extends BaseActivity {
         iv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TestActivity.this, TestActivityNew.class);
+                Intent intent = new Intent(CarActivity.this, GarageActivity.class);
                 transitionTo(intent);
             }
         });
@@ -80,7 +80,7 @@ public class TestActivity extends BaseActivity {
     private void setTransition() {
         if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
             Fade fade = new Fade();
-            fade.setDuration(1000);
+            fade.setDuration(300);
             getWindow().setEnterTransition(fade);
         }
     }
