@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.imageloader.ImageLoader;
 import com.imageloader.interfaces.IMGLoadListener;
+import com.lzp.appexp.car.CarActivity;
 import com.view.loadmore.LoadMoreAdapter;
 
 import java.util.List;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lzp.appexp.transition;
+package com.lzp.appexp.car.transition;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -24,7 +24,6 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.RequiresApi;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.transition.PathMotion;
 import android.transition.Transition;
 import android.transition.TransitionValues;

@@ -32,7 +32,7 @@ public class KLineActivity extends BaseActivity {
 
     }
 
-    private void initView() {
+    public void initView() {
         kLinView = findViewById(R.id.kLinView);
 
         kLinView.refreshPoint(point);

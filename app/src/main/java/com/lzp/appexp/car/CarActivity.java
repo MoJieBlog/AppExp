@@ -1,4 +1,4 @@
-package com.lzp.appexp;
+package com.lzp.appexp.car;
 
 import android.content.Intent;
 import android.os.Build.VERSION;
@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.base.compat.BaseActivity;
+import com.lzp.appexp.Constants;
+import com.lzp.appexp.R;
 import com.lzp.appexp.behavior.HomeBottomSheetBehavior;
 import com.lzp.appexp.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
 
@@ -99,7 +101,7 @@ public class CarActivity extends BaseActivity {
         super.onResume();
     }
 
-    private void findView() {
+    public void findView() {
         iv = findViewById(R.id.iv);
         scrollView = findViewById(R.id.scrollView);
         llTop = findViewById(R.id.llTop);

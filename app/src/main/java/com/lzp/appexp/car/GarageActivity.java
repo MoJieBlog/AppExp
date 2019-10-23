@@ -1,25 +1,38 @@
-package com.lzp.appexp;
+package com.lzp.appexp.car;
 
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.PagerSnapHelper;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionSet;
 
 import com.base.compat.BaseActivity;
-import com.lzp.appexp.transition.GarageEnterTransition;
-import com.lzp.appexp.transition.GarageReturnTransition;
-import com.lzp.appexp.transition.PositionTransition;
+import com.lzp.appexp.R;
+import com.lzp.appexp.car.adapter.GarageAdapter;
+import com.lzp.appexp.car.itemdecoration.GarageItemDecoration;
+import com.lzp.appexp.car.transition.GarageEnterTransition;
+import com.lzp.appexp.car.transition.GarageReturnTransition;
+import com.lzp.appexp.car.transition.PositionTransition;
 
 /**
- * @describe
+ * @describe 车库
  * @author: lixiaopeng
  * @Date: 2019-10-22
  */
 public class GarageActivity extends BaseActivity {
+
+    private static final String TAG = "GarageActivity";
+    private RecyclerView rcvGarage;
+
+    private GarageAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,7 +43,26 @@ public class GarageActivity extends BaseActivity {
         setContentView(R.layout.activity_garage);
         setTransition();
     }
+    
 
+    @Override
+    public void findView() {
+        rcvGarage = findViewById(R.id.rcvGarage);
+    }
+
+    @Override
+    public void initView() {
+        rcvGarage.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        rcvGarage.addItemDecoration(new GarageItemDecoration(this));
+        LinearSnapHelper helper = new LinearSnapHelper();
+        helper.attachToRecyclerView(rcvGarage);
+        if (adapter==null){
+            adapter = new GarageAdapter();
+        }
+        rcvGarage.setAdapter(adapter);
+    }
+
+    /******************设置转场动画*******************/
     private void setTransition() {
         if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
 
@@ -44,7 +76,7 @@ public class GarageActivity extends BaseActivity {
             getWindow().setAllowEnterTransitionOverlap(false);
         }
     }
-
+    
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
     private TransitionSet buildEnterTransition() {
         TransitionSet transitionSet = new TransitionSet();

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#e01236"
     android:orientation="vertical"
-    tools:context=".CarActivity">
+    tools:context=".car.CarActivity">
 
     <LinearLayout
         android:id="@+id/llTop"

@@ -2,17 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rootView"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
     android:gravity="center"
-    android:background="#e01236"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
 
-    <ImageView
-        android:id="@+id/car"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcvGarage"
         android:layout_width="match_parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:transitionName="@string/transition_home"
-        android:src="@mipmap/ngt_15"
-        android:layout_height="250dp"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp" />
+
+
 </LinearLayout>
