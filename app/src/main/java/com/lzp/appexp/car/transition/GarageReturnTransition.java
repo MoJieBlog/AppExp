@@ -26,7 +26,7 @@ public class GarageReturnTransition extends Transition {
     public void captureStartValues(TransitionValues transitionValues) {
 
         View view = transitionValues.view;
-        if (view instanceof ImageView){//指定初始时的动画状态
+        if (view instanceof ImageView) {//指定初始时的动画状态
             ((ImageView) view).setImageResource(R.mipmap.ngt_15);
         }
     }
@@ -34,14 +34,14 @@ public class GarageReturnTransition extends Transition {
     @Override
     public void captureEndValues(TransitionValues transitionValues) {
         View view = transitionValues.view;
-        if (view instanceof ImageView){//指定初始时的动画状态
+        if (view instanceof ImageView) {//指定初始时的动画状态
             ((ImageView) view).setImageResource(R.mipmap.ngt_1);
         }
     }
 
     @Override
     public Animator createAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
-        if (startValues!=null) {
+        if (startValues != null) {
             View view = startValues.view;
             if (view != null && view instanceof ImageView) {
 

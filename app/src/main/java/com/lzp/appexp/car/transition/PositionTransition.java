@@ -54,10 +54,9 @@ public class PositionTransition extends Transition {
     }
 
     private void captureValues(TransitionValues values) {
-        values.values.put(PROPNAME_POSITION, values.view.getBackground());
-
+        View view = values.view;
         Rect rect = new Rect();
-        values.view.getGlobalVisibleRect(rect);
+        view.getGlobalVisibleRect(rect);
         values.values.put(PROPNAME_POSITION, rect);
     }
 

@@ -34,7 +34,7 @@ public class GarageEnterTransition extends Transition {
     public void captureStartValues(TransitionValues transitionValues) {
         Log.e(TAG, "captureStartValues: ");
         View view = transitionValues.view;
-        if (view instanceof ImageView){//指定初始时的动画状态
+        if (view instanceof ImageView) {//指定初始时的动画状态
             ((ImageView) view).setImageResource(R.mipmap.ngt_1);
         }
     }
@@ -47,7 +47,7 @@ public class GarageEnterTransition extends Transition {
     @Override
     public void captureEndValues(TransitionValues transitionValues) {
         View view = transitionValues.view;
-        if (view instanceof ImageView){//指定初始时的动画状态
+        if (view instanceof ImageView) {//指定初始时的动画状态
             ((ImageView) view).setImageResource(R.mipmap.ngt_1);
         }
     }
@@ -55,45 +55,45 @@ public class GarageEnterTransition extends Transition {
     @Override
     public Animator createAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
         Log.e(TAG, "createAnimator: ");
-        if (endValues!=null){
+        if (endValues != null) {
             View view = endValues.view;
-            if (view !=null&&view instanceof ImageView){
+            if (view != null && view instanceof ImageView) {
 
-                ValueAnimator valueAnimator = ValueAnimator.ofInt(0,15);
+                ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 15);
                 valueAnimator.setInterpolator(new LinearInterpolator());
                 valueAnimator.addUpdateListener(new AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
                         int animatedValue = (int) animation.getAnimatedValue();
-                        if (animatedValue==1){
+                        if (animatedValue == 1) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_1);
-                        }else if(animatedValue==2){
+                        } else if (animatedValue == 2) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_2);
-                        }else if(animatedValue==3){
+                        } else if (animatedValue == 3) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_3);
-                        }else if(animatedValue==4){
+                        } else if (animatedValue == 4) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_4);
-                        }else if(animatedValue==5){
+                        } else if (animatedValue == 5) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_5);
-                        }else if(animatedValue==6){
+                        } else if (animatedValue == 6) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_6);
-                        }else if(animatedValue==7){
+                        } else if (animatedValue == 7) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_7);
-                        }else if(animatedValue==8){
+                        } else if (animatedValue == 8) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_8);
-                        }else if(animatedValue==9){
+                        } else if (animatedValue == 9) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_9);
-                        }else if(animatedValue==10){
+                        } else if (animatedValue == 10) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_10);
-                        }else if(animatedValue==11){
+                        } else if (animatedValue == 11) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_11);
-                        }else if(animatedValue==12){
+                        } else if (animatedValue == 12) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_12);
-                        }else if(animatedValue==13){
+                        } else if (animatedValue == 13) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_13);
-                        }else if(animatedValue==14){
+                        } else if (animatedValue == 14) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_14);
-                        }else if(animatedValue==15){
+                        } else if (animatedValue == 15) {
                             ((ImageView) view).setImageResource(R.mipmap.ngt_15);
                         }
                     }

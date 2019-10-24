@@ -24,6 +24,7 @@ import com.lzp.appexp.car.adapter.CarAdapter;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
 import com.utils.PhoneUtils;
+import com.utils.SizeUtils;
 
 public class CarActivity extends BaseActivity {
     private static final String TAG = "CarActivity";
@@ -37,6 +38,8 @@ public class CarActivity extends BaseActivity {
 
     private boolean open = false;
 
+    private int topViewHeight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,16 +49,20 @@ public class CarActivity extends BaseActivity {
     @Override
     public void initView() {
         setTransition();
+        topViewHeight = SizeUtils.dip2px(this, 350);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcv.setLayoutManager(linearLayoutManager);
         //rcv.addItemDecoration(new GarageItemDecoration(this));
-        CarAdapter garageAdapter = new CarAdapter(13);
+        CarAdapter garageAdapter = new CarAdapter(12);
         rcv.setAdapter(garageAdapter);
         rcv.post(new Runnable() {
             @Override
             public void run() {
                 int measuredHeight = rcv.getMeasuredHeight();
-                int disHeight = PhoneUtils.getDisHeight(CarActivity.this)+PhoneUtils.getStatusBarHeight(CarActivity.this);
+                int disHeight = PhoneUtils.getDisHeight(CarActivity.this) + PhoneUtils.getStatusBarHeight(CarActivity.this);
+                if (topViewHeight + measuredHeight < disHeight) {
+                    measuredHeight = disHeight - topViewHeight;
+                }
                 behavior.setFitToContentsOffset(disHeight - measuredHeight);
             }
         });

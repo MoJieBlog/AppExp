@@ -30,8 +30,6 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.security.auth.login.LoginException;
-
 /**
  * copy from {@link BottomSheetBehavior}
  * <p>
@@ -485,7 +483,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         return this.fitToContents ? this.fitToContentsOffset : 0;
     }
 
-    public void setFitToContentsOffset(int fitToContentsOffset){
+    public void setFitToContentsOffset(int fitToContentsOffset) {
         this.fitToContentsOffset = fitToContentsOffset;
     }
 
@@ -519,7 +517,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     }
 
     void dispatchOnSlide(int top) {
-        Log.e(TAG, "dispatchOnSlide: "+top);
+        Log.e(TAG, "dispatchOnSlide: " + top);
         View bottomSheet = (View) this.scrollView.get();
         if (bottomSheet != null && this.callback != null) {
             if (top > this.topViewHeight) {

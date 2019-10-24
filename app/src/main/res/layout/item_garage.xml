@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.lzp.appexp.car.view.CarCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="#f6f6f6">
+    android:layout_height="500dp"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:id="@+id/rootView"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_gravity="center"
+            android:background="#f6f6f6">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="M1 Sport"
+                android:layout_marginTop="15dp"
+                android:textColor="#223344"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
     <ImageView
-        android:id="@+id/car"
+        android:id="@+id/ivCar"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_centerInParent="true"
         android:elevation="2dp"
+        android:layout_marginTop="@dimen/car_top"
+        android:layout_gravity="center_horizontal"
         android:src="@mipmap/ngt_15" />
+</com.lzp.appexp.car.view.CarCardView>
 
-</RelativeLayout>
