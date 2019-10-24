@@ -1,4 +1,4 @@
-package com.lzp.appexp.behavior;
+package com.lzp.appexp.car.behavior;
 
 import android.content.Context;
 import android.os.Build.VERSION;
@@ -51,7 +51,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     int fitToContentsOffset;
     int halfExpandedOffset;
     boolean hideable = true;
-    int state = STATE_COLLAPSED;
+    int state = STATE_EXPANDED;
     ViewDragHelper viewDragHelper;
     private boolean ignoreEvents;
     private int lastNestedScrollDy;

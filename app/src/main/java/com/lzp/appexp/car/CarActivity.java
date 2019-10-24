@@ -8,7 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
-import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
@@ -19,13 +20,14 @@ import android.widget.LinearLayout;
 import com.base.compat.BaseActivity;
 import com.lzp.appexp.Constants;
 import com.lzp.appexp.R;
-import com.lzp.appexp.behavior.HomeBottomSheetBehavior;
-import com.lzp.appexp.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
+import com.lzp.appexp.car.adapter.CarAdapter;
+import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior;
+import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
 
 public class CarActivity extends BaseActivity {
     private static final String TAG = "CarActivity";
 
-    private NestedScrollView scrollView;
+    private RecyclerView rcv;
     private HomeBottomSheetBehavior behavior;
 
     private CoordinatorLayout rootView;
@@ -33,14 +35,25 @@ public class CarActivity extends BaseActivity {
     private ImageView iv;
 
     private boolean open = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car);
+    }
 
-        findView();
+    @Override
+    public void initView() {
+        setTransition();
+        rcv.setLayoutManager(new LinearLayoutManager(this));
+        //rcv.addItemDecoration(new GarageItemDecoration(this));
+        CarAdapter garageAdapter = new CarAdapter(13);
+        rcv.setAdapter(garageAdapter);
+    }
 
-        behavior = HomeBottomSheetBehavior.from(scrollView);
+    @Override
+    public void setListener() {
+        behavior = HomeBottomSheetBehavior.from(rcv);
         behavior.setBottomSheetCallback(new BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
@@ -54,14 +67,13 @@ public class CarActivity extends BaseActivity {
                     llTop.setAlpha(Math.max((1 - rate), 0.5f));
                     iv.setScaleX(Math.max((1 - rate), 0.5f));
                     iv.setScaleY(Math.max((1 - rate), 0.5f));
-                }else{//下半部分位移
-                    if (Math.abs(rate)>0.2f&&!open){
+                } else {//下半部分位移
+                    if (Math.abs(rate) > 0.2f && !open) {
                         open = true;
                         Intent intent = new Intent(CarActivity.this, GarageActivity.class);
                         transitionTo(intent);
                     }
                 }
-
             }
         });
 
@@ -72,10 +84,27 @@ public class CarActivity extends BaseActivity {
                 transitionTo(intent);
             }
         });
+    }
 
+    @Override
+    protected void onResume() {
+        if (open) {
+            open = false;
+        }
+        super.onResume();
+    }
 
-        setTransition();
+    public void findView() {
+        iv = findViewById(R.id.iv);
+        rcv = findViewById(R.id.rcv);
+        llTop = findViewById(R.id.llTop);
+        rootView = findViewById(R.id.rootView);
+    }
 
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        supportFinishAfterTransition();
     }
 
 
@@ -91,26 +120,5 @@ public class CarActivity extends BaseActivity {
         ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                 new Pair<>(iv, Constants.TRANSITION_HOME));
         startActivity(i, transitionActivityOptions.toBundle());
-    }
-
-    @Override
-    protected void onResume() {
-        if (open){
-            open = false;
-        }
-        super.onResume();
-    }
-
-    public void findView() {
-        iv = findViewById(R.id.iv);
-        scrollView = findViewById(R.id.scrollView);
-        llTop = findViewById(R.id.llTop);
-        rootView = findViewById(R.id.rootView);
-    }
-
-    @Override
-    public void onBackPressed() {
-       // super.onBackPressed();
-        supportFinishAfterTransition();
     }
 }

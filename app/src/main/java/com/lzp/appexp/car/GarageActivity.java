@@ -5,19 +5,12 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.PagerSnapHelper;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionSet;
 
 import com.base.compat.BaseActivity;
 import com.lzp.appexp.R;
-import com.lzp.appexp.car.adapter.GarageAdapter;
-import com.lzp.appexp.car.itemdecoration.GarageItemDecoration;
 import com.lzp.appexp.car.transition.GarageEnterTransition;
 import com.lzp.appexp.car.transition.GarageReturnTransition;
 import com.lzp.appexp.car.transition.PositionTransition;
@@ -30,14 +23,11 @@ import com.lzp.appexp.car.transition.PositionTransition;
 public class GarageActivity extends BaseActivity {
 
     private static final String TAG = "GarageActivity";
-    private RecyclerView rcvGarage;
-
-    private GarageAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (VERSION.SDK_INT >= VERSION_CODES.O) {//8.0透明背景崩溃
+        if (VERSION.SDK_INT == VERSION_CODES.O) {//8.0透明背景崩溃
             setTheme(R.style.appTheme);
         }
         setContentView(R.layout.activity_garage);
@@ -47,19 +37,10 @@ public class GarageActivity extends BaseActivity {
 
     @Override
     public void findView() {
-        rcvGarage = findViewById(R.id.rcvGarage);
     }
 
     @Override
     public void initView() {
-        rcvGarage.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        rcvGarage.addItemDecoration(new GarageItemDecoration(this));
-        LinearSnapHelper helper = new LinearSnapHelper();
-        helper.attachToRecyclerView(rcvGarage);
-        if (adapter==null){
-            adapter = new GarageAdapter();
-        }
-        rcvGarage.setAdapter(adapter);
     }
 
     /******************设置转场动画*******************/
@@ -67,13 +48,11 @@ public class GarageActivity extends BaseActivity {
         if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
 
             Fade fade = new Fade();
-            fade.setDuration(1000);
+            fade.setDuration(300);
             getWindow().setEnterTransition(fade);
 
             getWindow().setSharedElementEnterTransition(buildEnterTransition());
             getWindow().setSharedElementReturnTransition(buildReturnTransition());
-
-            getWindow().setAllowEnterTransitionOverlap(false);
         }
     }
     
