@@ -16,6 +16,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.support.v4.widget.ViewDragHelper.Callback;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -29,6 +30,8 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.security.auth.login.LoginException;
+
 /**
  * copy from {@link BottomSheetBehavior}
  * <p>
@@ -40,6 +43,7 @@ import java.util.Map;
  * @Date: 2019-10-21
  */
 public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
+    private static final String TAG = "HomeBottomSheetBehavior";
     public static final int STATE_DRAGGING = 1;
     public static final int STATE_SETTLING = 2;
     public static final int STATE_EXPANDED = 3;
@@ -71,6 +75,8 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     private WeakReference<V> topView;
     private WeakReference<View> scrollView;
     private int topViewHeight;
+
+    private int childTotalHeight = 0;
 
     public HomeBottomSheetBehavior() {
         this.dragCallback = new NamelessClass_1();
@@ -135,7 +141,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
                 }
             } else if (releasedChild.getTop() <= HomeBottomSheetBehavior.this.topViewHeight && Math.abs(xvel) >= Math.abs(yvel)) {
                 if (yvel != 0.0F && Math.abs(xvel) <= Math.abs(yvel)) {
-                    top = HomeBottomSheetBehavior.this.topViewHeight;
+                    top = HomeBottomSheetBehavior.this.fitToContentsOffset;
                     targetState = STATE_COLLAPSED;
                 } else {
                     currentTop = releasedChild.getTop();
@@ -169,7 +175,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
             }
 
             if (HomeBottomSheetBehavior.this.viewDragHelper.settleCapturedViewAt(releasedChild.getLeft(), top)) {
-                HomeBottomSheetBehavior.this.setStateInternal(2);
+                HomeBottomSheetBehavior.this.setStateInternal(STATE_SETTLING);
                 ViewCompat.postOnAnimation(releasedChild, HomeBottomSheetBehavior.this.new SettleRunnable(releasedChild, targetState));
             } else {
                 HomeBottomSheetBehavior.this.setStateInternal(targetState);
@@ -206,6 +212,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     }
 
     public boolean onLayoutChild(CoordinatorLayout parent, V child, int layoutDirection) {
+        Log.e(TAG, "onLayoutChild: ");
         int childCount = parent.getChildCount();
         if (childCount != 2) {
             throw new IllegalArgumentException("child count must be 2.");
@@ -217,7 +224,6 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         parent.onLayoutChild(child, layoutDirection);
         this.parentHeight = parent.getHeight();
 
-
         View topView = parent.getChildAt(0);
         topViewHeight = topView.getBottom();
         this.topView = new WeakReference(topView);
@@ -227,6 +233,8 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         if (this.viewDragHelper == null) {
             this.viewDragHelper = ViewDragHelper.create(parent, this.dragCallback);
         }
+        //默认打开模式
+        setState(STATE_COLLAPSED);
         return true;
     }
 
@@ -477,6 +485,10 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         return this.fitToContents ? this.fitToContentsOffset : 0;
     }
 
+    public void setFitToContentsOffset(int fitToContentsOffset){
+        this.fitToContentsOffset = fitToContentsOffset;
+    }
+
     void startSettlingAnimation(View child, int state) {
         int top;
         if (state == STATE_COLLAPSED) {
@@ -507,6 +519,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     }
 
     void dispatchOnSlide(int top) {
+        Log.e(TAG, "dispatchOnSlide: "+top);
         View bottomSheet = (View) this.scrollView.get();
         if (bottomSheet != null && this.callback != null) {
             if (top > this.topViewHeight) {

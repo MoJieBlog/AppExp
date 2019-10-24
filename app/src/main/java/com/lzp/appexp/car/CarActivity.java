@@ -23,6 +23,7 @@ import com.lzp.appexp.R;
 import com.lzp.appexp.car.adapter.CarAdapter;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
+import com.utils.PhoneUtils;
 
 public class CarActivity extends BaseActivity {
     private static final String TAG = "CarActivity";
@@ -45,10 +46,19 @@ public class CarActivity extends BaseActivity {
     @Override
     public void initView() {
         setTransition();
-        rcv.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rcv.setLayoutManager(linearLayoutManager);
         //rcv.addItemDecoration(new GarageItemDecoration(this));
         CarAdapter garageAdapter = new CarAdapter(13);
         rcv.setAdapter(garageAdapter);
+        rcv.post(new Runnable() {
+            @Override
+            public void run() {
+                int measuredHeight = rcv.getMeasuredHeight();
+                int disHeight = PhoneUtils.getDisHeight(CarActivity.this)+PhoneUtils.getStatusBarHeight(CarActivity.this);
+                behavior.setFitToContentsOffset(disHeight - measuredHeight);
+            }
+        });
     }
 
     @Override
