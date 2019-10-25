@@ -41,8 +41,8 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:clipChildren="false"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
             android:layout_height="match_parent"/>
     </FrameLayout>
 </LinearLayout>

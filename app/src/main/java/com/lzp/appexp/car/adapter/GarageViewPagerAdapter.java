@@ -19,6 +19,7 @@ public class GarageViewPagerAdapter extends PagerAdapter {
     private int size = 0;
     private int delayTime = 0;
 
+    private int[] colors = {0xff12abab,0xffab12ab,0xffabab12};
     private boolean isFirstInflate = true;
     private SparseArray<CarCardView> viewMap = new SparseArray<>();
     private int selectedPosition = 0;
@@ -57,6 +58,14 @@ public class GarageViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
         CarCardView carCardView = (CarCardView) LayoutInflater.from(container.getContext()).inflate(R.layout.item_garage, container, false);
+
+        if (position%2==0){
+            carCardView.setBackgroundColor(colors[0]);
+        }else if(position%3==0){
+            carCardView.setBackgroundColor(colors[1]);
+        }else{
+            carCardView.setBackgroundColor(colors[2]);
+        }
 
         if (isFirstInflate && position == selectedPosition) {
             isFirstInflate = false;

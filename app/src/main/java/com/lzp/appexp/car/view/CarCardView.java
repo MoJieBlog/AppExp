@@ -1,6 +1,10 @@
 package com.lzp.appexp.car.view;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -17,6 +21,7 @@ import com.lzp.appexp.R;
 public class CarCardView extends FrameLayout {
 
     private ImageView ivCar;
+    private RectF rectF;
 
     public CarCardView(@NonNull Context context) {
         this(context, null);
@@ -36,4 +41,9 @@ public class CarCardView extends FrameLayout {
         ivCar.setVisibility(visible);
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.clipRect(rectF);
+        super.onDraw(canvas);
+    }
 }

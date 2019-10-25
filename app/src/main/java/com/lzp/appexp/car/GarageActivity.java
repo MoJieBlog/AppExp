@@ -26,7 +26,7 @@ import com.lzp.appexp.car.adapter.GarageViewPagerAdapter;
 import com.lzp.appexp.car.transition.GarageEnterTransition;
 import com.lzp.appexp.car.transition.GarageReturnTransition;
 import com.lzp.appexp.car.transition.PositionTransition;
-import com.utils.SizeUtils;
+import com.lzp.appexp.car.view.GalleryTransformer;
 
 /**
  * @describe 车库
@@ -37,7 +37,7 @@ public class GarageActivity extends BaseActivity {
 
     private static final String TAG = "GarageActivity";
 
-    private int playTime = 1000;
+    private int playTime = 300;
     private ImageView car;
     private ViewPager viewPager;
     private FrameLayout viewPagerContainer;
@@ -83,17 +83,19 @@ public class GarageActivity extends BaseActivity {
         actionBar.setSubTitleText("main subTitle");
         actionBar.setRightText("right text");
 
-        viewPager.setPageMargin(SizeUtils.dip2px(this, 30));
+        viewPager.setOffscreenPageLimit(2);
+        viewPager.setPageMargin(30);
+        viewPager.setPageTransformer(false,new GalleryTransformer(this));
         adapter = new GarageViewPagerAdapter(12, playTime + 200);
         viewPager.setAdapter(adapter);
 
         car.postDelayed(new Runnable() {
             @Override
             public void run() {
-                int top = car.getTop();
+                Log.e(TAG, "run: 隐藏");
                 car.setVisibility(View.INVISIBLE);
             }
-        }, playTime + 200);
+        }, playTime + 150);
     }
 
     @Override
@@ -131,6 +133,7 @@ public class GarageActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        Log.e(TAG, "onBackPressed: ");
         car.setVisibility(View.VISIBLE);
         //隐藏掉item的图片
         adapter.onDestroy(selectedPosition);
