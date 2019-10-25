@@ -83,6 +83,12 @@ public class GarageActivityNew extends BaseActivity {
         });
 
         adapter = new GarageAdapter();
+
+        selectedPosition = 2;
+        //设置选中，首次加载会隐藏掉图片，用于播放转场动画
+        adapter.setSelectedPosition(selectedPosition);
+        //设置当前选中
+        rcv.setCurrentItem(selectedPosition);
         rcv.setAdapter(adapter);
 
         car.postDelayed(new Runnable() {
@@ -95,9 +101,9 @@ public class GarageActivityNew extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        car.setVisibility(View.VISIBLE);
+        adapter.onDestroy(selectedPosition,rcv);
         //隐藏掉item的图片
-        adapter.onDestroy(selectedPosition);
+        car.setVisibility(View.VISIBLE);
         super.onBackPressed();
     }
 

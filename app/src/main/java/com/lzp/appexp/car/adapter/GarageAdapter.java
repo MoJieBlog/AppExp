@@ -19,6 +19,7 @@ import com.utils.PhoneUtils;
  */
 public class GarageAdapter extends RecyclerView.Adapter {
 
+    private final String HIND_CAR_IMG = "hind_car_img";
     private int size = 0;
 
     private int delayTime = 0;
@@ -41,8 +42,16 @@ public class GarageAdapter extends RecyclerView.Adapter {
         this.selectedPosition = selectedPosition;
     }
 
-    public void onDestroy(int index) {
-
+    /**
+     * 关闭页面必须调用这个，不然转场动画播放会出现两个图片
+     * @param index
+     * @param rcv
+     */
+    public void onDestroy(int index,RecyclerView rcv) {
+        View childAt = rcv.getChildAt(index);
+        if (childAt instanceof CarCardView){
+            ((CarCardView) childAt).setCarImgVisible(View.GONE);
+        }
     }
 
     @NonNull
@@ -55,13 +64,13 @@ public class GarageAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         View itemView = viewHolder.itemView;
-        if (itemView instanceof CarCardView){
+        if (itemView instanceof CarCardView) {
             CarCardView carCardView = (CarCardView) itemView;
-            if (position%2==0){
+            if (position % 2 == 0) {
                 carCardView.setRootBgColor(colors[0]);
-            }else if(position%3==0){
+            } else if (position % 3 == 0) {
                 carCardView.setRootBgColor(colors[1]);
-            }else{
+            } else {
                 carCardView.setRootBgColor(colors[2]);
             }
 
@@ -90,7 +99,7 @@ public class GarageAdapter extends RecyclerView.Adapter {
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             LayoutParams layoutParams = itemView.getLayoutParams();
-            layoutParams.width = (int) (PhoneUtils.getWinWide(itemView.getContext())*0.8);
+            layoutParams.width = (int) (PhoneUtils.getWinWide(itemView.getContext()) * 0.8);
         }
     }
 }

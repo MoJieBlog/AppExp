@@ -1,4 +1,4 @@
-package com.lzp.appexp.car.view;
+package com.view.viewpager;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

@@ -103,7 +103,12 @@ public class GalleryRecyclerView extends RecyclerView {
     }
 
     public void setCurrentItem(int position) {
-        layoutManager.scrollToPositionWithOffset(position, offset);
+        if (position!=0){
+            layoutManager.scrollToPositionWithOffset(position, offset-itemDecoration.getDiverWidth());
+        }else {
+            //第一个左分割线宽度就是偏移量
+            layoutManager.scrollToPositionWithOffset(position, offset);
+        }
     }
 
     public int getCurrentItemPosition() {

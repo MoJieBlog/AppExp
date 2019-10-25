@@ -34,10 +34,6 @@
         <activity
             android:name=".KLineActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".car.GarageActivity"
-            android:theme="@style/transparentTheme"
-            android:screenOrientation="portrait" />
         <activity android:name=".car.GarageActivityNew"
             android:theme="@style/transparentTheme"
             android:screenOrientation="portrait" />

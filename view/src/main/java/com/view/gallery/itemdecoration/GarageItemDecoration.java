@@ -48,6 +48,9 @@ public class GarageItemDecoration  extends RecyclerView.ItemDecoration {
         }
     }
 
+    public int getDiverWidth(){
+        return diverWidth;
+    }
     /**
      * 设置选中的pager距离屏幕左右两侧的距离
      * @param pagerOffset
