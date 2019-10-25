@@ -28,8 +28,9 @@ public class GalleryTransformer implements ViewPager.PageTransformer {
             page.setAlpha(ALPHA);
         }else{
             float deltScroll = 1 - Math.abs(position);
-            page.setAlpha(ALPHA+ALPHA*deltScroll);
+           // page.setAlpha(ALPHA+ALPHA*deltScroll);
             float scale=Math.max(SCALE,deltScroll);
+            //float scale=deltScroll;
             page.setScaleX(scale);
             page.setScaleY(scale);
         }

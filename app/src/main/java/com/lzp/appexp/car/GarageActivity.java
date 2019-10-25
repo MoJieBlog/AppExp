@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.widget.PagerSnapHelper;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionSet;
@@ -84,7 +85,7 @@ public class GarageActivity extends BaseActivity {
         actionBar.setRightText("right text");
 
         viewPager.setOffscreenPageLimit(2);
-        viewPager.setPageMargin(30);
+        viewPager.setPageMargin(-30);
         viewPager.setPageTransformer(false,new GalleryTransformer(this));
         adapter = new GarageViewPagerAdapter(12, playTime + 200);
         viewPager.setAdapter(adapter);
