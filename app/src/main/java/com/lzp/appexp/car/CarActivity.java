@@ -87,7 +87,10 @@ public class CarActivity extends BaseActivity {
                 } else {//下半部分位移
                     if (Math.abs(rate) > 0.2f && !open) {
                         open = true;
-                        Intent intent = new Intent(CarActivity.this, GarageActivity.class);
+                        //ViewPager
+                        //Intent intent = new Intent(CarActivity.this, GarageActivity.class);
+                        //使用RecyclerView
+                        Intent intent = new Intent(CarActivity.this, GarageActivityNew.class);
                         transitionTo(intent);
                     }
                 }
@@ -97,7 +100,9 @@ public class CarActivity extends BaseActivity {
         iv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CarActivity.this, GarageActivity.class);
+                //Intent intent = new Intent(CarActivity.this, GarageActivity.class);
+                //使用RecyclerView
+                Intent intent = new Intent(CarActivity.this, GarageActivityNew.class);
                 transitionTo(intent);
             }
         });
