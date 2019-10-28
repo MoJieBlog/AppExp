@@ -2,6 +2,7 @@ package com.lzp.appexp.car.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,12 +45,14 @@ public class GarageAdapter extends RecyclerView.Adapter {
 
     /**
      * 关闭页面必须调用这个，不然转场动画播放会出现两个图片
+     *
      * @param index
      * @param rcv
      */
-    public void onDestroy(int index,RecyclerView rcv) {
-        View childAt = rcv.getChildAt(index);
-        if (childAt instanceof CarCardView){
+    public void onDestroy(int index, RecyclerView rcv) {
+        LayoutManager layoutManager = rcv.getLayoutManager();
+        View childAt = layoutManager.findViewByPosition(index);
+        if (childAt instanceof CarCardView) {
             ((CarCardView) childAt).setCarImgVisible(View.GONE);
         }
     }

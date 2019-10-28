@@ -75,7 +75,7 @@ public class GarageActivityNew extends BaseActivity {
         actionBar.setSubTitleText("main subTitle");
         actionBar.setRightText("right text");
 
-        actionBar.setActionBarClickListener(new ActionBarClickAdapter(){
+        actionBar.setActionBarClickListener(new ActionBarClickAdapter() {
             @Override
             public void onClickLeftImg(View v) {
                 onBackPressed();
@@ -101,7 +101,7 @@ public class GarageActivityNew extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        adapter.onDestroy(selectedPosition,rcv);
+        adapter.onDestroy(selectedPosition, rcv);
         //隐藏掉item的图片
         car.setVisibility(View.VISIBLE);
         super.onBackPressed();

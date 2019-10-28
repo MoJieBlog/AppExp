@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.State;
-import android.util.Log;
 import android.view.View;
 
 import com.utils.PhoneUtils;
@@ -35,7 +34,6 @@ public class GarageItemDecoration  extends RecyclerView.ItemDecoration {
         int childCount = parent.getAdapter().getItemCount();
 
         int position = layoutManager.getPosition(view);
-        Log.e(TAG, "getItemOffsets: "+position+"  "+childCount);
         if (position==0){
             outRect.left = pagerOffset;
             outRect.right =diverWidth;
@@ -48,6 +46,10 @@ public class GarageItemDecoration  extends RecyclerView.ItemDecoration {
         }
     }
 
+    /**
+     * 获取分割线宽度
+     * @return
+     */
     public int getDiverWidth(){
         return diverWidth;
     }
@@ -60,7 +62,7 @@ public class GarageItemDecoration  extends RecyclerView.ItemDecoration {
     }
 
     /**
-     * 设置
+     * 设置pager之间的分割线宽度
      * @param diverWidth
      */
     public void setDiverWidth(int diverWidth){
