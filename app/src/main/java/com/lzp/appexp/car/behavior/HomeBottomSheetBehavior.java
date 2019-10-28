@@ -1,5 +1,6 @@
 package com.lzp.appexp.car.behavior;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build.VERSION;
 import android.os.Parcel;
@@ -23,6 +24,9 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
+
+import com.lzp.appexp.car.CarActivity;
+import com.utils.PhoneUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -227,10 +231,11 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         this.topView = new WeakReference(topView);
         this.scrollView = new WeakReference<>(child);
         ViewCompat.offsetTopAndBottom(child, topView.getBottom());
-
         if (this.viewDragHelper == null) {
             this.viewDragHelper = ViewDragHelper.create(parent, this.dragCallback);
         }
+        //设置偏移量
+        onSizeChange((Activity) parent.getContext());
         //默认打开模式
         setState(STATE_COLLAPSED);
         return true;
@@ -639,6 +644,20 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         this.hideable = hideable;
     }
 
+    public void onSizeChange(Activity activity){
+        scrollView.get().post(new Runnable() {
+            @Override
+            public void run() {
+                int measuredHeight = scrollView.get().getMeasuredHeight();
+                int disHeight = PhoneUtils.getDisHeight(activity) + PhoneUtils.getStatusBarHeight(activity);
+                if (topViewHeight + measuredHeight < disHeight) {
+                    measuredHeight = disHeight - topViewHeight;
+                }
+                setFitToContentsOffset(disHeight - measuredHeight);
+                Log.e(TAG, "onClick: "+(disHeight - measuredHeight));
+            }
+        });
+    }
     @Retention(RetentionPolicy.SOURCE)
     @RestrictTo({Scope.LIBRARY_GROUP})
     public @interface State {

@@ -8,37 +8,41 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.widget.NestedScrollView;
 import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.base.compat.BaseActivity;
 import com.lzp.appexp.Constants;
 import com.lzp.appexp.R;
-import com.lzp.appexp.car.adapter.CarAdapter;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
-import com.utils.PhoneUtils;
-import com.utils.SizeUtils;
+import com.lzp.appexp.car.view.CarCardView;
 
 public class CarActivity extends BaseActivity {
     private static final String TAG = "CarActivity";
 
-    private RecyclerView rcv;
+    private NestedScrollView contentLayout;
     private HomeBottomSheetBehavior behavior;
 
     private CoordinatorLayout rootView;
     private LinearLayout llTop;
     private ImageView iv;
+    private Button btn;
+
+    private TextView content1;
+    private TextView content2;
+    private TextView content3;
+    private TextView content4;
+    private TextView content5;
 
     private boolean open = false;
-
-    private int topViewHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,28 +53,33 @@ public class CarActivity extends BaseActivity {
     @Override
     public void initView() {
         setTransition();
-        topViewHeight = SizeUtils.dip2px(this, 350);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        rcv.setLayoutManager(linearLayoutManager);
-        //rcv.addItemDecoration(new GarageItemDecoration(this));
-        CarAdapter garageAdapter = new CarAdapter(12);
-        rcv.setAdapter(garageAdapter);
-        rcv.post(new Runnable() {
-            @Override
-            public void run() {
-                int measuredHeight = rcv.getMeasuredHeight();
-                int disHeight = PhoneUtils.getDisHeight(CarActivity.this) + PhoneUtils.getStatusBarHeight(CarActivity.this);
-                if (topViewHeight + measuredHeight < disHeight) {
-                    measuredHeight = disHeight - topViewHeight;
-                }
-                behavior.setFitToContentsOffset(disHeight - measuredHeight);
-            }
-        });
+        isLong = false;
+        content5.setVisibility(View.GONE);
+        content4.setVisibility(View.GONE);
+        content3.setVisibility(View.GONE);
     }
 
+    private boolean isLong = true;
     @Override
     public void setListener() {
-        behavior = HomeBottomSheetBehavior.from(rcv);
+        btn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLong){
+                    isLong = false;
+                    content5.setVisibility(View.GONE);
+                    content4.setVisibility(View.GONE);
+                    content3.setVisibility(View.GONE);
+                }else{
+                    isLong = true;
+                    content5.setVisibility(View.VISIBLE);
+                    content4.setVisibility(View.VISIBLE);
+                    content3.setVisibility(View.VISIBLE);
+                }
+                behavior.onSizeChange(CarActivity.this);
+            }
+        });
+        behavior = HomeBottomSheetBehavior.from(contentLayout);
         behavior.setBottomSheetCallback(new BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
@@ -113,9 +122,15 @@ public class CarActivity extends BaseActivity {
 
     public void findView() {
         iv = findViewById(R.id.iv);
-        rcv = findViewById(R.id.rcv);
+        contentLayout = findViewById(R.id.contentLayout);
         llTop = findViewById(R.id.llTop);
         rootView = findViewById(R.id.rootView);
+        btn = findViewById(R.id.btn);
+        content1 = findViewById(R.id.content1);
+        content2 = findViewById(R.id.content2);
+        content3 = findViewById(R.id.content3);
+        content4 = findViewById(R.id.content4);
+        content5 = findViewById(R.id.content5);
     }
 
     @Override

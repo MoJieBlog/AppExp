@@ -27,6 +27,10 @@ public class CarAdapter extends RecyclerView.Adapter {
         this.size = size;
     }
 
+    public void setSize(int size){
+        this.size = size;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
