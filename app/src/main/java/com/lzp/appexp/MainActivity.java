@@ -48,7 +48,9 @@ public class MainActivity extends BaseActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
 
-        PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
+        }
 
         setContentView(R.layout.activity_main);
 
