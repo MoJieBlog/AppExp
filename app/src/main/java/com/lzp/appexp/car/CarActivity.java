@@ -23,7 +23,6 @@ import com.lzp.appexp.Constants;
 import com.lzp.appexp.R;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
-import com.lzp.appexp.car.view.CarCardView;
 
 public class CarActivity extends BaseActivity {
     private static final String TAG = "CarActivity";

@@ -3,6 +3,7 @@ package com.lzp.appexp.car.behavior;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -409,6 +410,11 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         }
     }
 
+    @Override
+    public void onNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type) {
+        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type);
+    }
+
     public boolean onNestedPreFling(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View target, float velocityX, float velocityY) {
         return target == this.scrollView.get() && (this.state != STATE_EXPANDED || super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY));
     }
@@ -472,15 +478,6 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
 
                 }
             }
-        }
-    }
-
-    private float getYVelocity() {
-        if (this.velocityTracker == null) {
-            return 0.0F;
-        } else {
-            this.velocityTracker.computeCurrentVelocity(1000, this.maximumVelocity);
-            return this.velocityTracker.getYVelocity(this.activePointerId);
         }
     }
 
@@ -640,10 +637,6 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         }
     }
 
-    public void setHideable(boolean hideable) {
-        this.hideable = hideable;
-    }
-
     public void onSizeChange(Activity activity){
         scrollView.get().post(new Runnable() {
             @Override
@@ -654,13 +647,8 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
                     measuredHeight = disHeight - topViewHeight;
                 }
                 setFitToContentsOffset(disHeight - measuredHeight);
-                Log.e(TAG, "onClick: "+(disHeight - measuredHeight));
             }
         });
-    }
-    @Retention(RetentionPolicy.SOURCE)
-    @RestrictTo({Scope.LIBRARY_GROUP})
-    public @interface State {
     }
 
     public interface BottomSheetCallback {
@@ -670,5 +658,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
 
         default void onSlide(@NonNull View view, float rate) {
         }
+
+        default void openActivity(View view,float rate){}
     }
 }
