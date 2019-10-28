@@ -658,7 +658,5 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
 
         default void onSlide(@NonNull View view, float rate) {
         }
-
-        default void openActivity(View view,float rate){}
     }
 }
