@@ -67,6 +67,14 @@ public class GalleryRecyclerView extends RecyclerView {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                if (listener!=null){
+                    listener.onScrollStateChanged(recyclerView,newState);
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE){
+                        int currentItemPosition = getCurrentItemPosition();
+                        listener.onPageSelected(currentItemPosition);
+                    }
+                }
+
             }
 
             @Override
@@ -118,4 +126,16 @@ public class GalleryRecyclerView extends RecyclerView {
         //因为选中的居中，所以中间的index为（最后一个index + 第一个index）/2
         return (lastPosition + firstPosition) / 2;
     }
+
+    public interface MONScrollListener{
+
+       default void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState){}
+        default void onPageSelected(int position){}
+    }
+
+    private MONScrollListener listener;
+    public void setMOnScrollListener(MONScrollListener listener){
+        this.listener = listener;
+    }
+
 }
