@@ -38,7 +38,8 @@ import com.view.gallery.GalleryRecyclerView.MONScrollListener;
  */
 public class GarageActivityNew extends BaseActivity {
 
-    private int playTime = 3000;
+    //为了看清楚动画过程设置为1500毫秒，经过试验发现300毫秒体验最好
+    private int playTime = 1500;
     private ImageView car;
     private GalleryRecyclerView rcv;
     ActionBarView actionBar;
