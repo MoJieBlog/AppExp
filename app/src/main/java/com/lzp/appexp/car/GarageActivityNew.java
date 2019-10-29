@@ -4,8 +4,10 @@ import android.graphics.Color;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.RecyclerView;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionSet;
@@ -23,6 +25,7 @@ import com.lzp.appexp.car.transition.GarageEnterTransition;
 import com.lzp.appexp.car.transition.GarageReturnTransition;
 import com.lzp.appexp.car.transition.PositionTransition;
 import com.view.gallery.GalleryRecyclerView;
+import com.view.gallery.GalleryRecyclerView.MONScrollListener;
 
 /**
  * @describe
@@ -91,12 +94,19 @@ public class GarageActivityNew extends BaseActivity {
         rcv.setCurrentItem(selectedPosition);
         rcv.setAdapter(adapter);
 
-        car.postDelayed(new Runnable() {
+        rcv.setMOnScrollListener(new MONScrollListener() {
             @Override
-            public void run() {
-                car.setVisibility(View.INVISIBLE);
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                if (car.getVisibility()==View.VISIBLE){
+                    car.setVisibility(View.INVISIBLE);
+                }
             }
-        }, playTime + 150);
+
+            @Override
+            public void onPageSelected(int position) {
+                selectedPosition = position;
+            }
+        });
     }
 
     @Override
