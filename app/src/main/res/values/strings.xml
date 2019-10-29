@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">appexp</string>
     <string name="transition_home">transition_home</string>
-    <string name="transition_home_root">transition_home_root</string>
+    <string name="transition_btn">transition_btn</string>
 </resources>

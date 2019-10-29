@@ -12,8 +12,11 @@ import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionSet;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.base.compat.ActionBarView;
 import com.base.compat.ActionBarView.ActionBarClickAdapter;
@@ -23,6 +26,7 @@ import com.lzp.appexp.R;
 import com.lzp.appexp.car.adapter.GarageAdapter;
 import com.lzp.appexp.car.transition.GarageEnterTransition;
 import com.lzp.appexp.car.transition.GarageReturnTransition;
+import com.lzp.appexp.car.transition.OtherTransition;
 import com.lzp.appexp.car.transition.PositionTransition;
 import com.view.gallery.GalleryRecyclerView;
 import com.view.gallery.GalleryRecyclerView.MONScrollListener;
@@ -34,12 +38,14 @@ import com.view.gallery.GalleryRecyclerView.MONScrollListener;
  */
 public class GarageActivityNew extends BaseActivity {
 
-    private int playTime = 300;
+    private int playTime = 3000;
     private ImageView car;
     private GalleryRecyclerView rcv;
-    private FrameLayout garageContainer;
     ActionBarView actionBar;
     StatusBarView statusBarView;
+    private TextView tvConfirm;
+    private LinearLayout rootView;
+    private FrameLayout carView;
 
     private GarageAdapter adapter;
     private int selectedPosition = 0;
@@ -60,12 +66,13 @@ public class GarageActivityNew extends BaseActivity {
         rcv = findViewById(R.id.rcv);
         actionBar = findViewById(R.id.actionBar);
         statusBarView = findViewById(R.id.statusBarView);
-        garageContainer = findViewById(R.id.garageContainer);
+        tvConfirm = findViewById(R.id.tvConfirm);
+        rootView = findViewById(R.id.rootView);
+        carView = findViewById(R.id.carView);
     }
 
     @Override
     public void initView() {
-
         statusBarView.setBgColorRes(R.color.color_status_bar);
         actionBar.setActionBarBgRes(R.color.color_actionbar_bg);
 
@@ -97,8 +104,9 @@ public class GarageActivityNew extends BaseActivity {
         rcv.setMOnScrollListener(new MONScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                if (car.getVisibility()==View.VISIBLE){
+                if (car.getVisibility() == View.VISIBLE) {
                     car.setVisibility(View.INVISIBLE);
+                    adapter.showLastCar(selectedPosition, rcv);
                 }
             }
 
@@ -121,9 +129,9 @@ public class GarageActivityNew extends BaseActivity {
     private void setTransition() {
         if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
 
-            Fade fade = new Fade();
-            fade.setDuration(playTime);
-            getWindow().setEnterTransition(fade);
+            OtherTransition otherTransition = new OtherTransition(this, rootView, tvConfirm, carView, actionBar,statusBarView);
+            otherTransition.setDuration(playTime);
+            getWindow().setEnterTransition(otherTransition);
 
             getWindow().setSharedElementEnterTransition(buildEnterTransition());
             getWindow().setSharedElementReturnTransition(buildReturnTransition());

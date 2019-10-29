@@ -9,5 +9,5 @@ import com.lzp.appexp.applicaton.App;
  */
 public interface Constants {
     String TRANSITION_HOME = App.getApplication().getResources().getString(R.string.transition_home);
-    String TRANSITION_HOME_ROOT = App.getApplication().getResources().getString(R.string.transition_home_root);
+    String TRANSITION_BTN = App.getApplication().getResources().getString(R.string.transition_btn);
 }

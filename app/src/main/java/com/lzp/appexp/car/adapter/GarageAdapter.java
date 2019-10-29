@@ -57,6 +57,14 @@ public class GarageAdapter extends RecyclerView.Adapter {
         }
     }
 
+    public void showLastCar(int index,RecyclerView rcv) {
+        LayoutManager layoutManager = rcv.getLayoutManager();
+        View childAt = layoutManager.findViewByPosition(index);
+        if (childAt instanceof CarCardView) {
+            ((CarCardView) childAt).setCarImgVisible(View.VISIBLE);
+        }
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -80,12 +88,6 @@ public class GarageAdapter extends RecyclerView.Adapter {
             if (isFirstInflate && position == selectedPosition) {
                 isFirstInflate = false;
                 carCardView.setCarImgVisible(View.INVISIBLE);
-                carCardView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        carCardView.setCarImgVisible(View.VISIBLE);
-                    }
-                }, delayTime - 100);
             } else {
                 carCardView.setCarImgVisible(View.VISIBLE);
             }
@@ -96,6 +98,8 @@ public class GarageAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return size;
     }
+
+
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
