@@ -23,13 +23,13 @@ import com.lzp.appexp.Constants;
 import com.lzp.appexp.R;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
-import com.view.refresh.SwipeRefreshLayout;
-import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
+import com.view.refresh.ext.moveopen.MoveOpenAndRefreshLayout;
+import com.view.refresh.ext.moveopen.MoveOpenAndRefreshLayout.OpenRefreshListener;
 
 public class CarActivity extends BaseActivity {
     private static final String TAG = "CarActivity";
 
-    private SwipeRefreshLayout fresh;
+    private MoveOpenAndRefreshLayout fresh;
     private NestedScrollView contentLayout;
     private HomeBottomSheetBehavior behavior;
 
@@ -61,7 +61,14 @@ public class CarActivity extends BaseActivity {
         content3.setVisibility(View.GONE);
 
         fresh.setCanRefresh(true);
-        fresh.setOnRefreshListener(new OnRefreshListener() {
+
+        fresh.setOnRefreshListener(new OpenRefreshListener() {
+            @Override
+            public void openActivity() {
+                Intent intent = new Intent(CarActivity.this, GarageActivityNew.class);
+                transitionTo(intent);
+            }
+
             @Override
             public void onRefresh() {
                 fresh.postDelayed(new Runnable() {

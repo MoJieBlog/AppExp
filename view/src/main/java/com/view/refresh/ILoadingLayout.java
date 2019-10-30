@@ -1,7 +1,5 @@
 package com.view.refresh;
 
-import android.view.View;
-
 /**
  * @describe
  * @author: lixiaopeng
@@ -37,7 +35,7 @@ public interface ILoadingLayout {
     /**
      * 设置刷新布局的实例索引
      */
-    public void setRefreshLayoutInstance(View refreshLayout);
+    public void setRefreshLayoutInstance(SwipeRefreshLayout refreshLayout);
 
     /**
      * 获取loadinglayout的高度

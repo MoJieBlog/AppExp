@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.view.refresh.LoadingLayout;
+import com.view.refresh.SwipeRefreshLayout;
 
 /**
  * @describe
@@ -16,7 +17,7 @@ import com.view.refresh.LoadingLayout;
  */
 public class DefaultRefreshLayout extends LoadingLayout {
 
-    private NiuLoadingLayout loadingLayout;
+    private GoLoadingLayout loadingLayout;
 
     private int animViewWidth, animViewHeight;
 
@@ -30,7 +31,7 @@ public class DefaultRefreshLayout extends LoadingLayout {
 
     @Override
     public void init() {
-        loadingLayout = new NiuLoadingLayout(getContext());
+        loadingLayout = new GoLoadingLayout(getContext());
         loadingLayout.setVisibility(VISIBLE);
         animViewHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60,
                 mResources.getDisplayMetrics());
@@ -67,7 +68,7 @@ public class DefaultRefreshLayout extends LoadingLayout {
     }
 
     @Override
-    public void setRefreshLayoutInstance(View refreshLayout) {
+    public void setRefreshLayoutInstance(SwipeRefreshLayout refreshLayout) {
 
     }
 

@@ -34,9 +34,10 @@
 
     </LinearLayout>
 
-    <com.view.refresh.SwipeRefreshLayout
+    <com.view.refresh.ext.moveopen.MoveOpenAndRefreshLayout
         android:id="@+id/fresh"
         android:layout_width="match_parent"
+        app:fresh_type="1"
         android:layout_height="match_parent"
         app:layout_behavior=".car.behavior.HomeBottomSheetBehavior">
 
@@ -159,7 +160,7 @@
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
-    </com.view.refresh.SwipeRefreshLayout>
+    </com.view.refresh.ext.moveopen.MoveOpenAndRefreshLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

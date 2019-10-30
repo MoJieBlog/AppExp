@@ -4,8 +4,6 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
@@ -47,7 +45,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     private boolean mNestedScrollInProgress;
 
     protected View mTarget; // the target of the gesture
-    private OnRefreshListener mRefreshListener;
+    protected OnRefreshListener mRefreshListener;
     private int mTouchSlop;
 
     private float mInitialMotionY, mLastMotionY;
@@ -58,7 +56,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     /**
      * 是否正在刷新
      */
-    private boolean isRefreshing = false;
+    protected boolean isRefreshing = false;
     /**
      * 是否可以拖动
      */
@@ -68,10 +66,10 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
 
     protected boolean canRefresh;
 
-    private LoadingLayout headLoadingLayout;
+    protected LoadingLayout headLoadingLayout;
 
     private float moveOffset = 0;
-    private int freshViewType = 0;
+    protected int freshViewType = 0;
 
     private ValueAnimator resetHeaderAnimator;
 
@@ -213,7 +211,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     @Override
     public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
         ensureTarget();
-        if (isRefreshing){
+        if (isRefreshing) {
             return true;
         }
         int action = ev.getActionMasked();
@@ -353,7 +351,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         return true;
     }
 
-    private void finishMove() {
+    protected void finishMove() {
         if (-getScrollY() >= headLoadingLayout.getMeasuredHeight()
                 && mRefreshListener != null
                 && !isRefreshing) {
@@ -376,7 +374,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         return scrollOffset >= 0;
     }
 
-    private void resetHeader() {
+    protected void resetHeader() {
 
         if (resetHeaderAnimator != null && resetHeaderAnimator.isRunning()) {
             resetHeaderAnimator.cancel();

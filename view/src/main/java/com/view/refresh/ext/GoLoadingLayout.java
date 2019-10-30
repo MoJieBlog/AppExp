@@ -22,7 +22,7 @@ import com.utils.SizeUtils;
  * @author: lixiaopeng
  * @Date: 2019-06-14
  */
-public class NiuLoadingLayout extends View {
+public class GoLoadingLayout extends View {
 
     private TextPaint paint;
     private Context context;
@@ -47,11 +47,11 @@ public class NiuLoadingLayout extends View {
 
     private boolean animEnd = false;
 
-    public NiuLoadingLayout(Context context) {
+    public GoLoadingLayout(Context context) {
         this(context, null);
     }
 
-    public NiuLoadingLayout(Context context, @Nullable AttributeSet attrs) {
+    public GoLoadingLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
 
