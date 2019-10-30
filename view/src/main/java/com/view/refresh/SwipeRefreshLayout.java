@@ -190,7 +190,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         headLoadingLayout.measure(
                 MeasureSpec.makeMeasureSpec(getMeasuredWidth() - getPaddingLeft() - getPaddingRight(),
                         MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(headLoadingLayout.getDesHeight(),
+                MeasureSpec.makeMeasureSpec(headLoadingLayout.getLoadingOffsetHeight(),
                         MeasureSpec.EXACTLY));
     }
 
@@ -428,7 +428,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
 
     private void forceResetHeader() {
 
-        ValueAnimator animator = ValueAnimator.ofInt(getScrollY(), -headLoadingLayout.getDesHeight());
+        ValueAnimator animator = ValueAnimator.ofInt(getScrollY(), -headLoadingLayout.getLoadingOffsetHeight());
         animator.setDuration(400);
         animator.setInterpolator(mDecelerateInterpolator);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

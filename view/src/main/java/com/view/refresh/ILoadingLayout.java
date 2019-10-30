@@ -40,6 +40,6 @@ public interface ILoadingLayout {
     /**
      * 获取loadinglayout的高度
      */
-    public int getDesHeight();
+    public int getLoadingOffsetHeight();
 
 }

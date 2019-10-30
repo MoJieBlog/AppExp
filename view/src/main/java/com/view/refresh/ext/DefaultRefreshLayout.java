@@ -73,7 +73,7 @@ public class DefaultRefreshLayout extends LoadingLayout {
     }
 
     @Override
-    public int getDesHeight() {
+    public int getLoadingOffsetHeight() {
         return animViewHeight;
     }
 }

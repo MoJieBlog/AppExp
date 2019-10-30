@@ -135,7 +135,7 @@ public class MoveOpenRefreshLayout extends LoadingLayout {
      * 获取loadinglayout的高度
      */
     @Override
-    public int getDesHeight() {
+    public int getLoadingOffsetHeight() {
         return animViewHeight;
     }
 }
