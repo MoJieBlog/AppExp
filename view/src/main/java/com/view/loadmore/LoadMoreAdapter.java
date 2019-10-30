@@ -54,11 +54,6 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
                 }
             });
         }
-
-        if (layoutManager instanceof StaggeredGridLayoutManager){
-            StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
-        }
-
     }
 
     @Override

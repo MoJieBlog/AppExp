@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
@@ -74,7 +76,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     private ValueAnimator resetHeaderAnimator;
 
     public SwipeRefreshLayout(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public SwipeRefreshLayout(Context context, AttributeSet attrs) {
@@ -86,7 +88,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         mDecelerateInterpolator = new DecelerateInterpolator(DECELERATE_INTERPOLATION_FACTOR);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SwipeRefreshLayout);
-        freshViewType = typedArray.getInteger(R.styleable.SwipeRefreshLayout_fresh_type,0);
+        freshViewType = typedArray.getInteger(R.styleable.SwipeRefreshLayout_fresh_type, 0);
         setEnabled(typedArray.getBoolean(R.styleable.SwipeRefreshLayout_enabled, true));
         typedArray.recycle();
 
@@ -100,18 +102,19 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
 
     /**
      * 配置刷新头部
+     *
      * @return
      */
     protected LoadingLayout createLoadingLayout() {
-        if (freshViewType==0){
-            if (headLoadingLayout==null){
+        if (freshViewType == 0) {
+            if (headLoadingLayout == null) {
                 headLoadingLayout = new DefaultRefreshLayout(getContext());
                 headLoadingLayout.setRefreshLayoutInstance(this);
             }
         }/* else if(freshViewType==1){
 
-        }*/else{
-            if (headLoadingLayout==null){
+        }*/ else {
+            if (headLoadingLayout == null) {
                 headLoadingLayout = new DefaultRefreshLayout(getContext());
                 headLoadingLayout.setRefreshLayoutInstance(this);
             }
@@ -166,7 +169,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
             headLoadingLayout.layout((width / 2 - headWidth / 2), -headHeight, (width / 2 + headWidth / 2), 0);
 
             headLoadingLayout.setTargetViewHeight(child.getMeasuredHeight());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -210,7 +213,9 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     @Override
     public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
         ensureTarget();
-
+        if (isRefreshing){
+            return true;
+        }
         int action = ev.getActionMasked();
 
         if (canChildScrollUp() || !canRefresh || mNestedScrollInProgress) {
@@ -654,5 +659,11 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
 
     public void setIHeaderScroll(IHeaderScroll mIHeaderScroll) {
         this.mIHeaderScroll = mIHeaderScroll;
+    }
+
+    @Override
+    public boolean canScrollVertically(int direction) {
+        return mTarget.canScrollVertically(direction);
+        // return super.canScrollVertically(direction);
     }
 }
