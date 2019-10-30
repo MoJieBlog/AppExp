@@ -3,12 +3,9 @@ package com.lzp.appexp.car.behavior;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
-import android.support.annotation.RestrictTo.Scope;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.CoordinatorLayout.Behavior;
@@ -26,11 +23,8 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
 
-import com.lzp.appexp.car.CarActivity;
 import com.utils.PhoneUtils;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +51,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     private float maximumVelocity;
     int fitToContentsOffset;
     int halfExpandedOffset;
-    boolean hideable = true;
+    boolean hideable = false;
     int state = STATE_EXPANDED;
     ViewDragHelper viewDragHelper;
     private boolean ignoreEvents;
@@ -125,6 +119,7 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         }
 
         public void onViewReleased(@NonNull View releasedChild, float xvel, float yvel) {
+            Log.e(TAG, "onViewReleased: ");
             int top;
             byte targetState;
             int currentTop;
@@ -187,7 +182,8 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
         }
 
         public int clampViewPositionVertical(@NonNull View child, int top, int dy) {
-            return MathUtils.clamp(top, HomeBottomSheetBehavior.this.getExpandedOffset(), HomeBottomSheetBehavior.this.hideable ? HomeBottomSheetBehavior.this.parentHeight : HomeBottomSheetBehavior.this.topViewHeight);
+            return MathUtils.clamp(top, HomeBottomSheetBehavior.this.getExpandedOffset(),
+                    HomeBottomSheetBehavior.this.hideable ? HomeBottomSheetBehavior.this.parentHeight : HomeBottomSheetBehavior.this.topViewHeight);
         }
 
         public int clampViewPositionHorizontal(@NonNull View child, int left, int dx) {
@@ -361,13 +357,22 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     }
 
     public void onStopNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View target, int type) {
+        Log.e(TAG, "onStopNestedScroll: ");
         if (child.getTop() == this.getExpandedOffset()) {
             this.setStateInternal(STATE_EXPANDED);
         } else if (target == this.scrollView.get() && this.nestedScrolled) {
             int top;
             byte targetState;
             if (this.lastNestedScrollDy > 0) {
-                top = this.getExpandedOffset();
+                if (child.getTop()<halfExpandedOffset){
+                    top = this.topViewHeight;
+                    targetState = STATE_EXPANDED;
+                }else{
+                    top = this.getExpandedOffset();
+                    targetState = STATE_EXPANDED;
+                }
+            }else if (this.hideable && this.shouldHide(child, this.getYVelocity())) {
+                top = this.topViewHeight;
                 targetState = STATE_EXPANDED;
             } else if (this.lastNestedScrollDy == 0) {
                 int currentTop = child.getTop();
@@ -421,6 +426,27 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
 
     public void setBottomSheetCallback(HomeBottomSheetBehavior.BottomSheetCallback callback) {
         this.callback = callback;
+    }
+
+    boolean shouldHide(View child, float yvel) {
+        /*if (this.skipCollapsed) {
+            return true;
+        } else if (child.getTop() < this.collapsedOffset) {
+            return false;
+        } else {
+            float newTop = (float)child.getTop() + yvel * 0.1F;
+            return Math.abs(newTop - (float)this.collapsedOffset) / (float)this.peekHeight > 0.5F;
+        }*/
+        return false;
+    }
+
+    private float getYVelocity() {
+        if (this.velocityTracker == null) {
+            return 0.0F;
+        } else {
+            this.velocityTracker.computeCurrentVelocity(1000, this.maximumVelocity);
+            return this.velocityTracker.getYVelocity(this.activePointerId);
+        }
     }
 
     public final int getState() {
@@ -519,7 +545,6 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     }
 
     void dispatchOnSlide(int top) {
-        Log.e(TAG, "dispatchOnSlide: " + top);
         View bottomSheet = (View) this.scrollView.get();
         if (bottomSheet != null && this.callback != null) {
             if (top > this.topViewHeight) {

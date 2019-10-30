@@ -23,10 +23,13 @@ import com.lzp.appexp.Constants;
 import com.lzp.appexp.R;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
+import com.view.refresh.SwipeRefreshLayout;
+import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
 
 public class CarActivity extends BaseActivity {
     private static final String TAG = "CarActivity";
 
+    private SwipeRefreshLayout fresh;
     private NestedScrollView contentLayout;
     private HomeBottomSheetBehavior behavior;
 
@@ -56,6 +59,19 @@ public class CarActivity extends BaseActivity {
         content5.setVisibility(View.GONE);
         content4.setVisibility(View.GONE);
         content3.setVisibility(View.GONE);
+
+        fresh.setCanRefresh(true);
+        fresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fresh.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fresh.stopRefresh();
+                    }
+                },3000);
+            }
+        });
     }
 
     private boolean isLong = true;
@@ -78,7 +94,7 @@ public class CarActivity extends BaseActivity {
                 behavior.onSizeChange(CarActivity.this);
             }
         });
-        behavior = HomeBottomSheetBehavior.from(contentLayout);
+        behavior = HomeBottomSheetBehavior.from(fresh);
         behavior.setBottomSheetCallback(new BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
@@ -93,11 +109,11 @@ public class CarActivity extends BaseActivity {
                     iv.setScaleX(Math.max((1 - rate), 0.5f));
                     iv.setScaleY(Math.max((1 - rate), 0.5f));
                 } else {//下半部分位移
-                    if (Math.abs(rate) > 0.2f && !open) {
+                    /*if (Math.abs(rate) > 0.2f && !open) {
                         open = true;
                         Intent intent = new Intent(CarActivity.this, GarageActivityNew.class);
                         transitionTo(intent);
-                    }
+                    }*/
                 }
             }
         });
@@ -130,6 +146,7 @@ public class CarActivity extends BaseActivity {
         content3 = findViewById(R.id.content3);
         content4 = findViewById(R.id.content4);
         content5 = findViewById(R.id.content5);
+        fresh = findViewById(R.id.fresh);
     }
 
     @Override
