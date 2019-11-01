@@ -54,27 +54,33 @@ public class GalleryRecyclerView extends RecyclerView {
         addItemDecoration(itemDecoration);
         helper.attachToRecyclerView(this);
         setLayoutManager(layoutManager);
+    }
 
 
-        addOnLayoutChangeListener(new OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        setEventListener();
+    }
 
-            }
-        });
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        addOnScrollListener(null);
+    }
 
+    private void setEventListener() {
         addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (listener!=null){
-                    listener.onScrollStateChanged(recyclerView,newState);
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE){
+                if (listener != null) {
+                    listener.onScrollStateChanged(recyclerView, newState);
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                         int currentItemPosition = getCurrentItemPosition();
                         listener.onPageSelected(currentItemPosition);
                     }
                 }
-
             }
 
             @Override
@@ -111,9 +117,9 @@ public class GalleryRecyclerView extends RecyclerView {
     }
 
     public void setCurrentItem(int position) {
-        if (position!=0){
-            layoutManager.scrollToPositionWithOffset(position, offset-itemDecoration.getDiverWidth());
-        }else {
+        if (position != 0) {
+            layoutManager.scrollToPositionWithOffset(position, offset - itemDecoration.getDiverWidth());
+        } else {
             //第一个左分割线宽度就是偏移量
             layoutManager.scrollToPositionWithOffset(position, offset);
         }
@@ -127,14 +133,18 @@ public class GalleryRecyclerView extends RecyclerView {
         return (lastPosition + firstPosition) / 2;
     }
 
-    public interface MONScrollListener{
+    public interface MONScrollListener {
 
-       default void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState){}
-        default void onPageSelected(int position){}
+        default void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+        }
+
+        default void onPageSelected(int position) {
+        }
     }
 
     private MONScrollListener listener;
-    public void setMOnScrollListener(MONScrollListener listener){
+
+    public void setMOnScrollListener(MONScrollListener listener) {
         this.listener = listener;
     }
 

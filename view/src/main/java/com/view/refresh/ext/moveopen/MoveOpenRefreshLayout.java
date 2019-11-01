@@ -81,9 +81,9 @@ public class MoveOpenRefreshLayout extends LoadingLayout {
         textView.setVisibility(VISIBLE);
         loadingLayout.setVisibility(GONE);
         if (moveOffset < refreshLayout.REFRESH_SIZE) {
-            textView.setText("继续下拉刷新");
+            textView.setText("下拉刷新");
         } else if (moveOffset > refreshLayout.REFRESH_SIZE && moveOffset < refreshLayout.OPEN_ACTIVITY_SIZE) {
-            textView.setText("下拉打开车库");
+            textView.setText("松手刷新\n继续下拉打开车库");
         } else if (moveOffset > refreshLayout.OPEN_ACTIVITY_SIZE) {
             textView.setText("松开打开车库");
         }
