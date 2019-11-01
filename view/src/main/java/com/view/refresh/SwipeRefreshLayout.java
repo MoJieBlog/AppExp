@@ -211,9 +211,6 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     @Override
     public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
         ensureTarget();
-        if (isRefreshing) {
-            return true;
-        }
         int action = ev.getActionMasked();
 
         if (canChildScrollUp() || !canRefresh || mNestedScrollInProgress) {
@@ -493,7 +490,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
         return canRefresh //&& !mReturningToStart
-                && !isRefreshing
+               // && !isRefreshing
                 && (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
 
@@ -511,6 +508,9 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
         // If we are in the middle of consuming, a scroll, then we want to move the spinner back up
         // before allowing the list to scroll
+        if (isRefreshing&&dy>0){
+
+        }
         if (dy > 0 && mTotalUnconsumed > 0) {
             if (dy > mTotalUnconsumed) {
                 consumed[1] = dy - (int) mTotalUnconsumed;

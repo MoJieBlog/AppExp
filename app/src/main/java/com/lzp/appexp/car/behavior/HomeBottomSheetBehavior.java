@@ -39,8 +39,29 @@ import java.util.Map;
  * @author: lixiaopeng
  * @Date: 2019-10-21
  */
-public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
-    private static final String TAG = "HomeBottomSheetBehavior";
+public class HomeBottomSheetBehavior<V extends View> extends BottomSheetBehavior<V> {
+
+
+    public HomeBottomSheetBehavior() {
+        super();
+    }
+
+    public HomeBottomSheetBehavior(Context context, AttributeSet attrs) {
+        super(context,attrs);
+    }
+
+    public void setTopViewHeight(int topViewHeight,CoordinatorLayout coordinatorLayout) {
+        coordinatorLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                int measuredHeight = coordinatorLayout.getMeasuredHeight();
+                setPeekHeight(measuredHeight-topViewHeight);
+            }
+        });
+    }
+
+
+    /*private static final String TAG = "HomeBottomSheetBehavior";
     public static final int STATE_DRAGGING = 1;
     public static final int STATE_SETTLING = 2;
     public static final int STATE_EXPANDED = 3;
@@ -429,14 +450,14 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
     }
 
     boolean shouldHide(View child, float yvel) {
-        /*if (this.skipCollapsed) {
+        *//*if (this.skipCollapsed) {
             return true;
         } else if (child.getTop() < this.collapsedOffset) {
             return false;
         } else {
             float newTop = (float)child.getTop() + yvel * 0.1F;
             return Math.abs(newTop - (float)this.collapsedOffset) / (float)this.peekHeight > 0.5F;
-        }*/
+        }*//*
         return false;
     }
 
@@ -683,5 +704,5 @@ public class HomeBottomSheetBehavior<V extends View> extends Behavior<V> {
 
         default void onSlide(@NonNull View view, float rate) {
         }
-    }
+    }*/
 }

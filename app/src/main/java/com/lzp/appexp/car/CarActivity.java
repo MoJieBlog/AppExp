@@ -5,6 +5,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior.BottomSheetCallback;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -22,7 +23,6 @@ import com.base.compat.BaseActivity;
 import com.lzp.appexp.Constants;
 import com.lzp.appexp.R;
 import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior;
-import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior.BottomSheetCallback;
 import com.view.refresh.ext.moveopen.MoveOpenAndRefreshLayout;
 import com.view.refresh.ext.moveopen.MoveOpenAndRefreshLayout.OpenRefreshListener;
 
@@ -43,8 +43,6 @@ public class CarActivity extends BaseActivity {
     private TextView content3;
     private TextView content4;
     private TextView content5;
-
-    private boolean open = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,10 +96,18 @@ public class CarActivity extends BaseActivity {
                     content4.setVisibility(View.VISIBLE);
                     content3.setVisibility(View.VISIBLE);
                 }
-                behavior.onSizeChange(CarActivity.this);
             }
         });
-        behavior = HomeBottomSheetBehavior.from(fresh);
+        behavior = (HomeBottomSheetBehavior) HomeBottomSheetBehavior.from(fresh);
+
+        rootView.post(new Runnable() {
+            @Override
+            public void run() {
+                int measuredHeight = llTop.getMeasuredHeight();
+                behavior.setTopViewHeight(measuredHeight,rootView);
+            }
+        });
+
         behavior.setBottomSheetCallback(new BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
@@ -115,12 +121,6 @@ public class CarActivity extends BaseActivity {
                     llTop.setAlpha(Math.max((1 - rate), 0.5f));
                     iv.setScaleX(Math.max((1 - rate), 0.5f));
                     iv.setScaleY(Math.max((1 - rate), 0.5f));
-                } else {//下半部分位移
-                    /*if (Math.abs(rate) > 0.2f && !open) {
-                        open = true;
-                        Intent intent = new Intent(CarActivity.this, GarageActivityNew.class);
-                        transitionTo(intent);
-                    }*/
                 }
             }
         });
@@ -132,14 +132,6 @@ public class CarActivity extends BaseActivity {
                 transitionTo(intent);
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        if (open) {
-            open = false;
-        }
-        super.onResume();
     }
 
     public void findView() {

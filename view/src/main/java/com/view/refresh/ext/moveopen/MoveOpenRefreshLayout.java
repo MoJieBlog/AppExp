@@ -78,6 +78,8 @@ public class MoveOpenRefreshLayout extends LoadingLayout {
      */
     @Override
     public void onMove(float moveOffset, boolean isRefreshing) {
+        textView.setVisibility(VISIBLE);
+        loadingLayout.setVisibility(GONE);
         if (moveOffset < refreshLayout.REFRESH_SIZE) {
             textView.setText("继续下拉刷新");
         } else if (moveOffset > refreshLayout.REFRESH_SIZE && moveOffset < refreshLayout.OPEN_ACTIVITY_SIZE) {
