@@ -121,7 +121,10 @@ public class GarageItemDecoration extends RecyclerView.ItemDecoration {
             return;
         }
         int itemCount = adapter.getItemCount();
-        int totleWidth = itemCount * indicatorWidth;
+        if (itemCount<0){
+            return;
+        }
+        int totleWidth = itemCount * indicatorWidth+indicatorGap*itemCount-1;
         float startX = (parent.getWidth() - totleWidth) / 2f;
 
         LayoutManager layoutManager = parent.getLayoutManager();
@@ -137,11 +140,10 @@ public class GarageItemDecoration extends RecyclerView.ItemDecoration {
         int left = visibleChild.getLeft();
         int width = visibleChild.getWidth();
         float progress = (left - pagerOffset) * -1 / (float) width;
-        Log.e(TAG, "onDrawOver: " + progress);
-
         //画indicator
         for (int i = 0; i < itemCount; i++) {
             isSelected = (selectedPosition == i);
+
             RectF rectF;
             if (isSelected) {
                 float start = startX + i * indicatorWidth + (indicatorWidth - Math.max(unselectedWidth, seletedWidth * (1 - Math.abs(progress)))) / 2 + i * indicatorGap;
@@ -155,6 +157,8 @@ public class GarageItemDecoration extends RecyclerView.ItemDecoration {
             } else {
                 float start = startX + i * indicatorWidth + (indicatorWidth - unselectedWidth) / 2 + i * indicatorGap;
                 rectF = new RectF(start, parent.getBottom() - indicatorHeight, start + unselectedWidth, parent.getBottom());
+            }
+            if (i==itemCount-1){
             }
             c.drawRoundRect(rectF, indicatorHeight / 2, indicatorHeight / 2, isSelected ? selectedPaint : unSelectedPaint);
         }
