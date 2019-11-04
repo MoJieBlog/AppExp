@@ -63,7 +63,19 @@ public class TestAdapter extends LoadMoreAdapter {
     protected void mOnBindViewHolder(ViewHolder viewHolder, int position, List p) {
         MyViewHolder holder = (MyViewHolder) viewHolder;
 
-        holder.tv.setText(String.valueOf(position));
+        if (position==0){
+            holder.tv.setText("水平滚动的LinerLayout");
+        }else if(position==1){
+            holder.tv.setText("K线图");
+        }else if(position==2){
+            holder.tv.setText("转场动画");
+        }else if(position==3){
+            holder.tv.setText("banner");
+        }
+
+        else{
+            holder.tv.setText(String.valueOf(position));
+        }
 
         if (position==0){
 
@@ -99,14 +111,28 @@ public class TestAdapter extends LoadMoreAdapter {
             testIv = itemView.findViewById(R.id.testIv);
             tv = itemView.findViewById(R.id.tv);
 
-            testIv.setOnClickListener(new OnClickListener() {
+            itemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, CarActivity.class);
-                    ActivityOptionsCompat options = ActivityOptionsCompat
-                            .makeSceneTransitionAnimation((Activity) context,
-                                    v, Constants.TRANSITION_HOME);
-                    context.startActivity(intent, options.toBundle());
+
+                    int adapterPosition = getAdapterPosition();
+                    if (adapterPosition==0){
+                        Intent intent = new Intent(context, HorizontalScrollableLinearLayoutActivity.class);
+                        context.startActivity(intent);
+                    }else if(adapterPosition==1){
+                        Intent intent = new Intent(context,KLineActivity.class);
+                        context.startActivity(intent);
+                    }else if(adapterPosition==3){
+                        Intent intent = new Intent(context,BannerLayoutActivity.class);
+                        context.startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(context, CarActivity.class);
+                        ActivityOptionsCompat options = ActivityOptionsCompat
+                                .makeSceneTransitionAnimation((Activity) context,
+                                        v, Constants.TRANSITION_HOME);
+                        context.startActivity(intent, options.toBundle());
+                    }
                 }
             });
         }

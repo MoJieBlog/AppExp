@@ -37,6 +37,8 @@
         <activity android:name=".car.GarageActivityNew"
             android:theme="@style/transparentTheme"
             android:screenOrientation="portrait" />
+        <activity android:name=".BannerLayoutActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
