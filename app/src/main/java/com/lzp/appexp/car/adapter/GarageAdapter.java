@@ -31,7 +31,7 @@ public class GarageAdapter extends RecyclerView.Adapter {
     private boolean isFirstInflate = true;
 
     public GarageAdapter() {
-        this(15);
+        this(10);
     }
 
     public GarageAdapter(int size) {

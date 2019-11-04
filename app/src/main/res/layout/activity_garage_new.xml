@@ -41,7 +41,6 @@
             android:layout_height="300dp" />
     </FrameLayout>
 
-
     <TextView
         android:id="@+id/tvConfirm"
         android:layout_width="200dp"

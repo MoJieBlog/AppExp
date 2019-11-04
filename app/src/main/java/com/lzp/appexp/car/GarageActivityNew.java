@@ -93,7 +93,7 @@ public class GarageActivityNew extends BaseActivity {
 
         adapter = new GarageAdapter();
 
-        selectedPosition = 2;
+        selectedPosition = 0;
         //设置选中，首次加载会隐藏掉图片，用于播放转场动画
         adapter.setSelectedPosition(selectedPosition);
         //设置当前选中

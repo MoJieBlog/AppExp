@@ -116,6 +116,10 @@ public class GalleryRecyclerView extends RecyclerView {
         this.itemDecoration.setPagerOffset(offset);
     }
 
+    public int getItemWidth(){
+        return this.itemWidth;
+    }
+
     public void setCurrentItem(int position) {
         if (position != 0) {
             layoutManager.scrollToPositionWithOffset(position, offset - itemDecoration.getDiverWidth());
