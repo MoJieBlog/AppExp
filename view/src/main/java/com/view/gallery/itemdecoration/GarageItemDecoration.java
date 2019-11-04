@@ -34,9 +34,8 @@ public class GarageItemDecoration extends RecyclerView.ItemDecoration {
     //indicator相关
     private int indicatorTopMargin;
     private int indicatorHeight;
-
     private int indicatorWidth;
-
+    /****选中*****/
     private Paint selectedPaint;
     private int seletedWidth;//选中的宽度
     private int selectedColor = 0xffe60012;
@@ -44,12 +43,11 @@ public class GarageItemDecoration extends RecyclerView.ItemDecoration {
     private Paint unSelectedPaint;
     private int unselectedWidth;//未选中的宽度
     private int unselectedColor = 0xffe60012;
-
+    //indicator间隔
     private int indicatorGap;
-
+    //其他参数
     private boolean showIndicator = true;
     private boolean isSelected = false;
-
     private int selectedPosition = 0;
 
     public GarageItemDecoration(Context context) {
@@ -61,7 +59,6 @@ public class GarageItemDecoration extends RecyclerView.ItemDecoration {
         if (showIndicator) {
             initIndicator();
         }
-
     }
 
     private void initIndicator() {
@@ -107,6 +104,8 @@ public class GarageItemDecoration extends RecyclerView.ItemDecoration {
         }
         if (showIndicator) {
             outRect.bottom = indicatorTopMargin + indicatorHeight;
+        }else{
+            outRect.bottom = 0;
         }
     }
 
