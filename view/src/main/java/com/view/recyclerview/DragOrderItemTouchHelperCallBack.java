@@ -68,8 +68,8 @@ public class DragOrderItemTouchHelperCallBack extends ItemTouchHelper.SimpleCall
     public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         super.clearView(recyclerView, viewHolder);
         viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT);
-        adapter.notifyDataSetChanged();
         if (isDrag) {
+            adapter.notifyDataSetChanged();
             isDrag = false;
             if (mFromPosition != mToPosition) {
 
@@ -86,6 +86,11 @@ public class DragOrderItemTouchHelperCallBack extends ItemTouchHelper.SimpleCall
     }
 
     public OnPositionChangeListener onPositionChangeListener;
+
+    public void setOnPositionChangeListener(OnPositionChangeListener onPositionChangeListener) {
+        this.onPositionChangeListener = onPositionChangeListener;
+    }
+
     public interface OnPositionChangeListener {
         public void onPositionChangeListener(int fromPosition,int toPosition);
     }
