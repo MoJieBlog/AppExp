@@ -4,14 +4,12 @@ import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import java.util.Collections;
-
 /**
  * @describe
  * @author: lixiaopeng
  * @Date: 2019-11-05
  */
-public class DragOrderItemTouchHelper extends ItemTouchHelper.SimpleCallback {
+public class DragOrderItemTouchHelperCallBack extends ItemTouchHelper.SimpleCallback {
 
 
     private static final String TAG = "MyCallback";
@@ -21,7 +19,7 @@ public class DragOrderItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
     private RecyclerView.Adapter adapter;
 
-    public DragOrderItemTouchHelper(int dragDirs, int swipeDirs,RecyclerView.Adapter adapter) {
+    public DragOrderItemTouchHelperCallBack(int dragDirs, int swipeDirs, RecyclerView.Adapter adapter) {
         super(dragDirs, swipeDirs);
         this.adapter = adapter;
     }

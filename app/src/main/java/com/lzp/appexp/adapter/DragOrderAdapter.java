@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lzp.appexp.R;
-import com.view.recyclerview.DragOrderItemTouchHelper;
+import com.view.recyclerview.DragOrderItemTouchHelperCallBack;
 
 /**
  * @describe
@@ -36,7 +36,7 @@ public class DragOrderAdapter extends RecyclerView.Adapter {
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        DragOrderItemTouchHelper dragOrderItemTouchHelper = new DragOrderItemTouchHelper(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, this);
+        DragOrderItemTouchHelperCallBack dragOrderItemTouchHelper = new DragOrderItemTouchHelperCallBack(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, this);
         itemTouchHelper = new ItemTouchHelper(dragOrderItemTouchHelper);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
