@@ -1,4 +1,4 @@
-package com.lzp.appexp;
+package com.lzp.appexp.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,12 @@ import android.widget.TextView;
 
 import com.imageloader.ImageLoader;
 import com.imageloader.interfaces.IMGLoadListener;
+import com.lzp.appexp.BannerLayoutActivity;
+import com.lzp.appexp.Constants;
+import com.lzp.appexp.DragOrderActivity;
+import com.lzp.appexp.HorizontalScrollableLinearLayoutActivity;
+import com.lzp.appexp.KLineActivity;
+import com.lzp.appexp.R;
 import com.lzp.appexp.car.CarActivity;
 import com.view.loadmore.LoadMoreAdapter;
 
@@ -49,18 +55,18 @@ public class TestAdapter extends LoadMoreAdapter {
     }
 
     @Override
-    protected int mGetItemCount() {
+    public int mGetItemCount() {
         return size;
     }
 
     @Override
-    protected ViewHolder mOnCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder mOnCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(context).inflate(R.layout.test_item, parent, false);
         return new MyViewHolder(inflate);
     }
 
     @Override
-    protected void mOnBindViewHolder(ViewHolder viewHolder, int position, List p) {
+    public void mOnBindViewHolder(ViewHolder viewHolder, int position, List p) {
         MyViewHolder holder = (MyViewHolder) viewHolder;
 
         if (position==0){
@@ -71,6 +77,8 @@ public class TestAdapter extends LoadMoreAdapter {
             holder.tv.setText("转场动画");
         }else if(position==3){
             holder.tv.setText("banner");
+        } else if(position==4){
+            holder.tv.setText("拖拽排序");
         }
 
         else{
@@ -120,10 +128,14 @@ public class TestAdapter extends LoadMoreAdapter {
                         Intent intent = new Intent(context, HorizontalScrollableLinearLayoutActivity.class);
                         context.startActivity(intent);
                     }else if(adapterPosition==1){
-                        Intent intent = new Intent(context,KLineActivity.class);
+                        Intent intent = new Intent(context, KLineActivity.class);
                         context.startActivity(intent);
                     }else if(adapterPosition==3){
-                        Intent intent = new Intent(context,BannerLayoutActivity.class);
+                        Intent intent = new Intent(context, BannerLayoutActivity.class);
+                        context.startActivity(intent);
+                    }
+                    else if(adapterPosition==4){
+                        Intent intent = new Intent(context, DragOrderActivity.class);
                         context.startActivity(intent);
                     }
                     else{

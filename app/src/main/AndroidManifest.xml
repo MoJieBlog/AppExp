@@ -39,6 +39,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".BannerLayoutActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".DragOrderActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

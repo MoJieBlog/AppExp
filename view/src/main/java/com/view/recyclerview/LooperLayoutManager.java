@@ -1,4 +1,4 @@
-package com.view.banner;
+package com.view.recyclerview;
 
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * @describe
+ * @describe 配合PagerSnapHelper失败，因为要无限滑动，第一个和最后一个item重新布局了，所以PagerSnapHelper的findStartView方法返回不对
  * @author: lixiaopeng
  * @Date: 2019-11-04
  */
@@ -18,10 +18,10 @@ public class LooperLayoutManager extends RecyclerView.LayoutManager {
 
     private static final String TAG = "LooperLayoutManager";
     private boolean looperEnable = true;
-    //默认横向滚动
-    private boolean canScrollHorizontally = true;
-    private boolean canScrollVertically = false;
 
+
+    public LooperLayoutManager() {
+    }
 
     @Override
     public void onAttachedToWindow(RecyclerView view) {
@@ -36,12 +36,12 @@ public class LooperLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public boolean canScrollHorizontally() {
-        return canScrollHorizontally;
+        return true;
     }
 
     @Override
     public boolean canScrollVertically() {
-        return canScrollVertically;
+        return false;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class LooperLayoutManager extends RecyclerView.LayoutManager {
                 measureChildWithMargins(scrap, 0, 0);
                 int width = getDecoratedMeasuredWidth(scrap);
                 int height = getDecoratedMeasuredHeight(scrap);
-                layoutDecorated(scrap,lastView.getRight(), 0,
+                layoutDecorated(scrap, lastView.getRight(), 0,
                         lastView.getRight() + width, height);
                 return dx;
             }
@@ -141,7 +141,7 @@ public class LooperLayoutManager extends RecyclerView.LayoutManager {
                     return 0;
                 }
                 addView(scrap, 0);
-                measureChildWithMargins(scrap,0,0);
+                measureChildWithMargins(scrap, 0, 0);
                 int width = getDecoratedMeasuredWidth(scrap);
                 int height = getDecoratedMeasuredHeight(scrap);
                 layoutDecorated(scrap, firstView.getLeft() - width, 0,
@@ -173,6 +173,36 @@ public class LooperLayoutManager extends RecyclerView.LayoutManager {
                     Log.d(TAG, "循环: 移除 一个view  childCount=" + getChildCount());
                 }
             }
+        }
+
+    }
+
+    //自定义SnapHelper需要用到
+
+    public int getFixedScrollPosition(int direction) {
+        if (getItemCount() > 0) {
+            View childAt = getChildAt(0);
+            if (childAt!=null){
+                int width = childAt.getWidth();
+                int left = childAt.getLeft();
+                if (Math.abs(left)>width/2){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            }
+        }
+        return 0;
+    }
+
+    public int calculateDistanceToPosition(int targetPos) {
+        View childAt = getChildAt(targetPos);
+        if (childAt != null) {
+            int width = childAt.getWidth();
+            int distance = width * targetPos;
+            return distance;
+        } else {
+            return 0;
         }
 
     }

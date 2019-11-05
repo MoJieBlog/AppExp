@@ -1,4 +1,4 @@
-package com.lzp.appexp.car.adapter;
+package com.lzp.appexp.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lzp.appexp.R;
 
@@ -39,20 +40,23 @@ public class BannerAdapter extends RecyclerView.Adapter {
 
         MyViewHolder holder = (MyViewHolder) viewHolder;
 
-        holder.imageView.setImageResource(img[i]);
+        holder.imageView.setImageResource(img[i%img.length]);
+        holder.tv.setText(String.valueOf(i));
     }
 
     @Override
     public int getItemCount() {
-        return img.length;
+        return Integer.MAX_VALUE;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        private ImageView imageView;
+        ImageView imageView;
+        TextView tv;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.car);
+            tv = itemView.findViewById(R.id.tv);
         }
     }
 }

@@ -196,7 +196,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
      * @return
      * @see RecyclerView.Adapter#onCreateViewHolder(ViewGroup, int)
      */
-    protected abstract ViewHolder mOnCreateViewHolder(ViewGroup parent, int viewType);
+    public abstract ViewHolder mOnCreateViewHolder(ViewGroup parent, int viewType);
 
     /**
      * @param viewHolder
@@ -204,5 +204,5 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
      * @param payloads
      * @see RecyclerView.Adapter#onBindViewHolder(ViewHolder, int, List)
      */
-    protected abstract void mOnBindViewHolder(ViewHolder viewHolder, int position, List payloads);
+    public abstract void mOnBindViewHolder(ViewHolder viewHolder, int position, List payloads);
 }
