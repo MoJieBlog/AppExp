@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
+
 /**
  * @describe
  * @author: lixiaopeng
@@ -15,13 +17,14 @@ import android.view.ViewGroup;
 public class TestView extends ViewGroup {
 
     private static final String TAG = "TestView";
+
     public TestView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public TestView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        
+
         initView();
     }
 
@@ -41,7 +44,7 @@ public class TestView extends ViewGroup {
         Log.e(TAG, "initView: ");
     }
 
-    public void setTest(){
+    public void setTest() {
         Log.e(TAG, "setTest: ");
     }
 
@@ -60,6 +63,61 @@ public class TestView extends ViewGroup {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         Log.e(TAG, "onMeasure: ");
+    }
+
+
+    public void startSearchActivity(SearchActivityConfig config) {
+
+    }
+
+
+    class SearchActivityConfig1 extends SearchActivityConfig {
+
+        @Override
+        void setUI(int level) {
+            Log.e(TAG, "setUI: " + level);
+        }
+
+        @Override
+        int getUILevel() {
+            return 1;
+        }
+    }
+
+    class SearchActivityConfig2 extends SearchActivityConfig {
+
+        @Override
+        void setUI(int level) {
+            Log.e(TAG, "setUI: " + level);
+        }
+
+        @Override
+        int getUILevel() {
+            return Integer.MAX_VALUE;
+        }
+    }
+
+
+    abstract class SearchActivityConfig implements Serializable {
+
+        private SearchActivityConfig nextConfig;
+
+        abstract void setUI(int level);
+
+        abstract int getUILevel();
+
+        public void handelUI(int level) {
+            if (level > getUILevel()) {
+                setUI(level);
+            } else {
+                nextConfig.handelUI(level);
+            }
+        }
+    }
+
+
+    class SearchActivity {
+
     }
 }
 

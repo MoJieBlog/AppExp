@@ -4,6 +4,9 @@ import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * @describe
  * @author: lixiaopeng
@@ -18,12 +21,22 @@ public class DragOrderItemTouchHelperCallBack extends ItemTouchHelper.SimpleCall
     private boolean isDrag;
 
     private RecyclerView.Adapter adapter;
+    private boolean longPressDragEnabled = false;
 
-    public DragOrderItemTouchHelperCallBack(int dragDirs, int swipeDirs, RecyclerView.Adapter adapter) {
+    private List data;
+
+
+
+    public DragOrderItemTouchHelperCallBack(int dragDirs, int swipeDirs, RecyclerView.Adapter adapter,boolean longPressDragEnabled) {
         super(dragDirs, swipeDirs);
         this.adapter = adapter;
+        this.longPressDragEnabled = longPressDragEnabled;
     }
 
+
+    public void setData(List data) {
+        this.data = data;
+    }
 
     @Override
     public boolean isItemViewSwipeEnabled() {
@@ -32,7 +45,7 @@ public class DragOrderItemTouchHelperCallBack extends ItemTouchHelper.SimpleCall
 
     @Override
     public boolean isLongPressDragEnabled() {
-        return false;
+        return longPressDragEnabled;
     }
 
     @Override
@@ -45,7 +58,23 @@ public class DragOrderItemTouchHelperCallBack extends ItemTouchHelper.SimpleCall
                 mFromPosition = fromPosition;
             }
             mToPosition = toPosition;
-            adapter.notifyItemMoved(fromPosition, toPosition);
+            if (onPositionChangeListener != null) {
+                onPositionChangeListener.onPositionChangeListener(mFromPosition,mToPosition);
+            }
+
+            if (data!=null){
+                if (fromPosition < toPosition) {
+                    for (int i = fromPosition; i < toPosition; i++) {
+                        Collections.swap(data, i, i + 1);
+                    }
+                } else {
+                    for (int i = fromPosition; i > toPosition; i--) {
+                        Collections.swap(data, i, i - 1);
+                    }
+                }
+            }
+
+            adapter.notifyItemMoved(fromPosition,toPosition);
             return true;
         }
         return false;
@@ -69,15 +98,8 @@ public class DragOrderItemTouchHelperCallBack extends ItemTouchHelper.SimpleCall
         super.clearView(recyclerView, viewHolder);
         viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT);
         if (isDrag) {
-            adapter.notifyDataSetChanged();
             isDrag = false;
-            if (mFromPosition != mToPosition) {
-
-                if (onPositionChangeListener != null) {
-                    onPositionChangeListener.onPositionChangeListener(mFromPosition,mToPosition);
-                }
-                adapter.notifyDataSetChanged();
-            }
+            adapter.notifyDataSetChanged();
             mToPosition = -1;
             mFromPosition = -1;
             isDrag = false;
@@ -85,13 +107,13 @@ public class DragOrderItemTouchHelperCallBack extends ItemTouchHelper.SimpleCall
 
     }
 
-    public OnPositionChangeListener onPositionChangeListener;
+    private OnPositionChangeListener onPositionChangeListener;
 
     public void setOnPositionChangeListener(OnPositionChangeListener onPositionChangeListener) {
         this.onPositionChangeListener = onPositionChangeListener;
     }
 
     public interface OnPositionChangeListener {
-        public void onPositionChangeListener(int fromPosition,int toPosition);
+        public void onPositionChangeListener(int fromPosition, int toPosition);
     }
 }
