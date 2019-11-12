@@ -388,6 +388,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
             resetHeaderAnimator.cancel();
         }
 
+        final int scrollY = headLoadingLayout.getScrollY();
         resetHeaderAnimator = ValueAnimator.ofInt(getScrollY(),
                 isRefreshing ? -headLoadingLayout.getLoadingOffsetHeight() : 0);
         resetHeaderAnimator.setDuration(400);
@@ -399,7 +400,10 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
                 if (!isRefreshing) {
                     headLoadingLayout.onMove(Math.abs((Integer) animation.getAnimatedValue()), isRefreshing);
                 }
-                headLoadingLayout.scrollTo(0, 0);
+                if (scrollY !=0){
+                    int y = (int) (scrollY * (1-animation.getAnimatedFraction()));
+                    headLoadingLayout.scrollTo(0, (int) y);
+                }
 
                 scrollTo(0, (Integer) animation.getAnimatedValue());
 
@@ -436,16 +440,18 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     }
 
     private void forceResetHeader() {
-
+        final int scrollY = headLoadingLayout.getScrollY();
         ValueAnimator animator = ValueAnimator.ofInt(getScrollY(), -headLoadingLayout.getLoadingOffsetHeight());
         animator.setDuration(400);
         animator.setInterpolator(mDecelerateInterpolator);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator animation) {
-
+                if (scrollY !=0){
+                    int y = (int) (scrollY * (1-animation.getAnimatedFraction()));
+                    headLoadingLayout.scrollTo(0, (int) y);
+                }
                 headLoadingLayout.onMove(Math.abs((Integer) animation.getAnimatedValue()), isRefreshing);
-
                 headLoadingLayout.scrollTo(0, 0);
                 scrollTo(0, (Integer) animation.getAnimatedValue());
 
