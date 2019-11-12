@@ -62,7 +62,7 @@ public class MoveOpenRefreshLayout extends LoadingLayout {
 
         loadingLayout = new GoLoadingLayout(getContext());
         LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, animViewHeight);
-        lp.gravity = Gravity.CENTER;
+        lp.gravity = Gravity.CENTER|Gravity.BOTTOM;
 
         addView(loadingLayout, lp);
         addView(textView, textLp);
