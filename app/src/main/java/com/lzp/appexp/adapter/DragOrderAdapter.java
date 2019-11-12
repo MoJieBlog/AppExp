@@ -5,15 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lzp.appexp.R;
 import com.view.recyclerview.DragOrderItemTouchHelperCallBack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @describe
@@ -26,19 +28,38 @@ public class DragOrderAdapter extends RecyclerView.Adapter {
 
     private ItemTouchHelper itemTouchHelper;
 
+    private List<Integer> list = new ArrayList();
+
     public DragOrderAdapter() {
+        setData();
     }
 
     public void setSize(int size) {
         this.size = size;
+        setData();
+    }
+
+    public List<Integer> getList() {
+        return list;
+    }
+
+    private void setData() {
+        list.clear();
+        for (int i = 0; i < size; i++) {
+            list.add(i);
+        }
+    }
+
+    public void setItemTouchHelper(ItemTouchHelper itemTouchHelper) {
+        this.itemTouchHelper = itemTouchHelper;
     }
 
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        DragOrderItemTouchHelperCallBack dragOrderItemTouchHelper = new DragOrderItemTouchHelperCallBack(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, this);
-        itemTouchHelper = new ItemTouchHelper(dragOrderItemTouchHelper);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+        if (itemTouchHelper!=null){
+            itemTouchHelper.attachToRecyclerView(recyclerView);
+        }
     }
 
     @NonNull
@@ -54,18 +75,11 @@ public class DragOrderAdapter extends RecyclerView.Adapter {
         MyViewHolder holder = (MyViewHolder) viewHolder;
         holder.imageView.setVisibility(View.GONE);
         holder.tv.setText(String.valueOf(i));
-        holder.itemView.setOnTouchListener(new OnTouchListener() {
+        holder.itemView.setOnClickListener(new OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (itemTouchHelper != null) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            itemTouchHelper.startDrag(holder);
-                            break;
-                    }
-                    return true;
-                }
-                return false;
+            public void onClick(View v) {
+                size++;
+                notifyDataSetChanged();
             }
         });
 

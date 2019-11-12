@@ -34,7 +34,7 @@ public class BannerLayoutActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        hBannerLayoutManager = new BannerLayoutManager(this,horizontalRcv,4);
+        hBannerLayoutManager = new BannerLayoutManager(this,horizontalRcv);
         horizontalRcv.setAdapter(new BannerAdapter());
         horizontalRcv.setLayoutManager(hBannerLayoutManager);
     }

@@ -39,7 +39,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".BannerLayoutActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".DragOrderActivity"
+        <activity android:name=".tabmanager.TabManagerActivity"
             android:screenOrientation="portrait"/>
     </application>
 

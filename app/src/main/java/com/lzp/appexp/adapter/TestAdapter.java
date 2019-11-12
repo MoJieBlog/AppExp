@@ -19,7 +19,7 @@ import com.imageloader.ImageLoader;
 import com.imageloader.interfaces.IMGLoadListener;
 import com.lzp.appexp.BannerLayoutActivity;
 import com.lzp.appexp.Constants;
-import com.lzp.appexp.DragOrderActivity;
+import com.lzp.appexp.tabmanager.TabManagerActivity;
 import com.lzp.appexp.HorizontalScrollableLinearLayoutActivity;
 import com.lzp.appexp.KLineActivity;
 import com.lzp.appexp.R;
@@ -60,8 +60,18 @@ public class TestAdapter extends LoadMoreAdapter {
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (position<size){
+            return position;
+        }
+        return super.getItemViewType(position);
+    }
+
+    @Override
     public ViewHolder mOnCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(context).inflate(R.layout.test_item, parent, false);
+        MyViewHolder myViewHolder = new MyViewHolder(inflate);
+        myViewHolder.tv.setText(String.valueOf(viewType));
         return new MyViewHolder(inflate);
     }
 
@@ -135,7 +145,7 @@ public class TestAdapter extends LoadMoreAdapter {
                         context.startActivity(intent);
                     }
                     else if(adapterPosition==4){
-                        Intent intent = new Intent(context, DragOrderActivity.class);
+                        Intent intent = new Intent(context, TabManagerActivity.class);
                         context.startActivity(intent);
                     }
                     else{
