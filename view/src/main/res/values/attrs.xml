@@ -17,4 +17,5 @@
             <enum name="left" value="3" />
         </attr>
     </declare-styleable>
+
 </resources>

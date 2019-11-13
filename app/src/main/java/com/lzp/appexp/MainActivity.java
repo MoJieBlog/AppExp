@@ -5,12 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
-import android.support.v7.widget.RecyclerView.OnScrollListener;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,6 +19,7 @@ import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
 import com.view.loadmore.LoadMoreRecyclerView;
 import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
+import com.view.RoundRelativeLayout;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
 
@@ -60,7 +56,6 @@ public class MainActivity extends BaseActivity {
 
         setContentView(R.layout.activity_main);
 
-
         rcv = findViewById(R.id.rcv);
         actionBar = findViewById(R.id.actionBar);
         statusBarView = findViewById(R.id.statusBarView);
@@ -90,6 +85,8 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClickSubTitle(View v) {
                 super.onClickSubTitle(v);
+
+
             }
 
             @Override
@@ -105,8 +102,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClickRightText(View v) {
                 super.onClickRightText(v);
-                Intent intent = new Intent(MainActivity.this, HorizontalScrollableLinearLayoutActivity.class);
-                startActivity(intent);
+                //((MessageCardView)findViewById(R.id.messageCardView)).show();
+               /* Intent intent = new Intent(MainActivity.this, HorizontalScrollableLinearLayoutActivity.class);
+                startActivity(intent);*/
             }
 
             @Override
