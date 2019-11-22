@@ -22,7 +22,7 @@ public class GalleryRecyclerView extends RecyclerView {
     private static final String TAG = "GalleryRecyclerView";
 
     //图片最小的缩放倍数
-    private final float MIN_SCALE = 0.85f;
+    private final float MIN_SCALE = 0.65f;
 
     private LinearLayoutManager layoutManager;
     private LinearSnapHelper helper;
