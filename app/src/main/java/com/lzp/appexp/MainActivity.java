@@ -20,6 +20,7 @@ import com.utils.permission.PermissionUtils;
 import com.view.loadmore.LoadMoreRecyclerView;
 import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 import com.view.RoundRelativeLayout;
+import com.view.qmlayout.QMUIFrameLayout;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
 
@@ -35,6 +36,7 @@ public class MainActivity extends BaseActivity {
 
     ActionBarView actionBar;
     StatusBarView statusBarView;
+    QMUIFrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +61,10 @@ public class MainActivity extends BaseActivity {
         rcv = findViewById(R.id.rcv);
         actionBar = findViewById(R.id.actionBar);
         statusBarView = findViewById(R.id.statusBarView);
+        frameLayout = findViewById(R.id.qmFram);
 
-
+        frameLayout.setShadowColor(0xffe60012);
+        frameLayout.setElevation(30f);
         statusBarView.setBgColorRes(R.color.color_status_bar);
         actionBar.setActionBarBgRes(R.color.color_actionbar_bg);
 
