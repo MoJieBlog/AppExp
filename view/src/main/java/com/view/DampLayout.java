@@ -29,10 +29,10 @@ public class DampLayout extends FrameLayout {
         return super.onTouchEvent(event);
     }
 
-    private View getScrollbleChild(){
+   /* private View getScrollbleChild(){
         int childCount = getChildCount();
         if (childCount==0){
             return null;
         }
-    }
+    }*/
 }
