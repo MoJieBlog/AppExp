@@ -37,7 +37,7 @@ import com.view.gallery.GalleryRecyclerView.MONScrollListener;
 public class GarageActivityNew extends BaseActivity {
 
     //为了看清楚动画过程设置为1500毫秒，经过试验发现300毫秒体验最好
-    private int playTime = 1500;
+    private int playTime = 200;
     private ImageView car;
     private GalleryRecyclerView rcv;
     ActionBarView actionBar;
@@ -72,6 +72,7 @@ public class GarageActivityNew extends BaseActivity {
 
     @Override
     public void initView() {
+
         statusBarView.setBgColorRes(R.color.color_status_bar);
         actionBar.setActionBarBgRes(R.color.color_actionbar_bg);
 

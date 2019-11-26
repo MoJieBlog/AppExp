@@ -680,7 +680,29 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
 
     @Override
     public boolean canScrollVertically(int direction) {
+        View scrollingChild = findScrollingChild(mTarget);
+        if (scrollingChild != null) {
+            return scrollingChild.canScrollVertically(direction);
+        }
         return mTarget.canScrollVertically(direction);
-        // return super.canScrollVertically(direction);
+    }
+
+
+    @Nullable
+    private View findScrollingChild(View view) {
+        if (ViewCompat.isNestedScrollingEnabled(view)) {
+            return view;
+        }
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+            for (int i = 0, count = group.getChildCount(); i < count; i++) {
+                View scrollingChild = findScrollingChild(group.getChildAt(i));
+                if (scrollingChild != null) {
+                    return scrollingChild;
+                }
+            }
+        }
+
+        return null;
     }
 }

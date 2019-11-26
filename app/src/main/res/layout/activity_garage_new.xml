@@ -21,8 +21,9 @@
     <FrameLayout
         android:id="@+id/carView"
         android:layout_width="match_parent"
-        android:layout_marginTop="100dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
         <ImageView
             android:id="@+id/car"
             android:layout_width="200dp"
@@ -35,17 +36,20 @@
             android:src="@mipmap/ngt_15"
             android:transitionName="@string/transition_home" />
 
+
         <com.view.gallery.GalleryRecyclerView
             android:id="@+id/rcv"
             android:layout_width="match_parent"
             android:layout_height="300dp" />
+
+
     </FrameLayout>
 
     <TextView
         android:id="@+id/tvConfirm"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/color_a1abbc"/>
+        android:layout_marginTop="30dp"
+        android:background="@color/color_a1abbc" />
 </LinearLayout>

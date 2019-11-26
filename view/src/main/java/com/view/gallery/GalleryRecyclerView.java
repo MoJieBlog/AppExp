@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.utils.PhoneUtils;
+import com.view.DampRecyclerView;
 import com.view.gallery.itemdecoration.GarageItemDecoration;
 
 /**
@@ -17,7 +18,7 @@ import com.view.gallery.itemdecoration.GarageItemDecoration;
  * @author: lixiaopeng
  * @Date: 2019-10-25
  */
-public class GalleryRecyclerView extends RecyclerView {
+public class GalleryRecyclerView extends DampRecyclerView {
 
     private static final String TAG = "GalleryRecyclerView";
 
@@ -32,7 +33,7 @@ public class GalleryRecyclerView extends RecyclerView {
     //默认宽度为屏幕宽度*0.8
     private int itemWidth;
     //画廊效果距离屏幕两侧偏移量
-    private int offset;
+    private int itemOffset;
 
     public GalleryRecyclerView(@NonNull Context context) {
         this(context, null);
@@ -40,16 +41,16 @@ public class GalleryRecyclerView extends RecyclerView {
 
     public GalleryRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-
+        setOverScrollMode(OVER_SCROLL_NEVER);
         screentWidth = PhoneUtils.getWinWide(context);
         //画廊效果默认偏移量
         itemWidth = (int) (screentWidth * 0.8);
-        offset = (screentWidth - itemWidth) / 2;
+        itemOffset = (screentWidth - itemWidth) / 2;
 
         helper = new LinearSnapHelper();
         layoutManager = new LinearLayoutManager(context, HORIZONTAL, false);
         itemDecoration = new GarageItemDecoration(context);
-        itemDecoration.setPagerOffset(offset);
+        itemDecoration.setPagerOffset(itemOffset);
 
         addItemDecoration(itemDecoration);
         helper.attachToRecyclerView(this);
@@ -91,16 +92,16 @@ public class GalleryRecyclerView extends RecyclerView {
                     int left = childAt.getLeft();
                     /////////摘抄自网上
                     float rate = 0;//是一个缩放比例
-                    if (left <= offset) {//如果view距离左边的宽度 小于等于 左侧剩余空间(offset) （意味着这个view开始往左边滑动了，并且有遮挡）
-                        if (left + childAt.getWidth() >= offset) {//如果view距离左边的距离 小于等于滑进去的距离 （其实就是说滑动到一半的时候）
-                            rate = (offset - left) * 1f / childAt.getWidth();//（这个比例的计算结果一般都会大于1，这样一来，根据下面的 1- rate * 0.1 得出，这个比例最多不会到达1，也就是 1- 0.1， 也就是 0.9， 所以这个view的宽度最大不会小于他本身的90%）
+                    if (left <= itemOffset) {//如果view距离左边的宽度 小于等于 左侧剩余空间(itemOffset) （意味着这个view开始往左边滑动了，并且有遮挡）
+                        if (left + childAt.getWidth() >= itemOffset) {//如果view距离左边的距离 小于等于滑进去的距离 （其实就是说滑动到一半的时候）
+                            rate = (itemOffset - left) * 1f / childAt.getWidth();//（这个比例的计算结果一般都会大于1，这样一来，根据下面的 1- rate * 0.1 得出，这个比例最多不会到达1，也就是 1- 0.1， 也就是 0.9， 所以这个view的宽度最大不会小于他本身的90%）
                         } else {
                             rate = 1;
                         }
                         childAt.setScaleY(1 - rate * (1 - MIN_SCALE));
                     } else {
-                        if (left <= recyclerView.getWidth() - offset) {//这个过程大概是指这个view 从最后侧刚刚出现的时候开始滑动过offset的距离
-                            rate = (recyclerView.getWidth() - offset - left) * 1f / childAt.getWidth();
+                        if (left <= recyclerView.getWidth() - itemOffset) {//这个过程大概是指这个view 从最后侧刚刚出现的时候开始滑动过offset的距离
+                            rate = (recyclerView.getWidth() - itemOffset - left) * 1f / childAt.getWidth();
                         }
                         childAt.setScaleY(MIN_SCALE + rate * (1 - MIN_SCALE));
                     }
@@ -112,20 +113,20 @@ public class GalleryRecyclerView extends RecyclerView {
 
     public void setItemWidth(int itemWidth) {
         this.itemWidth = itemWidth;
-        this.offset = (PhoneUtils.getWinWide(getContext()) - itemWidth) / 2;
-        this.itemDecoration.setPagerOffset(offset);
+        this.itemOffset = (PhoneUtils.getWinWide(getContext()) - itemWidth) / 2;
+        this.itemDecoration.setPagerOffset(itemOffset);
     }
 
-    public int getItemWidth(){
+    public int getItemWidth() {
         return this.itemWidth;
     }
 
     public void setCurrentItem(int position) {
         if (position != 0) {
-            layoutManager.scrollToPositionWithOffset(position, offset - itemDecoration.getDiverWidth());
+            layoutManager.scrollToPositionWithOffset(position, itemOffset - itemDecoration.getDiverWidth());
         } else {
             //第一个左分割线宽度就是偏移量
-            layoutManager.scrollToPositionWithOffset(position, offset);
+            layoutManager.scrollToPositionWithOffset(position, itemOffset);
         }
     }
 
@@ -151,5 +152,4 @@ public class GalleryRecyclerView extends RecyclerView {
     public void setMOnScrollListener(MONScrollListener listener) {
         this.listener = listener;
     }
-
 }
