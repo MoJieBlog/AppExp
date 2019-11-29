@@ -20,7 +20,7 @@
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
         <activity android:name=".HorizontalScrollableLinearLayoutActivity"></activity>
         <activity
-            android:name=".car.CarActivity"
+            android:name=".transition.CarActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
@@ -34,7 +34,7 @@
         <activity
             android:name=".KLineActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".car.GarageActivityNew"
+        <activity android:name=".transition.GarageActivityNew"
             android:theme="@style/transparentTheme"
             android:screenOrientation="portrait" />
         <activity android:name=".BannerLayoutActivity"

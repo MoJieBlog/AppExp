@@ -23,7 +23,7 @@ import com.lzp.appexp.tabmanager.TabManagerActivity;
 import com.lzp.appexp.HorizontalScrollableLinearLayoutActivity;
 import com.lzp.appexp.KLineActivity;
 import com.lzp.appexp.R;
-import com.lzp.appexp.car.CarActivity;
+import com.lzp.appexp.transition.CarActivity;
 import com.view.loadmore.LoadMoreAdapter;
 
 import java.util.List;

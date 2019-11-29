@@ -1,4 +1,4 @@
-package com.lzp.appexp.car;
+package com.lzp.appexp.transition;
 
 import android.content.Intent;
 import android.os.Build.VERSION;
@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.base.compat.BaseActivity;
 import com.lzp.appexp.Constants;
 import com.lzp.appexp.R;
-import com.lzp.appexp.car.behavior.HomeBottomSheetBehavior;
+import com.lzp.appexp.transition.behavior.HomeBottomSheetBehavior;
 import com.view.refresh.ext.moveopen.MoveOpenAndRefreshLayout;
 import com.view.refresh.ext.moveopen.MoveOpenAndRefreshLayout.OpenRefreshListener;
 

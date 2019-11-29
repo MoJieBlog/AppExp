@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
-    tools:context=".car.CarActivity">
+    tools:context=".transition.CarActivity">
 
     <LinearLayout
         android:id="@+id/llTop"
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         app:fresh_type="1"
         android:layout_height="match_parent"
-        app:layout_behavior=".car.behavior.HomeBottomSheetBehavior">
+        app:layout_behavior=".transition.behavior.HomeBottomSheetBehavior">
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/contentLayout"

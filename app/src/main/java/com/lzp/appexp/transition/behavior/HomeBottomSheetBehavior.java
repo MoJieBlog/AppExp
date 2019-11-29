@@ -1,33 +1,10 @@
-package com.lzp.appexp.car.behavior;
+package com.lzp.appexp.transition.behavior;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Build.VERSION;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.CoordinatorLayout.Behavior;
-import android.support.v4.math.MathUtils;
-import android.support.v4.view.AbsSavedState;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.ViewDragHelper;
-import android.support.v4.widget.ViewDragHelper.Callback;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.VelocityTracker;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewParent;
-
-import com.utils.PhoneUtils;
-
-import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * copy from {@link BottomSheetBehavior}

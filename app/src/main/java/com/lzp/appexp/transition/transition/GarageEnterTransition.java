@@ -1,4 +1,4 @@
-package com.lzp.appexp.car.transition;
+package com.lzp.appexp.transition.transition;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -7,6 +7,7 @@ import android.os.Build.VERSION_CODES;
 import android.support.annotation.RequiresApi;
 import android.transition.Transition;
 import android.transition.TransitionValues;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
@@ -15,22 +16,34 @@ import android.widget.ImageView;
 import com.lzp.appexp.R;
 
 /**
- * @describe
+ * @describe 车库进入的动画
  * @author: lixiaopeng
- * @Date: 2019-10-23
+ * @Date: 2019-10-18
  */
 @RequiresApi(api = VERSION_CODES.KITKAT)
-public class GarageReturnTransition extends Transition {
+public class GarageEnterTransition extends Transition {
 
+    private static final String TAG = "GarageEnterTransition";
+
+    /**
+     * 收集动画开始的信息
+     *
+     * @param transitionValues
+     */
     @Override
     public void captureStartValues(TransitionValues transitionValues) {
-
+        Log.e(TAG, "captureStartValues: ");
         View view = transitionValues.view;
         if (view instanceof ImageView) {//指定初始时的动画状态
-            ((ImageView) view).setImageResource(R.mipmap.ngt_15);
+            ((ImageView) view).setImageResource(R.mipmap.ngt_1);
         }
     }
 
+    /**
+     * 收集动画结束的信息
+     *
+     * @param transitionValues
+     */
     @Override
     public void captureEndValues(TransitionValues transitionValues) {
         View view = transitionValues.view;
@@ -41,11 +54,12 @@ public class GarageReturnTransition extends Transition {
 
     @Override
     public Animator createAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
-        if (startValues != null) {
-            View view = startValues.view;
+        Log.e(TAG, "createAnimator: ");
+        if (endValues != null) {
+            View view = endValues.view;
             if (view != null && view instanceof ImageView) {
 
-                ValueAnimator valueAnimator = ValueAnimator.ofInt(15, 0);
+                ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 15);
                 valueAnimator.setInterpolator(new LinearInterpolator());
                 valueAnimator.addUpdateListener(new AnimatorUpdateListener() {
                     @Override
@@ -86,7 +100,9 @@ public class GarageReturnTransition extends Transition {
                 });
                 return valueAnimator;
             }
+
         }
+
         return super.createAnimator(sceneRoot, startValues, endValues);
     }
 }

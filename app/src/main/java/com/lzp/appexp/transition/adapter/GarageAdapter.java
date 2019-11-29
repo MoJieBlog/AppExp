@@ -1,4 +1,4 @@
-package com.lzp.appexp.car.adapter;
+package com.lzp.appexp.transition.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
 import com.lzp.appexp.R;
-import com.lzp.appexp.car.view.CarCardView;
+import com.lzp.appexp.transition.view.CarCardView;
 
 /**
  * @describe

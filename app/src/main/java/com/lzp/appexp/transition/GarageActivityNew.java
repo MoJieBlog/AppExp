@@ -1,4 +1,4 @@
-package com.lzp.appexp.car;
+package com.lzp.appexp.transition;
 
 import android.graphics.Color;
 import android.os.Build.VERSION;
@@ -20,11 +20,11 @@ import com.base.compat.ActionBarView.ActionBarClickAdapter;
 import com.base.compat.BaseActivity;
 import com.base.compat.StatusBarView;
 import com.lzp.appexp.R;
-import com.lzp.appexp.car.adapter.GarageAdapter;
-import com.lzp.appexp.car.transition.GarageEnterTransition;
-import com.lzp.appexp.car.transition.GarageReturnTransition;
-import com.lzp.appexp.car.transition.OtherTransition;
-import com.lzp.appexp.car.transition.PositionTransition;
+import com.lzp.appexp.transition.adapter.GarageAdapter;
+import com.lzp.appexp.transition.transition.GarageEnterTransition;
+import com.lzp.appexp.transition.transition.GarageReturnTransition;
+import com.lzp.appexp.transition.transition.OtherTransition;
+import com.lzp.appexp.transition.transition.PositionTransition;
 import com.view.gallery.GalleryRecyclerView;
 import com.view.gallery.GalleryRecyclerView.MONScrollListener;
 import com.view.gallery.IndicatorView;

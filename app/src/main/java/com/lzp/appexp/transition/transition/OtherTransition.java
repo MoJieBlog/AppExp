@@ -1,4 +1,4 @@
-package com.lzp.appexp.car.transition;
+package com.lzp.appexp.transition.transition;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
