@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.base.compat.ActionBarView;
 import com.base.compat.ActionBarView.ActionBarClickAdapter;
@@ -28,6 +27,7 @@ import com.lzp.appexp.car.transition.OtherTransition;
 import com.lzp.appexp.car.transition.PositionTransition;
 import com.view.gallery.GalleryRecyclerView;
 import com.view.gallery.GalleryRecyclerView.MONScrollListener;
+import com.view.gallery.IndicatorView;
 
 /**
  * @describe
@@ -37,14 +37,14 @@ import com.view.gallery.GalleryRecyclerView.MONScrollListener;
 public class GarageActivityNew extends BaseActivity {
 
     //为了看清楚动画过程设置为1500毫秒，经过试验发现300毫秒体验最好
-    private int playTime = 200;
+    private int playTime = 300;
     private ImageView car;
     private GalleryRecyclerView rcv;
     ActionBarView actionBar;
     StatusBarView statusBarView;
-    private TextView tvConfirm;
     private LinearLayout rootView;
     private FrameLayout carView;
+    private IndicatorView indicatorView;
 
     private GarageAdapter adapter;
     private int selectedPosition = 0;
@@ -65,7 +65,7 @@ public class GarageActivityNew extends BaseActivity {
         rcv = findViewById(R.id.rcv);
         actionBar = findViewById(R.id.actionBar);
         statusBarView = findViewById(R.id.statusBarView);
-        tvConfirm = findViewById(R.id.tvConfirm);
+        indicatorView = findViewById(R.id.indicatorView);
         rootView = findViewById(R.id.rootView);
         carView = findViewById(R.id.carView);
     }
@@ -92,7 +92,7 @@ public class GarageActivityNew extends BaseActivity {
             }
         });
 
-        adapter = new GarageAdapter();
+        adapter = new GarageAdapter(rcv.getItemWidth());
 
         selectedPosition = 0;
         //设置选中，首次加载会隐藏掉图片，用于播放转场动画
@@ -115,6 +115,10 @@ public class GarageActivityNew extends BaseActivity {
                 selectedPosition = position;
             }
         });
+
+        indicatorView.attachRecyclerView(rcv);
+        indicatorView.setItemCount(adapter.getItemCount());
+        indicatorView.setPageOffset(rcv.getOffset());
     }
 
     @Override
@@ -129,7 +133,7 @@ public class GarageActivityNew extends BaseActivity {
     private void setTransition() {
         if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
 
-            OtherTransition otherTransition = new OtherTransition(this, rootView, tvConfirm, carView, actionBar,statusBarView);
+            OtherTransition otherTransition = new OtherTransition(this, rootView, indicatorView, carView, actionBar,statusBarView);
             otherTransition.setDuration(playTime);
             getWindow().setEnterTransition(otherTransition);
 

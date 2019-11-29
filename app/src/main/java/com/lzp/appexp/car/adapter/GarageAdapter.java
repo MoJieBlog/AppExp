@@ -11,7 +11,6 @@ import android.view.ViewGroup.LayoutParams;
 
 import com.lzp.appexp.R;
 import com.lzp.appexp.car.view.CarCardView;
-import com.utils.PhoneUtils;
 
 /**
  * @describe
@@ -21,22 +20,17 @@ import com.utils.PhoneUtils;
 public class GarageAdapter extends RecyclerView.Adapter {
 
     private final String HIND_CAR_IMG = "hind_car_img";
-    private int size = 0;
+    private int size = 10;
 
-    private int delayTime = 0;
     private int[] colors = {0xff12abab, 0xffab12ab, 0xffabab12};
     private int selectedPosition = 0;
 
     //首次加载因为要播放转场动画，所以不显示图片
     private boolean isFirstInflate = true;
 
-    public GarageAdapter() {
-        this(10);
-    }
-
-    public GarageAdapter(int size) {
-        this.size = size;
-        this.delayTime = 500;
+    private int itemWidth;
+    public GarageAdapter(int itemWidth) {
+        this.itemWidth = itemWidth;
     }
 
     public void setSelectedPosition(int selectedPosition) {
@@ -84,13 +78,6 @@ public class GarageAdapter extends RecyclerView.Adapter {
             } else {
                 carCardView.setRootBgColor(colors[2]);
             }
-
-            if (isFirstInflate && position == selectedPosition) {
-                isFirstInflate = false;
-                carCardView.setCarImgVisible(View.INVISIBLE);
-            } else {
-                carCardView.setCarImgVisible(View.VISIBLE);
-            }
         }
     }
 
@@ -106,7 +93,7 @@ public class GarageAdapter extends RecyclerView.Adapter {
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             LayoutParams layoutParams = itemView.getLayoutParams();
-            layoutParams.width = (int) (PhoneUtils.getWinWide(itemView.getContext()) * 0.8);
+            layoutParams.width = itemWidth;
         }
     }
 }

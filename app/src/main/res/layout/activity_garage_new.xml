@@ -45,11 +45,9 @@
 
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/tvConfirm"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:background="@color/color_a1abbc" />
+    <com.view.gallery.IndicatorView
+        android:id="@+id/indicatorView"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="15dp"/>
 </LinearLayout>
