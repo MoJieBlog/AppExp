@@ -27,7 +27,6 @@ public class KLineActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_k_line);
-        getData();
         initView();
 
     }
@@ -38,7 +37,7 @@ public class KLineActivity extends BaseActivity {
         kLinView.refreshPoint(point);
     }
 
-    private void getData() {
+    public void getData() {
         for (int i = 0; i < 1000; i++) {
             if (i==200){
                 Point point = new Point(System.currentTimeMillis(), 3.3f, true);

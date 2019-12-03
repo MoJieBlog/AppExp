@@ -122,8 +122,6 @@ public class MainActivity extends BaseActivity {
 
         mAdapter = new TestAdapter(this);
 
-        getData();
-
         rcv.setAdapter(mAdapter);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -144,7 +142,7 @@ public class MainActivity extends BaseActivity {
 
     private int freshType = 0;
 
-    private void getData() {
+    public void getData() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

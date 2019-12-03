@@ -17,14 +17,17 @@ public interface IBase {
     default void writeArgument(@NonNull Bundle bundle) {
     }
 
+    /***fragment用这个****/
+    default void findView(@NonNull View view) {
+    }
+
     default void findView() {
     }
 
     default void initView() {
     }
 
-    /***fragment用这个****/
-    default void findView(@NonNull View view) {
+    default void getData() {
     }
 
     default void setListener() {

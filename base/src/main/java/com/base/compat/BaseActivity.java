@@ -31,6 +31,7 @@ public class BaseActivity extends AppCompatActivity implements IBase {
         findView();
         initView();
         setListener();
+        getData();
     }
 
     @Override
@@ -39,6 +40,7 @@ public class BaseActivity extends AppCompatActivity implements IBase {
         findView();
         initView();
         setListener();
+        getData();
     }
 
     @Override
@@ -47,6 +49,7 @@ public class BaseActivity extends AppCompatActivity implements IBase {
         findView(view);
         initView();
         setListener();
+        getData();
     }
 
     @Override

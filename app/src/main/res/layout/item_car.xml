@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_gravity="center"
-    android:background="#f6f6f6">
+    android:background="#00f6f6f6">
 
     <ImageView
         android:id="@+id/car"
@@ -20,9 +20,9 @@
         android:id="@+id/tv"
         android:text="1"
         android:textColor="#000"
+        android:layout_margin="5dp"
         android:gravity="center"
         android:background="@color/color_a1abbc"
-        android:layout_margin="5dp"
         android:layout_centerInParent="true"
         android:textSize="30sp"/>
 
