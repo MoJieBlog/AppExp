@@ -60,48 +60,14 @@ public class RoundRelativeLayout extends RelativeLayout {
     @SuppressLint("MissingSuperCall")
     @Override
     public void draw(Canvas canvas) {
-        if (Build.VERSION.SDK_INT >= 28) {
-            draw28(canvas);
-        } else {
-            draw27(canvas);
-        }
+        canvas.clipPath(genPath());
+        super.draw(canvas);
     }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
-        if (Build.VERSION.SDK_INT >= 28) {
-            dispatchDraw28(canvas);
-        } else {
-            dispatchDraw27(canvas);
-        }
-    }
-
-    private void draw27(Canvas canvas) {
-        canvas.saveLayer(mRectF, null, Canvas.ALL_SAVE_FLAG);
-        super.draw(canvas);
-        canvas.drawPath(genPath(), mPaint);
-        canvas.restore();
-    }
-
-    private void draw28(Canvas canvas) {
-        canvas.save();
-        canvas.clipPath(genPath());
-        super.draw(canvas);
-        canvas.restore();
-    }
-
-    private void dispatchDraw27(Canvas canvas) {
-        canvas.saveLayer(mRectF, null, Canvas.ALL_SAVE_FLAG);
-        super.dispatchDraw(canvas);
-        canvas.drawPath(genPath(), mPaint);
-        canvas.restore();
-    }
-
-    private void dispatchDraw28(Canvas canvas) {
-        canvas.save();
         canvas.clipPath(genPath());
         super.dispatchDraw(canvas);
-        canvas.restore();
     }
 
     private Path genPath() {

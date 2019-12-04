@@ -123,7 +123,7 @@ public class TabManagerActivity extends BaseActivity {
                     int[] fromXY = getFromXY(adapterPosition);
                     int[] toXy = computeToXY(holder, adapter.getMyTabList().size() + 3, true);
                     adapter.notifyItemMoved(adapterPosition, adapter.getMyTabList().size() + 2);
-                    showAnimation(fromXY, toXy,adapter.getMyTabList().size() + 2);
+                    showAnimation(fromXY, toXy);
                 } else if (adapter.getOtherTabPosition(adapterPosition) >= 0 && adapter.getOtherTabPosition(adapterPosition) < adapter.getOtherTabList().size()) {
                     String s = adapter.getOtherTabList().get(adapter.getOtherTabPosition(adapterPosition));
                     adapter.getOtherTabList().remove(s);
@@ -132,7 +132,7 @@ public class TabManagerActivity extends BaseActivity {
                     int[] fromXY = getFromXY(adapterPosition);
                     int[] toXY = computeToXY(holder, adapter.getMyTabList().size(), false);
                     adapter.notifyItemMoved(adapterPosition, adapter.getMyTabList().size());
-                    showAnimation(fromXY, toXY,adapter.getMyTabList().size());
+                    showAnimation(fromXY, toXY);
                 }
             }
         });
@@ -147,7 +147,7 @@ public class TabManagerActivity extends BaseActivity {
     /**
      * 展示平移动画
      */
-    private void showAnimation(int[] fromXY, int toXY[],int toPosition) {
+    private void showAnimation(int[] fromXY, int toXY[]) {
         if (isAnimation && valueAnimator.isRunning()) {
             valueAnimator.cancel();
         }

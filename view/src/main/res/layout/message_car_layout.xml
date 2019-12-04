@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rect_gradient_ffa240_ff8c49"
+    android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
     tools:parentTag="android.widget.RelativeLayout"
     android:orientation="vertical">
 

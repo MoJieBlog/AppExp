@@ -19,6 +19,7 @@ import com.imageloader.ImageLoader;
 import com.imageloader.interfaces.IMGLoadListener;
 import com.lzp.appexp.BannerLayoutActivity;
 import com.lzp.appexp.Constants;
+import com.lzp.appexp.MessageActivity;
 import com.lzp.appexp.tabmanager.TabManagerActivity;
 import com.lzp.appexp.HorizontalScrollableLinearLayoutActivity;
 import com.lzp.appexp.KLineActivity;
@@ -89,6 +90,8 @@ public class TestAdapter extends LoadMoreAdapter {
             holder.tv.setText("banner");
         } else if(position==4){
             holder.tv.setText("拖拽排序");
+        }else if(position==5){
+            holder.tv.setText("消息卡片");
         }
 
         else{
@@ -146,6 +149,10 @@ public class TestAdapter extends LoadMoreAdapter {
                     }
                     else if(adapterPosition==4){
                         Intent intent = new Intent(context, TabManagerActivity.class);
+                        context.startActivity(intent);
+                    }
+                    else if(adapterPosition==5){
+                        Intent intent = new Intent(context, MessageActivity.class);
                         context.startActivity(intent);
                     }
                     else{

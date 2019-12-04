@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <com.base.compat.StatusBarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.lzp.appexp.view.MessageCardView
+        android:id="@+id/msgCard"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:visibility="invisible"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <Button
+        android:id="@+id/btnShow"
+        android:layout_width="match_parent"
+        android:text="显示卡片"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnDismiss"
+        android:layout_width="match_parent"
+        android:text="隐藏卡片"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
