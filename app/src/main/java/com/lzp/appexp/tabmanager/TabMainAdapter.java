@@ -3,6 +3,7 @@ package com.lzp.appexp.tabmanager;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -175,6 +176,20 @@ public class TabMainAdapter extends RecyclerView.Adapter {
         this.itemClickListener = itemClickListener;
     }
 
+    public void showItem(int position, RecyclerView recyclerView) {
+        ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
+        if (holder instanceof TabViewHolder){
+            holder.itemView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void hindItem(int position, RecyclerView recyclerView){
+        ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
+        if (holder instanceof TabViewHolder){
+            holder.itemView.setVisibility(View.INVISIBLE);
+        }
+    }
+
     public interface OnItemClickListener{
         void onItemClick(ViewHolder holder);
     }
@@ -202,11 +217,7 @@ public class TabMainAdapter extends RecyclerView.Adapter {
     }
 
 
-    public int getMyTitleHeight(){
-        return titleHeight;
-    }
-
-    public int getOtherTitleHeight(){
+    public int getTitleHeight(){
         return titleHeight;
     }
 }

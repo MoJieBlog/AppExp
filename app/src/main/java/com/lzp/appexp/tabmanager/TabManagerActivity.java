@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.GridLayoutManager.SpanSizeLookup;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
@@ -23,6 +22,7 @@ import android.widget.ImageView;
 import com.base.compat.BaseActivity;
 import com.lzp.appexp.R;
 import com.lzp.appexp.tabmanager.TabMainAdapter.OnItemClickListener;
+import com.utils.PhoneUtils;
 
 import java.util.ArrayList;
 
@@ -119,14 +119,20 @@ public class TabManagerActivity extends BaseActivity {
                     String s = adapter.getMyTabList().get(adapter.getMyTabPosition(adapterPosition));
                     adapter.getMyTabList().remove(s);
                     adapter.getOtherTabList().add(0, s);
-                    showAnimation(holder, getFromPosition(adapterPosition), computeToPosition(holder,adapter.getMyTabList().size() + 2, false));
+
+                    int[] fromXY = getFromXY(adapterPosition);
+                    int[] toXy = computeToXY(holder, adapter.getMyTabList().size() + 3, true);
                     adapter.notifyItemMoved(adapterPosition, adapter.getMyTabList().size() + 2);
+                    showAnimation(fromXY, toXy,adapter.getMyTabList().size() + 2);
                 } else if (adapter.getOtherTabPosition(adapterPosition) >= 0 && adapter.getOtherTabPosition(adapterPosition) < adapter.getOtherTabList().size()) {
                     String s = adapter.getOtherTabList().get(adapter.getOtherTabPosition(adapterPosition));
                     adapter.getOtherTabList().remove(s);
                     adapter.getMyTabList().add(adapter.getMyTabList().size(), s);
-                    showAnimation(holder, getFromPosition(adapterPosition), computeToPosition(holder,adapter.getMyTabList().size(), true));
+
+                    int[] fromXY = getFromXY(adapterPosition);
+                    int[] toXY = computeToXY(holder, adapter.getMyTabList().size(), false);
                     adapter.notifyItemMoved(adapterPosition, adapter.getMyTabList().size());
+                    showAnimation(fromXY, toXY,adapter.getMyTabList().size());
                 }
             }
         });
@@ -140,27 +146,25 @@ public class TabManagerActivity extends BaseActivity {
 
     /**
      * 展示平移动画
-     *
-     * @param holder
      */
-    private void showAnimation(ViewHolder holder, int[] fromPosition, int toPosition[]) {
+    private void showAnimation(int[] fromXY, int toXY[],int toPosition) {
         if (isAnimation && valueAnimator.isRunning()) {
             valueAnimator.cancel();
         }
         ivMirror.setVisibility(View.VISIBLE);
-        ivMirror.setTranslationX(fromPosition[0]);
-        ivMirror.setTranslationY(fromPosition[1]);
+        ivMirror.setTranslationX(fromXY[0]);
+        ivMirror.setTranslationY(fromXY[1]);
 
-        int dx = toPosition[0] - fromPosition[0];
-        int dy = toPosition[1] - fromPosition[1];
+        int dx = toXY[0] - fromXY[0];
+        int dy = toXY[1] - fromXY[1];
         valueAnimator = ValueAnimator.ofFloat(0, 1);
         valueAnimator.setDuration(260);
         valueAnimator.addUpdateListener(new AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float animatedFraction = animation.getAnimatedFraction();
-                ivMirror.setTranslationX(fromPosition[0] + dx * animatedFraction);
-                ivMirror.setTranslationY(fromPosition[1] + dy * animatedFraction);
+                ivMirror.setTranslationX(fromXY[0] + dx * animatedFraction);
+                ivMirror.setTranslationY(fromXY[1] + dy * animatedFraction);
             }
         });
 
@@ -173,12 +177,19 @@ public class TabManagerActivity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 isAnimation = false;
-                ivMirror.setVisibility(View.GONE);
+                ivMirror.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ivMirror.setVisibility(View.GONE);
+                    }
+                }, 200);
+
             }
 
             @Override
             public void onAnimationCancel(Animator animation) {
                 isAnimation = false;
+
                 ivMirror.setVisibility(View.GONE);
             }
 
@@ -191,40 +202,51 @@ public class TabManagerActivity extends BaseActivity {
     }
 
     /**
-     * @param toPosition 这里的目标位置是没有刷新前的坐标，因为刷新和位移同时进行，所以页不能等刷新完成后计算
-     * @param toMyTab
+     * @param toPosition 这里的目标位置是没有刷新前的坐标，因为刷新和位移同时进行，所以不能等刷新完成后计算，所以：目标位置 = 真实目标位置+1
      * @return
      */
-    private int[] computeToPosition(ViewHolder holder,int toPosition, boolean toMyTab) {
-        int myTitleHeight = adapter.getMyTitleHeight();
-        int otherTitleHeight = adapter.getOtherTitleHeight();
+    private int[] computeToXY(ViewHolder holder, int toPosition, boolean my2more) {
+
+        int firstVisibleItemPosition = gridLayoutManager.findFirstVisibleItemPosition();
+        int lastVisibleItemPosition = gridLayoutManager.findLastVisibleItemPosition();
+
+        //目标位置没在屏幕内
+        if (toPosition > lastVisibleItemPosition + 1) {
+            int[] toXy = {0, PhoneUtils.getWinHeight(this)};
+            return toXy;
+        } else if (toPosition < firstVisibleItemPosition + 1) {
+            int[] toXy = {0, 0};
+            return toXy;
+        }
+
+        //目标位置在屏幕内
+        int titleHeight = adapter.getTitleHeight();
         int itemHeight = holder.itemView.getMeasuredHeight();
         int itemWidth = holder.itemView.getMeasuredWidth();
 
-        int paddingTop = dragRcv.getPaddingTop();
-        MarginLayoutParams layoutParams = (MarginLayoutParams) dragRcv.getLayoutParams();
-        int topMargin = layoutParams.topMargin;
-
-        int[] position = new int[2];
-        if (toMyTab) {//从其他移动到我的
-            int myTabPosition = adapter.getMyTabPosition(toPosition);
-            int span = myTabPosition % gridLayoutManager.getSpanCount();
-            int ceil = (int) Math.ceil(1f * (myTabPosition+1) / gridLayoutManager.getSpanCount());
-            position[0] = (span) * itemWidth;
-            position[1] = (ceil - 1) * itemHeight + myTitleHeight+ topMargin+paddingTop;
-        } else {//从我的移动到其他
-            int otherTabPosition = adapter.getOtherTabPosition(toPosition);
-            int span = otherTabPosition % gridLayoutManager.getSpanCount();
-            int myTabClum = (int) Math.ceil(1f * adapter.getMyTabList().size() / gridLayoutManager.getSpanCount());
-            int ceil = (int) Math.ceil(1f * (otherTabPosition+1) / gridLayoutManager.getSpanCount());
-            position[0] = (span) * itemWidth;
-            position[1] = (myTabClum + ceil - 1) * itemHeight + myTitleHeight + otherTitleHeight + topMargin+paddingTop;
-
+        //因为目标的位置在变化，所以用目标位置的上一个确定位置
+        int[] toXY = getFromXY(toPosition - 1);
+        ViewHolder preHolder = dragRcv.findViewHolderForAdapterPosition(toPosition - 1);
+        if (preHolder.getItemViewType() == adapter.getTitleType()) {//是title
+            toXY[0] = 0;
+            toXY[1] = toXY[1] + titleHeight;
+        } else {
+            if (toXY[0] >= dragRcv.getRight() - itemWidth) {//最右侧一个，换行
+                toXY[0] = 0;
+                toXY[1] = toXY[1] + itemHeight;
+            } else {
+                toXY[0] = toXY[0] + itemWidth;
+            }
         }
-        return position;
+
+        if (my2more && adapter.getMyTabList().size() % gridLayoutManager.getSpanCount() == 0) {//我的移动到更多，并且移动后，我的会少一行
+            toXY[1] = toXY[1] - itemHeight;
+        }
+
+        return toXY;
     }
 
-    private int[] getFromPosition(int targetPosition) {
+    private int[] getFromXY(int targetPosition) {
         int[] position = new int[2];
         ViewHolder viewHolder = dragRcv.findViewHolderForAdapterPosition(targetPosition);
         if (viewHolder != null) {
@@ -278,6 +300,21 @@ public class TabManagerActivity extends BaseActivity {
         otherTabList.add("汽车");
         otherTabList.add("电影");
         otherTabList.add("历史");
+
+       /* otherTabList.add("热点");
+        otherTabList.add("国际");
+        otherTabList.add("足球");
+        otherTabList.add("娱乐");
+        otherTabList.add("教育");
+        otherTabList.add("漫画");
+        otherTabList.add("动漫");
+        otherTabList.add("图片");
+        otherTabList.add("搞笑");
+        otherTabList.add("家居");
+        otherTabList.add("美食");
+        otherTabList.add("汽车");
+        otherTabList.add("电影");
+        otherTabList.add("历史");*/
         adapter.refreshData(myTabList, otherTabList);
     }
 }
