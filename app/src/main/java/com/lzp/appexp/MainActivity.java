@@ -14,6 +14,7 @@ import com.base.compat.ActionBarView;
 import com.base.compat.ActionBarView.ActionBarClickAdapter;
 import com.base.compat.BaseActivity;
 import com.base.compat.StatusBarView;
+import com.dialog.NBDialogBuilder;
 import com.lzp.appexp.adapter.TestAdapter;
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
@@ -88,12 +89,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onClickLeftText(View v) {
-                //super.onClickLeftText(v);
-               /* new TwoOptDialog(MainActivity.this)
-                        .setLeftText("取消")
-                        .setRightText("确定")
-                        .setGravity(Gravity.CENTER)
-                        .show();*/
+                NBDialogBuilder.buildTwoOptMsgDialog(MainActivity.this).setLeftText("").build().show();
             }
 
             @Override

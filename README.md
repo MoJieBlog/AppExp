@@ -35,3 +35,11 @@
 * 仪表盘（doing）
 * 半圆
 * 加载中的View,IOS的菊花加载
+
+## [dialog](https://github.com/MoJieBlog/AppExp/blob/master/dialog/)
+* 单选项弹窗
+* 多选项弹窗
+* 双选项弹窗
+* loading弹窗
+* 图片弹窗
+* 进度条弹窗

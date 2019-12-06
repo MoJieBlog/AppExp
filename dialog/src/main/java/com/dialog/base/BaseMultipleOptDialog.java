@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import java.util.List;
 
@@ -97,7 +98,7 @@ public abstract class BaseMultipleOptDialog<D> extends BaseDialog implements IMu
      * @return
      */
     @Override
-    public BaseMultipleOptDialog fillData(int position, D t) {
+    public BaseMultipleOptDialog fillData(int position, D t, View view) {
         return this;
     }
 }

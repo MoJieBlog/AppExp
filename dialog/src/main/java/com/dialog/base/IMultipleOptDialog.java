@@ -3,6 +3,7 @@ package com.dialog.base;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.ColorInt;
+import android.view.View;
 
 import java.util.List;
 
@@ -68,5 +69,5 @@ public interface IMultipleOptDialog<T,D> {
      * @param t
      * @return
      */
-    T fillData(int position, D t);
+    T fillData(int position, D t, View view);
 }

@@ -19,6 +19,12 @@ public interface ITwoOptDialog<T> {
      */
     T setLeftText(String text);
 
+    /**
+     * 设置左侧文字
+     *
+     * @param text
+     * @return
+     */
     T setLeftText(@IntegerRes int text);
 
     /**
