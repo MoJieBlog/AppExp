@@ -1,4 +1,4 @@
-package com.dialog;
+package com.dialog.base;
 
 import android.graphics.Color;
 import android.graphics.Typeface;

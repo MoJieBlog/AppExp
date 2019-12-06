@@ -1,4 +1,4 @@
-package com.dialog;
+package com.dialog.base;
 
 /**
  * @describe

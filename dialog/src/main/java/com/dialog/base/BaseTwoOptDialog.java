@@ -1,4 +1,4 @@
-package com.dialog;
+package com.dialog.base;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog<BaseTwoOptDialog>{
+public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog<BaseTwoOptDialog> {
 
 
     public BaseTwoOptDialog(@NonNull Context context) {

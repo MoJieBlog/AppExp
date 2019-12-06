@@ -1,4 +1,4 @@
-package com.dialog;
+package com.dialog.base;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,7 +12,7 @@ import java.util.List;
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public abstract class BaseMultipleOptDialog<D> extends BaseDialog implements IMultipleOptDialog<BaseMultipleOptDialog,D>{
+public abstract class BaseMultipleOptDialog<D> extends BaseDialog implements IMultipleOptDialog<BaseMultipleOptDialog,D> {
 
     public BaseMultipleOptDialog(@NonNull Context context) {
         super(context);

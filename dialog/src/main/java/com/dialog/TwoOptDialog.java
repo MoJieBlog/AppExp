@@ -7,6 +7,10 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 
+import com.dialog.base.BaseTwoOptDialog;
+import com.dialog.base.IBaseDialog;
+import com.dialog.base.ITwoOptDialog;
+
 /**
  * @describe
  * @author: lixiaopeng
@@ -23,7 +27,7 @@ public class TwoOptDialog extends BaseTwoOptDialog {
         setGravity(Gravity.CENTER);
     }
 
-    public static class TwoOptDialogBuilder implements ITwoOptDialog<TwoOptDialogBuilder> ,IBaseDialog<TwoOptDialogBuilder>{
+    public static class TwoOptDialogBuilder implements ITwoOptDialog<TwoOptDialogBuilder>, IBaseDialog<TwoOptDialogBuilder> {
 
         private TwoOptDialog twoOptDialog;
 

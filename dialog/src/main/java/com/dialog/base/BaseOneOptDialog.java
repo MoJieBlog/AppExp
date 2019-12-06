@@ -1,4 +1,4 @@
-package com.dialog;
+package com.dialog.base;
 
 import android.content.Context;
 import android.graphics.Color;
