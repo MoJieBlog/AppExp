@@ -27,7 +27,7 @@ public class TwoOptDialog extends BaseTwoOptDialog {
         setGravity(Gravity.CENTER);
     }
 
-    public static class TwoOptDialogBuilder implements ITwoOptDialog<TwoOptDialogBuilder>, IBaseDialog<TwoOptDialogBuilder> {
+    static class TwoOptDialogBuilder implements ITwoOptDialog<TwoOptDialogBuilder>, IBaseDialog<TwoOptDialogBuilder> {
 
         private TwoOptDialog twoOptDialog;
 
@@ -200,6 +200,48 @@ public class TwoOptDialog extends BaseTwoOptDialog {
         @Override
         public TwoOptDialogBuilder setGravity(int gravity) {
             twoOptDialog.setGravity(gravity);
+            return this;
+        }
+
+        @Override
+        public TwoOptDialogBuilder setTitleVisible(int visible) {
+            twoOptDialog.setTitleVisible(visible);
+            return this;
+        }
+
+        @Override
+        public TwoOptDialogBuilder setTitleText(String text) {
+            twoOptDialog.setTitleText(text);
+            return this;
+        }
+
+        @Override
+        public TwoOptDialogBuilder setTitleText(int text) {
+            twoOptDialog.setTitleText(text);
+            return this;
+        }
+
+        @Override
+        public TwoOptDialogBuilder setTitleColor(int color) {
+            twoOptDialog.setTitleColor(color);
+            return this;
+        }
+
+        @Override
+        public TwoOptDialogBuilder setTitleColor(Color color) {
+            twoOptDialog.setTitleColor(color);
+            return this;
+        }
+
+        @Override
+        public TwoOptDialogBuilder setTitleSize(int size) {
+            twoOptDialog.setTitleSize(size);
+            return this;
+        }
+
+        @Override
+        public TwoOptDialogBuilder setTitleBold(boolean bold) {
+            twoOptDialog.setTitleBold(bold);
             return this;
         }
 

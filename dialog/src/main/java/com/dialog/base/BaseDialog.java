@@ -2,6 +2,7 @@ package com.dialog.base;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.WindowManager.LayoutParams;
 
@@ -29,5 +30,40 @@ public abstract class BaseDialog extends Dialog implements IBaseDialog<BaseDialo
     public BaseDialog setGravity(int gravity) {
         getWindow().setGravity(gravity);
         return this;
+    }
+
+    @Override
+    public BaseDialog setTitleVisible(int visible) {
+        return null;
+    }
+
+    @Override
+    public BaseDialog setTitleText(String text) {
+        return null;
+    }
+
+    @Override
+    public BaseDialog setTitleText(int text) {
+        return null;
+    }
+
+    @Override
+    public BaseDialog setTitleColor(int color) {
+        return null;
+    }
+
+    @Override
+    public BaseDialog setTitleColor(Color color) {
+        return null;
+    }
+
+    @Override
+    public BaseDialog setTitleSize(int size) {
+        return null;
+    }
+
+    @Override
+    public BaseDialog setTitleBold(boolean bold) {
+        return null;
     }
 }
