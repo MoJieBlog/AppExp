@@ -10,24 +10,16 @@ import android.support.annotation.IntegerRes;
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public interface ITwoOptDialog {
+public interface ITwoOptDialog<T> {
     /**
      * 设置左侧文字
      *
      * @param text
      * @return
      */
-    BaseTwoOptDialog setLeftText(String text);
+    T setLeftText(String text);
 
-    BaseTwoOptDialog setLeftText(@IntegerRes int text);
-
-    /**
-     * 设置右侧文字
-     *
-     * @param text
-     * @return
-     */
-    BaseTwoOptDialog setRightText(String text);
+    T setLeftText(@IntegerRes int text);
 
     /**
      * 设置右侧文字
@@ -35,7 +27,15 @@ public interface ITwoOptDialog {
      * @param text
      * @return
      */
-    BaseTwoOptDialog setRightText(@IntegerRes int text);
+    T setRightText(String text);
+
+    /**
+     * 设置右侧文字
+     *
+     * @param text
+     * @return
+     */
+    T setRightText(@IntegerRes int text);
 
     /**
      * 设置左侧文字大小
@@ -43,7 +43,7 @@ public interface ITwoOptDialog {
      * @param size
      * @return
      */
-    BaseTwoOptDialog setLeftTextSize(int size);
+    T setLeftTextSize(int size);
 
     /**
      * 设置右侧文字大小
@@ -51,7 +51,7 @@ public interface ITwoOptDialog {
      * @param size
      * @return
      */
-    BaseTwoOptDialog setRightTextSize(int size);
+    T setRightTextSize(int size);
 
     /**
      * 设置左侧文字颜色
@@ -59,7 +59,7 @@ public interface ITwoOptDialog {
      * @param color
      * @return
      */
-    BaseTwoOptDialog setLeftTextColor(Color color);
+    T setLeftTextColor(Color color);
 
     /**
      * 设置左侧文字颜色
@@ -67,7 +67,7 @@ public interface ITwoOptDialog {
      * @param color
      * @return
      */
-    BaseTwoOptDialog setLeftTextColor(@ColorInt int color);
+    T setLeftTextColor(@ColorInt int color);
 
     /**
      * 设置右侧文字颜色
@@ -75,7 +75,7 @@ public interface ITwoOptDialog {
      * @param color
      * @return
      */
-    BaseTwoOptDialog setRightTextColor(Color color);
+    T setRightTextColor(Color color);
 
     /**
      * 设置右侧文字颜色
@@ -83,7 +83,7 @@ public interface ITwoOptDialog {
      * @param color
      * @return
      */
-    BaseTwoOptDialog setRightTextColor(@ColorInt int color);
+    T setRightTextColor(@ColorInt int color);
 
     /**
      * 设置左侧文字字体
@@ -91,7 +91,7 @@ public interface ITwoOptDialog {
      * @param typeface
      * @return
      */
-    BaseTwoOptDialog setLeftTextTypeface(Typeface typeface);
+    T setLeftTextTypeface(Typeface typeface);
 
     /**
      * 设置右侧文字字体
@@ -99,7 +99,7 @@ public interface ITwoOptDialog {
      * @param typeFace
      * @return
      */
-    BaseTwoOptDialog setRightTextTypeFace(Typeface typeFace);
+    T setRightTextTypeFace(Typeface typeFace);
 
     /**
      * 设置左侧文字是否加粗
@@ -107,7 +107,7 @@ public interface ITwoOptDialog {
      * @param bold
      * @return
      */
-    BaseTwoOptDialog setLeftTextBold(boolean bold);
+    T setLeftTextBold(boolean bold);
 
     /**
      * 设置右侧文字是否加粗
@@ -115,5 +115,5 @@ public interface ITwoOptDialog {
      * @param bold
      * @return
      */
-    BaseTwoOptDialog setRightTextBold(boolean bold);
+    T setRightTextBold(boolean bold);
 }

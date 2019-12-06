@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public class BaseOneOptDialog extends BaseDialog implements IOneOptDialog {
+public abstract class BaseOneOptDialog extends BaseDialog implements IOneOptDialog<BaseOneOptDialog> {
 
     public BaseOneOptDialog(@NonNull Context context) {
         super(context);
@@ -28,7 +28,7 @@ public class BaseOneOptDialog extends BaseDialog implements IOneOptDialog {
      */
     @Override
     public BaseOneOptDialog setText(String text) {
-        return null;
+        return this;
     }
 
     /**
@@ -39,7 +39,7 @@ public class BaseOneOptDialog extends BaseDialog implements IOneOptDialog {
      */
     @Override
     public BaseOneOptDialog setText(int textRes) {
-        return null;
+        return this;
     }
 
     /**
@@ -50,7 +50,7 @@ public class BaseOneOptDialog extends BaseDialog implements IOneOptDialog {
      */
     @Override
     public BaseOneOptDialog setTextSize(int size) {
-        return null;
+        return this;
     }
 
     /**
@@ -61,7 +61,7 @@ public class BaseOneOptDialog extends BaseDialog implements IOneOptDialog {
      */
     @Override
     public BaseOneOptDialog setTextColor(Color color) {
-        return null;
+        return this;
     }
 
     /**
@@ -72,7 +72,7 @@ public class BaseOneOptDialog extends BaseDialog implements IOneOptDialog {
      */
     @Override
     public BaseOneOptDialog setTextColor(int color) {
-        return null;
+        return this;
     }
 
     /**
@@ -83,7 +83,7 @@ public class BaseOneOptDialog extends BaseDialog implements IOneOptDialog {
      */
     @Override
     public BaseOneOptDialog setTextTypeFace(Typeface typeFace) {
-        return null;
+        return this;
     }
 
     /**
@@ -94,6 +94,6 @@ public class BaseOneOptDialog extends BaseDialog implements IOneOptDialog {
      */
     @Override
     public BaseOneOptDialog setTextBold(boolean bold) {
-        return null;
+        return this;
     }
 }

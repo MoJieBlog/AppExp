@@ -11,7 +11,7 @@ import java.util.List;
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public interface IMultipleOptDialog<T> {
+public interface IMultipleOptDialog<T,D> {
 
     /**
      * 设置List
@@ -19,7 +19,7 @@ public interface IMultipleOptDialog<T> {
      * @param list
      * @return
      */
-    BaseMultipleOptDialog setList(List<T> list);
+    T setList(List<D> list);
 
     /**
      * 设置选项文字大小
@@ -27,7 +27,7 @@ public interface IMultipleOptDialog<T> {
      * @param size
      * @return
      */
-    BaseMultipleOptDialog setTextSize(int size);
+    T setTextSize(int size);
 
     /**
      * 设置字体
@@ -35,7 +35,7 @@ public interface IMultipleOptDialog<T> {
      * @param typeFace
      * @return
      */
-    BaseMultipleOptDialog setTextTypeFace(Typeface typeFace);
+    T setTextTypeFace(Typeface typeFace);
 
     /**
      * 设置颜色
@@ -43,7 +43,7 @@ public interface IMultipleOptDialog<T> {
      * @param color
      * @return
      */
-    BaseMultipleOptDialog setTextColor(Color color);
+    T setTextColor(Color color);
 
     /**
      * 设置颜色
@@ -51,7 +51,7 @@ public interface IMultipleOptDialog<T> {
      * @param color
      * @return
      */
-    BaseMultipleOptDialog setTextColor(@ColorInt int color);
+    T setTextColor(@ColorInt int color);
 
     /**
      * 设置是否加粗
@@ -59,7 +59,7 @@ public interface IMultipleOptDialog<T> {
      * @param bold
      * @return
      */
-    BaseMultipleOptDialog setTextBold(boolean bold);
+    T setTextBold(boolean bold);
 
     /**
      * 设置填充数据
@@ -68,5 +68,5 @@ public interface IMultipleOptDialog<T> {
      * @param t
      * @return
      */
-    BaseMultipleOptDialog fillData(int position, T t);
+    T fillData(int position, D t);
 }

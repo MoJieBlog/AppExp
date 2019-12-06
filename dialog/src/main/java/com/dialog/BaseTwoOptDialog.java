@@ -10,7 +10,8 @@ import android.support.annotation.NonNull;
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
+public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog<BaseTwoOptDialog>{
+
 
     public BaseTwoOptDialog(@NonNull Context context) {
         super(context);
@@ -20,7 +21,6 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
         super(context, themeResId);
     }
 
-
     /**
      * 设置左侧文字
      *
@@ -29,12 +29,12 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setLeftText(String text) {
-        return null;
+        return this;
     }
 
     @Override
     public BaseTwoOptDialog setLeftText(int text) {
-        return null;
+        return this;
     }
 
     /**
@@ -45,7 +45,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setRightText(String text) {
-        return null;
+        return this;
     }
 
     /**
@@ -56,7 +56,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setRightText(int text) {
-        return null;
+        return this;
     }
 
     /**
@@ -67,7 +67,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setLeftTextSize(int size) {
-        return null;
+        return this;
     }
 
     /**
@@ -78,7 +78,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setRightTextSize(int size) {
-        return null;
+        return this;
     }
 
     /**
@@ -89,7 +89,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setLeftTextColor(Color color) {
-        return null;
+        return this;
     }
 
     /**
@@ -100,7 +100,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setLeftTextColor(int color) {
-        return null;
+        return this;
     }
 
     /**
@@ -111,7 +111,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setRightTextColor(Color color) {
-        return null;
+        return this;
     }
 
     /**
@@ -122,7 +122,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setRightTextColor(int color) {
-        return null;
+        return this;
     }
 
     /**
@@ -133,7 +133,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setLeftTextTypeface(Typeface typeface) {
-        return null;
+        return this;
     }
 
     /**
@@ -144,7 +144,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setRightTextTypeFace(Typeface typeFace) {
-        return null;
+        return this;
     }
 
     /**
@@ -155,7 +155,7 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setLeftTextBold(boolean bold) {
-        return null;
+        return this;
     }
 
     /**
@@ -166,6 +166,6 @@ public class BaseTwoOptDialog extends BaseDialog implements ITwoOptDialog{
      */
     @Override
     public BaseTwoOptDialog setRightTextBold(boolean bold) {
-        return null;
+        return this;
     }
 }

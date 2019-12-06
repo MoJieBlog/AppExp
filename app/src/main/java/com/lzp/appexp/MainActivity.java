@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,6 +15,9 @@ import com.base.compat.ActionBarView;
 import com.base.compat.ActionBarView.ActionBarClickAdapter;
 import com.base.compat.BaseActivity;
 import com.base.compat.StatusBarView;
+import com.dialog.BaseDialog;
+import com.dialog.BaseTwoOptDialog;
+import com.dialog.TwoOptDialog;
 import com.lzp.appexp.adapter.TestAdapter;
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
@@ -90,7 +94,12 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onClickLeftText(View v) {
-                super.onClickLeftText(v);
+                //super.onClickLeftText(v);
+               /* new TwoOptDialog(MainActivity.this)
+                        .setLeftText("取消")
+                        .setRightText("确定")
+                        .setGravity(Gravity.CENTER)
+                        .show();*/
             }
 
             @Override

@@ -12,7 +12,7 @@ import java.util.List;
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public class BaseMultipleOptDialog<T> extends BaseDialog implements IMultipleOptDialog<T>{
+public abstract class BaseMultipleOptDialog<D> extends BaseDialog implements IMultipleOptDialog<BaseMultipleOptDialog,D>{
 
     public BaseMultipleOptDialog(@NonNull Context context) {
         super(context);
@@ -30,8 +30,8 @@ public class BaseMultipleOptDialog<T> extends BaseDialog implements IMultipleOpt
      * @return
      */
     @Override
-    public BaseMultipleOptDialog setList(List<T> list) {
-        return null;
+    public BaseMultipleOptDialog setList(List<D> list) {
+        return this;
     }
 
     /**
@@ -42,7 +42,7 @@ public class BaseMultipleOptDialog<T> extends BaseDialog implements IMultipleOpt
      */
     @Override
     public BaseMultipleOptDialog setTextSize(int size) {
-        return null;
+        return this;
     }
 
     /**
@@ -53,7 +53,7 @@ public class BaseMultipleOptDialog<T> extends BaseDialog implements IMultipleOpt
      */
     @Override
     public BaseMultipleOptDialog setTextTypeFace(Typeface typeFace) {
-        return null;
+        return this;
     }
 
     /**
@@ -64,7 +64,7 @@ public class BaseMultipleOptDialog<T> extends BaseDialog implements IMultipleOpt
      */
     @Override
     public BaseMultipleOptDialog setTextColor(Color color) {
-        return null;
+        return this;
     }
 
     /**
@@ -75,7 +75,7 @@ public class BaseMultipleOptDialog<T> extends BaseDialog implements IMultipleOpt
      */
     @Override
     public BaseMultipleOptDialog setTextColor(int color) {
-        return null;
+        return this;
     }
 
     /**
@@ -86,7 +86,7 @@ public class BaseMultipleOptDialog<T> extends BaseDialog implements IMultipleOpt
      */
     @Override
     public BaseMultipleOptDialog setTextBold(boolean bold) {
-        return null;
+        return this;
     }
 
     /**
@@ -97,7 +97,7 @@ public class BaseMultipleOptDialog<T> extends BaseDialog implements IMultipleOpt
      * @return
      */
     @Override
-    public BaseMultipleOptDialog fillData(int position, T t) {
-        return null;
+    public BaseMultipleOptDialog fillData(int position, D t) {
+        return this;
     }
 }

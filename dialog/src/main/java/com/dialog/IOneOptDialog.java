@@ -9,28 +9,28 @@ import android.support.annotation.IntegerRes;
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public interface IOneOptDialog {
+public interface IOneOptDialog<T> {
 
     /**
      * 设置选项文字
      * @param text
      * @return
      */
-    BaseOneOptDialog setText(String text);
+    T setText(String text);
 
     /**
      * 设置选项文字
      * @param textRes
      * @return
      */
-    BaseOneOptDialog setText(@IntegerRes int textRes);
+    T setText(@IntegerRes int textRes);
 
     /**
      * 设置选项文字大小
      * @param size
      * @return
      */
-    BaseOneOptDialog setTextSize(int size);
+    T setTextSize(int size);
 
 
     /**
@@ -38,26 +38,26 @@ public interface IOneOptDialog {
      * @param color
      * @return
      */
-    BaseOneOptDialog setTextColor(Color color);
+    T setTextColor(Color color);
 
     /**
      * 设置选项文字颜色
      * @param color
      * @return
      */
-    BaseOneOptDialog setTextColor(@IntegerRes int color);
+    T setTextColor(@IntegerRes int color);
 
     /**
      * 设置选项字体
      * @param typeFace
      * @return
      */
-    BaseOneOptDialog setTextTypeFace(Typeface typeFace);
+    T setTextTypeFace(Typeface typeFace);
 
     /**
      * 设置选项文字是否加粗
      * @param bold
      * @return
      */
-    BaseOneOptDialog setTextBold(boolean bold);
+    T setTextBold(boolean bold);
 }
