@@ -65,4 +65,6 @@ public interface IBaseDialog<T> {
      * @return
      */
     T setTitleBold(boolean bold);
+
+    void show();
 }

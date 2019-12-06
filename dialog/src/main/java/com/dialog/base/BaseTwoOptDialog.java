@@ -172,14 +172,11 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
 
     public abstract static class TwoOptDialogBuilder implements ITwoOptDialog<TwoOptDialogBuilder>, IBaseDialog<TwoOptDialogBuilder> {
 
-        protected BaseTwoOptDialog twoOptDialog;
 
         protected TwoOptDialogBuilder(Context context) {
-            this.twoOptDialog = createDialog(context);
         }
 
-        protected abstract BaseTwoOptDialog createDialog(Context context);
-        public abstract BaseTwoOptDialog build();
+        public abstract BaseTwoOptDialog getDialog();
         /**
          * 设置左侧文字
          *
@@ -188,13 +185,13 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setLeftText(String text) {
-            twoOptDialog.setLeftText(text);
+            getDialog().setLeftText(text);
             return this;
         }
 
         @Override
         public TwoOptDialogBuilder setLeftText(int text) {
-            twoOptDialog.setLeftText(text);
+            getDialog().setLeftText(text);
             return this;
         }
 
@@ -206,7 +203,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setRightText(String text) {
-            twoOptDialog.setRightText(text);
+            getDialog().setRightText(text);
             return this;
         }
 
@@ -218,7 +215,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setRightText(int text) {
-            twoOptDialog.setRightText(text);
+            getDialog().setRightText(text);
             return this;
         }
 
@@ -230,7 +227,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setLeftTextSize(int size) {
-            twoOptDialog.setLeftTextSize(size);
+            getDialog().setLeftTextSize(size);
             return this;
         }
 
@@ -242,7 +239,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setRightTextSize(int size) {
-            twoOptDialog.setRightTextSize(size);
+            getDialog().setRightTextSize(size);
             return this;
         }
 
@@ -254,7 +251,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setLeftTextColor(Color color) {
-            twoOptDialog.setLeftTextColor(color);
+            getDialog().setLeftTextColor(color);
             return this;
         }
 
@@ -266,7 +263,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setLeftTextColor(@ColorInt int color) {
-            twoOptDialog.setLeftTextColor(color);
+            getDialog().setLeftTextColor(color);
             return this;
         }
 
@@ -278,7 +275,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setRightTextColor(Color color) {
-            twoOptDialog.setRightTextColor(color);
+            getDialog().setRightTextColor(color);
             return this;
         }
 
@@ -290,7 +287,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setRightTextColor(int color) {
-            twoOptDialog.setRightTextColor(color);
+            getDialog().setRightTextColor(color);
             return this;
         }
 
@@ -302,7 +299,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setLeftTextTypeface(Typeface typeface) {
-            twoOptDialog.setLeftTextTypeface(typeface);
+            getDialog().setLeftTextTypeface(typeface);
             return this;
         }
 
@@ -314,7 +311,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setRightTextTypeFace(Typeface typeFace) {
-            twoOptDialog.setRightTextTypeFace(typeFace);
+            getDialog().setRightTextTypeFace(typeFace);
             return this;
         }
 
@@ -326,7 +323,7 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setLeftTextBold(boolean bold) {
-            twoOptDialog.setLeftTextBold(bold);
+            getDialog().setLeftTextBold(bold);
             return this;
         }
 
@@ -338,55 +335,55 @@ public abstract class BaseTwoOptDialog extends BaseDialog implements ITwoOptDial
          */
         @Override
         public TwoOptDialogBuilder setRightTextBold(boolean bold) {
-            twoOptDialog.setRightTextBold(bold);
+            getDialog().setRightTextBold(bold);
             return this;
         }
 
         @Override
         public TwoOptDialogBuilder setGravity(int gravity) {
-            twoOptDialog.setGravity(gravity);
+            getDialog().setGravity(gravity);
             return this;
         }
 
         @Override
         public TwoOptDialogBuilder setTitleVisible(int visible) {
-            twoOptDialog.setTitleVisible(visible);
+            getDialog().setTitleVisible(visible);
             return this;
         }
 
         @Override
         public TwoOptDialogBuilder setTitleText(String text) {
-            twoOptDialog.setTitleText(text);
+            getDialog().setTitleText(text);
             return this;
         }
 
         @Override
         public TwoOptDialogBuilder setTitleText(int text) {
-            twoOptDialog.setTitleText(text);
+            getDialog().setTitleText(text);
             return this;
         }
 
         @Override
         public TwoOptDialogBuilder setTitleColor(int color) {
-            twoOptDialog.setTitleColor(color);
+            getDialog().setTitleColor(color);
             return this;
         }
 
         @Override
         public TwoOptDialogBuilder setTitleColor(Color color) {
-            twoOptDialog.setTitleColor(color);
+            getDialog().setTitleColor(color);
             return this;
         }
 
         @Override
         public TwoOptDialogBuilder setTitleSize(int size) {
-            twoOptDialog.setTitleSize(size);
+            getDialog().setTitleSize(size);
             return this;
         }
 
         @Override
         public TwoOptDialogBuilder setTitleBold(boolean bold) {
-            twoOptDialog.setTitleBold(bold);
+            getDialog().setTitleBold(bold);
             return this;
         }
 

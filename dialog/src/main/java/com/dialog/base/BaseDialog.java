@@ -11,7 +11,7 @@ import android.view.WindowManager.LayoutParams;
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public abstract class BaseDialog extends Dialog implements IBaseDialog<BaseDialog> {
+public  class BaseDialog extends Dialog implements IBaseDialog<BaseDialog> {
 
     public BaseDialog(@NonNull Context context) {
         this(context, 0);

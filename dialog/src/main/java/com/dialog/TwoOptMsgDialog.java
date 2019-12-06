@@ -2,8 +2,6 @@ package com.dialog;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 
@@ -14,7 +12,7 @@ import com.dialog.base.BaseTwoOptDialog;
  * @author: lixiaopeng
  * @Date: 2019-12-06
  */
-public class TwoOptMsgDialog extends BaseTwoOptDialog {
+public class TwoOptMsgDialog extends BaseTwoOptDialog{
     private TwoOptMsgDialog(@NonNull Context context) {
         super(context);
     }
@@ -26,47 +24,75 @@ public class TwoOptMsgDialog extends BaseTwoOptDialog {
         setContentView(R.layout.dialog_two_opt);
     }
 
-    /**
-     * 是否需要描述
-     *
-     * @param needMsg
-     */
-    public void setNeedMsg(boolean needMsg) {
-
+    public TwoOptMsgDialog setNeedMsg(boolean needMsg) {
+        return null;
     }
 
-    public void setMsgSize(int size) {
-
+    public TwoOptMsgDialog setMsgSize(int size) {
+        return null;
     }
 
-    interface ITwoOptMsgDialog {
-        void setNeedMsg(boolean needMsg);
-
-        void setMsgSize(int size);
-
-        void setMsgText(String text);
-
-        void setMsgText(@IntegerRes int text);
-
-        void setMsgColor(Color color);
-
-        void setMsgColor(@ColorInt int color);
+    public TwoOptMsgDialog setMsgText(String text) {
+        return null;
     }
 
-    public static class TwoOptMsgDialogBuilder extends TwoOptDialogBuilder {
+    public TwoOptMsgDialog setMsgText(int text) {
+        return null;
+    }
 
+    public TwoOptMsgDialog setMsgColor(Color color) {
+        return null;
+    }
+
+    public TwoOptMsgDialog setMsgColor(int color) {
+        return null;
+    }
+
+    public static class TwoOptMsgDialogBuilder extends TwoOptDialogBuilder{
+        private TwoOptMsgDialog twoOptMsgDialog;
         protected TwoOptMsgDialogBuilder(Context context) {
             super(context);
+            twoOptMsgDialog = new TwoOptMsgDialog(context);
         }
 
         @Override
-        protected BaseTwoOptDialog createDialog(Context context) {
-            return new TwoOptMsgDialog(context);
+        public BaseTwoOptDialog getDialog() {
+            return twoOptMsgDialog;
+        }
+
+        public TwoOptMsgDialogBuilder setNeedMsg(boolean needMsg) {
+            twoOptMsgDialog.setNeedMsg(needMsg);
+            return this;
+        }
+
+        public TwoOptMsgDialogBuilder setMsgSize(int size) {
+            twoOptMsgDialog.setMsgSize(size);
+            return this;
+        }
+
+        public TwoOptMsgDialogBuilder setMsgText(String text) {
+            twoOptMsgDialog.setMsgText(text);
+            return this;
+        }
+
+        public TwoOptMsgDialogBuilder setMsgText(int text) {
+            twoOptMsgDialog.setMsgText(text);
+            return this;
+        }
+
+        public TwoOptMsgDialogBuilder setMsgColor(Color color) {
+            twoOptMsgDialog.setMsgColor(color);
+            return this;
+        }
+
+        public TwoOptMsgDialogBuilder setMsgColor(int color) {
+            twoOptMsgDialog.setMsgColor(color);
+            return this;
         }
 
         @Override
-        public BaseTwoOptDialog build() {
-            return twoOptDialog;
+        public void show() {
+            twoOptMsgDialog.show();
         }
     }
 }

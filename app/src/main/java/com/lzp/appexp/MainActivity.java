@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onClickLeftText(View v) {
-                NBDialogBuilder.buildTwoOptMsgDialog(MainActivity.this).setLeftText("").build().show();
+                NBDialogBuilder.buildTwoOptMsgDialog(MainActivity.this).setLeftText("").show();
             }
 
             @Override
