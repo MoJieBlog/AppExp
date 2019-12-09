@@ -14,6 +14,7 @@ import com.base.compat.ActionBarView;
 import com.base.compat.ActionBarView.ActionBarClickAdapter;
 import com.base.compat.BaseActivity;
 import com.base.compat.StatusBarView;
+import com.base.compat.ToastBaseActivity;
 import com.dialog.NBDialogBuilder;
 import com.lzp.appexp.adapter.TestAdapter;
 import com.utils.permission.PermissionConstant;
@@ -23,7 +24,7 @@ import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 import com.view.refresh.SwipeRefreshLayout;
 import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends ToastBaseActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -137,6 +138,22 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private long preTime = 0;
+    @Override
+    public void onBackPressed() {
+        if (preTime==0){
+            preTime = System.currentTimeMillis();
+            showToast("再按一次退出");
+            return;
+        }
+        if (System.currentTimeMillis()-preTime>1000){
+            preTime = System.currentTimeMillis();
+            showToast("再按一次退出");
+        }else{
+            super.onBackPressed();
+        }
     }
 
     private int freshType = 0;

@@ -306,7 +306,7 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
         public void onClickLeftImg(View v) {
             Log.d(TAG, "onClickLeftImg: ");
             if (v.getContext() instanceof Activity) {
-                ((Activity) v.getContext()).finish();
+                ((Activity) v.getContext()).onBackPressed();
             }
         }
 
