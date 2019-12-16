@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.imageloader.ImageLoader;
 import com.imageloader.interfaces.IMGLoadListener;
 import com.lzp.appexp.BannerLayoutActivity;
+import com.lzp.appexp.ClipImageActivity;
 import com.lzp.appexp.Constants;
 import com.lzp.appexp.MessageActivity;
 import com.lzp.appexp.tabmanager.TabManagerActivity;
@@ -73,6 +74,9 @@ public class TestAdapter extends LoadMoreAdapter {
         View inflate = LayoutInflater.from(context).inflate(R.layout.test_item, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(inflate);
         myViewHolder.tv.setText(String.valueOf(viewType));
+
+
+
         return new MyViewHolder(inflate);
     }
 
@@ -92,6 +96,8 @@ public class TestAdapter extends LoadMoreAdapter {
             holder.tv.setText("拖拽排序");
         }else if(position==5){
             holder.tv.setText("消息卡片");
+        }else if(position==6){
+            holder.tv.setText("裁切图片");
         }
 
         else{
@@ -122,20 +128,23 @@ public class TestAdapter extends LoadMoreAdapter {
     }
 
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+   static class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView testIv;
         TextView tv;
 
+        Context context;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            context = itemView.getContext();
             testIv = itemView.findViewById(R.id.testIv);
             tv = itemView.findViewById(R.id.tv);
+
 
             itemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     int adapterPosition = getAdapterPosition();
                     if (adapterPosition==0){
                         Intent intent = new Intent(context, HorizontalScrollableLinearLayoutActivity.class);
@@ -155,6 +164,10 @@ public class TestAdapter extends LoadMoreAdapter {
                         Intent intent = new Intent(context, MessageActivity.class);
                         context.startActivity(intent);
                     }
+                    else if(adapterPosition==6){
+                        Intent intent = new Intent(context, ClipImageActivity.class);
+                        context.startActivity(intent);
+                    }
                     else{
                         Intent intent = new Intent(context, CarActivity.class);
                         ActivityOptionsCompat options = ActivityOptionsCompat
@@ -164,6 +177,7 @@ public class TestAdapter extends LoadMoreAdapter {
                     }
                 }
             });
+
         }
     }
 }
