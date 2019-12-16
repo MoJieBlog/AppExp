@@ -2,7 +2,7 @@ package com.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Rect;
+import android.graphics.Path;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
@@ -11,19 +11,18 @@ import android.util.AttributeSet;
  * @author: lixiaopeng
  * @Date: 2019-12-16
  */
-public class ClipRectImageView extends AppCompatImageView {
+public class ClipAbleImageView extends AppCompatImageView {
 
-    private Rect rect;
     private boolean needClip = false;
+    private Path path;
 
-    public ClipRectImageView(Context context) {
+    public ClipAbleImageView(Context context) {
         this(context, null);
     }
 
-    public ClipRectImageView(Context context, AttributeSet attrs) {
+    public ClipAbleImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        rect = new Rect();
+        path = new Path();
     }
 
     public void setNeedClip(boolean needClip) {
@@ -36,21 +35,37 @@ public class ClipRectImageView extends AppCompatImageView {
             @Override
             public void run() {
                 needClip = true;
-                rect.set(0, 0, endX, getMeasuredHeight());
+                path.reset();
+                path.moveTo(0,0);
+                path.lineTo(endX,0);
+                path.lineTo(endX,getMeasuredHeight());
+                path.lineTo(0,getMeasuredHeight());
+                path.close();
                 invalidate();
             }
         });
     }
+
     public void setClipRect(int left, int top, int right, int bottom) {
         needClip = true;
-        rect.set(left, top, right, bottom);
+        path.reset();
+        path.moveTo(left,top);
+        path.lineTo(left,bottom);
+        path.lineTo(right,bottom);
+        path.lineTo(right,top);
+        path.close();
+        invalidate();
+    }
+
+    public void clipPath(Path path){
+        this.path = path;
         invalidate();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         if (needClip){
-            canvas.clipRect(rect);
+            canvas.clipPath(path);
         }
         super.onDraw(canvas);
     }

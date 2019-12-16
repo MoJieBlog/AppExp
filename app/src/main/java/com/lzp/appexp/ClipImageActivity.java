@@ -7,7 +7,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.base.compat.BaseActivity;
-import com.view.ClipRectImageView;
+import com.view.ClipAbleImageView;
 
 /**
  * @describe
@@ -16,7 +16,7 @@ import com.view.ClipRectImageView;
  */
 public class ClipImageActivity extends BaseActivity implements OnClickListener {
 
-    private ClipRectImageView clipImageView;
+    private ClipAbleImageView clipImageView;
     private Button btnClip;
     private Button btnNotClip;
 
