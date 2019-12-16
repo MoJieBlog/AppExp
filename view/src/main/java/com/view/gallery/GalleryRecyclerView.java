@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.utils.PhoneUtils;
 import com.utils.SizeUtils;
-import com.view.DampRecyclerView;
+import com.view.damp.DampRecyclerView;
 import com.view.gallery.itemdecoration.GarageItemDecoration;
 
 /**

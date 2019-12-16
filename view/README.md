@@ -16,3 +16,11 @@
 ## [加载更多，目前只有RecyclerView](https://github.com/MoJieBlog/AppExp/tree/master/view/src/main/java/com/view/loadmore)
 
 ## [k线图](https://github.com/MoJieBlog/AppExp/tree/master/view/src/main/java/com/view/kline)
+
+## [recyclerView画廊效果](https://github.com/MoJieBlog/AppExp/tree/master/view/src/main/java/com/view/gallery)
+
+## [弹性控件](https://github.com/MoJieBlog/AppExp/tree/master/view/src/main/java/com/view/damp)
+* 弹性recyclerView
+* 弹性ViewPager
+
+## [圆形relativeLayout](https://github.com/MoJieBlog/AppExp/tree/master/view/src/main/java/com/view/RoundRelativeLayout)

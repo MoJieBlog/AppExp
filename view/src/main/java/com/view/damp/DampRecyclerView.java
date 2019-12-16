@@ -1,4 +1,4 @@
-package com.view;
+package com.view.damp;
 
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
@@ -35,7 +35,7 @@ public class DampRecyclerView extends RecyclerView {
     public boolean onInterceptTouchEvent(MotionEvent e) {
         int action = e.getAction();
         LayoutManager layoutManager = getLayoutManager();
-        if (layoutManager instanceof LinearLayoutManager){
+        if (layoutManager instanceof LinearLayoutManager) {
             orientation = ((LinearLayoutManager) layoutManager).getOrientation();
         }
         if (action == MotionEvent.ACTION_DOWN) {
@@ -53,7 +53,7 @@ public class DampRecyclerView extends RecyclerView {
                 downX = e.getX();
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (orientation==LinearLayoutManager.HORIZONTAL){
+                if (orientation == LinearLayoutManager.HORIZONTAL) {
                     float nowX = e.getX();
                     float dx = nowX - downX;
                     downX = nowX;
@@ -61,12 +61,12 @@ public class DampRecyclerView extends RecyclerView {
                         offsetLeftAndRight((int) (dx * damp));
                     } else {
                         if (getAdapter() != null) {
-                            if (getLastPosition() == getAdapter().getItemCount() - 1) {//在末尾
+                            if (dx < 0 && getLastPosition() == getAdapter().getItemCount() - 1) {//在末尾
                                 offsetLeftAndRight((int) (dx * damp));
                             }
                         }
                     }
-                }else{
+                } else {
                     float nowY = e.getY();
                     float dy = nowY - downY;
                     downY = dy;
@@ -74,7 +74,7 @@ public class DampRecyclerView extends RecyclerView {
                         offsetLeftAndRight((int) (dy * damp));
                     } else {
                         if (getAdapter() != null) {
-                            if (getLastPosition() == getAdapter().getItemCount() - 1) {//在末尾
+                            if (dy < 0 && getLastPosition() == getAdapter().getItemCount() - 1) {//在末尾
                                 offsetLeftAndRight((int) (dy * damp));
                             }
                         }
@@ -111,9 +111,9 @@ public class DampRecyclerView extends RecyclerView {
     private int viewOffset = 0;
 
     private void doDamp() {
-        if (orientation==LinearLayoutManager.HORIZONTAL){
+        if (orientation == LinearLayoutManager.HORIZONTAL) {
             viewOffset = getLeft();
-        }else{
+        } else {
             viewOffset = getTop();
         }
 
@@ -127,9 +127,9 @@ public class DampRecyclerView extends RecyclerView {
                 int animatedValue = (int) animation.getAnimatedValue();
                 int dv = animatedValue - viewOffset;
                 viewOffset = animatedValue;
-                if (orientation== LinearLayoutManager.HORIZONTAL){
+                if (orientation == LinearLayoutManager.HORIZONTAL) {
                     offsetLeftAndRight(dv);
-                }else{
+                } else {
                     offsetTopAndBottom(dv);
                 }
             }

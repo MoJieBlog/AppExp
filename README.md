@@ -19,22 +19,8 @@
 * BaseStatusView 状态View
 
 ## [utils](https://github.com/MoJieBlog/AppExp/blob/master/utils/src/main/java/com/utils/)
-* 权限工具类
-* 日期时间工具类
-* Log
-* 数字
-* 手机
-* SP存储
-* 尺寸
 
-## [View](https://github.com/MoJieBlog/AppExp/blob/master/view/)
-* 加载更多的recyclerView
-* PhotoView
-* 仿SwipeRefreshLayout写的刷新头部,系统SwipeRefreshLayout支持刷新场景都支持，支持扩展，配合加载更多的recyclerView可实现刷新加载更多的recyclerView功能。
-    * 支持下拉到一定高度刷新，继续下拉打开新页面（MoveOpenAndRefreshLayout）
-* 仪表盘（doing）
-* 半圆
-* 加载中的View,IOS的菊花加载
+## [自定义View](https://github.com/MoJieBlog/AppExp/blob/master/view/)
 
 ## [dialog](https://github.com/MoJieBlog/AppExp/blob/master/dialog/)
 * 单选项弹窗
