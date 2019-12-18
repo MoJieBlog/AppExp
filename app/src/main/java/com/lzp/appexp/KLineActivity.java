@@ -2,10 +2,13 @@ package com.lzp.appexp;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.base.compat.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import com.view.kline.KLineView;
 import com.view.kline.Point;
@@ -17,6 +20,7 @@ import com.view.kline.Point;
  */
 public class KLineActivity extends BaseActivity {
 
+    private static final String TAG = "KLineActivity";
 
     private KLineView kLinView;
 
@@ -28,6 +32,8 @@ public class KLineActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_k_line);
         initView();
+
+        doTest();
 
     }
 
@@ -54,4 +60,50 @@ public class KLineActivity extends BaseActivity {
             }
         }
     }
+
+    void doTest(){
+
+        CountDownLatch countDownLatch = new CountDownLatch(2);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    countDownLatch.await(3, TimeUnit.SECONDS);
+
+                    Log.e(TAG, "run: all tasks have done.");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    countDownLatch.countDown();
+                    Log.e(TAG, "run: task 1 has done.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                    Thread.sleep(5000);
+                    countDownLatch.countDown();
+                    Log.e(TAG, "run: task 2 has done.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+    }
+
+
 }

@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/appTheme"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name=".HorizontalScrollableLinearLayoutActivity"></activity>
+        <activity android:name=".ConstraintLayoutActivity"></activity>
+        <activity android:name=".HorizontalScrollableLinearLayoutActivity" />
         <activity
             android:name=".transition.CarActivity"
             android:screenOrientation="portrait" />
@@ -34,16 +35,20 @@
         <activity
             android:name=".KLineActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".transition.GarageActivityNew"
-            android:theme="@style/transparentTheme"
+        <activity
+            android:name=".transition.GarageActivityNew"
+            android:screenOrientation="portrait"
+            android:theme="@style/transparentTheme" />
+        <activity
+            android:name=".BannerLayoutActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".BannerLayoutActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".tabmanager.TabManagerActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".tabmanager.TabManagerActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".MessageActivity" />
-        <activity android:name=".ClipImageActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ClipImageActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

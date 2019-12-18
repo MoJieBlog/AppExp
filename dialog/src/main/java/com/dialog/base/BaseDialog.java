@@ -11,7 +11,7 @@ import android.view.WindowManager.LayoutParams;
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public  class BaseDialog extends Dialog implements IBaseDialog<BaseDialog> {
+public class BaseDialog extends Dialog implements IBaseDialog<BaseDialog> {
 
     public BaseDialog(@NonNull Context context) {
         this(context, 0);
@@ -21,49 +21,14 @@ public  class BaseDialog extends Dialog implements IBaseDialog<BaseDialog> {
         super(context, themeResId);
 
         //设置透明度
-        LayoutParams lp = getWindow().getAttributes();
+        /*LayoutParams lp = getWindow().getAttributes();
         lp.alpha = 0.3f;
-        getWindow().setAttributes(lp);
+        getWindow().setAttributes(lp);*/
     }
 
     @Override
     public BaseDialog setGravity(int gravity) {
         getWindow().setGravity(gravity);
         return this;
-    }
-
-    @Override
-    public BaseDialog setTitleVisible(int visible) {
-        return null;
-    }
-
-    @Override
-    public BaseDialog setTitleText(String text) {
-        return null;
-    }
-
-    @Override
-    public BaseDialog setTitleText(int text) {
-        return null;
-    }
-
-    @Override
-    public BaseDialog setTitleColor(int color) {
-        return null;
-    }
-
-    @Override
-    public BaseDialog setTitleColor(Color color) {
-        return null;
-    }
-
-    @Override
-    public BaseDialog setTitleSize(int size) {
-        return null;
-    }
-
-    @Override
-    public BaseDialog setTitleBold(boolean bold) {
-        return null;
     }
 }

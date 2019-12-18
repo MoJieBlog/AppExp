@@ -22,10 +22,15 @@ android {
         }
     }
 
+    compileOptions {
+        targetCompatibility rootProject.ext.javaVersion
+        sourceCompatibility rootProject.ext.javaVersion
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation extAppcompatV7
+    implementation extConstraint
 }

@@ -1,23 +1,26 @@
 package com.dialog.base;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.ColorInt;
-import android.support.annotation.IntegerRes;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
+
+import com.dialog.TwoOptMsgDialog;
 
 /**
  * @describe
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
-public interface ITwoOptDialog<T> {
+public interface ITwoOptDialog {
     /**
      * 设置左侧文字
      *
      * @param text
      * @return
      */
-    T setLeftText(String text);
+    TwoOptMsgDialog setLeftText(String text);
 
     /**
      * 设置左侧文字
@@ -25,7 +28,7 @@ public interface ITwoOptDialog<T> {
      * @param text
      * @return
      */
-    T setLeftText(@IntegerRes int text);
+    TwoOptMsgDialog setLeftText(@StringRes int text);
 
     /**
      * 设置右侧文字
@@ -33,7 +36,7 @@ public interface ITwoOptDialog<T> {
      * @param text
      * @return
      */
-    T setRightText(String text);
+    TwoOptMsgDialog setRightText(String text);
 
     /**
      * 设置右侧文字
@@ -41,7 +44,7 @@ public interface ITwoOptDialog<T> {
      * @param text
      * @return
      */
-    T setRightText(@IntegerRes int text);
+    TwoOptMsgDialog setRightText(@StringRes int text);
 
     /**
      * 设置左侧文字大小
@@ -49,7 +52,7 @@ public interface ITwoOptDialog<T> {
      * @param size
      * @return
      */
-    T setLeftTextSize(int size);
+    TwoOptMsgDialog setLeftTextSize(int size);
 
     /**
      * 设置右侧文字大小
@@ -57,7 +60,7 @@ public interface ITwoOptDialog<T> {
      * @param size
      * @return
      */
-    T setRightTextSize(int size);
+    TwoOptMsgDialog setRightTextSize(int size);
 
     /**
      * 设置左侧文字颜色
@@ -65,7 +68,7 @@ public interface ITwoOptDialog<T> {
      * @param color
      * @return
      */
-    T setLeftTextColor(Color color);
+    TwoOptMsgDialog setLeftTextColorRes(@ColorRes int color);
 
     /**
      * 设置左侧文字颜色
@@ -73,7 +76,7 @@ public interface ITwoOptDialog<T> {
      * @param color
      * @return
      */
-    T setLeftTextColor(@ColorInt int color);
+    TwoOptMsgDialog setLeftTextColor(@ColorInt int color);
 
     /**
      * 设置右侧文字颜色
@@ -81,7 +84,7 @@ public interface ITwoOptDialog<T> {
      * @param color
      * @return
      */
-    T setRightTextColor(Color color);
+    TwoOptMsgDialog setRightTextColorRes(@ColorRes int color);
 
     /**
      * 设置右侧文字颜色
@@ -89,7 +92,7 @@ public interface ITwoOptDialog<T> {
      * @param color
      * @return
      */
-    T setRightTextColor(@ColorInt int color);
+    TwoOptMsgDialog setRightTextColor(@ColorInt int color);
 
     /**
      * 设置左侧文字字体
@@ -97,7 +100,7 @@ public interface ITwoOptDialog<T> {
      * @param typeface
      * @return
      */
-    T setLeftTextTypeface(Typeface typeface);
+    TwoOptMsgDialog setLeftTextTypeface(Typeface typeface);
 
     /**
      * 设置右侧文字字体
@@ -105,7 +108,7 @@ public interface ITwoOptDialog<T> {
      * @param typeFace
      * @return
      */
-    T setRightTextTypeFace(Typeface typeFace);
+    TwoOptMsgDialog setRightTextTypeFace(Typeface typeFace);
 
     /**
      * 设置左侧文字是否加粗
@@ -113,7 +116,7 @@ public interface ITwoOptDialog<T> {
      * @param bold
      * @return
      */
-    T setLeftTextBold(boolean bold);
+    TwoOptMsgDialog setLeftTextBold(boolean bold);
 
     /**
      * 设置右侧文字是否加粗
@@ -121,5 +124,96 @@ public interface ITwoOptDialog<T> {
      * @param bold
      * @return
      */
-    T setRightTextBold(boolean bold);
+    TwoOptMsgDialog setRightTextBold(boolean bold);
+
+    /**
+     * 显示选项间的分割线
+     * @param show
+     * @return
+     */
+    TwoOptMsgDialog showOptGapLine(boolean show);
+
+    /**
+     * 显示msg和选项间的分割线
+     * @param show
+     * @return
+     */
+    TwoOptMsgDialog showMsgOptGapLine(boolean show);
+
+    /**
+     * 设置左侧选项的背景
+     * @param bgRes
+     * @return
+     */
+    TwoOptMsgDialog setLeftBg(@DrawableRes int bgRes);
+
+    /**
+     * 设置左侧选项的背景
+     * @param color
+     * @return
+     */
+    TwoOptMsgDialog setLeftBgColor(@ColorInt int color);
+
+    /**
+     * 设置左侧选项的背景
+     * @param color
+     * @return
+     */
+    TwoOptMsgDialog setLeftBgColorRes(@ColorRes int color);
+
+    /**
+     * 设置右侧选项的背景
+     * @param bgRes
+     * @return
+     */
+    TwoOptMsgDialog setRightBg(@DrawableRes int bgRes);
+
+    /**
+     * 设置右侧选项的背景
+     * @param color
+     * @return
+     */
+    TwoOptMsgDialog setRightBgColor(@ColorInt int color);
+
+    /**
+     * 设置右侧选项的背景
+     * @param color
+     * @return
+     */
+    TwoOptMsgDialog setRightBgColorRes(@ColorRes int color);
+
+    /**
+     * 信息文字
+     * @param text
+     * @return
+     */
+    TwoOptMsgDialog setMsgText(String text);
+
+    /**
+     * 信息文字
+     * @param textRes
+     * @return
+     */
+    TwoOptMsgDialog setMsgText(@StringRes int textRes);
+
+    /**
+     * 信息文字大小
+     * @param size
+     * @return
+     */
+    TwoOptMsgDialog setMsgTextSize(int size);
+
+    /**
+     * 信息文字颜色
+     * @param colorRes
+     * @return
+     */
+    TwoOptMsgDialog setMsgTextColorRes(@ColorRes int colorRes);
+
+    /**
+     * 信息文字颜色
+     * @param color
+     * @return
+     */
+    TwoOptMsgDialog setMsgTextColor(@ColorInt int color);
 }

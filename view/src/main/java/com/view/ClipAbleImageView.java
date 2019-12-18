@@ -7,7 +7,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 /**
- * @describe 裁切的矩形ImageView
+ * @describe 可以裁切的ImageView
  * @author: lixiaopeng
  * @Date: 2019-12-16
  */
@@ -58,6 +58,7 @@ public class ClipAbleImageView extends AppCompatImageView {
     }
 
     public void clipPath(Path path){
+        needClip = true;
         this.path = path;
         invalidate();
     }

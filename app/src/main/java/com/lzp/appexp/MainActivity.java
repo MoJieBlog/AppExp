@@ -12,10 +12,10 @@ import android.view.WindowManager;
 
 import com.base.compat.ActionBarView;
 import com.base.compat.ActionBarView.ActionBarClickAdapter;
-import com.base.compat.BaseActivity;
 import com.base.compat.StatusBarView;
 import com.base.compat.ToastBaseActivity;
-import com.dialog.NBDialogBuilder;
+import com.dialog.TwoOptMsgDialog;
+import com.dialog.TwoOptMsgDialog.OnOptClickListener;
 import com.lzp.appexp.adapter.TestAdapter;
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
@@ -51,7 +51,7 @@ public class MainActivity extends ToastBaseActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
         }
 
@@ -77,8 +77,26 @@ public class MainActivity extends ToastBaseActivity {
             @Override
             public void onClickTitle(View v) {
                 super.onClickTitle(v);
-                Intent intent = new Intent(MainActivity.this,KLineActivity.class);
-                startActivity(intent);
+                TwoOptMsgDialog twoOptMsgDialog = new TwoOptMsgDialog(MainActivity.this);
+                twoOptMsgDialog.setLeftText("this is title");
+                twoOptMsgDialog.setMsgText("this is message.");
+                twoOptMsgDialog.setLeftText("cancel");
+                twoOptMsgDialog.setRightText("ok");
+                twoOptMsgDialog.setOptClickListener(new OnOptClickListener() {
+                    @Override
+                    public void leftOptClick(View v) {
+                        twoOptMsgDialog.dismiss();
+                    }
+
+                    @Override
+                    public void rightOptClick(View v) {
+                        showToast("ok");
+                        twoOptMsgDialog.dismiss();
+                    }
+                });
+
+                twoOptMsgDialog.show();
+
             }
 
             @Override
@@ -90,7 +108,7 @@ public class MainActivity extends ToastBaseActivity {
 
             @Override
             public void onClickLeftText(View v) {
-                NBDialogBuilder.buildTwoOptMsgDialog(MainActivity.this).setLeftText("").show();
+
             }
 
             @Override
@@ -141,17 +159,18 @@ public class MainActivity extends ToastBaseActivity {
     }
 
     private long preTime = 0;
+
     @Override
     public void onBackPressed() {
-        if (preTime==0){
+        if (preTime == 0) {
             preTime = System.currentTimeMillis();
             showToast("再按一次退出");
             return;
         }
-        if (System.currentTimeMillis()-preTime>1000){
+        if (System.currentTimeMillis() - preTime > 1000) {
             preTime = System.currentTimeMillis();
             showToast("再按一次退出");
-        }else{
+        } else {
             super.onBackPressed();
         }
     }
