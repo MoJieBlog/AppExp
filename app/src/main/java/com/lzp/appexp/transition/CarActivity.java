@@ -4,12 +4,6 @@ import android.content.Intent;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior.BottomSheetCallback;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
-import android.support.v4.widget.NestedScrollView;
 import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +13,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+import androidx.core.widget.NestedScrollView;
+
 import com.base.compat.BaseActivity;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.lzp.appexp.Constants;
 import com.lzp.appexp.R;
 import com.lzp.appexp.transition.behavior.HomeBottomSheetBehavior;
@@ -108,7 +109,7 @@ public class CarActivity extends BaseActivity {
             }
         });
 
-        behavior.setBottomSheetCallback(new BottomSheetCallback() {
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
                 Log.e(TAG, "onStateChanged: " + i);

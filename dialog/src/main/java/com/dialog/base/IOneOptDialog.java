@@ -2,7 +2,9 @@ package com.dialog.base;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.annotation.IntegerRes;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.StringRes;
 
 /**
  * @describe 单选项弹窗
@@ -23,7 +25,7 @@ public interface IOneOptDialog<T> {
      * @param textRes
      * @return
      */
-    T setText(@IntegerRes int textRes);
+    T setText(@StringRes int textRes);
 
     /**
      * 设置选项文字大小
@@ -45,7 +47,7 @@ public interface IOneOptDialog<T> {
      * @param color
      * @return
      */
-    T setTextColor(@IntegerRes int color);
+    T setTextColor(@ColorRes int color);
 
     /**
      * 设置选项字体

@@ -8,7 +8,7 @@ android {
         targetSdkVersion rootProject.ext.extTargetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -60,9 +60,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation extAppcompatV7
+    implementation extAppcompat
     implementation extConstraint
-    implementation extRecyclerviewV7
+    implementation extRecyclerview
     implementation extDesign
 
     implementation extEventBus
@@ -80,3 +80,38 @@ dependencies {
     implementation extGlide
     annotationProcessor extGlideCompiler
 }
+
+
+/*project.afterEvaluate {
+    Task task = null
+    try {
+        task = project.tasks.getByName("mergeDebugAssets")
+        println("find task")
+    } catch (UnknownTaskException e) {
+        println("not find task")
+        println(e.printStackTrace())
+    }
+
+    task.dependsOn(myTask)
+
+}*/
+
+
+/*project.tasks.whenTaskAdded {Task theTask ->
+    if(theTask.name == "assembleDebug"){
+        theTask.dependsOn(myTask)
+    }
+}*/
+task myTask(){
+
+    println("this is myTask to do test")
+
+    doLast(new Action<Task>(){
+        @Override
+        void execute(Task task) {
+            println("doTest  1111111111")
+        }
+    })
+
+}
+

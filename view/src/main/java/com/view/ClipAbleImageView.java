@@ -3,8 +3,9 @@ package com.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Path;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 /**
  * @describe 可以裁切的ImageView

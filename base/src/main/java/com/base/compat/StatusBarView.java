@@ -2,15 +2,13 @@ package com.base.compat;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.LinearLayout.LayoutParams;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.utils.PhoneUtils;
-import com.utils.SizeUtils;
 
 /**
  * @describe

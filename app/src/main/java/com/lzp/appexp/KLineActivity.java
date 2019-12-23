@@ -1,17 +1,17 @@
 package com.lzp.appexp;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import com.base.compat.BaseActivity;
+import com.view.kline.KLineView;
+import com.view.kline.Point;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import com.view.kline.KLineView;
-import com.view.kline.Point;
 
 /**
  * @describe

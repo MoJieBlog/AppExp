@@ -9,14 +9,15 @@ ext {
     extTargetSdkVersion = 28
 
     //系统
-    extAppcompatV7 = "com.android.support:appcompat-v7:28.0.0"
-    extConstraint = "com.android.support.constraint:constraint-layout:1.1.3"
-    extSupportV4 = 'com.android.support:support-v4:28.0.0'
-    extDesign = 'com.android.support:design:28.0.0'
-    extRecyclerviewV7 = 'com.android.support:recyclerview-v7:28.0.0'
-    extCardviewV7 = 'com.android.support:cardview-v7:28.0.0'
+    extAppcompat = 'androidx.appcompat:appcompat:1.0.0'
+    extConstraint = 'androidx.constraintlayout:constraintlayout:1.1.3'
+    extDesign = 'com.google.android.material:material:1.0.0'
+    extRecyclerview = 'androidx.recyclerview:recyclerview:1.0.0'
+    extCardview = 'com.android.support:cardview-v7:28.0.0'
+    extAnnotations = 'androidx.annotation:annotation:1.0.0'
+
+    //
     extDynamicAnimation = 'com.android.support:support-dynamic-animation:28.0.0'
-    extAnnotations = 'com.android.support:support-annotations:28.0.0'
     extMultidex = "com.android.support:multidex:1.0.3"
 
     // okhttp 依赖
@@ -24,8 +25,8 @@ ext {
     //retrofit
     //extRetrofit = 'com.squareup.retrofit2:retrofit:2.0.2'
     // glide 依赖
-    extGlide = 'com.github.bumptech.glide:glide:4.8.0'
-    extGlideCompiler = 'com.github.bumptech.glide:compiler:4.8.0'
+    extGlide = 'com.github.bumptech.glide:glide:4.9.0'
+    extGlideCompiler = 'com.github.bumptech.glide:compiler:4.9.0'
     // Rx
     extRxJava = 'io.reactivex.rxjava2:rxjava:2.2.7'
     extRxAndroid = 'io.reactivex.rxjava2:rxandroid:2.1.1'

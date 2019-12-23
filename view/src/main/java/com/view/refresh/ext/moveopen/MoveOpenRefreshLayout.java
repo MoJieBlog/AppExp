@@ -1,12 +1,13 @@
 package com.view.refresh.ext.moveopen;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.utils.SizeUtils;
 import com.view.refresh.LoadingLayout;

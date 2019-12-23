@@ -1,12 +1,6 @@
 package com.lzp.appexp.tabmanager;
 
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +9,12 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lzp.appexp.R;
 import com.lzp.appexp.applicaton.App;
@@ -87,7 +84,7 @@ public class TabMainAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == TYPE_TITLE) {
             TextView textView = new TextView(viewGroup.getContext());
             textView.setTextColor(0xff000000);
@@ -138,7 +135,7 @@ public class TabMainAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         int itemViewType = getItemViewType(position);
         if (itemViewType == TYPE_TITLE) {
             TitleHolder holder = (TitleHolder) viewHolder;
@@ -177,21 +174,21 @@ public class TabMainAdapter extends RecyclerView.Adapter {
     }
 
     public void showItem(int position, RecyclerView recyclerView) {
-        ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
+        RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
         if (holder instanceof TabViewHolder){
             holder.itemView.setVisibility(View.VISIBLE);
         }
     }
 
     public void hindItem(int position, RecyclerView recyclerView){
-        ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
+        RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
         if (holder instanceof TabViewHolder){
             holder.itemView.setVisibility(View.INVISIBLE);
         }
     }
 
     public interface OnItemClickListener{
-        void onItemClick(ViewHolder holder);
+        void onItemClick(RecyclerView.ViewHolder holder);
     }
 
     /*****************以下为Viewholder********************/

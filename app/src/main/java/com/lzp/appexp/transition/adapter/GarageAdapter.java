@@ -1,13 +1,12 @@
 package com.lzp.appexp.transition.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lzp.appexp.R;
 import com.lzp.appexp.transition.view.CarCardView;
@@ -44,7 +43,7 @@ public class GarageAdapter extends RecyclerView.Adapter {
      * @param rcv
      */
     public void onDestroy(int index, RecyclerView rcv) {
-        LayoutManager layoutManager = rcv.getLayoutManager();
+        RecyclerView.LayoutManager layoutManager = rcv.getLayoutManager();
         View childAt = layoutManager.findViewByPosition(index);
         if (childAt instanceof CarCardView) {
             ((CarCardView) childAt).setCarImgVisible(View.GONE);
@@ -52,7 +51,7 @@ public class GarageAdapter extends RecyclerView.Adapter {
     }
 
     public void showLastCar(int index,RecyclerView rcv) {
-        LayoutManager layoutManager = rcv.getLayoutManager();
+        RecyclerView.LayoutManager layoutManager = rcv.getLayoutManager();
         View childAt = layoutManager.findViewByPosition(index);
         if (childAt instanceof CarCardView) {
             ((CarCardView) childAt).setCarImgVisible(View.VISIBLE);
@@ -61,13 +60,13 @@ public class GarageAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         CarCardView carCardView = (CarCardView) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_garage, viewGroup, false);
         return new MyViewHolder(carCardView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         View itemView = viewHolder.itemView;
         if (itemView instanceof CarCardView) {
             CarCardView carCardView = (CarCardView) itemView;

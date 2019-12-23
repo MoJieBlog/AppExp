@@ -1,17 +1,16 @@
 package com.view.loadmore;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
-import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.view.R;
 import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
@@ -32,7 +31,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     protected LoadMoreRecyclerView mLoadMoreRecyclerview;
     protected Context context;
 
-    private LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManager;
 
     public LoadMoreAdapter(Context context) {
         this.context = context;
@@ -67,7 +66,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_LOADMORE) {
 
             return new LoadmoreViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_loadmore, parent, false));
@@ -77,7 +76,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position, List payloads) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, List payloads) {
 
 
         if (viewHolder.getItemViewType() == TYPE_LOADMORE) {
@@ -106,7 +105,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
         onBindViewHolder(viewHolder, position, null);
     }
 
@@ -122,7 +121,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
      *
      * @param viewHolder
      */
-    private void bindLoadMoreViewHolder(ViewHolder viewHolder) {
+    private void bindLoadMoreViewHolder(RecyclerView.ViewHolder viewHolder) {
         LoadmoreViewHolder holder = (LoadmoreViewHolder) viewHolder;
         final int loadmoreStatus = mLoadMoreRecyclerview.getLoadMoreStatus();
         switch (mLoadMoreRecyclerview.getLoadMoreStatus()) {
@@ -176,7 +175,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     }
 
 
-    static class LoadmoreViewHolder extends ViewHolder {
+    static class LoadmoreViewHolder extends RecyclerView.ViewHolder {
 
         ProgressBar loadmoreView;
         TextView loadmoreTitle;
@@ -196,13 +195,13 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
      * @return
      * @see RecyclerView.Adapter#onCreateViewHolder(ViewGroup, int)
      */
-    public abstract ViewHolder mOnCreateViewHolder(ViewGroup parent, int viewType);
+    public abstract RecyclerView.ViewHolder
+    mOnCreateViewHolder(ViewGroup parent, int viewType);
 
     /**
      * @param viewHolder
      * @param position
      * @param payloads
-     * @see RecyclerView.Adapter#onBindViewHolder(ViewHolder, int, List)
      */
-    public abstract void mOnBindViewHolder(ViewHolder viewHolder, int position, List payloads);
+    public abstract void mOnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, List payloads);
 }

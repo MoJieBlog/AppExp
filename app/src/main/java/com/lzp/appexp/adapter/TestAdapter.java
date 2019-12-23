@@ -4,10 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,16 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.imageloader.ImageLoader;
 import com.imageloader.interfaces.IMGLoadListener;
 import com.lzp.appexp.BannerLayoutActivity;
 import com.lzp.appexp.ClipImageActivity;
 import com.lzp.appexp.Constants;
-import com.lzp.appexp.MessageActivity;
-import com.lzp.appexp.tabmanager.TabManagerActivity;
 import com.lzp.appexp.HorizontalScrollableLinearLayoutActivity;
 import com.lzp.appexp.KLineActivity;
+import com.lzp.appexp.MessageActivity;
 import com.lzp.appexp.R;
+import com.lzp.appexp.tabmanager.TabManagerActivity;
 import com.lzp.appexp.transition.CarActivity;
 import com.view.loadmore.LoadMoreAdapter;
 
@@ -70,7 +70,7 @@ public class TestAdapter extends LoadMoreAdapter {
     }
 
     @Override
-    public ViewHolder mOnCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder mOnCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(context).inflate(R.layout.test_item, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(inflate);
         myViewHolder.tv.setText(String.valueOf(viewType));
@@ -81,7 +81,7 @@ public class TestAdapter extends LoadMoreAdapter {
     }
 
     @Override
-    public void mOnBindViewHolder(ViewHolder viewHolder, int position, List p) {
+    public void mOnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, List p) {
         MyViewHolder holder = (MyViewHolder) viewHolder;
 
         if (position==0){

@@ -23,7 +23,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Build.VERSION_CODES;
-import android.support.annotation.RequiresApi;
 import android.transition.PathMotion;
 import android.transition.Transition;
 import android.transition.TransitionValues;
@@ -31,6 +30,8 @@ import android.util.Property;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+
+import androidx.annotation.RequiresApi;
 
 @RequiresApi(api = VERSION_CODES.KITKAT)
 public class PositionTransition extends Transition {

@@ -5,12 +5,13 @@ import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.os.Build.VERSION_CODES;
-import android.support.annotation.RequiresApi;
 import android.transition.TransitionValues;
 import android.transition.Visibility;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * @describe

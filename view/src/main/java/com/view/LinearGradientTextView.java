@@ -8,12 +8,14 @@ import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
 /**
  * @describe
  * @author: lixiaopeng
  * @Date: 2019-08-29
  */
-public class LinearGradientTextView extends android.support.v7.widget.AppCompatTextView {
+public class LinearGradientTextView extends AppCompatTextView {
 
     private static final String TAG = "LinearGradientTextView";
     private Paint paint;

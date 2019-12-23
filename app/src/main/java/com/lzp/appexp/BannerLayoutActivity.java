@@ -1,9 +1,10 @@
 package com.lzp.appexp;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.PagerSnapHelper;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.compat.BaseActivity;
 import com.lzp.appexp.adapter.BannerAdapter;

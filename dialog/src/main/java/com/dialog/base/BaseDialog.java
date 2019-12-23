@@ -2,9 +2,8 @@ package com.dialog.base;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.view.WindowManager.LayoutParams;
+
+import androidx.annotation.NonNull;
 
 /**
  * @describe

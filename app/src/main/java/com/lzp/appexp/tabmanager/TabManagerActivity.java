@@ -6,18 +6,16 @@ import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.GridLayoutManager.SpanSizeLookup;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.compat.BaseActivity;
 import com.lzp.appexp.R;
@@ -70,7 +68,7 @@ public class TabManagerActivity extends BaseActivity {
 
         gridLayoutManager = new GridLayoutManager(this, 3);
         dragRcv.setLayoutManager(gridLayoutManager);
-        gridLayoutManager.setSpanSizeLookup(new SpanSizeLookup() {
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
                 int itemViewType = adapter.getItemViewType(position);
@@ -99,19 +97,19 @@ public class TabManagerActivity extends BaseActivity {
             }
 
             @Override
-            public void onSelected(ViewHolder viewHolder) {
+            public void onSelected(RecyclerView.ViewHolder viewHolder) {
 
             }
 
             @Override
-            public void onEndMove(RecyclerView recyclerView, ViewHolder viewHolder) {
+            public void onEndMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
 
             }
         });
 
         adapter.setItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(ViewHolder holder) {
+            public void onItemClick(RecyclerView.ViewHolder holder) {
                 int adapterPosition = holder.getAdapterPosition();
                 //初始化镜像View
                 initMirrorView(holder);
@@ -205,7 +203,7 @@ public class TabManagerActivity extends BaseActivity {
      * @param toPosition 这里的目标位置是没有刷新前的坐标，因为刷新和位移同时进行，所以不能等刷新完成后计算，所以：目标位置 = 真实目标位置+1
      * @return
      */
-    private int[] computeToXY(ViewHolder holder, int toPosition, boolean my2more) {
+    private int[] computeToXY(RecyclerView.ViewHolder holder, int toPosition, boolean my2more) {
 
         int firstVisibleItemPosition = gridLayoutManager.findFirstVisibleItemPosition();
         int lastVisibleItemPosition = gridLayoutManager.findLastVisibleItemPosition();
@@ -226,7 +224,7 @@ public class TabManagerActivity extends BaseActivity {
 
         //因为目标的位置在变化，所以用目标位置的上一个确定位置
         int[] toXY = getFromXY(toPosition - 1);
-        ViewHolder preHolder = dragRcv.findViewHolderForAdapterPosition(toPosition - 1);
+        RecyclerView.ViewHolder preHolder = dragRcv.findViewHolderForAdapterPosition(toPosition - 1);
         if (preHolder.getItemViewType() == adapter.getTitleType()) {//是title
             toXY[0] = 0;
             toXY[1] = toXY[1] + titleHeight;
@@ -248,7 +246,7 @@ public class TabManagerActivity extends BaseActivity {
 
     private int[] getFromXY(int targetPosition) {
         int[] position = new int[2];
-        ViewHolder viewHolder = dragRcv.findViewHolderForAdapterPosition(targetPosition);
+        RecyclerView.ViewHolder viewHolder = dragRcv.findViewHolderForAdapterPosition(targetPosition);
         if (viewHolder != null) {
             viewHolder.itemView.getLocationOnScreen(position);
             Log.e(TAG, "computeTargetPosition: " + targetPosition + " = " + position[0] + "   " + position[1]);
@@ -259,7 +257,7 @@ public class TabManagerActivity extends BaseActivity {
     /**
      * 初始化镜像控件
      */
-    private void initMirrorView(ViewHolder holder) {
+    private void initMirrorView(RecyclerView.ViewHolder holder) {
         View itemView = holder.itemView;
         itemView.destroyDrawingCache();
         itemView.setDrawingCacheEnabled(true);

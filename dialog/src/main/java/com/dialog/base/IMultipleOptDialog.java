@@ -2,8 +2,9 @@ package com.dialog.base;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.annotation.ColorInt;
 import android.view.View;
+
+import androidx.annotation.ColorRes;
 
 import java.util.List;
 
@@ -52,7 +53,7 @@ public interface IMultipleOptDialog<T,D> {
      * @param color
      * @return
      */
-    T setTextColor(@ColorInt int color);
+    T setTextColorRes(@ColorRes int color);
 
     /**
      * 设置是否加粗

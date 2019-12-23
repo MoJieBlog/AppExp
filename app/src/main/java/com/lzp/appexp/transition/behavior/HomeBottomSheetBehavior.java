@@ -1,10 +1,12 @@
 package com.lzp.appexp.transition.behavior;
 
 import android.content.Context;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 /**
  * copy from {@link BottomSheetBehavior}
@@ -27,7 +29,7 @@ public class HomeBottomSheetBehavior<V extends View> extends BottomSheetBehavior
         super(context,attrs);
     }
 
-    public void setTopViewHeight(int topViewHeight,CoordinatorLayout coordinatorLayout) {
+    public void setTopViewHeight(int topViewHeight, CoordinatorLayout coordinatorLayout) {
         coordinatorLayout.post(new Runnable() {
             @Override
             public void run() {

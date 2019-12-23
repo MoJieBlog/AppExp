@@ -1,13 +1,10 @@
 package com.view.recyclerview;
 
-import android.support.v7.widget.PagerSnapHelper;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutParams;
-import android.support.v7.widget.RecyclerView.Recycler;
-import android.support.v7.widget.RecyclerView.State;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @describe 配合PagerSnapHelper失败，因为要无限滑动，第一个和最后一个item重新布局了，所以PagerSnapHelper的findStartView方法返回不对
@@ -29,7 +26,7 @@ public class LooperLayoutManager extends RecyclerView.LayoutManager {
     }
 
     @Override
-    public LayoutParams generateDefaultLayoutParams() {
+    public RecyclerView.LayoutParams generateDefaultLayoutParams() {
         return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
     }
@@ -45,7 +42,7 @@ public class LooperLayoutManager extends RecyclerView.LayoutManager {
     }
 
     @Override
-    public void onLayoutChildren(Recycler recycler, State state) {
+    public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
         if (getItemCount() <= 0) {
             return;
         }
@@ -71,7 +68,7 @@ public class LooperLayoutManager extends RecyclerView.LayoutManager {
     }
 
     @Override
-    public int scrollHorizontallyBy(int dx, Recycler recycler, State state) {
+    public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
         int travl = fill(dx, recycler, state);
         if (travl == 0) {
             return 0;

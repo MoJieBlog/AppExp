@@ -1,10 +1,11 @@
 package com.lzp.appexp;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import androidx.annotation.Nullable;
 
 import com.base.compat.BaseActivity;
 import com.view.ClipAbleImageView;

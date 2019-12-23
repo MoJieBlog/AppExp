@@ -3,13 +3,14 @@ package com.view.damp;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.animation.DecelerateInterpolator;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @describe 弹性RecyclerView 目前只支持LinearLayoutManager,GridLayoutManager,如果想支持瀑布流，需要重写getLastPosition和getFirstItem
@@ -29,12 +30,12 @@ public class DampRecyclerView extends RecyclerView {
     private float downX = 0;
     private float downY = 0;
     private float damp = 0.5f;
-    private int orientation = LinearLayoutManager.VERTICAL;
+    private int orientation = RecyclerView.VERTICAL;
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent e) {
         int action = e.getAction();
-        LayoutManager layoutManager = getLayoutManager();
+        RecyclerView.LayoutManager layoutManager = getLayoutManager();
         if (layoutManager instanceof LinearLayoutManager) {
             orientation = ((LinearLayoutManager) layoutManager).getOrientation();
         }

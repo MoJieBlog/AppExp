@@ -1,8 +1,9 @@
 package com.base.compat;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 /**
  * @describe
