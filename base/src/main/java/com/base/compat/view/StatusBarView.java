@@ -1,4 +1,4 @@
-package com.base.compat;
+package com.base.compat.view;
 
 import android.content.Context;
 import android.graphics.Color;

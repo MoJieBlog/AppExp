@@ -16,10 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.base.compat.ActionBarView;
-import com.base.compat.ActionBarView.ActionBarClickAdapter;
+import com.base.compat.view.ActionBarView;
+import com.base.compat.view.ActionBarView.ActionBarClickAdapter;
 import com.base.compat.BaseActivity;
-import com.base.compat.StatusBarView;
+import com.base.compat.view.StatusBarView;
 import com.lzp.appexp.R;
 import com.lzp.appexp.transition.adapter.GarageAdapter;
 import com.lzp.appexp.transition.transition.GarageEnterTransition;

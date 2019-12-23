@@ -10,9 +10,9 @@ import android.view.WindowManager;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.base.compat.ActionBarView;
-import com.base.compat.ActionBarView.ActionBarClickAdapter;
-import com.base.compat.StatusBarView;
+import com.base.compat.view.ActionBarView;
+import com.base.compat.view.ActionBarView.ActionBarClickAdapter;
+import com.base.compat.view.StatusBarView;
 import com.base.compat.ToastBaseActivity;
 import com.dialog.TwoOptMsgDialog;
 import com.dialog.TwoOptMsgDialog.OnOptClickListener;
@@ -163,10 +163,9 @@ public class MainActivity extends ToastBaseActivity {
     @Override
     public void onBackPressed() {
         if (preTime == 0) {
-            preTime = System.currentTimeMillis();
-            showToast("再按一次退出");
-            return;
+            preTime = System.currentTimeMillis()-1001;
         }
+
         if (System.currentTimeMillis() - preTime > 1000) {
             preTime = System.currentTimeMillis();
             showToast("再按一次退出");

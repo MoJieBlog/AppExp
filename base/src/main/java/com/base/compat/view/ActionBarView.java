@@ -1,4 +1,4 @@
-package com.base.compat;
+package com.base.compat.view;
 
 import android.app.Activity;
 import android.content.Context;

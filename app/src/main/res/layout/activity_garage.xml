@@ -8,12 +8,12 @@
     android:orientation="vertical">
 
 
-    <com.base.compat.StatusBarView
+    <com.base.compat.view.StatusBarView
         android:id="@+id/statusBarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.base.compat.ActionBarView
+    <com.base.compat.view.ActionBarView
         android:id="@+id/actionBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_actionbar_height"/>
