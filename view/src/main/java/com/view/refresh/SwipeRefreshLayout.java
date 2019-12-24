@@ -4,6 +4,13 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.AbsListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,15 +20,8 @@ import androidx.core.view.NestedScrollingChildHelper;
 import androidx.core.view.NestedScrollingParent;
 import androidx.core.view.NestedScrollingParentHelper;
 import androidx.core.view.ViewCompat;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.AbsListView;
 
+import com.utils.LogUtils;
 import com.view.R;
 import com.view.refresh.ext.DefaultRefreshLayout;
 
@@ -192,7 +192,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         headLoadingLayout.measure(
                 MeasureSpec.makeMeasureSpec(getMeasuredWidth() - getPaddingLeft() - getPaddingRight(),
                         MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.EXACTLY));
+                MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY));
     }
 
     public boolean canChildScrollUp() {
@@ -362,12 +362,12 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
 
     private boolean moveHeader(float scrollOffset) {
 
-        if (scrollOffset>headLoadingLayout.getLoadingOffsetHeight()){
-            Log.e(LOG_TAG, "moveHeader: 超过了"+scrollOffset);
+        if (scrollOffset > headLoadingLayout.getLoadingOffsetHeight()) {
+            LogUtils.d(LOG_TAG, "moveHeader: 超过了" + scrollOffset);
             // ViewCompat.offsetTopAndBottom(headLoadingLayout, (int) scrollOffset);
             headLoadingLayout.scrollTo(0, (int) (scrollOffset - headLoadingLayout.getLoadingOffsetHeight()));
-        }else{
-            Log.e(LOG_TAG, "moveHeader: "+scrollOffset);
+        } else {
+            LogUtils.d(LOG_TAG, "moveHeader: " + scrollOffset);
 
         }
 
@@ -400,8 +400,8 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
                 if (!isRefreshing) {
                     headLoadingLayout.onMove(Math.abs((Integer) animation.getAnimatedValue()), isRefreshing);
                 }
-                if (scrollY !=0){
-                    int y = (int) (scrollY * (1-animation.getAnimatedFraction()));
+                if (scrollY != 0) {
+                    int y = (int) (scrollY * (1 - animation.getAnimatedFraction()));
                     headLoadingLayout.scrollTo(0, (int) y);
                 }
 
@@ -447,8 +447,8 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator animation) {
-                if (scrollY !=0){
-                    int y = (int) (scrollY * (1-animation.getAnimatedFraction()));
+                if (scrollY != 0) {
+                    int y = (int) (scrollY * (1 - animation.getAnimatedFraction()));
                     headLoadingLayout.scrollTo(0, (int) y);
                 }
                 headLoadingLayout.onMove(Math.abs((Integer) animation.getAnimatedValue()), isRefreshing);
@@ -509,7 +509,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
         return canRefresh //&& !mReturningToStart
-               // && !isRefreshing
+                // && !isRefreshing
                 && (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
 
@@ -527,7 +527,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
         // If we are in the middle of consuming, a scroll, then we want to move the spinner back up
         // before allowing the list to scroll
-        if (isRefreshing&&dy>0){
+        if (isRefreshing && dy > 0) {
 
         }
         if (dy > 0 && mTotalUnconsumed > 0) {

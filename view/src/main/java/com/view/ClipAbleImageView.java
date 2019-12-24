@@ -4,8 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.appcompat.widget.AppCompatImageView;
+
+import com.utils.LogUtils;
 
 /**
  * @describe 可以裁切的ImageView
@@ -13,6 +16,8 @@ import androidx.appcompat.widget.AppCompatImageView;
  * @Date: 2019-12-16
  */
 public class ClipAbleImageView extends AppCompatImageView {
+
+    private static final String TAG = "ClipAbleImageView";
 
     private boolean needClip = false;
     private Path path;
@@ -66,9 +71,22 @@ public class ClipAbleImageView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        LogUtils.d(TAG,"onDraw");
         if (needClip){
             canvas.clipPath(path);
         }
         super.onDraw(canvas);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        LogUtils.d(TAG, "onMeasure: ");
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        LogUtils.d(TAG, "onLayout: ");
     }
 }

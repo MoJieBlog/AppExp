@@ -26,6 +26,7 @@ import com.lzp.appexp.MessageActivity;
 import com.lzp.appexp.R;
 import com.lzp.appexp.tabmanager.TabManagerActivity;
 import com.lzp.appexp.transition.CarActivity;
+import com.lzp.appexp.viewpager.ViewPagerNestActivity;
 import com.view.loadmore.LoadMoreAdapter;
 
 import java.util.List;
@@ -98,6 +99,8 @@ public class TestAdapter extends LoadMoreAdapter {
             holder.tv.setText("消息卡片");
         }else if(position==6){
             holder.tv.setText("裁切图片");
+        }else if(position==7){
+            holder.tv.setText("viewpager 嵌套");
         }
 
         else{
@@ -166,6 +169,10 @@ public class TestAdapter extends LoadMoreAdapter {
                     }
                     else if(adapterPosition==6){
                         Intent intent = new Intent(context, ClipImageActivity.class);
+                        context.startActivity(intent);
+                    }
+                    else if(adapterPosition==7){
+                        Intent intent = new Intent(context, ViewPagerNestActivity.class);
                         context.startActivity(intent);
                     }
                     else{

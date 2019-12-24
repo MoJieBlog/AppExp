@@ -49,6 +49,9 @@
         <activity
             android:name=".ClipImageActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".viewpager.ViewPagerNestActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
