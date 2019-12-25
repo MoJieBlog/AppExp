@@ -2,6 +2,7 @@ package com.view.refresh.ext.moveopen;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -63,12 +64,17 @@ public class MoveOpenRefreshLayout extends LoadingLayout {
 
         loadingLayout = new GoLoadingLayout(getContext());
         LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, animViewHeight);
-        lp.gravity = Gravity.CENTER|Gravity.BOTTOM;
+        lp.gravity = Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM;
 
         addView(loadingLayout, lp);
         addView(textView, textLp);
+    }
 
-
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(MeasureSpec.makeMeasureSpec(widthMeasureSpec, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(animViewHeight, MeasureSpec.EXACTLY));
     }
 
     /**
@@ -79,8 +85,6 @@ public class MoveOpenRefreshLayout extends LoadingLayout {
      */
     @Override
     public void onMove(float moveOffset, boolean isRefreshing) {
-        textView.setVisibility(VISIBLE);
-        loadingLayout.setVisibility(GONE);
         if (moveOffset < refreshLayout.REFRESH_SIZE) {
             textView.setText("下拉刷新");
         } else if (moveOffset > refreshLayout.REFRESH_SIZE && moveOffset < refreshLayout.OPEN_ACTIVITY_SIZE) {
@@ -95,6 +99,7 @@ public class MoveOpenRefreshLayout extends LoadingLayout {
      */
     @Override
     public void onRefreshing() {
+        Log.d("SwipeRefreshLayout", "onRefreshing: 开始刷新");
         if (loadingLayout != null) {
             textView.setVisibility(GONE);
             loadingLayout.setVisibility(VISIBLE);

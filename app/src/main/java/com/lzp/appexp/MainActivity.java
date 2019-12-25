@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -144,6 +145,7 @@ public class MainActivity extends ToastBaseActivity {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Log.d("SwipeRefreshLayout", "onRefresh: "+System.currentTimeMillis()/1000);
                 freshType = 0;
                 getData();
             }
@@ -198,6 +200,6 @@ public class MainActivity extends ToastBaseActivity {
                     }
                 });
             }
-        }, 3000);
+        }, 6000);
     }
 }
