@@ -200,6 +200,6 @@ public class MainActivity extends ToastBaseActivity {
                     }
                 });
             }
-        }, 6000);
+        }, 1000);
     }
 }
