@@ -43,8 +43,6 @@ public class DefaultRefreshLayout extends LoadingLayout {
         lp.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
 
         addView(loadingLayout, lp);
-
-        setBackgroundColor(0xffffff00);
     }
 
     @Override
