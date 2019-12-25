@@ -29,7 +29,6 @@ import com.view.refresh.ext.DefaultRefreshLayout;
  * @describe 仿官方SwipeRefreshLayout写的刷新控件
  * @author: lixiaopeng
  * @Date: 2019-06-14
- * @see androidx.core.widget.SwipeRefreshLayout
  */
 public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingParent,
         NestedScrollingChild {
@@ -202,7 +201,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
                 return absListView.getChildCount() > 0 && (absListView.getFirstVisiblePosition() > 0
                         || absListView.getChildAt(0).getTop() < absListView.getPaddingTop());
             } else {
-                return mTarget.canScrollVertically(-1) || mTarget.getScrollY() > 0;
+                return mTarget.canScrollVertically(-1) || mTarget.getTranslationY() > 0;
             }
         } else {
             return mTarget.canScrollVertically(-1);
@@ -229,7 +228,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
                 }
                 canDragged = true;
                 if (isRefreshing) {
-                    moveOffset = -getScrollY();
+                    moveOffset = -getTranslationY();
                 } else {
                     moveOffset = 0;
                 }
@@ -308,7 +307,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
                 mLastMotionY = y;
 
                 if (mIsBeingDragged) {
-                    return moveHeader(moveOffset);
+                    return onTargetMove(moveOffset);
                 }
                 break;
 
@@ -350,7 +349,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     }
 
     protected void finishMove() {
-        if (-getScrollY() >= headLoadingLayout.getLoadingOffsetHeight()
+        if (mTarget.getTranslationY() >= headLoadingLayout.getLoadingOffsetHeight()
                 && mRefreshListener != null
                 && !isRefreshing) {
             isRefreshing = true;
@@ -360,56 +359,47 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         resetHeader();
     }
 
-    private boolean moveHeader(float scrollOffset) {
-
-        if (scrollOffset > headLoadingLayout.getLoadingOffsetHeight()) {
-            LogUtils.d(LOG_TAG, "moveHeader: 超过了" + scrollOffset);
-            // ViewCompat.offsetTopAndBottom(headLoadingLayout, (int) scrollOffset);
-            headLoadingLayout.scrollTo(0, (int) (scrollOffset - headLoadingLayout.getLoadingOffsetHeight()));
-        } else {
-            LogUtils.d(LOG_TAG, "moveHeader: " + scrollOffset);
-
+    /**
+     * 被包裹空固件move中
+     *
+     * @param offset
+     */
+    private boolean onTargetMove(float offset) {
+        if (offset < headLoadingLayout.getLoadingOffsetHeight()) {//没有超过刷新控件的高度
+            setTranslationY(offset);
+        } else {//超过刷新控件的高度
+            //设置刷新头部显示出来
+            float translationY = headLoadingLayout.getTranslationY();
+            if (translationY != headLoadingLayout.getLoadingOffsetHeight()) {
+                headLoadingLayout.setTranslationY(headLoadingLayout.getLoadingOffsetHeight());
+            }
+            //设置被包裹控件移动
+            mTarget.setTranslationY(offset);
         }
 
-        scrollTo(0, scrollOffset >= 0 ? (int) -scrollOffset : 0);
-
-        headLoadingLayout.onMove(scrollOffset, isRefreshing);
+        headLoadingLayout.onMove(offset, isRefreshing);
 
         if (mIHeaderScroll != null) {
-            mIHeaderScroll.onHeaderScroll(getScrollY());
+            mIHeaderScroll.onHeaderScroll(offset);
         }
 
-        return scrollOffset >= 0;
+        return offset >= 0;
     }
 
     protected void resetHeader() {
-
         if (resetHeaderAnimator != null && resetHeaderAnimator.isRunning()) {
             resetHeaderAnimator.cancel();
         }
-
-        final int scrollY = headLoadingLayout.getScrollY();
-        resetHeaderAnimator = ValueAnimator.ofInt(getScrollY(),
+        final float scrollY = mTarget.getTranslationY();
+        resetHeaderAnimator = ValueAnimator.ofFloat(scrollY,
                 isRefreshing ? -headLoadingLayout.getLoadingOffsetHeight() : 0);
         resetHeaderAnimator.setDuration(400);
         resetHeaderAnimator.setInterpolator(mDecelerateInterpolator);
         resetHeaderAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator animation) {
-
-                if (!isRefreshing) {
-                    headLoadingLayout.onMove(Math.abs((Integer) animation.getAnimatedValue()), isRefreshing);
-                }
-                if (scrollY != 0) {
-                    int y = (int) (scrollY * (1 - animation.getAnimatedFraction()));
-                    headLoadingLayout.scrollTo(0, (int) y);
-                }
-
-                scrollTo(0, (Integer) animation.getAnimatedValue());
-
-                if (mIHeaderScroll != null) {
-                    mIHeaderScroll.onHeaderScroll(getScrollY());
-                }
+                float animatedValue = (float) animation.getAnimatedValue();
+                onTargetMove(animatedValue);
             }
         });
         resetHeaderAnimator.addListener(new Animator.AnimatorListener() {
@@ -440,24 +430,15 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     }
 
     private void forceResetHeader() {
-        final int scrollY = headLoadingLayout.getScrollY();
-        ValueAnimator animator = ValueAnimator.ofInt(getScrollY(), -headLoadingLayout.getLoadingOffsetHeight());
+        final float targetY = mTarget.getTranslationY();
+        ValueAnimator animator = ValueAnimator.ofFloat(targetY, -headLoadingLayout.getLoadingOffsetHeight());
         animator.setDuration(400);
         animator.setInterpolator(mDecelerateInterpolator);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(@NonNull ValueAnimator animation) {
-                if (scrollY != 0) {
-                    int y = (int) (scrollY * (1 - animation.getAnimatedFraction()));
-                    headLoadingLayout.scrollTo(0, (int) y);
-                }
-                headLoadingLayout.onMove(Math.abs((Integer) animation.getAnimatedValue()), isRefreshing);
-                headLoadingLayout.scrollTo(0, 0);
-                scrollTo(0, (Integer) animation.getAnimatedValue());
-
-                if (mIHeaderScroll != null) {
-                    mIHeaderScroll.onHeaderScroll(getScrollY());
-                }
+                float animatedValue = (float) animation.getAnimatedValue();
+                onTargetMove(animatedValue);
             }
         });
         animator.start();
@@ -538,7 +519,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
                 mTotalUnconsumed -= dy;
                 consumed[1] = dy;
             }
-            moveHeader(mTotalUnconsumed * DRAG_RATE);
+            onTargetMove(mTotalUnconsumed * DRAG_RATE);
         }
 
         // If a client layout is using a custom start position for the circle
@@ -593,7 +574,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         final int dy = dyUnconsumed + mParentOffsetInWindow[1];
         if (dy < 0 && !canChildScrollUp()) {
             mTotalUnconsumed += Math.abs(dy);
-            moveHeader(mTotalUnconsumed * DRAG_RATE);
+            onTargetMove(mTotalUnconsumed * DRAG_RATE);
         }
     }
 

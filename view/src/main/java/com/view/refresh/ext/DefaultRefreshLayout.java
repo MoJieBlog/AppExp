@@ -39,9 +39,16 @@ public class DefaultRefreshLayout extends LoadingLayout {
         animViewWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100,
                 mResources.getDisplayMetrics());
         LayoutParams lp = new LayoutParams(animViewWidth, animViewHeight);
-        lp.gravity = Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL;
+        lp.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
 
         addView(loadingLayout, lp);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(MeasureSpec.makeMeasureSpec(widthMeasureSpec, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(animViewHeight, MeasureSpec.EXACTLY));
     }
 
     @Override
