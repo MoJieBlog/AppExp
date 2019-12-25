@@ -228,7 +228,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
                 }
                 canDragged = true;
                 if (isRefreshing()) {
-                    moveOffset = -getTranslationY();
+                    moveOffset = mTarget.getTranslationY();
                 } else {
                     moveOffset = 0;
                 }
@@ -353,7 +353,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     }
 
     /**
-     * 被包裹空固件move中
+     * 被包裹控件move中
      *
      * @param offset
      */
@@ -371,7 +371,9 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
             mTarget.setTranslationY(offset);
         }
 
-        headLoadingLayout.onMove(offset, isRefreshing());
+        if (!isRefreshing()){
+            headLoadingLayout.onMove(offset, isRefreshing());
+        }
 
         if (mIHeaderScroll != null) {
             mIHeaderScroll.onHeaderScroll(offset);
@@ -507,9 +509,6 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
         // If we are in the middle of consuming, a scroll, then we want to move the spinner back up
         // before allowing the list to scroll
-        if (isRefreshing() && dy > 0) {
-
-        }
         if (dy > 0 && mTotalUnconsumed > 0) {
             if (dy > mTotalUnconsumed) {
                 consumed[1] = dy - (int) mTotalUnconsumed;
@@ -520,16 +519,6 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
             }
             onTargetMove(mTotalUnconsumed * DRAG_RATE);
         }
-
-        // If a client layout is using a custom start position for the circle
-        // view, they mean to hide it again before scrolling the child view
-        // If we get back to mTotalUnconsumed == 0 and there is more to go, hide
-        // the circle so it isn't exposed if its blocking content is moved
-//        if (mUsingCustomStart && dy > 0 && mTotalUnconsumed == 0
-//                && Math.abs(dy - consumed[1]) > 0) {
-//            mCircleView.setVisibility(View.GONE);
-//        }
-
         // Now let our nested parent consume the leftovers
         final int[] parentConsumed = mParentScrollConsumed;
         if (dispatchNestedPreScroll(dx - consumed[0], dy - consumed[1], parentConsumed, null)) {
