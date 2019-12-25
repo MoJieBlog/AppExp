@@ -61,7 +61,7 @@ public class GoLoadingLayout extends View {
         initAnimator();
     }
 
-    public void startAnimation(int pb){
+    public void startAnimation(float pb){
         mCurrentLength = pathLength/100*pb;
         postInvalidate();
     }

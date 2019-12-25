@@ -48,16 +48,15 @@ public class MoveOpenAndRefreshLayout extends SwipeRefreshLayout {
 
     @Override
     protected void finishMove() {
-        if (-getScrollY() > OPEN_ACTIVITY_SIZE) {
+        if (mTarget.getTranslationY() > OPEN_ACTIVITY_SIZE) {
             if (mRefreshListener != null && mRefreshListener instanceof OpenRefreshListener) {
                 ((OpenRefreshListener) mRefreshListener).openActivity();
             }
-        } else if (-getScrollY() >= REFRESH_SIZE
+        } else if (mTarget.getTranslationY() >= REFRESH_SIZE
                 && mRefreshListener != null
                 && !isRefreshing) {
             isRefreshing = true;
             mRefreshListener.onRefresh();
-            headLoadingLayout.onRefreshing();
         }
 
         //用户刷新中，又滑动打开新界面
