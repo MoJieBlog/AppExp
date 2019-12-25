@@ -26,10 +26,9 @@ import com.view.R;
 import com.view.refresh.ext.DefaultRefreshLayout;
 
 /**
- * @describe 仿官方SwipeRefreshLayout写的刷新控件
+ * @describe 仿官方SwipeRefreshLayout写的刷新控件,copy from {@link androidx.swiperefreshlayout.widget.SwipeRefreshLayout}
  * @author: lixiaopeng
  * @Date: 2019-06-14
- * @see androidx.core.widget.SwipeRefreshLayout
  */
 public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingParent,
         NestedScrollingChild {
