@@ -223,11 +223,7 @@ public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle
      */
     @Override
     public TwoOptMsgDialog setLeftTextBold(boolean bold) {
-        if (bold){
-            leftOptTv.setTypeface(Typeface.DEFAULT_BOLD);
-        }else{
-            leftOptTv.setTypeface(Typeface.DEFAULT);
-        }
+        leftOptTv.getPaint().setFakeBoldText(bold);
         return this;
     }
 
@@ -239,11 +235,7 @@ public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle
      */
     @Override
     public TwoOptMsgDialog setRightTextBold(boolean bold) {
-        if (bold){
-            rightOptTv.setTypeface(Typeface.DEFAULT_BOLD);
-        }else{
-            rightOptTv.setTypeface(Typeface.DEFAULT);
-        }
+        rightOptTv.getPaint().setFakeBoldText(bold);
         return this;
     }
 
@@ -471,7 +463,7 @@ public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle
      * @return
      */
     @Override
-    public TwoOptMsgDialog setTitleSize(int size) {
+    public TwoOptMsgDialog setTitleSize(float size) {
         titleTv.setTextSize(size);
         return this;
     }
@@ -484,11 +476,7 @@ public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle
      */
     @Override
     public TwoOptMsgDialog setTitleBold(boolean bold) {
-        if (bold){
-            titleTv.setTypeface(Typeface.DEFAULT_BOLD);
-        }else{
-            titleTv.setTypeface(Typeface.DEFAULT);
-        }
+        titleTv.getPaint().setFakeBoldText(bold);
         return this;
     }
 

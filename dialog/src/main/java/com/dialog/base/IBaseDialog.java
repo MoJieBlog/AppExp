@@ -1,5 +1,7 @@
 package com.dialog.base;
 
+import androidx.annotation.StyleRes;
+
 /**
  * @describe
  * @author: lixiaopeng
@@ -15,4 +17,5 @@ public interface IBaseDialog<T> {
     T setGravity(int gravity);
 
     //动画
+    T setWindowAnimations(@StyleRes int animations);
 }

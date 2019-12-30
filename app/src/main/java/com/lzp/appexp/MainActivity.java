@@ -15,6 +15,7 @@ import com.base.compat.view.ActionBarView;
 import com.base.compat.view.ActionBarView.ActionBarClickAdapter;
 import com.base.compat.view.StatusBarView;
 import com.base.compat.ToastBaseActivity;
+import com.dialog.OneOptDialog;
 import com.dialog.TwoOptMsgDialog;
 import com.dialog.TwoOptMsgDialog.OnOptClickListener;
 import com.lzp.appexp.adapter.TestAdapter;
@@ -120,9 +121,11 @@ public class MainActivity extends ToastBaseActivity {
             @Override
             public void onClickRightText(View v) {
                 super.onClickRightText(v);
-                //((MessageCardView)findViewById(R.id.messageCardView)).show();
-               /* Intent intent = new Intent(MainActivity.this, HorizontalScrollableLinearLayoutActivity.class);
-                startActivity(intent);*/
+                new OneOptDialog(MainActivity.this)
+                        .setTitleText("标题")
+                        .setMessageText("测试文案")
+                        .setOptText("确定")
+                        .show();
             }
 
             @Override

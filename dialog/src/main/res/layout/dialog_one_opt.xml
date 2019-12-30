@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:background="@drawable/two_opt_dialog_bg"
+    android:orientation="vertical"
+    android:paddingTop="12dp">
+
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="title"
+        android:textColor="#333333"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/messageTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:lineSpacingExtra="3dp"
+        android:text="this is message.this is message.this is message.this is message.this is message."
+        android:textColor="#666666"
+        android:textSize="13sp" />
+
+    <View
+        android:id="@+id/lineMsgOpt"
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/line" />
+
+
+    <TextView
+        android:id="@+id/optTv"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="opt"
+        android:textColor="#666666"
+        android:textSize="13sp" />
+
+</LinearLayout>

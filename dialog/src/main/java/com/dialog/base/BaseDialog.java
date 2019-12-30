@@ -2,8 +2,11 @@ package com.dialog.base;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.view.Window;
 
+import androidx.annotation.AnimatorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
 
 /**
  * @describe
@@ -27,7 +30,21 @@ public class BaseDialog extends Dialog implements IBaseDialog<BaseDialog> {
 
     @Override
     public BaseDialog setGravity(int gravity) {
-        getWindow().setGravity(gravity);
+        Window window = getWindow();
+        if (window!=null){
+            getWindow().setGravity(gravity);
+        }
         return this;
     }
+
+    @Override
+    public BaseDialog setWindowAnimations(@StyleRes int animations) {
+        Window window = getWindow();
+        if (window!=null){
+            window.setWindowAnimations(animations);
+        }
+        return this;
+    }
+
+
 }

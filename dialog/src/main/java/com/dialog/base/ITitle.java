@@ -3,6 +3,7 @@ package com.dialog.base;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.IntegerRes;
+import androidx.annotation.StringRes;
 
 /**
  * @describe
@@ -29,7 +30,7 @@ public interface ITitle<T> {
      * @param text
      * @return
      */
-    T setTitleText(@IntegerRes int text);
+    T setTitleText(@StringRes int text);
 
     /**
      * 设置title文字颜色
@@ -50,7 +51,7 @@ public interface ITitle<T> {
      * @param size
      * @return
      */
-    T setTitleSize(int size);
+    T setTitleSize(float size);
 
     /**
      * 设置title文字是否加粗
