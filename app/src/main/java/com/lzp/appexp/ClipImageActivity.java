@@ -1,5 +1,6 @@
 package com.lzp.appexp;
 
+import android.graphics.Path;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.base.compat.BaseActivity;
 import com.view.ClipAbleImageView;
+
 
 /**
  * @describe
@@ -44,7 +46,9 @@ public class ClipImageActivity extends BaseActivity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnClip:
-                clipImageView.setClipEndX(500);
+                Path path = new Path();
+                path.addCircle(clipImageView.getWidth()/2,clipImageView.getHeight()/2,Math.min(clipImageView.getWidth()/2,clipImageView.getHeight()/2), Path.Direction.CCW);
+                clipImageView.clipPath(path);
                 break;
             case R.id.btnNotClip:
                 clipImageView.setNeedClip(false);
