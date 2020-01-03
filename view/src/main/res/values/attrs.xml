@@ -18,4 +18,13 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="CardViewShadow">
+        <!--阴影开始的颜色-->
+        <attr name="shadowStartColor" format="color"/>
+        <!--阴影结束的颜色-->
+        <attr name="shadowEndColor" format="color"/>
+        <!--阴影光来的方向-->
+        <attr name="shadowDelegate" format="float"/>
+    </declare-styleable>
+
 </resources>

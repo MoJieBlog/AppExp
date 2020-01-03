@@ -32,5 +32,6 @@ dependencies {
 
     implementation extAppcompat
     implementation extRecyclerview
+    implementation extCardview
     implementation project(path: ':utils')
 }

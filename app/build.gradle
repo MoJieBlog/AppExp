@@ -105,7 +105,7 @@ dependencies {
         theTask.dependsOn(myTask)
     }
 }*/
-task myTask(){
+/*task myTask(){
 
     println("this is myTask to do test")
 
@@ -116,5 +116,5 @@ task myTask(){
         }
     })
 
-}
+}*/
 
