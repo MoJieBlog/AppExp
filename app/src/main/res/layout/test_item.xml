@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:gravity="center"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="3dp"
-    android:layout_height="wrap_content">
+    android:gravity="center">
 
     <ImageView
         android:id="@+id/testIv"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:transitionName="testImg"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:src="@mipmap/ic_launcher_round"
+        android:transitionName="testImg" />
 
     <TextView
         android:id="@+id/tv"
-        android:textSize="30sp"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_gravity="center_vertical"
         android:layout_height="wrap_content"
-        android:text="12w3"/>
-</LinearLayout>
+        android:text="12w3"
+        android:textSize="30sp" />
+</FrameLayout>

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
+    android:clipChildren="false"
     tools:context=".MainActivity">
 
     <com.base.compat.view.StatusBarView
@@ -18,28 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_actionbar_height" />
 
-
-
-    <com.view.cardView.CardView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="15dp"
-        android:elevation="0dp"
-        app:cardCornerRadius="4dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardElevation="5dp"
-        app:shadowEndColor="#00333333"
-        app:shadowDelegate="1"
-        app:shadowStartColor="#333333">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="0dp"
-            android:background="@drawable/rect_gradient_ffa240_ff8c49_r4" />
-    </com.view.cardView.CardView>
-
     <com.view.refresh.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
@@ -48,8 +27,7 @@
         <com.view.loadmore.LoadMoreRecyclerView
             android:id="@+id/rcv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_a1abbc" />
+            android:layout_height="match_parent" />
     </com.view.refresh.SwipeRefreshLayout>
 
 

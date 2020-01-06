@@ -110,7 +110,7 @@ public class TestAdapter extends LoadMoreAdapter {
         if (position==0){
 
         }
-        ImageLoader.get(context)
+        /*ImageLoader.get(context)
                 .display(url)
                 // .size(300,300)
                 .needMemory(true)
@@ -127,7 +127,8 @@ public class TestAdapter extends LoadMoreAdapter {
 
                     }
                 })
-                .into(holder.testIv);
+                .into(holder.testIv);*/
+        holder.testIv.setImageResource(R.mipmap.yinsuwan);
     }
 
 

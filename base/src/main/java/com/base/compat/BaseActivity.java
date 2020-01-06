@@ -47,7 +47,7 @@ public class BaseActivity extends AppCompatActivity implements IBase {
     @Override
     public void setContentView(View view, LayoutParams params) {
         super.setContentView(view, params);
-        findView(view);
+        findView();
         initView();
         setListener();
         getData();
