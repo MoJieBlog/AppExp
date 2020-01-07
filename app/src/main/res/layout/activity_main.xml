@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
-    android:clipChildren="false"
     tools:context=".MainActivity">
 
     <com.base.compat.view.StatusBarView

@@ -70,13 +70,13 @@ public class DampRecyclerView extends RecyclerView {
                 } else {
                     float nowY = e.getY();
                     float dy = nowY - downY;
-                    downY = dy;
+                    downY = nowY;
                     if (dy > 0 && getFirstItem() == 0) {//在顶部
-                        offsetLeftAndRight((int) (dy * damp));
+                        offsetTopAndBottom((int) (dy * damp));
                     } else {
                         if (getAdapter() != null) {
                             if (dy < 0 && getLastPosition() == getAdapter().getItemCount() - 1) {//在末尾
-                                offsetLeftAndRight((int) (dy * damp));
+                                offsetTopAndBottom((int) (dy * damp));
                             }
                         }
                     }

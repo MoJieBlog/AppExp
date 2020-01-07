@@ -59,7 +59,7 @@ public class KLineItemView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension((PhoneUtils.getWinWide(getContext()) - SizeUtils.dip2px(getContext(), 52f)) / 60,
+        setMeasuredDimension((PhoneUtils.getWinWide(getContext()) - SizeUtils.dip2px(getContext(), 52)) / 60,
                 MeasureSpec.getSize(heightMeasureSpec));
     }
 

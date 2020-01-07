@@ -15,9 +15,15 @@ public final class SizeUtils {
      * @param dipValue
      * @return
      */
-    public static int dip2px(Context context,float dipValue) {
+
+    public static int dip2px(Context context,int dipValue) {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
+    }
+
+    public static float dip2px(Context context,float dipValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return dipValue * scale + 0.5f;
     }
 
     /**
@@ -26,9 +32,9 @@ public final class SizeUtils {
      * @param pxValue
      * @return
      */
-    public static int px2dp(Context context,float pxValue) {
+    public static float px2dp(Context context,float pxValue) {
         float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
+        return pxValue / scale + 0.5f;
     }
 
 }

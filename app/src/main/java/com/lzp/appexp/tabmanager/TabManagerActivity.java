@@ -21,6 +21,7 @@ import com.base.compat.BaseActivity;
 import com.lzp.appexp.R;
 import com.lzp.appexp.tabmanager.TabMainAdapter.OnItemClickListener;
 import com.utils.PhoneUtils;
+import com.view.damp.DampRecyclerView;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 public class TabManagerActivity extends BaseActivity {
     private static final String TAG = "TabManagerActivity";
 
-    private RecyclerView dragRcv;
+    private DampRecyclerView dragRcv;
     private FrameLayout rootView;
     private ImageView ivMirror;
 

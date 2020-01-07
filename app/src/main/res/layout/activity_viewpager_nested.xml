@@ -8,6 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <com.view.indicator.IndicatorLayout
+        android:id="@+id/indicatorView"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"

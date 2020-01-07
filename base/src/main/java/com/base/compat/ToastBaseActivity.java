@@ -50,7 +50,7 @@ public class ToastBaseActivity extends BaseActivity {
     }
 
     private void buildToastView(int layoutRes) {
-        toastViewHeight = SizeUtils.dip2px(this, 45) + PhoneUtils.getStatusBarHeight(this);
+        toastViewHeight = (int) (SizeUtils.dip2px(this, 45) + PhoneUtils.getStatusBarHeight(this));
         if (toastView == null) {
             ViewGroup viewById = findViewById(android.R.id.content);
             toastView = getLayoutInflater().inflate(layoutRes, null);

@@ -45,7 +45,7 @@ public class KLineItemDecoration extends RecyclerView.ItemDecoration {
         textPaint = new TextPaint();
         textPaint.setTextSize(45);
         textPaint.setColor(Color.WHITE);
-        textHeight = SizeUtils.dip2px(context, 24f);
+        textHeight = SizeUtils.dip2px(context, 24);
         linePaint = new Paint();
         linePaint.setColor(0xff95a4b3);
         linePaint.setStyle(Style.FILL_AND_STROKE);
