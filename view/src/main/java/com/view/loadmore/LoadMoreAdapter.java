@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -22,20 +23,14 @@ import java.util.List;
  */
 public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
 
-    private static final String TAG = "LoadMoreAdapter";
     /**
      * 加载更多条目类型
      */
     public static final int TYPE_LOADMORE = -100;
 
     protected LoadMoreRecyclerView mLoadMoreRecyclerview;
-    protected Context context;
 
     private RecyclerView.LayoutManager layoutManager;
-
-    public LoadMoreAdapter(Context context) {
-        this.context = context;
-    }
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -53,6 +48,11 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
                 }
             });
         }
+
+        if (layoutManager instanceof StaggeredGridLayoutManager){
+            StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+        }
+
     }
 
     @Override
@@ -68,7 +68,6 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_LOADMORE) {
-
             return new LoadmoreViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_loadmore, parent, false));
         } else {
             return mOnCreateViewHolder(parent, viewType);
@@ -76,9 +75,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, List payloads) {
-
-
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
         if (viewHolder.getItemViewType() == TYPE_LOADMORE) {
             //解决瀑布流加载更多占一整行
             if (layoutManager instanceof StaggeredGridLayoutManager) {
@@ -98,15 +95,9 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
             }
 
             bindLoadMoreViewHolder(viewHolder);
-            return;
         } else {
-            mOnBindViewHolder(viewHolder, position, null);
+            mOnBindViewHolder(viewHolder, position);
         }
-    }
-
-    @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
-        onBindViewHolder(viewHolder, position, null);
     }
 
     @Override
@@ -114,7 +105,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
         return 1 + mGetItemCount();
     }
 
-    protected abstract int mGetItemCount();
+    public abstract int mGetItemCount();
 
     /**
      * 绑定加载更多数据
@@ -126,22 +117,22 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
         final int loadmoreStatus = mLoadMoreRecyclerview.getLoadMoreStatus();
         switch (mLoadMoreRecyclerview.getLoadMoreStatus()) {
             case LoadMoreRecyclerView.LM_LOAD_COMPLETE:
-                holder.loadmoreTitle.setText(context.getResources().getString(R.string.load_complete));
+                holder.loadmoreTitle.setText(mLoadMoreRecyclerview.getCompleteText());
                 holder.loadmoreView.setVisibility(View.GONE);
                 holder.loadMoreLayout.setVisibility(View.VISIBLE);
                 break;
             case LoadMoreRecyclerView.LM_CLICK_LOAD:
-                holder.loadmoreTitle.setText(context.getString(R.string.click_load));
+                holder.loadmoreTitle.setText(mLoadMoreRecyclerview.getClickLoadText());
                 holder.loadmoreView.setVisibility(View.GONE);
                 holder.loadMoreLayout.setVisibility(View.VISIBLE);
                 break;
             case LoadMoreRecyclerView.LM_LOAD_FAILURE:
-                holder.loadmoreTitle.setText(context.getString(R.string.load_failure));
+                holder.loadmoreTitle.setText(mLoadMoreRecyclerview.getFailText());
                 holder.loadmoreView.setVisibility(View.GONE);
                 holder.loadMoreLayout.setVisibility(View.VISIBLE);
                 break;
             case LoadMoreRecyclerView.LM_AUTO_LOAD:
-                holder.loadmoreTitle.setText(context.getString(R.string.loading));
+                holder.loadmoreTitle.setText(mLoadMoreRecyclerview.getLoadingText());
                 holder.loadmoreView.setVisibility(View.VISIBLE);
                 holder.loadMoreLayout.setVisibility(View.VISIBLE);
                 break;
@@ -155,25 +146,15 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE || loadmoreStatus == LoadMoreRecyclerView.LM_CLICK_LOAD) {
-                    mLoadMoreRecyclerview.setLoadMoreStatus(LoadMoreRecyclerView.LM_AUTO_LOAD);
-                    notifyItemChanged(getItemCount() - 1);
-                    notifyLoadmore();
+                if (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE){
+                    mLoadMoreRecyclerview.onFailClick();
+                }
+                if (loadmoreStatus == LoadMoreRecyclerView.LM_CLICK_LOAD) {
+                    mLoadMoreRecyclerview.onLoadMore();
                 }
             }
         });
     }
-
-    /**
-     * 通知加载更多
-     */
-    private void notifyLoadmore() {
-        OnLoadMoreListener onLoadmoreListener = mLoadMoreRecyclerview.getOnLoadmoreListener();
-        if (mLoadMoreRecyclerview.getOnLoadmoreListener() != null) {
-            onLoadmoreListener.onLoadMore();
-        }
-    }
-
 
     static class LoadmoreViewHolder extends RecyclerView.ViewHolder {
 
@@ -195,13 +176,12 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
      * @return
      * @see RecyclerView.Adapter#onCreateViewHolder(ViewGroup, int)
      */
-    public abstract RecyclerView.ViewHolder
-    mOnCreateViewHolder(ViewGroup parent, int viewType);
+    protected abstract RecyclerView.ViewHolder mOnCreateViewHolder(@NonNull ViewGroup parent, int viewType);
 
     /**
      * @param viewHolder
      * @param position
-     * @param payloads
+     * @see RecyclerView.Adapter#onBindViewHolder(RecyclerView.ViewHolder, int, List)
      */
-    public abstract void mOnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, List payloads);
+    protected abstract void mOnBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position);
 }

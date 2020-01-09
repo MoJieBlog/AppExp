@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.base.compat.view.ActionBarView;
@@ -19,6 +20,7 @@ import com.dialog.OneOptDialog;
 import com.dialog.TwoOptMsgDialog;
 import com.dialog.TwoOptMsgDialog.OnOptClickListener;
 import com.lzp.appexp.adapter.TestAdapter;
+import com.utils.SizeUtils;
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
 import com.view.loadmore.LoadMoreRecyclerView;
@@ -56,8 +58,19 @@ public class MainActivity extends ToastBaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
         }
-
         setContentView(R.layout.activity_main);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            View viewById = findViewById(R.id.viewTest);
+            viewById.setClipToOutline(true);
+            viewById.setElevation(SizeUtils.dip2px(this,5));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                viewById.setOutlineAmbientShadowColor(Color.GREEN);
+                viewById.setOutlineSpotShadowColor(Color.RED);
+            }
+        }
+
 
         rcv = findViewById(R.id.rcv);
         actionBar = findViewById(R.id.actionBar);

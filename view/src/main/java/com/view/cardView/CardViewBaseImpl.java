@@ -68,9 +68,9 @@ class CardViewBaseImpl implements CardViewImpl {
     }
 
     @Override
-    public void initialize(CardViewDelegate cardView, Context context, ColorStateList backgroundColor, float radius, float elevation, float maxElevation, int shadowStartColor, int shadowEndColor, float shadowDelegate) {
+    public void initialize(CardViewDelegate cardView, Context context, ColorStateList backgroundColor, float radius, float elevation, float maxElevation, int shadowColor, float shadowDelegate) {
         RoundRectDrawableWithShadow background = createBackground(context, backgroundColor, radius,
-                elevation, maxElevation,shadowStartColor,shadowEndColor,shadowDelegate);
+                elevation, maxElevation,shadowColor,shadowDelegate);
         background.setAddPaddingForCorners(cardView.getPreventCornerOverlap());
         cardView.setCardBackground(background);
         updatePadding(cardView);
@@ -88,9 +88,9 @@ class CardViewBaseImpl implements CardViewImpl {
         updatePadding(cardView);
     }
 
-    private RoundRectDrawableWithShadow createBackground(Context context, ColorStateList backgroundColor, float radius, float elevation, float maxElevation, int shadowStartColor, int shadowEndColor, float shadowDelegate) {
+    private RoundRectDrawableWithShadow createBackground(Context context, ColorStateList backgroundColor, float radius, float elevation, float maxElevation, int shadowColor, float shadowDelegate) {
         return new RoundRectDrawableWithShadow(context.getResources(), backgroundColor, radius,
-                elevation, maxElevation,shadowStartColor,shadowEndColor,shadowDelegate);
+                elevation, maxElevation,shadowColor,0x00000000,shadowDelegate);
     }
 
     private RoundRectDrawableWithShadow createBackground(Context context,

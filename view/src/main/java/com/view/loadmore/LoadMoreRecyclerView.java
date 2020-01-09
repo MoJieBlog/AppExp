@@ -53,26 +53,29 @@ public class LoadMoreRecyclerView extends RecyclerView {
 
     private boolean isLoading = false;
 
+    //文字相关参数
+    private String completeText = "";//加载完成的文子
+    private String clickLoadText = "";//不自动加载时点击加载的文子
+    private String failText = "";//加载失败的文子
+    private String loadingText = "";//加载中的文子
+
     public LoadMoreRecyclerView(@NonNull Context context) {
         this(context, null);
     }
 
     public LoadMoreRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-
         addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-
                 LayoutManager layoutManager = getLayoutManager();
-                int itemCount = layoutManager.getItemCount();
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {//静止的时候再加载更多
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && layoutManager != null) {//静止的时候再加载更多
+                    int itemCount = layoutManager.getItemCount();
                     //因为有底部
                     if (canLoadMore(itemCount)) {
-                        isLoading = true;
                         Log.e(TAG, "onScrollStateChanged: 开始加载更多");
+                        isLoading = true;
                         setLoadMoreStatus(LoadMoreRecyclerView.LM_AUTO_LOAD);
                         if (getAdapter() != null) {
                             getAdapter().notifyItemChanged(getAdapter().getItemCount() - 1);
@@ -88,39 +91,42 @@ public class LoadMoreRecyclerView extends RecyclerView {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 LayoutManager layoutManager = getLayoutManager();
-                int itemCount = layoutManager.getItemCount();
-
                 if (layoutManager instanceof LinearLayoutManager) {
                     LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
                     lastPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-
                 } else if (layoutManager instanceof StaggeredGridLayoutManager) {
                     StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
                     int[] last = new int[staggeredGridLayoutManager.getSpanCount()];
-
                     int[] lastCompletelyVisibleItemPositions = staggeredGridLayoutManager.findLastCompletelyVisibleItemPositions(last);
-                    int max = Math.max(lastCompletelyVisibleItemPositions[0], lastCompletelyVisibleItemPositions[1]);
-                    lastPosition = max;
+                    lastPosition = Math.max(lastCompletelyVisibleItemPositions[0], lastCompletelyVisibleItemPositions[1]);
                 }
             }
         });
-
     }
 
     private boolean canLoadMore(int itemCount) {
         Log.e(TAG, "canLoadMore: " + lastPosition);
         return !isLoading &&
-                getLoadMoreStatus() == LoadMoreRecyclerView.LM_AUTO_LOAD
+                loadMoreStatus == LoadMoreRecyclerView.LM_AUTO_LOAD
                 && itemCount > 1
                 && lastPosition >= (itemCount - 1 - PRE_LOAD_COUNT);
+    }
+
+    public void setLoadMoreStatus(int loadMoreStatus) {
+        this.loadMoreStatus = loadMoreStatus;
+    }
+
+    public void setLoadMoreStatus(int loadMoreStatus,String failText) {
+        this.loadMoreStatus = loadMoreStatus;
+        this.failText = failText;
     }
 
     public void stopLoad(){
         isLoading = false;
     }
 
-    public void setLoadMoreStatus(int loadMoreStatus) {
-        this.loadMoreStatus = loadMoreStatus;
+    public void setAdapter(@Nullable LoadMoreAdapter adapter) {
+        super.setAdapter(adapter);
     }
 
     public int getLoadMoreStatus() {
@@ -135,8 +141,65 @@ public class LoadMoreRecyclerView extends RecyclerView {
         this.onLoadmoreListener = onLoadmoreListener;
     }
 
+    public void onFailClick(){
+        setLoadMoreStatus(LoadMoreRecyclerView.LM_AUTO_LOAD);
+        if(getAdapter()!=null){
+            getAdapter().notifyItemChanged(getAdapter().getItemCount() - 1);
+        }
+        if (this.onLoadmoreListener!=null){
+            this.onLoadmoreListener.onRecyclerViewFailClick();
+        }
+    }
+
+    public void onLoadMore(){
+        //显示加载中的动画
+        setLoadMoreStatus(LoadMoreRecyclerView.LM_AUTO_LOAD);
+        if(getAdapter()!=null){
+            getAdapter().notifyItemChanged(getAdapter().getItemCount() - 1);
+        }
+        //触发回调
+        if (this.onLoadmoreListener!=null){
+            this.onLoadmoreListener.onLoadMore();
+        }
+    }
     public interface OnLoadMoreListener {
-        public void onLoadMore();
+        void onLoadMore();
+
+        //失败被点击时要执行的操作
+        default void onRecyclerViewFailClick(){}
+    }
+
+    /********************文案设置***********************/
+    public String getCompleteText(){
+        return completeText;
+    }
+
+    public String getClickLoadText(){
+        return clickLoadText;
+    }
+
+    public String getFailText(){
+        return failText;
+    }
+
+    public String getLoadingText(){
+        return loadingText;
+    }
+
+    public void setCompleteText(String completeText) {
+        this.completeText = completeText;
+    }
+
+    public void setClickLoadText(String clickLoadText) {
+        this.clickLoadText = clickLoadText;
+    }
+
+    public void setFailText(String failText) {
+        this.failText = failText;
+    }
+
+    public void setLoadingText(String loadingText) {
+        this.loadingText = loadingText;
     }
 
 }

@@ -14,7 +14,7 @@ interface CardViewImpl {
 
     //modify 增加阴影颜色，和光来的方向
     void initialize(CardViewDelegate cardView, Context context, ColorStateList backgroundColor,
-                    float radius, float elevation, float maxElevation,int shadowStartColor,int shadowEndColor,float shadowDelegate);
+                    float radius, float elevation, float maxElevation,int shadowColor,float shadowDelegate);
 
     void initialize(CardViewDelegate cardView, Context context, ColorStateList backgroundColor,
                     float radius, float elevation, float maxElevation);

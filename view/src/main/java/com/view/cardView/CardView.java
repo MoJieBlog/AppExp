@@ -30,7 +30,9 @@ public class CardView extends FrameLayout {
     private static final CardViewImpl IMPL;
 
     static {
-        if (Build.VERSION.SDK_INT >= 17) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            IMPL = new CardViewApi21Impl();
+        } else if (Build.VERSION.SDK_INT >= 17) {
             IMPL = new CardViewApi17Impl();
         } else {
             IMPL = new CardViewBaseImpl();
@@ -56,8 +58,7 @@ public class CardView extends FrameLayout {
     final Rect mShadowBounds = new Rect();
 
     //额外增加参数
-    int shadowStartColor = 0;
-    int shadowEndColor = 0;
+    int shadowColor = 0;
     float shadowDelegate = 0f;
 
     public CardView(@NonNull Context context) {
@@ -121,16 +122,12 @@ public class CardView extends FrameLayout {
             }
 
             if (shadowTypeArray.hasValue(R.styleable.CardViewShadow_shadowStartColor)){
-                shadowStartColor = shadowTypeArray.getColor(R.styleable.CardViewShadow_shadowStartColor, Color.TRANSPARENT);
-            }
-
-            if (shadowTypeArray.hasValue(R.styleable.CardViewShadow_shadowEndColor)){
-                shadowEndColor = shadowTypeArray.getColor(R.styleable.CardViewShadow_shadowEndColor, Color.TRANSPARENT);
+                shadowColor = shadowTypeArray.getColor(R.styleable.CardViewShadow_shadowStartColor, Color.TRANSPARENT);
             }
             shadowTypeArray.recycle();
 
             IMPL.initialize(mCardViewDelegate, context, backgroundColor, radius,
-                    elevation, maxElevation,shadowStartColor,shadowEndColor,shadowDelegate);
+                    elevation, maxElevation,shadowColor,shadowDelegate);
         } else {
             IMPL.initialize(mCardViewDelegate, context, backgroundColor, radius,
                     elevation, maxElevation);
