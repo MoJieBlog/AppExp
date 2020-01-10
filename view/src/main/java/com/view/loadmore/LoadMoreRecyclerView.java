@@ -54,10 +54,10 @@ public class LoadMoreRecyclerView extends RecyclerView {
     private boolean isLoading = false;
 
     //文字相关参数
-    private String completeText = "";//加载完成的文子
-    private String clickLoadText = "";//不自动加载时点击加载的文子
-    private String failText = "";//加载失败的文子
-    private String loadingText = "";//加载中的文子
+    private String completeText = "已加载全部";//加载完成的文字
+    private String clickLoadText = "点击加载下一页";//不自动加载时点击加载的文字
+    private String failText = "数据加载失败";//加载失败的文字
+    private String loadingText = "加载中...";//加载中的文字
 
     public LoadMoreRecyclerView(@NonNull Context context) {
         this(context, null);
@@ -164,7 +164,6 @@ public class LoadMoreRecyclerView extends RecyclerView {
     }
     public interface OnLoadMoreListener {
         void onLoadMore();
-
         //失败被点击时要执行的操作
         default void onRecyclerViewFailClick(){}
     }

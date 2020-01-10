@@ -34,7 +34,6 @@ class ViewPagerNestActivity : BaseActivity() {
         indicatorView.createTab(0,TextTabView(this).apply { text = "000000000" })
         indicatorView.createTab(1,TextTabView(this).apply { text = "000000001" })
         indicatorView.createTab(2,TextTabView(this).apply { text = "000000002" })
-
         indicatorView.setIndicatorView(LineIndicatorView(this))
     }
 

@@ -53,8 +53,8 @@ public class TestAdapter extends LoadMoreAdapter {
         notifyDataSetChanged();
     }
 
-    public TestAdapter(Context context) {
-        super(context);
+    public TestAdapter() {
+        super();
     }
 
     @Override
@@ -72,7 +72,7 @@ public class TestAdapter extends LoadMoreAdapter {
 
     @Override
     public RecyclerView.ViewHolder mOnCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.test_item, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_item, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(inflate);
         myViewHolder.tv.setText(String.valueOf(viewType));
 
@@ -82,7 +82,7 @@ public class TestAdapter extends LoadMoreAdapter {
     }
 
     @Override
-    public void mOnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, List p) {
+    protected void mOnBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         MyViewHolder holder = (MyViewHolder) viewHolder;
 
         if (position==0){
@@ -110,27 +110,9 @@ public class TestAdapter extends LoadMoreAdapter {
         if (position==0){
 
         }
-        /*ImageLoader.get(context)
-                .display(url)
-                // .size(300,300)
-                .needMemory(true)
-                .placeHolder(R.mipmap.ic_launcher_round)
-                .errHolder(R.mipmap.ic_launcher)
-                .listener(new IMGLoadListener<Drawable>() {
-                    @Override
-                    public void success(Drawable drawable) {
 
-                    }
-
-                    @Override
-                    public void fail(Exception e) {
-
-                    }
-                })
-                .into(holder.testIv);*/
         holder.testIv.setImageResource(R.mipmap.yinsuwan);
     }
-
 
    static class MyViewHolder extends RecyclerView.ViewHolder {
 

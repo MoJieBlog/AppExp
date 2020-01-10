@@ -6,27 +6,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.base.compat.ToastBaseActivity;
 import com.base.compat.view.ActionBarView;
 import com.base.compat.view.ActionBarView.ActionBarClickAdapter;
 import com.base.compat.view.StatusBarView;
-import com.base.compat.ToastBaseActivity;
 import com.dialog.OneOptDialog;
 import com.dialog.TwoOptMsgDialog;
 import com.dialog.TwoOptMsgDialog.OnOptClickListener;
 import com.lzp.appexp.adapter.TestAdapter;
-import com.utils.SizeUtils;
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
 import com.view.loadmore.LoadMoreRecyclerView;
-import com.view.loadmore.LoadMoreRecyclerView.OnLoadMoreListener;
 import com.view.refresh.SwipeRefreshLayout;
-import com.view.refresh.SwipeRefreshLayout.OnRefreshListener;
 
 public class MainActivity extends ToastBaseActivity {
 
@@ -44,40 +38,52 @@ public class MainActivity extends ToastBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            //取消设置Window半透明的Flag
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //添加Flag把状态栏设为可绘制模式
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            //设置状态栏颜色
-            window.setStatusBarColor(Color.TRANSPARENT);
-        }
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             PermissionUtils.getPermission(this, PermissionConstant.EXTERNAL_STORAGE_GROUP);
         }
         setContentView(R.layout.activity_main);
+    }
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            View viewById = findViewById(R.id.viewTest);
-            viewById.setClipToOutline(true);
-            viewById.setElevation(SizeUtils.dip2px(this,5));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                viewById.setOutlineAmbientShadowColor(Color.GREEN);
-                viewById.setOutlineSpotShadowColor(Color.RED);
-            }
-        }
-
-
+    @Override
+    public void findView() {
         rcv = findViewById(R.id.rcv);
         actionBar = findViewById(R.id.actionBar);
         statusBarView = findViewById(R.id.statusBarView);
         statusBarView.setBgColorRes(R.color.color_status_bar);
         actionBar.setActionBarBgRes(R.color.color_actionbar_bg);
+        refreshLayout = findViewById(R.id.refresh);
+    }
 
+    @Override
+    public void initView() {
+        initActionBar();
+        refreshLayout.setCanRefresh(true);
+        rcv.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new TestAdapter();
+        rcv.setAdapter(mAdapter);
+    }
+
+
+    @Override
+    public void setListener() {
+        refreshLayout.setOnRefreshListener(() -> {
+            Log.d("SwipeRefreshLayout", "onRefresh: "+System.currentTimeMillis()/1000);
+            freshType = 0;
+            getData();
+        });
+        rcv.setOnLoadmoreListener(() -> {
+            freshType = 1;
+            getData();
+        });
+    }
+
+    @Override
+    public void clearListener() {
+        refreshLayout.setOnRefreshListener(null);
+        rcv.setOnLoadmoreListener(null);
+    }
+
+    private void initActionBar() {
         actionBar.setTitleVisible(View.VISIBLE);
         actionBar.setSubTitleVisible(View.VISIBLE);
         actionBar.setLeftImgVisible(View.VISIBLE);
@@ -86,8 +92,6 @@ public class MainActivity extends ToastBaseActivity {
         actionBar.setTitleText("main title");
         actionBar.setSubTitleText("main subTitle");
         actionBar.setRightText("right text");
-
-
         actionBar.setActionBarClickListener(new ActionBarClickAdapter() {
             @Override
             public void onClickTitle(View v) {
@@ -113,24 +117,6 @@ public class MainActivity extends ToastBaseActivity {
                 twoOptMsgDialog.show();
 
             }
-
-            @Override
-            public void onClickSubTitle(View v) {
-                super.onClickSubTitle(v);
-
-
-            }
-
-            @Override
-            public void onClickLeftText(View v) {
-
-            }
-
-            @Override
-            public void onClickLeftImg(View v) {
-                super.onClickLeftImg(v);
-            }
-
             @Override
             public void onClickRightText(View v) {
                 super.onClickRightText(v);
@@ -140,40 +126,7 @@ public class MainActivity extends ToastBaseActivity {
                         .setOptText("确定")
                         .show();
             }
-
-            @Override
-            public void onClickRightImg(View v) {
-                super.onClickRightImg(v);
-            }
         });
-
-
-        refreshLayout = findViewById(R.id.refresh);
-        refreshLayout.setCanRefresh(true);
-
-        // rcv.setLayoutManager(new GridLayoutManager(this,2));
-        //rcv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        rcv.setLayoutManager(new LinearLayoutManager(this));
-
-        mAdapter = new TestAdapter(this);
-
-        rcv.setAdapter(mAdapter);
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Log.d("SwipeRefreshLayout", "onRefresh: "+System.currentTimeMillis()/1000);
-                freshType = 0;
-                getData();
-            }
-        });
-        rcv.setOnLoadmoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                freshType = 1;
-                getData();
-            }
-        });
-
     }
 
     private long preTime = 0;
@@ -209,7 +162,7 @@ public class MainActivity extends ToastBaseActivity {
                             rcv.stopLoad();
                         }
                         if (mAdapter.mGetItemCount() > 30) {
-                            rcv.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOAD_COMPLETE);
+                            rcv.setLoadMoreStatus(LoadMoreRecyclerView.LM_LOAD_COMPLETE,"已加载全部");
                         } else {
                             rcv.setLoadMoreStatus(LoadMoreRecyclerView.LM_AUTO_LOAD);
                         }

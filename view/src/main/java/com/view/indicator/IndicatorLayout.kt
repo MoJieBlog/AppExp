@@ -169,13 +169,7 @@ class IndicatorLayout : FrameLayout, ViewPager.OnPageChangeListener {
     }
 
     fun setIndicatorView(indicatorView: IIndicatorView) {
-        if (indicatorView is View){
-            this.indicatorView = indicatorView
-            indicatorContainer.addView(indicatorView)
-            val layoutParams = indicatorView.layoutParams as LinearLayout.LayoutParams
-            layoutParams.gravity = Gravity.BOTTOM
-        }
-
+        setIndicatorView(indicatorView,Gravity.BOTTOM)
     }
 
     fun setIndicatorView(indicatorView: IIndicatorView, gravity: Int) {
@@ -183,11 +177,13 @@ class IndicatorLayout : FrameLayout, ViewPager.OnPageChangeListener {
             this.indicatorView = indicatorView
             indicatorContainer.addView(indicatorView)
             val layoutParams = indicatorView.layoutParams as LinearLayout.LayoutParams
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+            layoutParams.height = indicatorView.getIndicatorHeight()
             layoutParams.gravity = gravity
         }
     }
 
-    fun setLeftMargin(lefeMargin:Int){
+    fun setLeftMargin(leftMargin:Int){
         this.leftMargin = leftMargin
     }
 
