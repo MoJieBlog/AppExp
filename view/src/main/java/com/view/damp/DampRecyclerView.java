@@ -2,8 +2,10 @@ package com.view.damp;
 
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.animation.DecelerateInterpolator;
 
@@ -13,16 +15,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * @describe 弹性RecyclerView 目前只支持LinearLayoutManager,GridLayoutManager,如果想支持瀑布流，需要重写getLastPosition和getFirstItem
+ * @describe
  * @author: lixiaopeng
  * @Date: 2019-11-26
  */
 public class DampRecyclerView extends RecyclerView {
+    private static final String TAG = "DampRecyclerView";
 
     private float downX = 0;
     private float downY = 0;
-    private float damp = 0.5f;
-    private int orientation = RecyclerView.VERTICAL;
+    private float damp = 0.3f;
+    private int orientation = LinearLayoutManager.VERTICAL;
+    private int viewOffset = 0;
+    ValueAnimator animator;
+
+    private boolean needStartDamp = true;//是否需要弹性阻尼运动
+    private boolean needEndDamp = true;//是否需要弹性阻尼运动
 
     private int originalX;
     private int originalY;
@@ -34,7 +42,6 @@ public class DampRecyclerView extends RecyclerView {
     public DampRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setOverScrollMode(OVER_SCROLL_NEVER);
-
         post(new Runnable() {
             @Override
             public void run() {
@@ -44,10 +51,17 @@ public class DampRecyclerView extends RecyclerView {
         });
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public boolean onInterceptTouchEvent(MotionEvent e) {
+        if (!needStartDamp && !needEndDamp) {
+            return super.onInterceptTouchEvent(e);
+        }
         int action = e.getAction();
-        RecyclerView.LayoutManager layoutManager = getLayoutManager();
+        if (animator != null && animator.isRunning()) {
+            animator.cancel();
+        }
+        LayoutManager layoutManager = getLayoutManager();
         if (layoutManager instanceof LinearLayoutManager) {
             orientation = ((LinearLayoutManager) layoutManager).getOrientation();
         }
@@ -64,18 +78,21 @@ public class DampRecyclerView extends RecyclerView {
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 downX = e.getX();
+                downY = e.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (orientation == LinearLayoutManager.HORIZONTAL) {
                     float nowX = e.getX();
                     float dx = nowX - downX;
                     downX = nowX;
-                    if (dx > 0 && getFirstItem() == 0) {//在顶部
+                    if (dx > 0 && getFirstItem() == 0 && needStartDamp) {//在顶部
                         offsetLeftAndRight((int) (dx * damp));
                     } else {
                         if (getAdapter() != null) {
-                            if (dx < 0 && getLastPosition() == getAdapter().getItemCount() - 1) {//在末尾
+                            if (dx < 0 && getLastPosition() == getAdapter().getItemCount() - 1 && needEndDamp) {//在末尾
                                 offsetLeftAndRight((int) (dx * damp));
+                            } else {
+
                             }
                         }
                     }
@@ -83,11 +100,11 @@ public class DampRecyclerView extends RecyclerView {
                     float nowY = e.getY();
                     float dy = nowY - downY;
                     downY = nowY;
-                    if (dy > 0 && getFirstItem() == 0) {//在顶部
+                    if (dy > 0 && getFirstItem() == 0 && needStartDamp) {//在顶部
                         offsetTopAndBottom((int) (dy * damp));
                     } else {
                         if (getAdapter() != null) {
-                            if (dy < 0 && getLastPosition() == getAdapter().getItemCount() - 1) {//在末尾
+                            if ((dy < 0 && getLastPosition() == getAdapter().getItemCount() - 1 && needEndDamp)) {//在末尾
                                 offsetTopAndBottom((int) (dy * damp));
                             }
                         }
@@ -97,7 +114,9 @@ public class DampRecyclerView extends RecyclerView {
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                doDamp();
+                if (needStartDamp || needEndDamp) {
+                    doDamp();
+                }
                 break;
         }
         return super.onTouchEvent(e);
@@ -121,9 +140,13 @@ public class DampRecyclerView extends RecyclerView {
         return 0;
     }
 
-    private int viewOffset = 0;
 
     private void doDamp() {
+        Log.e(TAG, "doDamp: ");
+        if (animator != null && animator.isRunning()) {
+            animator.cancel();
+            return;
+        }
         int toPosition;
         if (orientation == LinearLayoutManager.HORIZONTAL) {
             viewOffset = getLeft();
@@ -134,7 +157,7 @@ public class DampRecyclerView extends RecyclerView {
         }
 
         final int viewOffset_ = viewOffset;
-        ValueAnimator animator = ValueAnimator.ofInt(viewOffset_, toPosition);
+        animator = ValueAnimator.ofInt(viewOffset_, toPosition);
         animator.setDuration(400);
         animator.setInterpolator(new DecelerateInterpolator(2));
         animator.addUpdateListener(new AnimatorUpdateListener() {
@@ -151,5 +174,13 @@ public class DampRecyclerView extends RecyclerView {
             }
         });
         animator.start();
+    }
+
+    public void setNeedStartDamp(boolean needStartDamp) {
+        this.needStartDamp = needStartDamp;
+    }
+
+    public void setNeedEndDamp(boolean needEndDamp) {
+        this.needEndDamp = needEndDamp;
     }
 }
