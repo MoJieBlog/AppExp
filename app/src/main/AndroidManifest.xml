@@ -52,6 +52,7 @@
         <activity
             android:name=".viewpager.ViewPagerNestActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".damp.DampFrameLayoutActivity" />
     </application>
 
 </manifest>

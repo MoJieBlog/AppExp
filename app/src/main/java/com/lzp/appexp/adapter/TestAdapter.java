@@ -24,6 +24,7 @@ import com.lzp.appexp.HorizontalScrollableLinearLayoutActivity;
 import com.lzp.appexp.KLineActivity;
 import com.lzp.appexp.MessageActivity;
 import com.lzp.appexp.R;
+import com.lzp.appexp.damp.DampFrameLayoutActivity;
 import com.lzp.appexp.tabmanager.TabManagerActivity;
 import com.lzp.appexp.transition.CarActivity;
 import com.lzp.appexp.viewpager.ViewPagerNestActivity;
@@ -75,9 +76,6 @@ public class TestAdapter extends LoadMoreAdapter {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_item, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(inflate);
         myViewHolder.tv.setText(String.valueOf(viewType));
-
-
-
         return new MyViewHolder(inflate);
     }
 
@@ -101,6 +99,8 @@ public class TestAdapter extends LoadMoreAdapter {
             holder.tv.setText("裁切图片");
         }else if(position==7){
             holder.tv.setText("viewpager 嵌套");
+        }else if(position==8){
+            holder.tv.setText("回弹效果");
         }
 
         else{
@@ -156,6 +156,10 @@ public class TestAdapter extends LoadMoreAdapter {
                     }
                     else if(adapterPosition==7){
                         Intent intent = new Intent(context, ViewPagerNestActivity.class);
+                        context.startActivity(intent);
+                    }
+                    else if(adapterPosition==8){
+                        Intent intent = new Intent(context, DampFrameLayoutActivity.class);
                         context.startActivity(intent);
                     }
                     else{

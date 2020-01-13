@@ -18,6 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
  * @Date: 2019-11-26
  */
 public class DampRecyclerView extends RecyclerView {
+
+    private float downX = 0;
+    private float downY = 0;
+    private float damp = 0.5f;
+    private int orientation = RecyclerView.VERTICAL;
+
+    private int originalX;
+    private int originalY;
+
     public DampRecyclerView(@NonNull Context context) {
         this(context, null);
     }
@@ -25,12 +34,15 @@ public class DampRecyclerView extends RecyclerView {
     public DampRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setOverScrollMode(OVER_SCROLL_NEVER);
-    }
 
-    private float downX = 0;
-    private float downY = 0;
-    private float damp = 0.5f;
-    private int orientation = RecyclerView.VERTICAL;
+        post(new Runnable() {
+            @Override
+            public void run() {
+                originalX = getLeft();
+                originalY = getTop();
+            }
+        });
+    }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent e) {
@@ -112,14 +124,17 @@ public class DampRecyclerView extends RecyclerView {
     private int viewOffset = 0;
 
     private void doDamp() {
+        int toPosition;
         if (orientation == LinearLayoutManager.HORIZONTAL) {
             viewOffset = getLeft();
+            toPosition = originalX;
         } else {
             viewOffset = getTop();
+            toPosition = originalY;
         }
 
         final int viewOffset_ = viewOffset;
-        ValueAnimator animator = ValueAnimator.ofInt(viewOffset_, 0);
+        ValueAnimator animator = ValueAnimator.ofInt(viewOffset_, toPosition);
         animator.setDuration(400);
         animator.setInterpolator(new DecelerateInterpolator(2));
         animator.addUpdateListener(new AnimatorUpdateListener() {

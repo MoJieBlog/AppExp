@@ -27,6 +27,8 @@ public class DampViewPager  extends ViewPager {
     private int viewOffset = 0;
     ValueAnimator animator;
 
+    private int originalX;
+
     public DampViewPager(@NonNull Context context) {
         this(context, null);
     }
@@ -34,6 +36,12 @@ public class DampViewPager  extends ViewPager {
     public DampViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setOverScrollMode(OVER_SCROLL_NEVER);
+        post(new Runnable() {
+            @Override
+            public void run() {
+                originalX = getLeft();
+            }
+        });
     }
 
     @SuppressLint("WrongConstant")
@@ -91,7 +99,7 @@ public class DampViewPager  extends ViewPager {
         viewOffset = getLeft();
 
         final int viewOffset_ = viewOffset;
-        animator = ValueAnimator.ofInt(viewOffset_, 0);
+        animator = ValueAnimator.ofInt(viewOffset_, originalX);
         animator.setDuration(400);
         animator.setInterpolator(new DecelerateInterpolator(2));
         animator.addUpdateListener(new AnimatorUpdateListener() {
