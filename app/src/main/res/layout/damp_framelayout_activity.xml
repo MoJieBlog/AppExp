@@ -10,8 +10,14 @@
         android:layout_height="wrap_content"/>
 
 
-    <com.view.damp.DampRecyclerView
-        android:id="@+id/rcv"
+    <!--同级最好套一层，后续优化-->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <com.view.damp.DampRecyclerView
+            android:id="@+id/rcv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
 </LinearLayout>

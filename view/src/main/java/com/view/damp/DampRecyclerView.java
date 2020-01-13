@@ -85,14 +85,16 @@ public class DampRecyclerView extends RecyclerView {
                     float nowX = e.getX();
                     float dx = nowX - downX;
                     downX = nowX;
+                    if (getLeft()!=originalX){
+                        offsetLeftAndRight((int) (dx * damp));
+                        return true;
+                    }
                     if (dx > 0 && getFirstItem() == 0 && needStartDamp) {//在顶部
                         offsetLeftAndRight((int) (dx * damp));
                     } else {
                         if (getAdapter() != null) {
                             if (dx < 0 && getLastPosition() == getAdapter().getItemCount() - 1 && needEndDamp) {//在末尾
                                 offsetLeftAndRight((int) (dx * damp));
-                            } else {
-
                             }
                         }
                     }
@@ -100,6 +102,10 @@ public class DampRecyclerView extends RecyclerView {
                     float nowY = e.getY();
                     float dy = nowY - downY;
                     downY = nowY;
+                    if (getTop()!=originalY){
+                        offsetTopAndBottom((int) (dy * damp));
+                        return true;
+                    }
                     if (dy > 0 && getFirstItem() == 0 && needStartDamp) {//在顶部
                         offsetTopAndBottom((int) (dy * damp));
                     } else {
