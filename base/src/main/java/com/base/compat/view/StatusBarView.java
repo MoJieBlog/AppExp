@@ -44,21 +44,4 @@ public class StatusBarView  extends View {
         }
 
     }
-
-    public void setBgColor(int bgColor) {
-        this.bgColor = bgColor;
-        setBackgroundColor(bgColor);
-    }
-
-    public void setBgColorRes(int colorRes){
-        this.bgColor = getContext().getResources().getColor(colorRes);
-        setBackgroundColor(bgColor);
-    }
-
-    public void setBgColor(String colorStr){
-        this.bgColor = Color.parseColor(colorStr);
-    }
-    public int getBgColor() {
-        return bgColor;
-    }
 }
