@@ -49,7 +49,7 @@ public class MainActivity extends ToastBaseActivity {
         rcv = findViewById(R.id.rcv);
         actionBar = findViewById(R.id.actionBar);
         statusBarView = findViewById(R.id.statusBarView);
-        //statusBarView.setBgColorRes(R.color.color_status_bar);
+        statusBarView.setBackgroundColor(getResources().getColor(R.color.color_status_bar));
         actionBar.setActionBarBgRes(R.color.color_actionbar_bg);
         refreshLayout = findViewById(R.id.refresh);
     }

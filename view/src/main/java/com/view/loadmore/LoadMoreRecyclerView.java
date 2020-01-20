@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.view.damp.DampRecyclerView;
+
 /**
  * 加载更多RecyclerView
  */
-public class LoadMoreRecyclerView extends RecyclerView {
+public class LoadMoreRecyclerView extends DampRecyclerView {
 
     private static final String TAG = "LoadMoreRecyclerView";
 
@@ -65,6 +67,7 @@ public class LoadMoreRecyclerView extends RecyclerView {
 
     public LoadMoreRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        setNeedStartDamp(false);
         addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {

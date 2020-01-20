@@ -164,7 +164,7 @@ public class DampRecyclerView extends RecyclerView {
 
         final int viewOffset_ = viewOffset;
         animator = ValueAnimator.ofInt(viewOffset_, toPosition);
-        animator.setDuration(400);
+        animator.setDuration(200);
         animator.setInterpolator(new DecelerateInterpolator(2));
         animator.addUpdateListener(new AnimatorUpdateListener() {
             @Override

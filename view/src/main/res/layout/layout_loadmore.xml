@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loadMoreLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="60dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/loadMoreLayout"
+    <ProgressBar
+        android:id="@+id/loadmore"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="5dp"
+        android:indeterminateBehavior="repeat"
+        android:indeterminateDrawable="@drawable/dialog_loading_anim_progress" />
+
+    <TextView
+        android:id="@+id/tv_loadmore_title"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:text="加载中"
+        android:textSize="15sp" />
 
-        <ProgressBar
-            android:id="@+id/loadmore"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:indeterminateBehavior="repeat"
-            android:indeterminateDrawable="@drawable/dialog_loading_anim_progress"
-            android:layout_marginRight="5dp" />
-
-        <TextView
-            android:id="@+id/tv_loadmore_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="加载中"
-            android:textSize="15sp" />
-
-    </LinearLayout>
+</LinearLayout>
 
 
-</FrameLayout>

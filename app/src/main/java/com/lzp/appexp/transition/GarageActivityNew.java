@@ -74,7 +74,7 @@ public class GarageActivityNew extends BaseActivity {
     @Override
     public void initView() {
 
-        statusBarView.setBgColorRes(R.color.color_status_bar);
+        statusBarView.setBackgroundColor(getResources().getColor(R.color.color_status_bar));
         actionBar.setActionBarBgRes(R.color.color_actionbar_bg);
 
         actionBar.setTitleVisible(View.VISIBLE);
