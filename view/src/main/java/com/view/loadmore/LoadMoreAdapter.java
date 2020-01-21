@@ -49,11 +49,23 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     }
 
     @Override
+    public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        //解决瀑布流加载更多占一整行
+        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+        if (holder.getItemViewType() == TYPE_LOADMORE && layoutParams instanceof StaggeredGridLayoutManager.LayoutParams) {
+            StaggeredGridLayoutManager.LayoutParams p =
+                    (StaggeredGridLayoutManager.LayoutParams) layoutParams;
+            p.setFullSpan(true);
+        }
+    }
+
+    @Override
     public int getItemViewType(int position) {
         if (position == getItemCount() - 1) return TYPE_LOADMORE;
-        if (super.getItemViewType(position)==TYPE_LOADMORE){
-            throw new IllegalArgumentException(TYPE_LOADMORE+" has been declared to load more.Please chose anther number.");
-        }else{
+        if (super.getItemViewType(position) == TYPE_LOADMORE) {
+            throw new IllegalArgumentException(TYPE_LOADMORE + " has been declared to load more.Please chose anther number.");
+        } else {
             return super.getItemViewType(position);
         }
     }
@@ -70,23 +82,6 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
         if (viewHolder.getItemViewType() == TYPE_LOADMORE) {
-            //解决瀑布流加载更多占一整行
-            if (layoutManager instanceof StaggeredGridLayoutManager) {
-                StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
-                ViewGroup.LayoutParams targetParams = viewHolder.itemView.getLayoutParams();
-                StaggeredGridLayoutManager.LayoutParams staggerLayoutParams;
-                if (targetParams != null) {
-                    staggerLayoutParams =
-                            new StaggeredGridLayoutManager.LayoutParams(targetParams.width, targetParams.height);
-                } else {
-                    staggerLayoutParams =
-                            new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                                    ViewGroup.LayoutParams.WRAP_CONTENT);
-                }
-                staggerLayoutParams.setFullSpan(true);
-                viewHolder.itemView.setLayoutParams(staggerLayoutParams);
-            }
-
             bindLoadMoreViewHolder(viewHolder);
         } else {
             mOnBindViewHolder(viewHolder, position);
@@ -139,7 +134,7 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE){
+                if (loadmoreStatus == LoadMoreRecyclerView.LM_LOAD_FAILURE) {
                     mLoadMoreRecyclerview.onFailClick();
                 }
                 if (loadmoreStatus == LoadMoreRecyclerView.LM_CLICK_LOAD) {
