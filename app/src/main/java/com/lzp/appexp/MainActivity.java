@@ -21,6 +21,7 @@ import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
 import com.view.loadmore.LoadMoreRecyclerView;
 import com.view.refresh.SwipeRefreshLayout;
+import com.view.togglebtn.FiveNodesToggleButton;
 
 public class MainActivity extends ToastBaseActivity {
 
@@ -34,6 +35,8 @@ public class MainActivity extends ToastBaseActivity {
 
     ActionBarView actionBar;
     StatusBarView statusBarView;
+
+    FiveNodesToggleButton toggleBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class MainActivity extends ToastBaseActivity {
         statusBarView.setBackgroundColor(getResources().getColor(R.color.color_status_bar));
         actionBar.setActionBarBgRes(R.color.color_actionbar_bg);
         refreshLayout = findViewById(R.id.refresh);
+        toggleBtn = findViewById(R.id.toggleBtn);
     }
 
     @Override
@@ -61,6 +65,8 @@ public class MainActivity extends ToastBaseActivity {
         rcv.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new TestAdapter();
         rcv.setAdapter(mAdapter);
+
+        toggleBtn.setNodePosition(3);
     }
 
 

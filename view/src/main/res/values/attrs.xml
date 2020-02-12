@@ -27,4 +27,8 @@
         <attr name="shadowDelegate" format="float"/>
     </declare-styleable>
 
+    <declare-styleable name="FiveNodesToggleButton">
+        <!--toggle的图片-->
+        <attr name="toggle_img_res" format="reference"/>
+    </declare-styleable>
 </resources>

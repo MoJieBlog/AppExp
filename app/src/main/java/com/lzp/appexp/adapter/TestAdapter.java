@@ -74,8 +74,6 @@ public class TestAdapter extends LoadMoreAdapter {
     @Override
     public RecyclerView.ViewHolder mOnCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_item, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder(inflate);
-        myViewHolder.tv.setText(String.valueOf(viewType));
         return new MyViewHolder(inflate);
     }
 

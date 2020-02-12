@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#ffffff"
     tools:context=".MainActivity">
@@ -18,6 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_actionbar_height" />
 
+
+    <com.view.togglebtn.FiveNodesToggleButton
+        android:id="@+id/toggleBtn"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="30dp"
+        app:toggle_img_res="@mipmap/pic_knob"
+        android:layout_marginRight="30dp"/>
     <com.view.refresh.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"

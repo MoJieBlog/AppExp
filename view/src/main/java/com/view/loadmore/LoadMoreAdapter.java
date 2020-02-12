@@ -52,11 +52,18 @@ public abstract class LoadMoreAdapter extends RecyclerView.Adapter {
     public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
         super.onViewAttachedToWindow(holder);
         //解决瀑布流加载更多占一整行
-        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-        if (holder.getItemViewType() == TYPE_LOADMORE && layoutParams instanceof StaggeredGridLayoutManager.LayoutParams) {
-            StaggeredGridLayoutManager.LayoutParams p =
-                    (StaggeredGridLayoutManager.LayoutParams) layoutParams;
-            p.setFullSpan(true);
+        int itemViewType = holder.getItemViewType();
+        if (itemViewType == TYPE_LOADMORE) {
+            ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+            if (layoutParams == null) {
+                StaggeredGridLayoutManager.LayoutParams staggerLayoutParams =
+                        new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT);
+                staggerLayoutParams.setFullSpan(true);
+                holder.itemView.setLayoutParams(layoutParams);
+            } else if (layoutParams instanceof StaggeredGridLayoutManager.LayoutParams) {
+                ((StaggeredGridLayoutManager.LayoutParams) layoutParams).setFullSpan(true);
+            }
         }
     }
 
