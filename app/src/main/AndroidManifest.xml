@@ -60,7 +60,8 @@
         <activity
             android:name=".viewpager.ViewPagerNestActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".damp.DampFrameLayoutActivity" />
+        <activity android:name=".damp.DampFrameLayoutActivity"
+            android:theme="@style/transparentTheme" />
 
     </application>
 

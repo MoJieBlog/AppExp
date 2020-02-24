@@ -1,5 +1,6 @@
 package com.lzp.appexp.damp
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,18 @@ class DampFrameLayoutActivity :BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.damp_framelayout_activity)
+
+        rcv.alpha = 0f
+
+        rcv.post{
+            val animator = ValueAnimator.ofFloat(0f, 1f)
+            animator.duration = 1500
+            animator.addUpdateListener {
+                val animatedValue = it.animatedValue as Float
+                rcv.alpha = animatedValue
+            }
+            animator.start()
+        }
     }
 
     override fun initView() {

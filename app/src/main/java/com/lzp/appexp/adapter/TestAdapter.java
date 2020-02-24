@@ -159,6 +159,9 @@ public class TestAdapter extends LoadMoreAdapter {
                     else if(adapterPosition==8){
                         Intent intent = new Intent(context, DampFrameLayoutActivity.class);
                         context.startActivity(intent);
+                        if (context instanceof Activity){
+                            ((Activity) context).overridePendingTransition(0,0);
+                        }
                     }
                     else{
                         Intent intent = new Intent(context, CarActivity.class);

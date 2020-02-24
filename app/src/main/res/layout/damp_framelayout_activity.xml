@@ -17,6 +17,7 @@
         <com.view.damp.DampRecyclerView
             android:id="@+id/rcv"
             android:layout_width="match_parent"
+            android:background="#ffffff"
             android:layout_height="match_parent"/>
     </FrameLayout>
 
