@@ -40,7 +40,7 @@ public class StatusBarView  extends View {
         if (mode==MeasureSpec.AT_MOST||mode==MeasureSpec.UNSPECIFIED){
             int height = 0;
             if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
-                height = MeasureSpec.makeMeasureSpec(Configuration.Dimens.statusBarHeight, MeasureSpec.EXACTLY);
+                height = MeasureSpec.makeMeasureSpec(statusBarHeight, MeasureSpec.EXACTLY);
             }
             setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), height);
         }else{
