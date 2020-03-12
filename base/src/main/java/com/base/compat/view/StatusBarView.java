@@ -2,6 +2,7 @@ package com.base.compat.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -37,8 +38,11 @@ public class StatusBarView  extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int mode = MeasureSpec.getMode(heightMeasureSpec);
         if (mode==MeasureSpec.AT_MOST||mode==MeasureSpec.UNSPECIFIED){
-            int height = MeasureSpec.makeMeasureSpec(statusBarHeight, mode);
-            setMeasuredDimension(statusBarWidth,height);
+            int height = 0;
+            if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+                height = MeasureSpec.makeMeasureSpec(Configuration.Dimens.statusBarHeight, MeasureSpec.EXACTLY);
+            }
+            setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), height);
         }else{
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
