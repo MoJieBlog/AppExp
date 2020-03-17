@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MainTabView">
+        <attr name="tab_img_size" format="dimension"/>
+        <attr name="tab_text" format="string"/>
+        <!--选中-->
+        <attr name="selected_text_color" format="color"/>
+        <attr name="selected_text_size" format="dimension"/>
+        <attr name="selected_img_res" format="reference"/>
+
+        <!--未选中-->
+        <attr name="un_selected_text_color" format="color"/>
+        <attr name="un_selected_text_size" format="dimension"/>
+        <attr name="un_selected_img_res" format="reference"/>
+    </declare-styleable>
+</resources>

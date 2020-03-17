@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.lzp.appexp">
+    package="com.lzp.appexp"
+    tools:ignore="LockedOrientationActivity" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -18,19 +19,20 @@
         android:supportsRtl="true"
         android:theme="@style/appTheme"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name=".ConstraintLayoutActivity"></activity>
-        <activity android:name=".HorizontalScrollableLinearLayoutActivity" />
-        <activity
-            android:name=".transition.CarActivity"
+
+
+        <activity android:name=".SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".main.MainActivityNew"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".TestActivity" >
@@ -62,6 +64,12 @@
             android:screenOrientation="portrait" />
         <activity android:name=".damp.DampFrameLayoutActivity"
             android:theme="@style/transparentTheme" />
+        <activity android:name=".ConstraintLayoutActivity"></activity>
+        <activity android:name=".HorizontalScrollableLinearLayoutActivity" />
+        <activity
+            android:name=".transition.CarActivity"
+            android:screenOrientation="portrait" />
+
 
     </application>
 

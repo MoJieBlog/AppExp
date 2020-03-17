@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--如果需要定制，可以在app内重写，会自动覆盖-->
+    <!--主题相关-->
+    <color name="theme_bottom_tab">#141d26</color>
     <!--statusBar-->
     <color name="color_status_bar">#141d26</color>
     <!--actionBar-->
@@ -11,10 +14,4 @@
     <color name="color_actionbar_subtitle">#ffffff</color>
     <color name="color_actionbar_right_text">#ffffff</color>
     <color name="color_actionbar_right_text_not_enable">#55ffffff</color>
-
-
-    <color name="transparent">#00000000</color>
-    <color name="color_a1abbc">#a1abbc</color>
-    <color name="color_333333">#333333</color>
-    <color name="color_141d26">#141d26</color>
 </resources>

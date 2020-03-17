@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.lzp.appexp.main.MainTabLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="@color/theme_bottom_tab"
+        android:orientation="horizontal">
+
+        <com.lzp.appexp.main.MainTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:selected_img_res="@mipmap/load_fail"
+            app:selected_text_color="#ffffff"
+            app:selected_text_size="13sp"
+            app:tab_img_size="40dp"
+            app:tab_text="控件"
+            app:un_selected_img_res="@mipmap/load_success"
+            app:un_selected_text_color="#88ffffff"
+            app:un_selected_text_size="13sp" />
+
+        <com.lzp.appexp.main.MainTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:selected_img_res="@mipmap/load_fail"
+            app:selected_text_color="#ffffff"
+            app:selected_text_size="13sp"
+            app:tab_img_size="40dp"
+            app:tab_text="高仿UI"
+            app:un_selected_img_res="@mipmap/load_success"
+            app:un_selected_text_color="#88ffffff"
+            app:un_selected_text_size="13sp" />
+
+        <com.lzp.appexp.main.MainTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:selected_img_res="@mipmap/load_fail"
+            app:selected_text_color="#ffffff"
+            app:selected_text_size="13sp"
+            app:tab_img_size="40dp"
+            app:tab_text="系统"
+            app:un_selected_img_res="@mipmap/load_success"
+            app:un_selected_text_color="#88ffffff"
+            app:un_selected_text_size="13sp" />
+
+        <com.lzp.appexp.main.MainTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:selected_img_res="@mipmap/load_fail"
+            app:selected_text_color="#ffffff"
+            app:selected_text_size="13sp"
+            app:tab_img_size="40dp"
+            app:tab_text="工具类"
+            app:un_selected_img_res="@mipmap/load_success"
+            app:un_selected_text_color="#88ffffff"
+            app:un_selected_text_size="13sp" />
+
+    </com.lzp.appexp.main.MainTabLayout>
+
+</FrameLayout>

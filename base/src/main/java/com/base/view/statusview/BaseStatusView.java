@@ -35,17 +35,17 @@ public class BaseStatusView extends LinearLayout implements IStatusView {
     protected int defaultImageRes;
 
     protected String defaultTitleStr;
-    protected int defaultTitleColor;
+    protected int defaultTitleColor = 0xffa1abbc;
     protected int defaultTitleSize;
 
     protected String defaultContentStr;
-    protected int defaultContentColor;
+    protected int defaultContentColor = 0xffa1abbc;
     protected int defaultContentSize;
 
     protected String defaultBtnTextStr;
     protected int defaultBtnShapeRes;
     protected int defaultBtnTextSize;
-    protected int defaultBtnTextColor;
+    protected int defaultBtnTextColor = 0xff333333;
 
     public BaseStatusView(Context context) {
         this(context, null);
@@ -61,17 +61,17 @@ public class BaseStatusView extends LinearLayout implements IStatusView {
         defaultImageRes = typedArray.getResourceId(R.styleable.BaseStatusView_image_src, 0);
 
         defaultTitleStr = typedArray.getString(R.styleable.BaseStatusView_title_str);
-        defaultTitleColor = typedArray.getColor(R.styleable.BaseStatusView_title_color, resources.getColor(R.color.color_a1abbc));
+        defaultTitleColor = typedArray.getColor(R.styleable.BaseStatusView_title_color, defaultTitleColor);
         defaultTitleSize = typedArray.getDimensionPixelSize(R.styleable.BaseStatusView_title_size, 15);
 
         defaultContentStr = typedArray.getString(R.styleable.BaseStatusView_content_str);
-        defaultContentColor = typedArray.getColor(R.styleable.BaseStatusView_content_color, resources.getColor(R.color.color_a1abbc));
+        defaultContentColor = typedArray.getColor(R.styleable.BaseStatusView_content_color, defaultContentColor);
         defaultContentSize = typedArray.getDimensionPixelSize(R.styleable.BaseStatusView_content_size, 13);
 
         defaultBtnTextStr = typedArray.getString(R.styleable.BaseStatusView_btn_text);
         defaultBtnShapeRes = typedArray.getResourceId(R.styleable.BaseStatusView_btn_shape,R.drawable.rect_bf3f4f6_r2);
         defaultBtnTextSize = typedArray.getDimensionPixelSize(R.styleable.BaseStatusView_btn_text_size,15);
-        defaultBtnTextColor = typedArray.getColor(R.styleable.BaseStatusView_btn_text_color,resources.getColor(R.color.color_333333));
+        defaultBtnTextColor = typedArray.getColor(R.styleable.BaseStatusView_btn_text_color,defaultBtnTextColor);
         typedArray.recycle();
 
         init();

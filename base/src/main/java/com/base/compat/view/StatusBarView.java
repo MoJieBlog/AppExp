@@ -1,7 +1,6 @@
 package com.base.compat.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
@@ -19,9 +18,6 @@ import com.utils.PhoneUtils;
 public class StatusBarView  extends View {
 
     private int statusBarHeight;
-    private int statusBarWidth;
-
-    private int bgColor = 0xffffff;
 
     public StatusBarView(@NonNull Context context) {
         this(context,null);
@@ -29,8 +25,6 @@ public class StatusBarView  extends View {
 
     public StatusBarView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-
-        statusBarWidth = PhoneUtils.getWinWide(context);
         statusBarHeight = PhoneUtils.getStatusBarHeight(context);
     }
 
