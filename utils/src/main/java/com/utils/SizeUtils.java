@@ -16,12 +16,12 @@ public final class SizeUtils {
      * @return
      */
 
-    public static int dip2px(Context context,int dipValue) {
+    public static int dip2px(Context context, int dipValue) {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
 
-    public static float dip2px(Context context,float dipValue) {
+    public static float dip2px(Context context, float dipValue) {
         float scale = context.getResources().getDisplayMetrics().density;
         return dipValue * scale + 0.5f;
     }
@@ -32,9 +32,25 @@ public final class SizeUtils {
      * @param pxValue
      * @return
      */
-    public static float px2dp(Context context,float pxValue) {
+    public static float px2dp(Context context, float pxValue) {
         float scale = context.getResources().getDisplayMetrics().density;
         return pxValue / scale + 0.5f;
     }
 
+    /**
+     * 将px转换为sp
+     */
+    public static float px2sp(Context context, float pxValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return pxValue / fontScale + 0.5f;
+    }
+
+
+    /**
+     * 将sp转换为px
+     */
+    public static float sp2px(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return spValue * fontScale + 0.5f;
+    }
 }

@@ -1,6 +1,5 @@
 package com.lzp.appexp
 
-import android.content.Intent
 import android.os.Bundle
 import com.base.compat.BaseActivity
 import com.lzp.appexp.main.MainActivityNew
@@ -17,5 +16,6 @@ class SplashActivity :BaseActivity(){
         setContentView(R.layout.activity_splash)
 
         MainActivityNew.startMainActivity(this)
+        finish()
     }
 }

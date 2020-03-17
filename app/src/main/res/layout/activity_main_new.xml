@@ -17,56 +17,60 @@
         android:orientation="horizontal">
 
         <com.lzp.appexp.main.MainTabView
+            android:id="@+id/tab1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:selected_img_res="@mipmap/load_fail"
             app:selected_text_color="#ffffff"
-            app:selected_text_size="13sp"
-            app:tab_img_size="40dp"
+            app:selected_text_size="13"
+            app:tab_img_size="30dp"
             app:tab_text="控件"
             app:un_selected_img_res="@mipmap/load_success"
             app:un_selected_text_color="#88ffffff"
-            app:un_selected_text_size="13sp" />
+            app:un_selected_text_size="13" />
 
         <com.lzp.appexp.main.MainTabView
+            android:id="@+id/tab2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:selected_img_res="@mipmap/load_fail"
             app:selected_text_color="#ffffff"
-            app:selected_text_size="13sp"
-            app:tab_img_size="40dp"
+            app:selected_text_size="13"
+            app:tab_img_size="30dp"
             app:tab_text="高仿UI"
             app:un_selected_img_res="@mipmap/load_success"
             app:un_selected_text_color="#88ffffff"
-            app:un_selected_text_size="13sp" />
+            app:un_selected_text_size="13" />
 
         <com.lzp.appexp.main.MainTabView
+            android:id="@+id/tab3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:selected_img_res="@mipmap/load_fail"
             app:selected_text_color="#ffffff"
-            app:selected_text_size="13sp"
-            app:tab_img_size="40dp"
+            app:selected_text_size="13"
+            app:tab_img_size="30dp"
             app:tab_text="系统"
             app:un_selected_img_res="@mipmap/load_success"
             app:un_selected_text_color="#88ffffff"
-            app:un_selected_text_size="13sp" />
+            app:un_selected_text_size="13" />
 
         <com.lzp.appexp.main.MainTabView
+            android:id="@+id/tab4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:selected_img_res="@mipmap/load_fail"
             app:selected_text_color="#ffffff"
-            app:selected_text_size="13sp"
-            app:tab_img_size="40dp"
+            app:selected_text_size="13"
+            app:tab_img_size="30dp"
             app:tab_text="工具类"
             app:un_selected_img_res="@mipmap/load_success"
             app:un_selected_text_color="#88ffffff"
-            app:un_selected_text_size="13sp" />
+            app:un_selected_text_size="13" />
 
     </com.lzp.appexp.main.MainTabLayout>
 
