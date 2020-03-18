@@ -17,8 +17,6 @@
             <option value="$PROJECT_DIR$/basic/imageloader" />
             <option value="$PROJECT_DIR$/basic/utils" />
             <option value="$PROJECT_DIR$/basic/view" />
-            <option value="$PROJECT_DIR$/dialog" />
-            <option value="$PROJECT_DIR$/view" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
