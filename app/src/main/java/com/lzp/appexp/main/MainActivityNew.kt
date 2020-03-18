@@ -30,6 +30,9 @@ class MainActivityNew : BaseMainActivity(){
             intent.putExtra(Constants.EXTRA_BUNDLE,bundle)
             context.startActivity(intent)
         }
+    }
 
+    override fun initView() {
+        super.initView()
     }
 }
