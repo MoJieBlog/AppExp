@@ -69,11 +69,11 @@ dependencies {
     implementation extDesign
 
     implementation extEventBus
-    implementation project(path: ':base')
-    implementation project(path: ':utils')
-    implementation project(path: ':view')
-    implementation project(path: ':imageloader')
-    implementation project(path: ':dialog')
+    implementation project(path: ':basic-base')
+    implementation project(path: ':basic-utils')
+    implementation project(path: ':basic-view')
+    implementation project(path: ':basic-imageloader')
+    implementation project(path: ':basic-dialog')
 
     //implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     //releaseImplementation releaseLeakCanary

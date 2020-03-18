@@ -1,6 +1,19 @@
 include ':app'
 
-include ':utils'
-//project(':utils').projectDir = new File(rootProject.projectDir,'./basic-modules/utils')
-include ':base', ':imageloader', ':view', ':animation', ':dialog'
+include ':view', ':dialog'
+
+include 'basic-dialog'
+project(':basic-dialog').projectDir = new File(rootProject.projectDir,'./basic/dialog')
+
+include 'basic-view'
+project(':basic-view').projectDir = new File(rootProject.projectDir,'./basic/view')
+
+include 'basic-base'
+project(':basic-base').projectDir = new File(rootProject.projectDir,'./basic/base')
+
+include 'basic-utils'
+project(':basic-utils').projectDir = new File(rootProject.projectDir,'./basic/utils')
+
+include 'basic-imageloader'
+project(':basic-imageloader').projectDir = new File(rootProject.projectDir,'./basic/imageloader')
 

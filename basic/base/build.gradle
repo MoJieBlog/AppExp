@@ -33,5 +33,5 @@ dependencies {
     implementation extAppcompat
     implementation extConstraint
     implementation extDesign
-    implementation project(path: ':utils')
+    implementation project(path: ':basic-utils')
 }

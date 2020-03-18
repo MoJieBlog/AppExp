@@ -11,12 +11,13 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/animation" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/basic/base" />
+            <option value="$PROJECT_DIR$/basic/dialog" />
+            <option value="$PROJECT_DIR$/basic/imageloader" />
+            <option value="$PROJECT_DIR$/basic/utils" />
+            <option value="$PROJECT_DIR$/basic/view" />
             <option value="$PROJECT_DIR$/dialog" />
-            <option value="$PROJECT_DIR$/imageloader" />
-            <option value="$PROJECT_DIR$/utils" />
             <option value="$PROJECT_DIR$/view" />
           </set>
         </option>
