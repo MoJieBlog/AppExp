@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import com.lzp.appexp.R
-import kotlinx.android.synthetic.main.activity_main_new.view.*
+import kotlinx.android.synthetic.main.activity_main_base.view.*
 
 /**
  * @describe: mainActivity 底部tab
@@ -97,14 +97,14 @@ class MainTabLayout : LinearLayout, View.OnClickListener {
 
     //================以下为监听===============
     private var tabChangedListener:OnTabChangedListener? = null
-    fun setOnTabChangedListener(tabChangedListener:OnTabChangedListener){
+    fun setOnTabChangedListener(tabChangedListener:OnTabChangedListener?){
         this.tabChangedListener = tabChangedListener
     }
     interface OnTabChangedListener {
         /**
-         * @param originalTab 原来的tab位置
-         * @param currentTab 新的tab位置
+         * @param preIndex 原来的tab位置
+         * @param currentIndex 新的tab位置
          */
-        fun onTabChange(originalTab: Int, currentTab: Int)
+        fun onTabChange(preIndex: Int, currentIndex: Int)
     }
 }

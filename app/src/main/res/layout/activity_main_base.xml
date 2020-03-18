@@ -10,6 +10,7 @@
         android:layout_height="match_parent" />
 
     <com.lzp.appexp.main.MainTabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"

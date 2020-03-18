@@ -32,7 +32,20 @@ class MainActivityNew : BaseMainActivity(){
         }
     }
 
+    private var index = 0
+
+    override fun readArgument(bundle: Bundle) {
+        super.readArgument(bundle)
+        index = bundle.getInt(INDEX,index)
+    }
+
+    override fun writeArgument(bundle: Bundle) {
+        super.writeArgument(bundle)
+        bundle.putInt(INDEX,index)
+    }
+
     override fun initView() {
         super.initView()
+        setSelectedIndex(index)
     }
 }
