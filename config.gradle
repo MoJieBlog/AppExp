@@ -1,15 +1,23 @@
 ext {
 
+    //编译工具设置
     extKtVesion = "1.3.31"
     extKtGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:" + extKtVesion
-
     javaVersion = JavaVersion.VERSION_1_8
-
     extBuildGradle = 'com.android.tools.build:gradle:3.4.1'
 
+    //版本设置
     extCompileSdkVersion = 28
     extMinSdkVersion = 16
     extTargetSdkVersion = 28
+    appVersionCode = 1
+    appVersion = "1.0"
+
+    //项目配置
+    copyUiIsApp = false
+    customViewIsApp = false
+    systemOptIsApp = false
+    utilsExampleIsApp = false
 
     //系统
     extAppcompat = 'androidx.appcompat:appcompat:1.0.0'
@@ -18,8 +26,6 @@ ext {
     extRecyclerview = 'androidx.recyclerview:recyclerview:1.0.0'
     extCardview = 'androidx.cardview:cardview:1.0.0'
     extAnnotations = 'androidx.annotation:annotation:1.0.0'
-
-    //
     extDynamicAnimation = 'com.android.support:support-dynamic-animation:28.0.0'
     extMultidex = "com.android.support:multidex:1.0.3"
 
@@ -31,8 +37,8 @@ ext {
     extGlide = 'com.github.bumptech.glide:glide:4.9.0'
     extGlideCompiler = 'com.github.bumptech.glide:compiler:4.9.0'
     // Rx
-    extRxJava = 'io.reactivex.rxjava2:rxjava:2.2.7'
-    extRxAndroid = 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    //extRxJava = 'io.reactivex.rxjava2:rxjava:2.2.7'
+    //extRxAndroid = 'io.reactivex.rxjava2:rxandroid:2.1.1'
     // google gson
     extGson = 'com.google.code.gson:gson:2.8.5'
     //butterKnife

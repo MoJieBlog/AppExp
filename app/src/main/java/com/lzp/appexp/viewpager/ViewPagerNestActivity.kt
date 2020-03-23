@@ -39,9 +39,7 @@ class ViewPagerNestActivity : BaseActivity() {
 
 
     inner class ParentAdapter : FragmentPagerAdapter {
-
-        constructor(fm: FragmentManager?) : super(fm)
-
+        constructor(fm: FragmentManager) : super(fm)
         override fun getCount(): Int {
             return 3
         }

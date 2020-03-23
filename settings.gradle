@@ -14,3 +14,7 @@ project(':basic-utils').projectDir = new File(rootProject.projectDir,'./basic/ut
 
 include 'basic-imageloader'
 project(':basic-imageloader').projectDir = new File(rootProject.projectDir,'./basic/imageloader')
+include ':customview'
+include ':copyui'
+include ':systemopt'
+include ':utilsexample'
