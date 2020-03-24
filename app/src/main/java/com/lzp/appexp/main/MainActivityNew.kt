@@ -11,23 +11,19 @@ import com.base.compat.Constants
  * @Author: lixiaopeng
  * @Date: 2020/3/13
  */
-class MainActivityNew : BaseMainActivity(){
+class MainActivityNew : BaseMainActivity() {
 
-    companion object{
+    companion object {
         const val INDEX = "index"
 
-        fun startMainActivity(context: Context){
-            startMainActivity(context,0)
-        }
-
-        fun startMainActivity(context: Context,index:Int){
+        fun startMainActivity(context: Context, index: Int = 0) {
             val intent = Intent(context, MainActivityNew::class.java)
-            if (context !is Activity){
+            if (context !is Activity) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             val bundle = Bundle()
-            bundle.putInt(INDEX,index)
-            intent.putExtra(Constants.EXTRA_BUNDLE,bundle)
+            bundle.putInt(INDEX, index)
+            intent.putExtra(Constants.EXTRA_BUNDLE, bundle)
             context.startActivity(intent)
         }
     }
@@ -36,16 +32,17 @@ class MainActivityNew : BaseMainActivity(){
 
     override fun readArgument(bundle: Bundle) {
         super.readArgument(bundle)
-        index = bundle.getInt(INDEX,index)
+        index = bundle.getInt(INDEX, index)
     }
 
     override fun writeArgument(bundle: Bundle) {
         super.writeArgument(bundle)
-        bundle.putInt(INDEX,index)
+        bundle.putInt(INDEX, index)
     }
 
     override fun initView() {
         super.initView()
         setSelectedIndex(index)
+        onTabChange(-1,index)
     }
 }

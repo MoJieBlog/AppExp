@@ -18,7 +18,6 @@ class MainTabLayout : LinearLayout, View.OnClickListener {
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 
     private var preIndex = -1
-    private var currentIndex = 0
     init {
         orientation = HORIZONTAL
     }
