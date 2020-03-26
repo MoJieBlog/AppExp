@@ -20,5 +20,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".transition.CarActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".transition.GarageActivityNew"
+            android:theme="@style/transparentTheme"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".message.MessageActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".tabmanager.TabManagerActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

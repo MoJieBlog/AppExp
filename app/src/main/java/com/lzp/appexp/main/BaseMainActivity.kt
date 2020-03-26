@@ -96,7 +96,7 @@ open class BaseMainActivity : BaseActivity(), MainTabLayout.OnTabChangedListener
             } else {
                 beginTransaction.add(R.id.fragmentContainer, nowFragment, nowFragment.javaClass.name)
             }
-            beginTransaction.show(nowFragment).commit()
+            beginTransaction.show(nowFragment).commitAllowingStateLoss()
         }
     }
 

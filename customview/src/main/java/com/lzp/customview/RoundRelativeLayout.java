@@ -23,7 +23,6 @@ import androidx.annotation.Nullable;
 public class RoundRelativeLayout extends RelativeLayout {
 
     private Path mPath;
-    private Paint mPaint;
     private RectF mRectF;
     private float mRadius = 0;
 
@@ -36,13 +35,6 @@ public class RoundRelativeLayout extends RelativeLayout {
 
         mPath = new Path();
         mRectF = new RectF();
-
-        //Android P之后对setXfermode进行了修改
-        if (Build.VERSION.SDK_INT < 28) {
-            mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
-        }
-
     }
 
     public void setRadius(float radius) {
