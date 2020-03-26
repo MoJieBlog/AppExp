@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="color_white">#ffffff</color>
-
+    <color name="color_statusbar_bg">#141d26</color>
     <!--actionBar-->
     <color name="color_actionbar_bg">#141d26</color>
     <color name="color_actionbar_left_text">#ffffff</color>

@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lzp.copyui" />
+    package="com.lzp.copyui" >
+    <application>
+        <activity android:name=".transition.GarageActivityNew"
+            android:theme="@style/transparentTheme"/>
+    </application>
+</manifest>

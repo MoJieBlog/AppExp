@@ -30,10 +30,6 @@
 
         <activity android:name=".main.MainActivityNew"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
 
         <activity android:name=".TestActivity" >
             <!--<intent-filter>
@@ -42,34 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
-        <activity
-            android:name=".KLineActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".transition.GarageActivityNew"
-            android:screenOrientation="portrait"
-            android:theme="@style/transparentTheme" />
-        <activity
-            android:name=".BannerLayoutActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".tabmanager.TabManagerActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".MessageActivity" />
-        <activity
-            android:name=".ClipImageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".viewpager.ViewPagerNestActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".damp.DampFrameLayoutActivity"
-            android:theme="@style/transparentTheme" />
-        <activity android:name=".ConstraintLayoutActivity"></activity>
-        <activity android:name=".HorizontalScrollableLinearLayoutActivity" />
-        <activity
-            android:name=".transition.CarActivity"
-            android:screenOrientation="portrait" />
-
 
     </application>
 
