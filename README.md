@@ -1,31 +1,61 @@
 # AppExp
 组件化做一个app的架子。方便新建项目使用
 
-## imageloder
-### [图片加载](https://github.com/MoJieBlog/AppExp/tree/master/imageloader)
-* 图片下载(done)
-* 图片展示(done)
-* 设置缓存路径(done)
-* 设置网络请求（等待网络封装完成）
-* 缓存策略(暂时不支持)
-* 设置最大内存缓存(done)
-* 设置最大磁盘缓存(done)
-* 清除缓存(done)
-
-## [base](https://github.com/MoJieBlog/AppExp/blob/master/base/)
-* baseActivity
-* statusBarView
-* actionBarView
-* BaseStatusView 状态View
-
-## [utils](https://github.com/MoJieBlog/AppExp/blob/master/utils/src/main/java/com/utils/)
-
-## [自定义View](https://github.com/MoJieBlog/AppExp/blob/master/view/)
-
-## [dialog](https://github.com/MoJieBlog/AppExp/blob/master/dialog/)
-* 单选项弹窗
-* 多选项弹窗
-* 双选项弹窗
-* loading弹窗
-* 图片弹窗
-* 进度条弹窗
+## 项目结构
+* project
+    * app（空壳架子，用来组织组件之间展示）
+    * basic（项目必须的依赖，基本上每个项目都必须的一些工具类）
+        * base（baseActivity和baseFragment）
+            * baseActivity
+            * baseFragment
+            * ToastBaseActivity(顶部弹窗的Activity)
+        * dialog（常用的dialog）
+            * 单选弹窗
+            * 双选弹窗
+        * imageLoader（图片加载库）
+        * utils（工具类）
+            * 权限工具类
+            * 颜色工具类
+            * 时间日期工具类
+            * log
+            * 数字工具类
+            * 手机系统和硬件相关工具类
+            * 尺寸工具类
+            * SP存储
+        * view（常用的控件）
+            * actionBar
+            * statusBar
+            * 加载更多
+                * recyclerView加载更多
+            * 刷新控件（支持扩展头部）
+                * 下拉刷新
+                * 下拉刷新，继续下拉打开页面
+            * 状态控件
+                * 无数据
+                * 无网络
+                * 加载失败
+            * 仿IOS菊花
+    * copyUi（高仿Ui）
+        * 炫酷的消息卡片弹出效果
+        * 高仿频道管理
+        * 炫酷的转场动画
+    * customView（自定义控件）
+        * 裁切
+            * 裁切图片
+        * 万物皆可弹效果(滚动到底部，接着拖拽回弹效果)
+            * 弹性recyclerView
+            * 弹性ViewPager
+        * indicator
+            * 暂时有问题
+        * 图片预览
+            * 别人的代码。计划自己写一遍。
+        * recyclerView相关效果
+        * 水平滚动的LinearLayout
+        * 五个节点的toggleButton
+        * viewPager相关效果
+        * 仪表盘
+        * 半圆（支持设置方向）
+        * 线性渐变文字
+        * 圆角的RelativeLayout
+    * systemOpt（系统优化相关）
+    * utilsExample（工具类功能展示）

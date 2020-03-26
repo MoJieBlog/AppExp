@@ -1,4 +1,4 @@
-package com.lzp.customview;
+package com.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -17,6 +17,6 @@ public class LoadingView extends ProgressBar {
     public LoadingView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        setIndeterminateDrawable(getResources().getDrawable(com.view.R.drawable.dialog_loading_anim_progress));
+        setIndeterminateDrawable(getResources().getDrawable(R.drawable.dialog_loading_anim_progress));
     }
 }
