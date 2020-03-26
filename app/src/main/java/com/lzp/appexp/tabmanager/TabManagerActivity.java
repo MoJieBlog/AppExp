@@ -17,11 +17,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.base.compat.BaseActivity;
+import com.base.BaseActivity;
 import com.lzp.appexp.R;
 import com.lzp.appexp.tabmanager.TabMainAdapter.OnItemClickListener;
+import com.lzp.customview.damp.DampRecyclerView;
 import com.utils.PhoneUtils;
-import com.view.damp.DampRecyclerView;
 
 import java.util.ArrayList;
 

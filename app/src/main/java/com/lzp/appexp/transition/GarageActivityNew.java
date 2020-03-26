@@ -16,19 +16,17 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.base.compat.view.ActionBarView;
-import com.base.compat.view.ActionBarView.ActionBarClickAdapter;
-import com.base.compat.BaseActivity;
-import com.base.compat.view.StatusBarView;
+import com.base.BaseActivity;
 import com.lzp.appexp.R;
 import com.lzp.appexp.transition.adapter.GarageAdapter;
 import com.lzp.appexp.transition.transition.GarageEnterTransition;
 import com.lzp.appexp.transition.transition.GarageReturnTransition;
 import com.lzp.appexp.transition.transition.OtherTransition;
 import com.lzp.appexp.transition.transition.PositionTransition;
-import com.view.gallery.GalleryRecyclerView;
-import com.view.gallery.GalleryRecyclerView.MONScrollListener;
-import com.view.gallery.IndicatorView;
+import com.lzp.customview.gallery.GalleryRecyclerView;
+import com.lzp.customview.gallery.IndicatorView;
+import com.view.compat.ActionBarView;
+import com.view.compat.StatusBarView;
 
 /**
  * @describe
@@ -86,7 +84,7 @@ public class GarageActivityNew extends BaseActivity {
         actionBar.setSubTitleText("main subTitle");
         actionBar.setRightText("right text");
 
-        actionBar.setActionBarClickListener(new ActionBarClickAdapter() {
+        actionBar.setActionBarClickListener(new ActionBarView.ActionBarClickAdapter() {
             @Override
             public void onClickLeftImg(View v) {
                 onBackPressed();
@@ -102,7 +100,7 @@ public class GarageActivityNew extends BaseActivity {
         rcv.setCurrentItem(selectedPosition);
         rcv.setAdapter(adapter);
 
-        rcv.setMOnScrollListener(new MONScrollListener() {
+        rcv.setMOnScrollListener(new GalleryRecyclerView.MONScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 if (car.getVisibility() == View.VISIBLE) {

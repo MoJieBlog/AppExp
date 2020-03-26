@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.view.ClipAbleImageView
+    <com.lzp.customview.ClipAbleImageView
         android:id="@+id/clipImageView"
         android:layout_width="match_parent"
         android:layout_height="300dp"

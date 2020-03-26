@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.base.compat.BaseActivity
+import com.base.BaseActivity
 import com.lzp.appexp.R
 import com.utils.SizeUtils
 import com.view.indicator.ext.LineIndicatorView

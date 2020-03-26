@@ -8,17 +8,17 @@
     android:background="#ffffff"
     tools:context=".MainActivity">
 
-    <com.base.compat.view.StatusBarView
+    <com.view.compat.StatusBarView
         android:id="@+id/statusBarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.base.compat.view.ActionBarView
+    <com.view.compat.StatusBarView
         android:id="@+id/actionBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_actionbar_height" />
 
-    <com.view.togglebtn.FiveNodesToggleButton
+    <com.lzp.customview.togglebtn.FiveNodesToggleButton
         android:id="@+id/toggleBtn"
         android:layout_width="match_parent"
         android:layout_height="52dp"

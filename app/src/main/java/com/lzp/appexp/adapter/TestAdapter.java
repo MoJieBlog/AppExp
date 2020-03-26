@@ -15,12 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.imageloader.ImageLoader;
-import com.imageloader.interfaces.IMGLoadListener;
 import com.lzp.appexp.BannerLayoutActivity;
 import com.lzp.appexp.ClipImageActivity;
 import com.lzp.appexp.Constants;
-import com.lzp.appexp.HorizontalScrollableLinearLayoutActivity;
 import com.lzp.appexp.KLineActivity;
 import com.lzp.appexp.MessageActivity;
 import com.lzp.appexp.R;
@@ -29,8 +26,6 @@ import com.lzp.appexp.tabmanager.TabManagerActivity;
 import com.lzp.appexp.transition.CarActivity;
 import com.lzp.appexp.viewpager.ViewPagerNestActivity;
 import com.view.loadmore.LoadMoreAdapter;
-
-import java.util.List;
 
 /**
  * @describe
@@ -131,8 +126,6 @@ public class TestAdapter extends LoadMoreAdapter {
                 public void onClick(View v) {
                     int adapterPosition = getAdapterPosition();
                     if (adapterPosition==0){
-                        Intent intent = new Intent(context, HorizontalScrollableLinearLayoutActivity.class);
-                        context.startActivity(intent);
                     }else if(adapterPosition==1){
                         Intent intent = new Intent(context, KLineActivity.class);
                         context.startActivity(intent);

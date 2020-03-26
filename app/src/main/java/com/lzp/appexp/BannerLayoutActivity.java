@@ -6,9 +6,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.base.compat.BaseActivity;
+import com.base.BaseActivity;
 import com.lzp.appexp.adapter.BannerAdapter;
-import com.view.banner.BannerLayoutManager;
+import com.lzp.customview.banner.BannerLayoutManager;
 
 /**
  * @describe

@@ -3,4 +3,12 @@
 
     <color name="color_white">#ffffff</color>
 
+    <!--actionBar-->
+    <color name="color_actionbar_bg">#141d26</color>
+    <color name="color_actionbar_left_text">#ffffff</color>
+    <color name="color_actionbar_left_text_not_enable">#55ffffff</color>
+    <color name="color_actionbar_title">#ffffff</color>
+    <color name="color_actionbar_subtitle">#ffffff</color>
+    <color name="color_actionbar_right_text">#ffffff</color>
+    <color name="color_actionbar_right_text_not_enable">#55ffffff</color>
 </resources>

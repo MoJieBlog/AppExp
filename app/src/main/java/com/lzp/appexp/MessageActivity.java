@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
-import com.base.compat.BaseActivity;
+import com.base.BaseActivity;
 import com.lzp.appexp.view.MessageCardView;
 
 /**

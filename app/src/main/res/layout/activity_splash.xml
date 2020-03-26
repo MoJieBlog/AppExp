@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <com.base.compat.view.StatusBarView
+    <com.view.compat.StatusBarView
         android:id="@+id/statusBarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -4,7 +4,7 @@ import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.base.compat.BaseActivity
+import com.base.BaseActivity
 import com.lzp.appexp.R
 import com.lzp.appexp.adapter.RcvAdapter
 import kotlinx.android.synthetic.main.damp_framelayout_activity.*
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.damp_framelayout_activity.*
  * @Author: lixiaopeng
  * @Date: 2020-01-10
  */
-class DampFrameLayoutActivity :BaseActivity(), View.OnClickListener {
+class DampFrameLayoutActivity : BaseActivity(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

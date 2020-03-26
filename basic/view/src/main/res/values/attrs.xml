@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <declare-styleable name="BaseStatusView">
+        <attr name="image_src" format="reference"/>
+
+        <attr name="title_str" format="string"/>
+        <attr name="title_color" format="color"/>
+        <attr name="title_size" format="dimension"/>
+
+        <attr name="content_str" format="string"/>
+        <attr name="content_color" format="color"/>
+        <attr name="content_size" format="dimension"/>
+
+        <attr name="btn_text" format="string"/>
+        <attr name="btn_shape" format="reference"/>
+        <attr name="btn_text_size" format="dimension"/>
+        <attr name="btn_text_color" format="color"/>
+    </declare-styleable>
+
     <declare-styleable name="SwipeRefreshLayout">
         <attr name="enabled" format="boolean" />
         <attr name="fresh_type" format="integer">
             <enum name="fresh_default" value="0"/>
         </attr>
-    </declare-styleable>
-
-    <declare-styleable name="HalfCircleView">
-        <attr name="radius" format="dimension" />
-        <attr name="bgColor" format="color" />
-        <attr name="direction" format="integer">
-            <enum name="top" value="0" />
-            <enum name="bottom" value="1" />
-            <enum name="right" value="2" />
-            <enum name="left" value="3" />
-        </attr>
-    </declare-styleable>
-
-    <declare-styleable name="CardViewShadow">
-        <!--阴影开始的颜色-->
-        <attr name="shadowStartColor" format="color"/>
-        <!--阴影结束的颜色-->
-        <attr name="shadowEndColor" format="color"/>
-        <!--阴影光来的方向-->
-        <attr name="shadowDelegate" format="float"/>
-    </declare-styleable>
-
-    <declare-styleable name="FiveNodesToggleButton">
-        <!--toggle的图片-->
-        <attr name="toggle_img_res" format="reference"/>
     </declare-styleable>
 </resources>

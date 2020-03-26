@@ -8,8 +8,8 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
-import com.base.compat.BaseActivity;
-import com.view.ClipAbleImageView;
+import com.base.BaseActivity;
+import com.lzp.customview.ClipAbleImageView;
 
 
 /**

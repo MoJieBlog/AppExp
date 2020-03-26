@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.base.compat.Constants
+import com.base.Constants
 
 /**
  * @describe:

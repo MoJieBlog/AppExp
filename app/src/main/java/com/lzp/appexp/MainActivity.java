@@ -9,19 +9,18 @@ import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.base.compat.ToastBaseActivity;
-import com.base.compat.view.ActionBarView;
-import com.base.compat.view.ActionBarView.ActionBarClickAdapter;
-import com.base.compat.view.StatusBarView;
+import com.base.ToastBaseActivity;
 import com.dialog.OneOptDialog;
 import com.dialog.TwoOptMsgDialog;
 import com.dialog.TwoOptMsgDialog.OnOptClickListener;
 import com.lzp.appexp.adapter.TestAdapter;
+import com.lzp.customview.togglebtn.FiveNodesToggleButton;
 import com.utils.permission.PermissionConstant;
 import com.utils.permission.PermissionUtils;
+import com.view.compat.ActionBarView;
+import com.view.compat.StatusBarView;
 import com.view.loadmore.LoadMoreRecyclerView;
 import com.view.refresh.SwipeRefreshLayout;
-import com.view.togglebtn.FiveNodesToggleButton;
 
 public class MainActivity extends ToastBaseActivity {
 
@@ -98,7 +97,7 @@ public class MainActivity extends ToastBaseActivity {
         actionBar.setTitleText("main title");
         actionBar.setSubTitleText("main subTitle");
         actionBar.setRightText("right text");
-        actionBar.setActionBarClickListener(new ActionBarClickAdapter() {
+        actionBar.setActionBarClickListener(new ActionBarView.ActionBarClickAdapter() {
             @Override
             public void onClickTitle(View v) {
                 super.onClickTitle(v);

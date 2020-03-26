@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="size_title">17sp</dimen>
+    <dimen name="size_sub_title">10sp</dimen>
+    <dimen name="size_actionbar_left">15sp</dimen>
+    <dimen name="size_actionbar_right">15sp</dimen>
+    <dimen name="size_actionbar_height">45dp</dimen>
 </resources>

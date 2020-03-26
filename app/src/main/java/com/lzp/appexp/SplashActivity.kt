@@ -1,7 +1,7 @@
 package com.lzp.appexp
 
 import android.os.Bundle
-import com.base.compat.BaseActivity
+import com.base.BaseActivity
 import com.lzp.appexp.main.MainActivityNew
 
 /**
@@ -9,7 +9,7 @@ import com.lzp.appexp.main.MainActivityNew
  * @Author: lixiaopeng
  * @Date: 2020/3/13
  */
-class SplashActivity :BaseActivity(){
+class SplashActivity : BaseActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

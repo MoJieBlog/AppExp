@@ -2,11 +2,4 @@
     <string name="app_name">base</string>
 
     <string name="loading">正在加载...</string>
-    <string name="net_invalid">网络异常</string>
-    <string name="open_net">启用网络以访问数据</string>
-    <string name="net_timeout">网络请求超时</string>
-    <string name="refresh_later">稍后请刷新重试</string>
-    <string name="refresh">刷新</string>
-    <string name="have_no_data">暂无数据</string>
-    <string name="find_more_funny">点击屏幕再次加载</string>
 </resources>

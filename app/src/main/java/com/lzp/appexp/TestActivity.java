@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.base.compat.BaseActivity;
+import com.base.BaseActivity;
 
 import org.jetbrains.annotations.NotNull;
 

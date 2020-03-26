@@ -55,8 +55,8 @@ android {
         variant.outputs.all { output ->
             def buildName = "appExp"
             def type = variant.buildType.name
-            def releaseApkName = buildName + '_' + type + "_" + versionName + '.apk'
-            outputFileName = releaseApkName
+            def apkName = buildName + '_' + type + "_" + versionName + '.apk'
+            outputFileName = apkName
         }
     }
 }

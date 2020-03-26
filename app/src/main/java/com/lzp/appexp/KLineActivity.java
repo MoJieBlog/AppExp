@@ -5,9 +5,9 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.base.compat.BaseActivity;
-import com.view.kline.KLineView;
-import com.view.kline.Point;
+import com.base.BaseActivity;
+import com.lzp.customview.kline.KLineView;
+import com.lzp.customview.kline.Point;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;

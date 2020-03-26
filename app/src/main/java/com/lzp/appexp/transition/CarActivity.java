@@ -19,7 +19,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.core.widget.NestedScrollView;
 
-import com.base.compat.BaseActivity;
+import com.base.BaseActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.lzp.appexp.Constants;
 import com.lzp.appexp.R;

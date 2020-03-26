@@ -3,10 +3,10 @@ package com.lzp.appexp.main
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.base.compat.BaseActivity
+import com.base.BaseActivity
 import com.lzp.appexp.R
 import com.lzp.copyui.CopyUiFragment
-import com.lzp.customview.CustomViewFragment
+import com.lzp.customview.main.CustomViewFragment
 import com.lzp.systemopt.SystemOptFragment
 import com.lzp.utilsexample.UtilsExampleFragment
 import kotlinx.android.synthetic.main.activity_main_base.*

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
-import com.base.compat.BaseFragment
+import com.base.BaseFragment
 import com.lzp.appexp.R
 import kotlinx.android.synthetic.main.fragment_viewpager_two.*
 
