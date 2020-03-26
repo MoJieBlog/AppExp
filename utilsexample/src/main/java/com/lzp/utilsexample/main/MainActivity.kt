@@ -1,7 +1,8 @@
-package com.lzp.utilsexample
+package com.lzp.utilsexample.main
 
 import android.os.Bundle
 import com.base.BaseActivity
+import com.lzp.utilsexample.R
 
 /**
  * @describe:

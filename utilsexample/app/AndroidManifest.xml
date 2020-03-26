@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/appTheme"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name=".MainActivity" >
+        <activity android:name=".main.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

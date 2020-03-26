@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.base.BaseActivity
 import com.lzp.appexp.R
-import com.lzp.copyui.CopyUiFragment
+import com.lzp.copyui.main.CopyUiFragment
 import com.lzp.customview.main.CustomViewFragment
-import com.lzp.systemopt.SystemOptFragment
-import com.lzp.utilsexample.UtilsExampleFragment
+import com.lzp.systemopt.main.SystemOptFragment
+import com.lzp.utilsexample.main.UtilsExampleFragment
 import kotlinx.android.synthetic.main.activity_main_base.*
 
 /**

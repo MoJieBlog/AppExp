@@ -1,7 +1,8 @@
-package com.lzp.copyui
+package com.lzp.systemopt.main
 
 import android.os.Bundle
 import com.base.BaseActivity
+import com.lzp.systemopt.R
 
 /**
  * @describe:
@@ -11,6 +12,6 @@ import com.base.BaseActivity
 class MainActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.copyui_main_activity)
+        setContentView(R.layout.systemopt_main_activity)
     }
 }
