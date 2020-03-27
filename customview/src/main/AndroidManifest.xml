@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lzp.customview" />
+    package="com.lzp.customview" >
+    <application>
+
+        <activity android:name=".clip.ClipImageActivity"/>
+    </application>
+</manifest>
