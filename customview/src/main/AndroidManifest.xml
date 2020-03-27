@@ -3,5 +3,6 @@
     <application>
 
         <activity android:name=".clip.ClipImageActivity"/>
+        <activity android:name=".togglebtn.ToggleButtonActivity" />
     </application>
 </manifest>

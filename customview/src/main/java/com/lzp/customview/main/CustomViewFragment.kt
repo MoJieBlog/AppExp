@@ -1,11 +1,13 @@
 package com.lzp.customview.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.base.BaseFragment
 import com.lzp.customview.R
+import com.lzp.customview.togglebtn.ToggleButtonActivity
 import kotlinx.android.synthetic.main.customview_fragment.*
 
 /**
@@ -20,7 +22,7 @@ class CustomViewFragment: BaseFragment(), View.OnClickListener {
 
     override fun setListener() {
         super.setListener()
-        fiveToggleBtn.setOnClickListener(this)
+        toggleBtn.setOnClickListener(this)
         dampRv.setOnClickListener(this)
         dampVp.setOnClickListener(this)
         indicator.setOnClickListener(this)
@@ -32,7 +34,7 @@ class CustomViewFragment: BaseFragment(), View.OnClickListener {
 
     override fun clearListener() {
         super.clearListener()
-        fiveToggleBtn.setOnClickListener(null)
+        toggleBtn.setOnClickListener(null)
         dampRv.setOnClickListener(null)
         dampVp.setOnClickListener(null)
         indicator.setOnClickListener(null)
@@ -44,8 +46,9 @@ class CustomViewFragment: BaseFragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.fiveToggleBtn->{
-
+            R.id.toggleBtn->{
+                val intent = Intent(activity, ToggleButtonActivity::class.java)
+                startActivity(intent)
             }
             R.id.dampRv->{}
             R.id.dampVp->{}
