@@ -1,13 +1,12 @@
 package com.dialog.base;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.StringRes;
 
 /**
- * @describe 单选项弹窗
+ * @describe 选项的接口
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */

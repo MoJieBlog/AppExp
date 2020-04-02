@@ -125,6 +125,4 @@ class OneOptDialog : BaseDialog, IOneOptDialog<OneOptDialog>, ITitle<OneOptDialo
         titleTv.paint.isFakeBoldText = bold
         return this
     }
-
-
 }

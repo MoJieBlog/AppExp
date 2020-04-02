@@ -20,7 +20,6 @@ public final class PhoneUtils {
         DisplayMetrics dm =  context.getResources().getDisplayMetrics();
         int widthPixels = dm.widthPixels;
         int heightPixels = dm.heightPixels;
-
         return widthPixels;
     }
 
@@ -50,6 +49,23 @@ public final class PhoneUtils {
         Rect outRect1 = new Rect();
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect1);
         heightPixels = outRect1.height();
+        return heightPixels;
+    }
+
+    /**
+     * 获取可编辑区域的高度
+     * @param activity
+     * @return
+     */
+    public static int getDisWidth(Activity activity){
+        /**
+         * 获取状态栏高度——方法1
+         * */
+        int heightPixels = -1;
+        //获取status_bar_height资源的ID
+        Rect outRect1 = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect1);
+        heightPixels = outRect1.width();
         return heightPixels;
     }
 

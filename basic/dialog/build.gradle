@@ -37,4 +37,6 @@ dependencies {
 
     implementation extAppcompat
     implementation extConstraint
+    implementation extRecyclerview
+    implementation project(path: ':basic-utils')
 }

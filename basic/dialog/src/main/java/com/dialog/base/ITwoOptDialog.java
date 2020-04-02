@@ -10,7 +10,7 @@ import androidx.annotation.StringRes;
 import com.dialog.TwoOptMsgDialog;
 
 /**
- * @describe
+ * @describe 两个选项的弹窗
  * @author: lixiaopeng
  * @Date: 2019-12-05
  */
