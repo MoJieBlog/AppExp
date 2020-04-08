@@ -104,7 +104,7 @@ abstract class MultipleDialog : BaseDialog, ITitle<MultipleDialog>, IMultipleDia
         return this
     }
 
-    abstract fun bindView(position: Int, view: TextView)
+    abstract fun bindView(position: Int, holder: ViewHolder)
     abstract fun itemSize(): Int
 
     companion object {
@@ -163,7 +163,7 @@ abstract class MultipleDialog : BaseDialog, ITitle<MultipleDialog>, IMultipleDia
                 holder.bottomLine.visibility = View.VISIBLE
             }
 
-            bindView(position, holder.textView)
+            bindView(position, holder)
         }
 
         override fun setOptTextSize(size: Float): MultipleAdapter {

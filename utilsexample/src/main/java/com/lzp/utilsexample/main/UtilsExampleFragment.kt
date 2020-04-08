@@ -43,8 +43,8 @@ class UtilsExampleFragment : BaseFragment(), View.OnClickListener {
     private fun showMultipleDialog() {
         if (isAdded) {
             val multipleDialog = object : MultipleDialog(this@UtilsExampleFragment.context!!) {
-                override fun bindView(position: Int, view: TextView) {
-                    view.text = position.toString()
+                override fun bindView(position: Int, viewHolder: Companion.ViewHolder) {
+                    viewHolder.textView.text = position.toString()
                 }
 
                 override fun itemSize(): Int {
