@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.base.BaseFragment
 import com.lzp.customview.R
+import com.lzp.customview.textview.WordWrapTextViewActivity
 import com.lzp.customview.togglebtn.ToggleButtonActivity
 import kotlinx.android.synthetic.main.customview_fragment.*
 
@@ -30,6 +31,7 @@ class CustomViewFragment: BaseFragment(), View.OnClickListener {
         halfCircle.setOnClickListener(this)
         linearGradientTv.setOnClickListener(this)
         roundRl.setOnClickListener(this)
+        wordWrapTv.setOnClickListener(this)
     }
 
     override fun clearListener() {
@@ -42,6 +44,7 @@ class CustomViewFragment: BaseFragment(), View.OnClickListener {
         halfCircle.setOnClickListener(null)
         linearGradientTv.setOnClickListener(null)
         roundRl.setOnClickListener(null)
+        wordWrapTv.setOnClickListener(null)
     }
 
     override fun onClick(v: View?) {
@@ -57,6 +60,10 @@ class CustomViewFragment: BaseFragment(), View.OnClickListener {
             R.id.halfCircle->{}
             R.id.linearGradientTv->{}
             R.id.roundRl->{}
+            R.id.wordWrapTv->{
+                val intent = Intent(activity, WordWrapTextViewActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

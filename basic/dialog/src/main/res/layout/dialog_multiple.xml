@@ -7,21 +7,35 @@
     android:gravity="bottom"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/titleTv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="center"
-        android:text="title"
-        android:textColor="#333333"
-        android:textSize="17sp"
-        android:textStyle="bold" />
+        android:layout_height="45dp">
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:text="title"
+            android:textColor="#333333"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/closeIv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/dialog_window_close"/>
+    </RelativeLayout>
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
-        android:layout_marginTop="12dp"
         android:background="@color/line" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -42,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center"
-        android:text="opt"
+        android:text="确定"
         android:textColor="#666666"
         android:textSize="13sp" />
 </LinearLayout>

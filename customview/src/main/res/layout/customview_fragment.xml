@@ -124,6 +124,18 @@
                 android:text="圆角的relativeLayout"
                 android:textColor="#ffffff" />
 
+            <TextView
+                android:id="@+id/wordWrapTv"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
+                android:gravity="center"
+                android:text="自动换行的TextView"
+                android:textColor="#ffffff" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

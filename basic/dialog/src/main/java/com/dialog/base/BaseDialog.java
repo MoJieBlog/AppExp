@@ -8,6 +8,8 @@ import androidx.annotation.AnimatorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 
+import com.dialog.R;
+
 /**
  * @describe
  * @author: lixiaopeng
@@ -16,7 +18,7 @@ import androidx.annotation.StyleRes;
 public class BaseDialog extends Dialog implements IBaseDialog<BaseDialog> {
 
     public BaseDialog(@NonNull Context context) {
-        this(context, 0);
+        this(context, R.style.my_dialog);
     }
 
     public BaseDialog(@NonNull Context context, int themeResId) {

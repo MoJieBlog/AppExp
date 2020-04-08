@@ -6,16 +6,25 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="13sp"
-        android:text="666"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        android:text="666"
+        android:textSize="13sp" />
+
+    <ImageView
+        android:id="@+id/selectedIv"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="right|center_vertical"
+        android:src="@mipmap/multiple_item_selected"
+        android:layout_marginRight="15dp" />
 
     <View
         android:id="@+id/bottomLine"
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
         android:layout_gravity="bottom"
-        android:background="@color/line"/>
+        android:background="@color/line" />
 </FrameLayout>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.base.BaseFragment
 import com.dialog.MultipleDialog
 import com.lzp.utilsexample.R
@@ -40,7 +41,7 @@ class UtilsExampleFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun showMultipleDialog() {
-        if (isAdded){
+        if (isAdded) {
             val multipleDialog = object : MultipleDialog(this@UtilsExampleFragment.context!!) {
                 override fun bindView(position: Int, view: TextView) {
                     view.text = position.toString()
@@ -50,7 +51,13 @@ class UtilsExampleFragment : BaseFragment(), View.OnClickListener {
                     return 15
                 }
             }
-            multipleDialog.setOptTextColor(0xffff0000.toInt())
+            multipleDialog
+                    .setOptTextColor(0xffff0000.toInt())
+                    .setConfirmClickListener(object : MultipleDialog.OnConfirmListener {
+                        override fun onConfirmClick(v: View, position: Int) {
+                            Toast.makeText(this@UtilsExampleFragment.context, "$position", Toast.LENGTH_SHORT).show()
+                        }
+                    }).setSelectedPosition(2)
             multipleDialog.show()
         }
     }

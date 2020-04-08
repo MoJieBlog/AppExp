@@ -4,5 +4,6 @@
 
         <activity android:name=".clip.ClipImageActivity"/>
         <activity android:name=".togglebtn.ToggleButtonActivity" />
+        <activity android:name=".textview.WordWrapTextViewActivity"/>
     </application>
 </manifest>
