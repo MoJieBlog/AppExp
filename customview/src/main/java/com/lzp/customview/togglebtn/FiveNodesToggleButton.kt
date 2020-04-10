@@ -203,6 +203,7 @@ class FiveNodesToggleButton : FrameLayout {
         return currentNodePosition
     }
 
+    /************以下为设置监听************/
     private var nodesChangeListener: NodesChangeListener? = null
     fun setNodesChangeListener(nodesChangeListener: NodesChangeListener?) {
         this.nodesChangeListener = nodesChangeListener
