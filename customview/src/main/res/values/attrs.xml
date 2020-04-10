@@ -24,4 +24,21 @@
         <!--toggle的图片-->
         <attr name="toggle_img_res" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="SlideButtonView">
+        <attr name="enable_background_res" format="reference"/>
+        <attr name="text_start_color" format="color"/>
+        <attr name="text_end_color" format="color"/>
+        <attr name="un_enable_text_color" format="color"/>
+        <attr name="text_un_activate" format="string"/>
+        <attr name="text_activating" format="string"/>
+        <attr name="text_activate_success" format="string"/>
+        <attr name="text_activate_fail" format="string"/>
+        <attr name="text_size" format="dimension"/>
+        <attr name="slide_view_bg" format="reference"/>
+        <attr name="slide_view_width" format="dimension"/>
+        <attr name="slide_view_height" format="dimension"/>
+        <attr name="slide_view_left_margin" format="dimension"/>
+        <attr name="slide_view_right_margin" format="dimension"/>
+    </declare-styleable>
 </resources>
