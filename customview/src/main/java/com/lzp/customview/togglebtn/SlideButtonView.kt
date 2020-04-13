@@ -32,8 +32,8 @@ class SlideButtonView : FrameLayout {
         //激活失败
         const val STATE_ACTIVATE_FAIL = 4
     }
-    private var slideView = View(context)
-    private var textView = LinearGradientTextView(context)
+    private val slideView = View(context)
+    private val textView = LinearGradientTextView(context)
     private val dragHelper: ViewDragHelper = ViewDragHelper.create(this, DragHelperCallBack())
 
     private var state = STATE_UN_ACTIVATE
