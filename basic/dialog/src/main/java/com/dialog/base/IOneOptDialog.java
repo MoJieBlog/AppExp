@@ -13,56 +13,6 @@ import androidx.annotation.StringRes;
 public interface IOneOptDialog<T> {
 
     /**
-     * 设置信息文字
-     * @param text
-     * @return
-     */
-    T setMessageText(String text);
-
-    /**
-     * 设置信息文字
-     * @param textRes
-     * @return
-     */
-    T setMessageText(@StringRes int textRes);
-
-    /**
-     * 设置信息文字大小
-     * @param size
-     * @return
-     */
-    T setMessageTextSize(float size);
-
-
-    /**
-     * 设置信息文字颜色
-     * @param color
-     * @return
-     */
-    T setMessageTextColor(int color);
-
-    /**
-     * 设置信息文字颜色
-     * @param color
-     * @return
-     */
-    T setMessageTextColorRes(@ColorRes int color);
-
-    /**
-     * 设置信息字体
-     * @param typeFace
-     * @return
-     */
-    T setMessageTextTypeFace(Typeface typeFace);
-
-    /**
-     * 设置信息文字是否加粗
-     * @param bold
-     * @return
-     */
-    T setMessageTextBold(boolean bold);
-
-    /**
      * 设置选项文字
      * @param text
      * @return

@@ -1,5 +1,6 @@
 package com.lzp.utilsexample.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.Toast
 import com.base.BaseFragment
 import com.dialog.MultipleDialog
 import com.lzp.utilsexample.R
+import com.lzp.utilsexample.dialog.DialogDemoActivity
 import kotlinx.android.synthetic.main.utils_example_fragment.*
 
 /**
@@ -31,32 +33,12 @@ class UtilsExampleFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        var intent:Intent? = null
         when (v?.id) {
             R.id.dialogTv -> {
-                showMultipleDialog()
+                intent = Intent(activity,DialogDemoActivity::class.java)
+                startActivity(intent)
             }
-        }
-    }
-
-    private fun showMultipleDialog() {
-        if (isAdded) {
-            val multipleDialog = object : MultipleDialog(this@UtilsExampleFragment.context!!) {
-                override fun bindView(position: Int, viewHolder: Companion.ViewHolder) {
-                    viewHolder.textView.text = position.toString()
-                }
-
-                override fun itemSize(): Int {
-                    return 15
-                }
-            }
-            multipleDialog
-                    .setOptTextColor(0xffff0000.toInt())
-                    .setConfirmClickListener(object : MultipleDialog.OnConfirmListener {
-                        override fun onConfirmClick(v: View, position: Int) {
-                            Toast.makeText(this@UtilsExampleFragment.context, "$position", Toast.LENGTH_SHORT).show()
-                        }
-                    }).setSelectedPosition(2)
-            multipleDialog.show()
         }
     }
 }

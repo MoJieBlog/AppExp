@@ -15,6 +15,7 @@ import androidx.annotation.StringRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.dialog.base.BaseDialog;
+import com.dialog.base.IMessage;
 import com.dialog.base.ITitle;
 import com.dialog.base.ITwoOptDialog;
 
@@ -23,7 +24,7 @@ import com.dialog.base.ITwoOptDialog;
  * @author: lixiaopeng
  * @Date: 2019-12-06
  */
-public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle<TwoOptMsgDialog> {
+public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle<TwoOptMsgDialog> , IMessage<TwoOptMsgDialog> {
 
     private ConstraintLayout rootView;
     private TextView titleTv;
@@ -342,7 +343,7 @@ public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle
      * @return
      */
     @Override
-    public TwoOptMsgDialog setMsgText(String text) {
+    public TwoOptMsgDialog setMessageText(String text) {
         messageTv.setText(text);
         return this;
     }
@@ -354,7 +355,7 @@ public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle
      * @return
      */
     @Override
-    public TwoOptMsgDialog setMsgText(int textRes) {
+    public TwoOptMsgDialog setMessageText(int textRes) {
         messageTv.setText(getContext().getResources().getString(textRes));
         return this;
     }
@@ -366,7 +367,7 @@ public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle
      * @return
      */
     @Override
-    public TwoOptMsgDialog setMsgTextSize(int size) {
+    public TwoOptMsgDialog setMessageTextSize(float size) {
         messageTv.setTextSize(size);
         return this;
     }
@@ -378,7 +379,7 @@ public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle
      * @return
      */
     @Override
-    public TwoOptMsgDialog setMsgTextColorRes(int colorRes) {
+    public TwoOptMsgDialog setMessageTextColor(int colorRes) {
         messageTv.setTextColor(getContext().getResources().getColor(colorRes));
         return this;
     }
@@ -386,12 +387,24 @@ public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle
     /**
      * 信息文字颜色
      *
-     * @param color
+     * @param colorRes
      * @return
      */
     @Override
-    public TwoOptMsgDialog setMsgTextColor(int color) {
-        messageTv.setTextColor(color);
+    public TwoOptMsgDialog setMessageTextColorRes(int colorRes) {
+        messageTv.setTextColor(getContext().getResources().getColor(colorRes));
+        return this;
+    }
+
+    @Override
+    public TwoOptMsgDialog setMessageTextTypeFace(Typeface typeFace) {
+        messageTv.setTypeface(typeFace);
+        return this;
+    }
+
+    @Override
+    public TwoOptMsgDialog setMessageTextBold(boolean bold) {
+        messageTv.getPaint().setFakeBoldText(bold);
         return this;
     }
 

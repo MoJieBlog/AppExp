@@ -182,39 +182,4 @@ public interface ITwoOptDialog {
      * @return
      */
     TwoOptMsgDialog setRightBgColorRes(@ColorRes int color);
-
-    /**
-     * 信息文字
-     * @param text
-     * @return
-     */
-    TwoOptMsgDialog setMsgText(String text);
-
-    /**
-     * 信息文字
-     * @param textRes
-     * @return
-     */
-    TwoOptMsgDialog setMsgText(@StringRes int textRes);
-
-    /**
-     * 信息文字大小
-     * @param size
-     * @return
-     */
-    TwoOptMsgDialog setMsgTextSize(int size);
-
-    /**
-     * 信息文字颜色
-     * @param colorRes
-     * @return
-     */
-    TwoOptMsgDialog setMsgTextColorRes(@ColorRes int colorRes);
-
-    /**
-     * 信息文字颜色
-     * @param color
-     * @return
-     */
-    TwoOptMsgDialog setMsgTextColor(@ColorInt int color);
 }

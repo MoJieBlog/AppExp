@@ -4,18 +4,17 @@ import android.content.Context
 import android.graphics.Typeface
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import com.dialog.base.BaseDialog
+import com.dialog.base.IMessage
 import com.dialog.base.IOneOptDialog
 import com.dialog.base.ITitle
 import kotlinx.android.synthetic.main.dialog_one_opt.*
 
-class OneOptDialog : BaseDialog, IOneOptDialog<OneOptDialog>, ITitle<OneOptDialog> {
+class OneOptDialog : BaseDialog, IOneOptDialog<OneOptDialog>, ITitle<OneOptDialog> ,IMessage<OneOptDialog>{
 
-    constructor(context: Context) : super(context)
-    constructor(context: Context, themeResId: Int) : super(context, themeResId)
-
-
-    init {
+    constructor(context: Context) : this(context,0)
+    constructor(context: Context, themeResId: Int) : super(context, themeResId){
         setGravity(Gravity.CENTER)
         val inflate = LayoutInflater.from(context).inflate(R.layout.dialog_one_opt, null, false)
         setContentView(inflate)
@@ -123,6 +122,11 @@ class OneOptDialog : BaseDialog, IOneOptDialog<OneOptDialog>, ITitle<OneOptDialo
 
     override fun setTitleBold(bold: Boolean): OneOptDialog {
         titleTv.paint.isFakeBoldText = bold
+        return this
+    }
+
+    fun setOnOptClickListener(listener:View.OnClickListener):OneOptDialog{
+        optTv.setOnClickListener(listener)
         return this
     }
 }

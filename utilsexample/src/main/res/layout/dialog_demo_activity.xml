@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <com.view.compat.StatusBarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/oneOptDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单选项"/>
+
+    <Button
+        android:id="@+id/twoOptDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="两个选项"/>
+
+    <Button
+        android:id="@+id/multipleOptDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="多个选项"/>
+</LinearLayout>
