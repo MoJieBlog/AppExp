@@ -32,6 +32,12 @@ class CustomViewFragment: BaseFragment(), View.OnClickListener {
         linearGradientTv.setOnClickListener(this)
         roundRl.setOnClickListener(this)
         wordWrapTv.setOnClickListener(this)
+        freshLayout.setCanRefresh(true)
+        freshLayout.setOnRefreshListener {
+            freshLayout.postDelayed({
+                freshLayout.stopRefresh()
+            },1000)
+        }
     }
 
     override fun clearListener() {

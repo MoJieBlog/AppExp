@@ -16,127 +16,132 @@
         android:layout_height="@dimen/size_actionbar_height"
         android:background="@color/color_actionbar_bg" />
 
-    <androidx.core.widget.NestedScrollView
+    <com.view.refresh.SwipeRefreshLayout
+        android:id="@+id/freshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:paddingBottom="40dp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="40dp">
 
-            <TextView
-                android:id="@+id/toggleBtn"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
-                android:gravity="center"
-                android:text="toggleBtn"
-                android:textColor="#ffffff" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/dampRv"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
-                android:gravity="center"
-                android:text="触底反弹recyclerView"
-                android:textColor="#ffffff" />
+                <TextView
+                    android:id="@+id/toggleBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
+                    android:gravity="center"
+                    android:text="toggleBtn"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:id="@+id/dampVp"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
-                android:gravity="center"
-                android:text="触底反弹viewPager"
-                android:textColor="#ffffff" />
+                <TextView
+                    android:id="@+id/dampRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
+                    android:gravity="center"
+                    android:text="触底反弹recyclerView"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:id="@+id/indicator"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
-                android:gravity="center"
-                android:text="指示器"
-                android:textColor="#ffffff" />
+                <TextView
+                    android:id="@+id/dampVp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
+                    android:gravity="center"
+                    android:text="触底反弹viewPager"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:id="@+id/dashBoard"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
-                android:gravity="center"
-                android:text="仪表盘"
-                android:textColor="#ffffff" />
+                <TextView
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
+                    android:gravity="center"
+                    android:text="指示器"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:id="@+id/halfCircle"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
-                android:gravity="center"
-                android:text="半圆"
-                android:textColor="#ffffff" />
+                <TextView
+                    android:id="@+id/dashBoard"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
+                    android:gravity="center"
+                    android:text="仪表盘"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:id="@+id/linearGradientTv"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
-                android:gravity="center"
-                android:text="线性渐变色文字"
-                android:textColor="#ffffff" />
+                <TextView
+                    android:id="@+id/halfCircle"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
+                    android:gravity="center"
+                    android:text="半圆"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:id="@+id/roundRl"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
-                android:gravity="center"
-                android:text="圆角的relativeLayout"
-                android:textColor="#ffffff" />
+                <TextView
+                    android:id="@+id/linearGradientTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
+                    android:gravity="center"
+                    android:text="线性渐变色文字"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:id="@+id/wordWrapTv"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
-                android:gravity="center"
-                android:text="自动换行的TextView"
-                android:textColor="#ffffff" />
+                <TextView
+                    android:id="@+id/roundRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
+                    android:gravity="center"
+                    android:text="圆角的relativeLayout"
+                    android:textColor="#ffffff" />
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                <TextView
+                    android:id="@+id/wordWrapTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
+                    android:gravity="center"
+                    android:text="自动换行的TextView"
+                    android:textColor="#ffffff" />
 
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.view.refresh.SwipeRefreshLayout>
 </LinearLayout>

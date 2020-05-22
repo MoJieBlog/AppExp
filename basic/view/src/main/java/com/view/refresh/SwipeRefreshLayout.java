@@ -65,7 +65,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     @NonNull
     private final DecelerateInterpolator mDecelerateInterpolator;
 
-    protected boolean canRefresh;
+    protected boolean canRefresh = true;
 
     protected LoadingLayout headLoadingLayout;
 
@@ -426,6 +426,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     }
 
     private void showLoadingView() {
+        ensureTarget();
         final float targetY = mTarget.getTranslationY();
         ValueAnimator animator = ValueAnimator.ofFloat(targetY, headLoadingLayout.getLoadingOffsetHeight());
         animator.setDuration(400);
