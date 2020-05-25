@@ -84,7 +84,7 @@ public class GarageActivityNew extends BaseActivity {
         actionBar.setSubTitleText("main subTitle");
         actionBar.setRightText("right text");
 
-        actionBar.setActionBarClickListener(new ActionBarView.ActionBarClickAdapter() {
+        actionBar.setActionBarClickListener(new ActionBarView.ActionBarClickListener() {
             @Override
             public void onClickLeftImg(View v) {
                 onBackPressed();

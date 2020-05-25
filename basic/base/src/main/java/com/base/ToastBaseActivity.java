@@ -95,6 +95,9 @@ public class ToastBaseActivity extends BaseActivity {
                         toastView.postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                if (isFinishing()){
+                                    return;
+                                }
                                 hindToast();
                             }
                         },1000);

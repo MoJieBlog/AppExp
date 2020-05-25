@@ -263,60 +263,25 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
      * 点击事件的回调
      */
     public interface ActionBarClickListener {
-        void onClickTitle(View v);
+        default void onClickTitle(View v){}
 
-        void onClickSubTitle(View v);
+        default void onClickSubTitle(View v){}
 
-        void onClickLeftText(View v);
-
-        void onClickLeftImg(View v);
-
-        void onClickRightText(View v);
-
-        void onClickRightImg(View v);
-    }
-
-    /**
-     * 点击事件的适配器，防止每次都要全部实现一遍，可以选择要实现的事件
-     * 左侧图标和文字默认是关闭当前页面，其他默认无操作
-     */
-    public abstract static class ActionBarClickAdapter implements ActionBarClickListener {
-
-        @Override
-        public void onClickTitle(View v) {
-            Log.d(TAG, "onClickTitle: ");
-        }
-
-        @Override
-        public void onClickSubTitle(View v) {
-            Log.d(TAG, "onClickSubTitle: ");
-        }
-
-        @Override
-        public void onClickLeftText(View v) {
-            Log.d(TAG, "onClickLeftText: ");
+        default void onClickLeftText(View v){
             if (v.getContext() instanceof Activity) {
                 ((Activity) v.getContext()).finish();
             }
         }
 
-        @Override
-        public void onClickLeftImg(View v) {
-            Log.d(TAG, "onClickLeftImg: ");
+        default void onClickLeftImg(View v){
             if (v.getContext() instanceof Activity) {
-                ((Activity) v.getContext()).onBackPressed();
+                ((Activity) v.getContext()).finish();
             }
         }
 
-        @Override
-        public void onClickRightText(View v) {
-            Log.d(TAG, "onClickRightText: ");
-        }
+        default void onClickRightText(View v){}
 
-        @Override
-        public void onClickRightImg(View v) {
-            Log.d(TAG, "onClickRightImg: ");
-        }
+        default void onClickRightImg(View v){}
     }
 
     /*******以下为获取相关控件*******/
