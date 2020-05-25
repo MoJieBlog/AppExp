@@ -81,6 +81,9 @@ public class DampRecyclerView extends RecyclerView {
                 downY = e.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
+                if (!needStartDamp && !needEndDamp) {
+                    return super.onTouchEvent(e);
+                }
                 if (orientation == LinearLayoutManager.HORIZONTAL) {
                     float nowX = e.getX();
                     float dx = nowX - downX;
@@ -149,6 +152,9 @@ public class DampRecyclerView extends RecyclerView {
 
     private void doDamp() {
         Log.e(TAG, "doDamp: ");
+        if (!needStartDamp && !needEndDamp) {
+            return;
+        }
         if (animator != null && animator.isRunning()) {
             animator.cancel();
             return;
