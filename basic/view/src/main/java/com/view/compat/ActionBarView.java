@@ -77,21 +77,38 @@ public class ActionBarView extends RelativeLayout implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (actionBarClickListener == null) {
-            return;
-        }
         if (v.getId() == R.id.actionBarLeftText) {
-            actionBarClickListener.onClickLeftText(v);
+            if (actionBarClickListener!=null){
+                actionBarClickListener.onClickLeftText(v);
+            }else{
+                if (v.getContext() instanceof Activity) {
+                    ((Activity) v.getContext()).finish();
+                }
+            }
         } else if (v.getId() == R.id.actionBarLeftImg) {
-            actionBarClickListener.onClickLeftImg(v);
+            if (actionBarClickListener!=null){
+                actionBarClickListener.onClickLeftImg(v);
+            }else{
+                if (v.getContext() instanceof Activity) {
+                    ((Activity) v.getContext()).finish();
+                }
+            }
         } else if (v.getId() == R.id.actionBarTitleText) {
-            actionBarClickListener.onClickTitle(v);
+            if (actionBarClickListener!=null){
+                actionBarClickListener.onClickTitle(v);
+            }
         } else if (v.getId() == R.id.actionBarSubTitleText) {
-            actionBarClickListener.onClickSubTitle(v);
+            if (actionBarClickListener!=null){
+                actionBarClickListener.onClickSubTitle(v);
+            }
         } else if (v.getId() == R.id.actionBarRightText) {
-            actionBarClickListener.onClickRightText(v);
+            if (actionBarClickListener!=null){
+                actionBarClickListener.onClickRightText(v);
+            }
         } else if (v.getId() == R.id.actionBarRightImg) {
-            actionBarClickListener.onClickRightImg(v);
+            if (actionBarClickListener!=null){
+                actionBarClickListener.onClickRightImg(v);
+            }
         }
     }
 
