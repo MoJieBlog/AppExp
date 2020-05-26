@@ -10,7 +10,7 @@
         android:background="@color/color_statusbar_bg" />
 
     <com.view.compat.ActionBarView
-        android:id="@+id/actionBar"
+        android:id="@+id/actionBarView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_actionbar_height"
         android:background="@color/color_actionbar_bg" />

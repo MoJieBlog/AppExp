@@ -21,7 +21,7 @@ class DampRecyclerViewActivity :BaseActivity(){
 
     override fun initView() {
         super.initView()
-        actionBar.title = "弹性recyclerView"
+        actionBarView.setTitleText("弹性recyclerView")
         recyclerView.setNeedStartDamp(true)
         recyclerView.setNeedEndDamp(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
