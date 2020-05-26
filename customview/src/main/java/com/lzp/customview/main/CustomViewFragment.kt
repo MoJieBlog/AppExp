@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.base.BaseFragment
 import com.lzp.customview.R
+import com.lzp.customview.damp.DampRecyclerViewActivity
 import com.lzp.customview.textview.WordWrapTextViewActivity
 import com.lzp.customview.togglebtn.ToggleButtonActivity
 import kotlinx.android.synthetic.main.customview_fragment.*
@@ -59,7 +60,10 @@ class CustomViewFragment: BaseFragment(), View.OnClickListener {
                 val intent = Intent(activity, ToggleButtonActivity::class.java)
                 startActivity(intent)
             }
-            R.id.dampRv->{}
+            R.id.dampRv->{
+                val intent = Intent(activity, DampRecyclerViewActivity::class.java)
+                startActivity(intent)
+            }
             R.id.dampVp->{}
             R.id.indicator->{}
             R.id.dashBoard->{}
