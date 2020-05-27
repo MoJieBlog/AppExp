@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 /**
- * @describez 弹性recyclerView 暂时不支持自定义LayoutManager
+ * @describez 弹性recyclerView 暂时只支持系统的三个LayoutManager(LinearLayoutManager,GridLayoutManager,StaggeredGridLayoutManager)，不支持自定义LayoutManager
  * @author: lixiaopeng
  * @Date: 2019-11-26
  */
@@ -184,6 +184,10 @@ public class DampRecyclerView extends RecyclerView {
         return false;
     }
 
+    /**
+     * 是否在顶部/左侧
+     * @return
+     */
     private boolean isStart() {
         if (layoutManager != null && layoutManager.getItemCount() > 0) {
             View childAt = layoutManager.getChildAt(0);
