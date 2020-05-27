@@ -13,9 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 /**
- * @describez 弹性recyclerView 暂时只支持LinearLayoutManager和GridLayoutManager
+ * @describez 弹性recyclerView 暂时不支持自定义LayoutManager
  * @author: lixiaopeng
  * @Date: 2019-11-26
  */
@@ -141,9 +142,6 @@ public class DampRecyclerView extends RecyclerView {
         if (layoutManager == null) {
             return false;
         }
-        if (!(layoutManager instanceof LinearLayoutManager)){
-            return false;
-        }
         if (layoutManager.getItemCount() == 0) {
             return false;
         }
@@ -158,6 +156,8 @@ public class DampRecyclerView extends RecyclerView {
         if (layoutManager instanceof LinearLayoutManager) {
             //GridLayoutManager instanceof LinearLayoutManager
             orientation = ((LinearLayoutManager) layoutManager).getOrientation();
+        }else if(layoutManager instanceof StaggeredGridLayoutManager){
+            orientation = ((StaggeredGridLayoutManager) layoutManager).getOrientation();
         }
         return true;
     }
