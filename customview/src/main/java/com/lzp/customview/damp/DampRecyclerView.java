@@ -55,29 +55,41 @@ public class DampRecyclerView extends RecyclerView {
         }
         int action = e.getAction();
         if (animator != null && animator.isRunning()) {
-            animator.cancel();
+            return super.onInterceptTouchEvent(e);
         }
-        if (!ensureLayoutManager()){
+        if (!ensureLayoutManager()) {
             return super.onInterceptTouchEvent(e);
         }
         if (action == MotionEvent.ACTION_DOWN) {
             downX = e.getX();
             downY = e.getY();
         }
+        if (orientation == RecyclerView.HORIZONTAL) {
+            viewOffset = originalX;
+        } else {
+            viewOffset = originalY;
+        }
         return super.onInterceptTouchEvent(e);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (!ensureLayoutManager()){
+        if (!ensureLayoutManager()) {
             return super.onTouchEvent(e);
+        }
+        if (animator != null && animator.isRunning()) {
+            return super.onInterceptTouchEvent(e);
         }
         int action = e.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 downX = e.getX();
                 downY = e.getY();
-                viewOffset = 0;
+                if (orientation == RecyclerView.HORIZONTAL) {
+                    viewOffset = originalX;
+                } else {
+                    viewOffset = originalY;
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (!needStartDamp && !needEndDamp) {
@@ -91,14 +103,16 @@ public class DampRecyclerView extends RecyclerView {
                         int dampX = (int) (dx * damp);
                         viewOffset += dampX;
                         layoutManager.offsetChildrenHorizontal(dampX);
-                        Log.d(TAG, "onTouchEvent: 在顶部"+viewOffset);
+                        Log.d(TAG, "onTouchEvent: 在顶部" + viewOffset);
+                        return true;
                     } else {
                         if (getAdapter() != null) {
                             if (dx < 0 && isEnd() && needEndDamp) {//在末尾
                                 int dampX = (int) (dx * damp);
                                 viewOffset += dampX;
                                 layoutManager.offsetChildrenHorizontal(dampX);
-                                Log.d(TAG, "onTouchEvent: 在底部"+viewOffset);
+                                Log.d(TAG, "onTouchEvent: 在底部" + viewOffset);
+                                return true;
                             }
                         }
                     }
@@ -110,14 +124,16 @@ public class DampRecyclerView extends RecyclerView {
                         int dampY = (int) (dy * damp);
                         viewOffset += dampY;
                         layoutManager.offsetChildrenVertical(dampY);
-                        Log.d(TAG, "onTouchEvent: 在顶部"+viewOffset);
+                        Log.d(TAG, "onTouchEvent: 在顶部" + viewOffset);
+                        return true;
                     } else {
                         if (getAdapter() != null) {
                             if ((dy < 0 && isEnd() && needEndDamp)) {//在末尾
                                 int dampY = (int) (dy * damp);
                                 viewOffset += dampY;
                                 layoutManager.offsetChildrenVertical(dampY);
-                                Log.d(TAG, "onTouchEvent: 在底部"+viewOffset);
+                                Log.d(TAG, "onTouchEvent: 在底部" + viewOffset);
+                                return true;
                             }
                         }
                     }
@@ -125,19 +141,32 @@ public class DampRecyclerView extends RecyclerView {
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                if (needStartDamp || needEndDamp) {
+                if (needDamp()) {
                     doDamp();
+                    return true;
                 }
                 break;
         }
         return super.onTouchEvent(e);
     }
 
+    private boolean needDamp() {
+        if (!needStartDamp && !needEndDamp) {
+            return false;
+        }
+        if (orientation == RecyclerView.HORIZONTAL) {
+            return viewOffset != originalX;
+        } else {
+            return viewOffset != originalY;
+        }
+    }
+
     /**
      * 检查LayoutManager是否支持
+     *
      * @return
      */
-    private boolean ensureLayoutManager(){
+    private boolean ensureLayoutManager() {
         layoutManager = getLayoutManager();
         if (layoutManager == null) {
             return false;
@@ -156,7 +185,7 @@ public class DampRecyclerView extends RecyclerView {
         if (layoutManager instanceof LinearLayoutManager) {
             //GridLayoutManager instanceof LinearLayoutManager
             orientation = ((LinearLayoutManager) layoutManager).getOrientation();
-        }else if(layoutManager instanceof StaggeredGridLayoutManager){
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             orientation = ((StaggeredGridLayoutManager) layoutManager).getOrientation();
         }
         return true;
@@ -186,6 +215,7 @@ public class DampRecyclerView extends RecyclerView {
 
     /**
      * 是否在顶部/左侧
+     *
      * @return
      */
     private boolean isStart() {
@@ -207,11 +237,10 @@ public class DampRecyclerView extends RecyclerView {
 
 
     private void doDamp() {
-        Log.d(TAG, "doDamp: ");
         if (!ensureLayoutManager()) {
             return;
         }
-        if (!needStartDamp && !needEndDamp) {
+        if (!needDamp()) {
             return;
         }
         if (animator != null && animator.isRunning()) {
@@ -251,5 +280,9 @@ public class DampRecyclerView extends RecyclerView {
 
     public void setNeedEndDamp(boolean needEndDamp) {
         this.needEndDamp = needEndDamp;
+    }
+
+    public void setDamp(float damp) {
+        this.damp = damp;
     }
 }

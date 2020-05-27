@@ -1,4 +1,4 @@
-package com.lzp.customview.damp
+package com.lzp.customview.damp.demo
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager

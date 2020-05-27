@@ -3,8 +3,8 @@
     <application>
 
         <activity android:name=".clip.ClipImageActivity"/>
-        <activity android:name=".togglebtn.ToggleButtonActivity" />
+        <activity android:name=".togglebtn.demo.ToggleButtonActivity" />
         <activity android:name=".textview.WordWrapTextViewActivity"/>
-        <activity android:name=".damp.DampRecyclerViewActivity" />
+        <activity android:name=".damp.demo.DampRecyclerViewActivity" />
     </application>
 </manifest>

@@ -7,9 +7,11 @@
         android:id="@+id/commonTv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="1dp"
         android:background="@drawable/rect_gradient_ffa240_ff8c49_r4"
         android:gravity="center"
         android:textColor="#ffffff"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:textSize="17sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

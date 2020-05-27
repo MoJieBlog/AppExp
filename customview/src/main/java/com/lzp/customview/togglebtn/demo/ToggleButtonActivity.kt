@@ -1,8 +1,9 @@
-package com.lzp.customview.togglebtn
+package com.lzp.customview.togglebtn.demo
 
 import android.os.Bundle
 import com.base.BaseActivity
 import com.lzp.customview.R
+import com.lzp.customview.togglebtn.SlideButtonView
 import kotlinx.android.synthetic.main.activity_toggle_button.*
 
 /**
@@ -19,7 +20,7 @@ class ToggleButtonActivity:BaseActivity(){
     override fun initView() {
         super.initView()
 
-        slideView.setOnSlideFinishListener(object :SlideButtonView.OnSlideFinishListener{
+        slideView.setOnSlideFinishListener(object : SlideButtonView.OnSlideFinishListener {
             override fun onSlideFinish() {
                 slideView.setState(SlideButtonView.STATE_ACTIVATING)
                 slideView.postDelayed({
