@@ -2,6 +2,7 @@ package com.lzp.customview.damp
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.base.BaseActivity
 import com.lzp.customview.R
 import com.lzp.customview.common.CommonRecyclerViewTestAdapter
@@ -24,7 +25,7 @@ class DampRecyclerViewActivity :BaseActivity(){
         actionBarView.setTitleText("弹性recyclerView")
         recyclerView.setNeedStartDamp(true)
         recyclerView.setNeedEndDamp(true)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(this,RecyclerView.HORIZONTAL,false)
         recyclerView.adapter = CommonRecyclerViewTestAdapter(20)
     }
 }

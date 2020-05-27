@@ -173,34 +173,4 @@ public class LooperLayoutManager extends RecyclerView.LayoutManager {
         }
 
     }
-
-    //自定义SnapHelper需要用到
-
-    public int getFixedScrollPosition(int direction) {
-        if (getItemCount() > 0) {
-            View childAt = getChildAt(0);
-            if (childAt!=null){
-                int width = childAt.getWidth();
-                int left = childAt.getLeft();
-                if (Math.abs(left)>width/2){
-                    return 1;
-                }else{
-                    return 0;
-                }
-            }
-        }
-        return 0;
-    }
-
-    public int calculateDistanceToPosition(int targetPos) {
-        View childAt = getChildAt(targetPos);
-        if (childAt != null) {
-            int width = childAt.getWidth();
-            int distance = width * targetPos;
-            return distance;
-        } else {
-            return 0;
-        }
-
-    }
 }
