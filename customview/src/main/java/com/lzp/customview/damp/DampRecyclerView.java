@@ -2,7 +2,6 @@ package com.lzp.customview.damp;
 
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * @describe
+ * @describez 弹性recyclerView 暂时只支持LinearLayoutManager和GridLayoutManager
  * @author: lixiaopeng
  * @Date: 2019-11-26
  */
@@ -26,7 +25,7 @@ public class DampRecyclerView extends RecyclerView {
     private float downX = 0;
     private float downY = 0;
     private float damp = 0.3f;
-    private int orientation = LinearLayoutManager.VERTICAL;
+    private int orientation = RecyclerView.VERTICAL;
     ValueAnimator animator;
 
     private boolean needStartDamp = true;//是否需要弹性阻尼运动
@@ -48,7 +47,6 @@ public class DampRecyclerView extends RecyclerView {
         setOverScrollMode(OVER_SCROLL_NEVER);
     }
 
-    @SuppressLint("WrongConstant")
     @Override
     public boolean onInterceptTouchEvent(MotionEvent e) {
         if (!needStartDamp && !needEndDamp) {
@@ -58,23 +56,8 @@ public class DampRecyclerView extends RecyclerView {
         if (animator != null && animator.isRunning()) {
             animator.cancel();
         }
-        layoutManager = getLayoutManager();
-        if (layoutManager == null) {
+        if (!ensureLayoutManager()){
             return super.onInterceptTouchEvent(e);
-        }
-        if (layoutManager.getItemCount() == 0) {
-            return super.onInterceptTouchEvent(e);
-        }
-        //计算子View原始偏移量
-        if ((originalX == -1 || originalY == -1)) {
-            View childAt = layoutManager.getChildAt(0);
-            if (childAt != null) {
-                originalX = childAt.getLeft();
-                originalY = childAt.getTop();
-            }
-        }
-        if (layoutManager instanceof LinearLayoutManager) {
-            orientation = ((LinearLayoutManager) layoutManager).getOrientation();
         }
         if (action == MotionEvent.ACTION_DOWN) {
             downX = e.getX();
@@ -85,10 +68,7 @@ public class DampRecyclerView extends RecyclerView {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (layoutManager == null) {
-            return super.onTouchEvent(e);
-        }
-        if (layoutManager.getItemCount() == 0) {
+        if (!ensureLayoutManager()){
             return super.onTouchEvent(e);
         }
         int action = e.getAction();
@@ -153,6 +133,36 @@ public class DampRecyclerView extends RecyclerView {
     }
 
     /**
+     * 检查LayoutManager是否支持
+     * @return
+     */
+    private boolean ensureLayoutManager(){
+        layoutManager = getLayoutManager();
+        if (layoutManager == null) {
+            return false;
+        }
+        if (!(layoutManager instanceof LinearLayoutManager)){
+            return false;
+        }
+        if (layoutManager.getItemCount() == 0) {
+            return false;
+        }
+        //计算子View原始偏移量
+        if ((originalX == -1 || originalY == -1)) {
+            View childAt = layoutManager.getChildAt(0);
+            if (childAt != null) {
+                originalX = childAt.getLeft();
+                originalY = childAt.getTop();
+            }
+        }
+        if (layoutManager instanceof LinearLayoutManager) {
+            //GridLayoutManager instanceof LinearLayoutManager
+            orientation = ((LinearLayoutManager) layoutManager).getOrientation();
+        }
+        return true;
+    }
+
+    /**
      * 是否到底部/右侧
      *
      * @return
@@ -193,8 +203,8 @@ public class DampRecyclerView extends RecyclerView {
 
 
     private void doDamp() {
-        Log.e(TAG, "doDamp: ");
-        if (layoutManager == null) {
+        Log.d(TAG, "doDamp: ");
+        if (!ensureLayoutManager()) {
             return;
         }
         if (!needStartDamp && !needEndDamp) {

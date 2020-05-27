@@ -25,7 +25,7 @@ class DampRecyclerViewActivity :BaseActivity(){
         actionBarView.setTitleText("弹性recyclerView")
         recyclerView.setNeedStartDamp(true)
         recyclerView.setNeedEndDamp(true)
-        recyclerView.layoutManager = LinearLayoutManager(this,RecyclerView.HORIZONTAL,false)
+        recyclerView.layoutManager = LinearLayoutManager(this/*,RecyclerView.HORIZONTAL,false*/)
         recyclerView.adapter = CommonRecyclerViewTestAdapter(20)
     }
 }
