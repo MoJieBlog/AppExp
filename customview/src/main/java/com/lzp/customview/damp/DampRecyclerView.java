@@ -25,15 +25,15 @@ public class DampRecyclerView extends RecyclerView {
 
     private float downX = 0;
     private float downY = 0;
-    private float damp = 0.3f;
+    private float damp = .5f;
     private int orientation = RecyclerView.VERTICAL;
     ValueAnimator animator;
 
     private boolean needStartDamp = true;//是否需要弹性阻尼运动
     private boolean needEndDamp = true;//是否需要弹性阻尼运动
     //原始顶部和尾部偏移量
-    private int originalStartOffset = -1;
-    private int originalEndOffset = -1;
+    private int originalStartOffset = 0;
+    private int originalEndOffset = 0;
 
 
     private LayoutManager layoutManager;
@@ -64,20 +64,27 @@ public class DampRecyclerView extends RecyclerView {
             downX = e.getX();
             downY = e.getY();
         }
+        //计算子View原始偏移量
+        originalStartOffset = getStartOffset();
+        originalEndOffset = getEndOffset();
         return super.onInterceptTouchEvent(e);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (layoutManager.getItemCount() == 0) {
-            return super.onInterceptTouchEvent(e);
-        }
         if (animator != null && animator.isRunning()) {
-            return super.onInterceptTouchEvent(e);
+            return super.onTouchEvent(e);
+        }
+        if (layoutManager == null) {
+            return super.onTouchEvent(e);
+        }
+        if (layoutManager.getItemCount() == 0) {
+            return super.onTouchEvent(e);
         }
         int action = e.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
+                Log.e(TAG, "onTouchEvent: ACTION_DOWN" );
                 downX = e.getX();
                 downY = e.getY();
                 break;
@@ -92,16 +99,12 @@ public class DampRecyclerView extends RecyclerView {
                     if (dx > 0 && !canScrollHorizontally(-1) && needStartDamp) {//在顶部
                         int dampX = (int) (dx * damp);
                         layoutManager.offsetChildrenHorizontal(dampX);
-                        Log.d(TAG, "onTouchEvent: 在顶部");
-                        return true;
+                        Log.d(TAG, "onTouchEvent: 在顶部" + getStartOffset());
                     } else {
-                        if (getAdapter() != null) {
-                            if (dx < 0 && !canScrollHorizontally(1) && needEndDamp) {//在末尾
-                                int dampX = (int) (dx * damp);
-                                layoutManager.offsetChildrenHorizontal(dampX);
-                                Log.d(TAG, "onTouchEvent: 在底部");
-                                return true;
-                            }
+                        if (dx < 0 && !canScrollHorizontally(1) && needEndDamp) {//在末尾
+                            int dampX = (int) (dx * damp);
+                            layoutManager.offsetChildrenHorizontal(dampX);
+                            Log.d(TAG, "onTouchEvent: 在底部" + getEndOffset());
                         }
                     }
                 } else {
@@ -129,7 +132,11 @@ public class DampRecyclerView extends RecyclerView {
     }
 
     private boolean needDamp() {
-        return needStartDamp || needEndDamp;
+        if (orientation == RecyclerView.HORIZONTAL) {
+            return (needStartDamp || needEndDamp) && (!canScrollHorizontally(1) || !canScrollHorizontally(-1));
+        } else {
+            return (needStartDamp || needEndDamp) && (!canScrollVertically(1) || !canScrollVertically(-1));
+        }
     }
 
     /**
@@ -145,11 +152,6 @@ public class DampRecyclerView extends RecyclerView {
         if (layoutManager.getItemCount() == 0) {
             return false;
         }
-        //计算子View原始偏移量
-        if ((originalStartOffset == -1 || originalEndOffset == -1)) {
-            originalStartOffset = getStartOffset();
-            originalEndOffset = getEndOffset();
-        }
         if (layoutManager instanceof LinearLayoutManager) {
             orientation = ((LinearLayoutManager) layoutManager).getOrientation();
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
@@ -163,29 +165,29 @@ public class DampRecyclerView extends RecyclerView {
             return;
         }
         int toPosition = 0;
-        if (orientation == RecyclerView.HORIZONTAL) {
+        if (orientation == RecyclerView.VERTICAL) {
             if (!canScrollVertically(-1)) {
                 //在顶部|在左侧
-                viewOffset = (int) getStartOffset();
+                viewOffset = getStartOffset();
                 toPosition = originalStartOffset;
                 Log.d(TAG, "doDamp: start viewOffset = " + viewOffset + "  toPosition = " + toPosition);
             } else if (!canScrollVertically(1)) {
                 //在底部|在右侧
-                viewOffset = (int) getEndOffset();
+                viewOffset = getEndOffset();
                 toPosition = originalEndOffset;
                 Log.d(TAG, "doDamp: end viewOffset = " + viewOffset + "  toPosition = " + toPosition);
             }
         } else {
             if (!canScrollHorizontally(-1)) {
                 //在顶部|在左侧
-                viewOffset = (int) getStartOffset();
-                Log.d(TAG, "doDamp: start viewOffset = " + viewOffset + "  toPosition = " + toPosition);
+                viewOffset = getStartOffset();
                 toPosition = originalStartOffset;
+                Log.d(TAG, "doDamp: start viewOffset = " + viewOffset + "  toPosition = " + toPosition);
             } else if (!canScrollHorizontally(1)) {
                 //在底部|在右侧
-                viewOffset = (int) getEndOffset();
-                Log.d(TAG, "doDamp: end viewOffset = " + viewOffset + "  toPosition = " + toPosition);
+                viewOffset = getEndOffset();
                 toPosition = originalEndOffset;
+                Log.d(TAG, "doDamp: end viewOffset = " + viewOffset + "  toPosition = " + toPosition);
             }
         }
 
@@ -218,9 +220,9 @@ public class DampRecyclerView extends RecyclerView {
             return 0;
         }
         if (orientation == RecyclerView.HORIZONTAL) {
-            return childAt.getRight() - getWidth();
+            return childAt.getLeft();
         } else {
-            return childAt.getBottom() - getHeight();
+            return childAt.getTop();
         }
     }
 
