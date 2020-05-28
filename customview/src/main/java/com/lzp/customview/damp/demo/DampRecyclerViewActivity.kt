@@ -1,6 +1,8 @@
 package com.lzp.customview.damp.demo
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.base.BaseActivity
@@ -25,7 +27,20 @@ class DampRecyclerViewActivity :BaseActivity(){
         actionBarView.setTitleText("弹性recyclerView")
         recyclerView.setNeedStartDamp(true)
         recyclerView.setNeedEndDamp(true)
+        recyclerView.addItemDecoration(ItemDecoration())
         recyclerView.layoutManager = LinearLayoutManager(this/*,RecyclerView.HORIZONTAL,false*/)
         recyclerView.adapter = CommonRecyclerViewTestAdapter(10)
+    }
+
+    private class ItemDecoration:RecyclerView.ItemDecoration{
+        constructor() : super()
+
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            super.getItemOffsets(outRect, view, parent, state)
+            outRect.left = 100
+            outRect.bottom = 100
+            outRect.top = 100
+            outRect.right = 100
+        }
     }
 }

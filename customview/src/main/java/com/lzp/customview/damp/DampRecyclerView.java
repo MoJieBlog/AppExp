@@ -163,18 +163,31 @@ public class DampRecyclerView extends RecyclerView {
             return;
         }
         int toPosition = 0;
-        if (!canScrollVertically(-1)) {
-            //在顶部|在左侧
-            viewOffset = (int) getStartOffset();
-            Log.d(TAG, "doDamp: start viewOffset = " + viewOffset);
-            toPosition = originalStartOffset;
-        } else if (!canScrollHorizontally(1)) {
-            //在底部|在右侧
-            viewOffset = (int) getEndOffset();
-            Log.d(TAG, "doDamp: end viewOffset = " + viewOffset);
-            toPosition = originalEndOffset;
+        if (orientation == RecyclerView.HORIZONTAL) {
+            if (!canScrollVertically(-1)) {
+                //在顶部|在左侧
+                viewOffset = (int) getStartOffset();
+                toPosition = originalStartOffset;
+                Log.d(TAG, "doDamp: start viewOffset = " + viewOffset + "  toPosition = " + toPosition);
+            } else if (!canScrollVertically(1)) {
+                //在底部|在右侧
+                viewOffset = (int) getEndOffset();
+                toPosition = originalEndOffset;
+                Log.d(TAG, "doDamp: end viewOffset = " + viewOffset + "  toPosition = " + toPosition);
+            }
+        } else {
+            if (!canScrollHorizontally(-1)) {
+                //在顶部|在左侧
+                viewOffset = (int) getStartOffset();
+                Log.d(TAG, "doDamp: start viewOffset = " + viewOffset + "  toPosition = " + toPosition);
+                toPosition = originalStartOffset;
+            } else if (!canScrollHorizontally(1)) {
+                //在底部|在右侧
+                viewOffset = (int) getEndOffset();
+                Log.d(TAG, "doDamp: end viewOffset = " + viewOffset + "  toPosition = " + toPosition);
+                toPosition = originalEndOffset;
+            }
         }
-
 
         final int viewOffset_ = viewOffset;
         animator = ValueAnimator.ofInt(viewOffset_, toPosition);
