@@ -26,6 +26,6 @@ class DampRecyclerViewActivity :BaseActivity(){
         recyclerView.setNeedStartDamp(true)
         recyclerView.setNeedEndDamp(true)
         recyclerView.layoutManager = LinearLayoutManager(this/*,RecyclerView.HORIZONTAL,false*/)
-        recyclerView.adapter = CommonRecyclerViewTestAdapter(20)
+        recyclerView.adapter = CommonRecyclerViewTestAdapter(10)
     }
 }
