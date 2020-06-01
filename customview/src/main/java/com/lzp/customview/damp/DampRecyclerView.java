@@ -52,17 +52,26 @@ public class DampRecyclerView extends RecyclerView {
     @Override
     public void onChildAttachedToWindow(@NonNull View child) {
         super.onChildAttachedToWindow(child);
+        ensureLayoutManager();
         int childAdapterPosition = getChildAdapterPosition(child);
         if (childAdapterPosition == 0) {
             State mState = new State();
             Rect mTempRect = new Rect(0, 0, 0, 0);
             getItemDecorationAt(childAdapterPosition).getItemOffsets(mTempRect, child, this, mState);
-            originalStartOffset = mTempRect.top;
+            if (orientation==RecyclerView.VERTICAL){
+                originalStartOffset = mTempRect.top;
+            }else{
+                originalStartOffset = mTempRect.left;
+            }
         } else if (getAdapter() != null && childAdapterPosition == getAdapter().getItemCount() - 1) {
             State mState = new State();
             Rect mTempRect = new Rect(0, 0, 0, 0);
             getItemDecorationAt(getItemDecorationCount()-1).getItemOffsets(mTempRect, child, this, mState);
-            originalEndOffset = -mTempRect.bottom;
+            if (orientation==RecyclerView.VERTICAL){
+                originalEndOffset = -mTempRect.bottom;
+            }else{
+                originalEndOffset = -mTempRect.right;
+            }
         }
     }
 
