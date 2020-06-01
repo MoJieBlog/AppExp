@@ -3,6 +3,8 @@ package com.lzp.customview.damp;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -49,6 +51,24 @@ public class DampRecyclerView extends RecyclerView {
     }
 
     @Override
+    public void onChildAttachedToWindow(@NonNull View child) {
+        super.onChildAttachedToWindow(child);
+        int childAdapterPosition = getChildAdapterPosition(child);
+        if (childAdapterPosition == 0) {
+            State mState = new State();
+            Rect mTempRect = new Rect(0, 0, 0, 0);
+            getItemDecorationAt(childAdapterPosition).getItemOffsets(mTempRect, child, this, mState);
+            originalStartOffset = mTempRect.top;
+        } else if (getAdapter() != null && childAdapterPosition == getAdapter().getItemCount() - 1) {
+            State mState = new State();
+            Rect mTempRect = new Rect(0, 0, 0, 0);
+            int itemDecorationCount = getItemDecorationCount();
+            getItemDecorationAt(itemDecorationCount-1).getItemOffsets(mTempRect, child, this, mState);
+            originalEndOffset = -mTempRect.bottom;
+        }
+    }
+
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent e) {
         if (!needDamp()) {
             return super.onInterceptTouchEvent(e);
@@ -64,9 +84,6 @@ public class DampRecyclerView extends RecyclerView {
             downX = e.getX();
             downY = e.getY();
         }
-        //计算子View原始偏移量
-        originalStartOffset = getStartOffset();
-        originalEndOffset = getEndOffset();
         return super.onInterceptTouchEvent(e);
     }
 
@@ -84,7 +101,6 @@ public class DampRecyclerView extends RecyclerView {
         int action = e.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                Log.e(TAG, "onTouchEvent: ACTION_DOWN" );
                 downX = e.getX();
                 downY = e.getY();
                 break;
@@ -220,9 +236,9 @@ public class DampRecyclerView extends RecyclerView {
             return 0;
         }
         if (orientation == RecyclerView.HORIZONTAL) {
-            return childAt.getLeft();
+            return childAt.getRight() - getWidth();
         } else {
-            return childAt.getTop();
+            return childAt.getBottom() - getHeight();
         }
     }
 
