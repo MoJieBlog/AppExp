@@ -3,7 +3,6 @@ package com.lzp.customview.damp;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -62,8 +61,7 @@ public class DampRecyclerView extends RecyclerView {
         } else if (getAdapter() != null && childAdapterPosition == getAdapter().getItemCount() - 1) {
             State mState = new State();
             Rect mTempRect = new Rect(0, 0, 0, 0);
-            int itemDecorationCount = getItemDecorationCount();
-            getItemDecorationAt(itemDecorationCount-1).getItemOffsets(mTempRect, child, this, mState);
+            getItemDecorationAt(getItemDecorationCount()-1).getItemOffsets(mTempRect, child, this, mState);
             originalEndOffset = -mTempRect.bottom;
         }
     }
