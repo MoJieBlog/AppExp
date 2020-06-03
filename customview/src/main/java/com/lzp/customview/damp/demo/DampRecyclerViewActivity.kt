@@ -37,9 +37,9 @@ class DampRecyclerViewActivity :BaseActivity(){
 
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
-            outRect.left = 100
-            outRect.bottom = 100
-            outRect.top = 100
+            outRect.left = 10
+            outRect.bottom = 30
+            outRect.top = 80
             outRect.right = 100
         }
     }

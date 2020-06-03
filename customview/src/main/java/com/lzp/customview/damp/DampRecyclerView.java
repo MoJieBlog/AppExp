@@ -52,6 +52,9 @@ public class DampRecyclerView extends RecyclerView {
     @Override
     public void onChildAttachedToWindow(@NonNull View child) {
         super.onChildAttachedToWindow(child);
+        if (getItemDecorationCount()==0){
+            return;
+        }
         ensureLayoutManager();
         int childAdapterPosition = getChildAdapterPosition(child);
         if (childAdapterPosition == 0) {
