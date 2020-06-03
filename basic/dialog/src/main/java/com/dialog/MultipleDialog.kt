@@ -32,7 +32,7 @@ abstract class MultipleDialog : BaseDialog, ITitle<MultipleDialog>, IMultipleDia
     init {
         setGravity(Gravity.BOTTOM)
         val inflate = LayoutInflater.from(context).inflate(R.layout.dialog_multiple, null, false)
-        val layoutParams = ViewGroup.LayoutParams(1080, OsUtils.getWinHeight(context) / 2)
+        val layoutParams = ViewGroup.LayoutParams(OsUtils.getWinWide(context), OsUtils.getWinHeight(context) / 2)
         setContentView(inflate, layoutParams)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter

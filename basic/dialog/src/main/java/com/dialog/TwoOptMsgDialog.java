@@ -45,8 +45,6 @@ public class TwoOptMsgDialog extends BaseDialog implements ITwoOptDialog, ITitle
 
         View inflate = LayoutInflater.from(context).inflate(R.layout.dialog_two_opt, null, false);
         setContentView(inflate);
-
-
         findView(inflate);
     }
 
