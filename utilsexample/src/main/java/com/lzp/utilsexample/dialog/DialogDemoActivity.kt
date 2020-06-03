@@ -8,6 +8,7 @@ import com.dialog.MultipleDialog
 import com.dialog.OneOptDialog
 import com.dialog.TwoOptMsgDialog
 import com.lzp.utilsexample.R
+import com.utils.ToastUtils
 import kotlinx.android.synthetic.main.dialog_demo_activity.*
 
 /**
@@ -40,7 +41,9 @@ class DialogDemoActivity : BaseActivity(), View.OnClickListener {
                 oneOptDialog.setTitleText("一个选项")
                         .setMessageText("描述信息")
                         .setOptText("确定")
-                        .setOnOptClickListener(View.OnClickListener { oneOptDialog.dismiss() })
+                        .setOnOptClickListener(View.OnClickListener {
+                            ToastUtils.toastText(baseContext,"点击了确定")
+                            oneOptDialog.dismiss() })
                         .show()
             }
 
@@ -52,10 +55,12 @@ class DialogDemoActivity : BaseActivity(), View.OnClickListener {
                 twoOptMsgDialog.setRightText("取消")
                 twoOptMsgDialog.setOptClickListener(object :TwoOptMsgDialog.OnOptClickListener{
                     override fun leftOptClick(v: View?) {
+                        ToastUtils.toastText(baseContext,"点击了确定")
                         twoOptMsgDialog.dismiss()
                     }
 
                     override fun rightOptClick(v: View?) {
+                        ToastUtils.toastText(baseContext,"点击了取消")
                         twoOptMsgDialog.dismiss()
                     }
                 })
@@ -78,7 +83,7 @@ class DialogDemoActivity : BaseActivity(), View.OnClickListener {
                 .setOptTextColor(0xffff0000.toInt())
                 .setConfirmClickListener(object : MultipleDialog.OnConfirmListener {
                     override fun onConfirmClick(v: View, position: Int) {
-                        Toast.makeText(this@DialogDemoActivity, "$position", Toast.LENGTH_SHORT).show()
+                        ToastUtils.toastText(baseContext,"$position")
                     }
                 }).setSelectedPosition(2)
         multipleDialog.show()

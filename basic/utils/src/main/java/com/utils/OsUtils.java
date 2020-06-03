@@ -117,7 +117,7 @@ public final class OsUtils {
             }
             activity.startActivityForResult(cameraIntent, requestCodeTakePhoto);
         } else {
-            ToastUtils.toastText("没有系统相机");
+            ToastUtils.toastText(activity,"没有系统相机");
         }
     }
 
