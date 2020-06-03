@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.utils.PhoneUtils;
+import com.utils.OsUtils;
 import com.utils.SizeUtils;
 
 /**
@@ -24,7 +24,7 @@ public class GarageItemDecoration extends RecyclerView.ItemDecoration {
 
 
     public GarageItemDecoration(Context context) {
-        pagerOffset = (PhoneUtils.getWinWide(context) - SizeUtils.dip2px(context, 200)) / 2;
+        pagerOffset = (OsUtils.getWinWide(context) - SizeUtils.dip2px(context, 200)) / 2;
         diverWidth = SizeUtils.dip2px(context, 15);
     }
 

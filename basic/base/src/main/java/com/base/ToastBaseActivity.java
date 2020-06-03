@@ -11,9 +11,7 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
-import com.base.BaseActivity;
-import com.base.R;
-import com.utils.PhoneUtils;
+import com.utils.OsUtils;
 import com.utils.SizeUtils;
 
 /**
@@ -51,7 +49,7 @@ public class ToastBaseActivity extends BaseActivity {
     }
 
     private void buildToastView(int layoutRes) {
-        toastViewHeight = (int) (SizeUtils.dip2px(this, 45) + PhoneUtils.getStatusBarHeight(this));
+        toastViewHeight = (int) (SizeUtils.dip2px(this, 45) + OsUtils.getStatusBarHeight(this));
         if (toastView == null) {
             ViewGroup viewById = findViewById(android.R.id.content);
             toastView = getLayoutInflater().inflate(layoutRes, null);

@@ -3,6 +3,8 @@ package com.utils;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 /**
  * @describe:
  * @Author: lixiaopeng
@@ -10,15 +12,23 @@ import android.widget.Toast;
  */
 public class ToastUtils {
 
-    public static Toast get(Context context){
-       return new Toast(context);
+    private static Toast toast;
+
+    private static Toast getToast() {
+        if (toast == null) {
+            toast = new Toast(Utils.getApp());
+        }
+        return toast;
     }
 
-    public static void toastText(Context context,String text){
-
+    public static void toastText(String text) {
+        Toast toast = getToast();
+        toast.setText(text);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
     }
 
-    public static void toastIcon(String text){
+    public static void toastIcon(String text) {
 
     }
 

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dialog.base.BaseDialog
 import com.dialog.base.IMultipleDialog
 import com.dialog.base.ITitle
-import com.utils.PhoneUtils
+import com.utils.OsUtils
 import kotlinx.android.synthetic.main.dialog_multiple.*
 
 /**
@@ -32,7 +32,7 @@ abstract class MultipleDialog : BaseDialog, ITitle<MultipleDialog>, IMultipleDia
     init {
         setGravity(Gravity.BOTTOM)
         val inflate = LayoutInflater.from(context).inflate(R.layout.dialog_multiple, null, false)
-        val layoutParams = ViewGroup.LayoutParams(1080, PhoneUtils.getWinHeight(context) / 2)
+        val layoutParams = ViewGroup.LayoutParams(1080, OsUtils.getWinHeight(context) / 2)
         setContentView(inflate, layoutParams)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter

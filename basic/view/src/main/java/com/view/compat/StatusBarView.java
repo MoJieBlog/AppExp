@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.utils.PhoneUtils;
+import com.utils.OsUtils;
 
 /**
  * @describe
@@ -25,7 +25,7 @@ public class StatusBarView  extends View {
 
     public StatusBarView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        statusBarHeight = PhoneUtils.getStatusBarHeight(context);
+        statusBarHeight = OsUtils.getStatusBarHeight(context);
     }
 
     @Override

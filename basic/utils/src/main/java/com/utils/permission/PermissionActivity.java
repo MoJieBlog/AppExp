@@ -45,9 +45,7 @@ public class PermissionActivity extends Activity {
             List<String> deniedPermissions = new ArrayList<>();
             boolean neverRequest = false;
             for (String permission : permissions) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(PermissionActivity.this,permission)){
-                    neverRequest = true;
-                }
+                neverRequest = ActivityCompat.shouldShowRequestPermissionRationale(PermissionActivity.this,permission);
                 if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                     deniedPermissions.add(permission);
                 }

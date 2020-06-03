@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lzp.copyui.transition.gallery.itemdecoration.GarageItemDecoration;
-import com.utils.PhoneUtils;
+import com.utils.OsUtils;
 import com.utils.SizeUtils;
 
 /**
@@ -45,7 +45,7 @@ public class GalleryRecyclerView extends RecyclerView {
     public GalleryRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         dp1 = SizeUtils.dip2px(context, 1);
-        screentWidth = PhoneUtils.getWinWide(context);
+        screentWidth = OsUtils.getWinWide(context);
         //画廊效果默认偏移量
         itemWidth = (int) (screentWidth - dp1 * 90);
         offset = (screentWidth - itemWidth) / 2;

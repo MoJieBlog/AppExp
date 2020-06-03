@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.BaseActivity;
 import com.lzp.copyui.R;
-import com.utils.PhoneUtils;
+import com.utils.OsUtils;
 
 import java.util.ArrayList;
 
@@ -209,7 +209,7 @@ public class TabManagerActivity extends BaseActivity {
 
         //目标位置没在屏幕内
         if (toPosition > lastVisibleItemPosition + 1) {
-            int[] toXy = {0, PhoneUtils.getWinHeight(this)};
+            int[] toXy = {0, OsUtils.getWinHeight(this)};
             return toXy;
         } else if (toPosition < firstVisibleItemPosition + 1) {
             int[] toXy = {0, 0};

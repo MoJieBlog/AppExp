@@ -31,4 +31,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation extAppcompat
+    implementation extAnnotations
 }
