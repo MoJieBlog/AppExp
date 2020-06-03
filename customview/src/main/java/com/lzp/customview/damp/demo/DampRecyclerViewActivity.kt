@@ -28,8 +28,8 @@ class DampRecyclerViewActivity :BaseActivity(){
         recyclerView.setNeedStartDamp(true)
         recyclerView.setNeedEndDamp(true)
         recyclerView.addItemDecoration(ItemDecoration())
-        recyclerView.layoutManager = LinearLayoutManager(this/*,RecyclerView.HORIZONTAL,false*/)
-        recyclerView.adapter = CommonRecyclerViewTestAdapter(10)
+        recyclerView.layoutManager = LinearLayoutManager(this,RecyclerView.HORIZONTAL,false)
+        recyclerView.adapter = CommonRecyclerViewTestAdapter(4)
     }
 
     private class ItemDecoration:RecyclerView.ItemDecoration{

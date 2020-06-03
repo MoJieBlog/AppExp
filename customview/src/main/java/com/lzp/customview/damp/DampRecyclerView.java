@@ -3,11 +3,9 @@ package com.lzp.customview.damp;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import androidx.annotation.NonNull;
@@ -32,10 +30,6 @@ public class DampRecyclerView extends RecyclerView {
 
     private boolean needStartDamp = true;//是否需要弹性阻尼运动
     private boolean needEndDamp = true;//是否需要弹性阻尼运动
-    //原始顶部和尾部偏移量
-    private int originalStartOffset = 0;
-    private int originalEndOffset = 0;
-
 
     private LayoutManager layoutManager;
     private int viewOffset = 0;
@@ -50,62 +44,15 @@ public class DampRecyclerView extends RecyclerView {
     }
 
     @Override
-    public void onChildAttachedToWindow(@NonNull View child) {
-        super.onChildAttachedToWindow(child);
-        if (getItemDecorationCount()==0){
-            return;
-        }
-        ensureLayoutManager();
-        int childAdapterPosition = getChildAdapterPosition(child);
-        if (childAdapterPosition == 0) {
-            State mState = new State();
-            Rect mTempRect = new Rect(0, 0, 0, 0);
-            getItemDecorationAt(childAdapterPosition).getItemOffsets(mTempRect, child, this, mState);
-            if (orientation==RecyclerView.VERTICAL){
-                originalStartOffset = mTempRect.top;
-            }else{
-                originalStartOffset = mTempRect.left;
-            }
-        } else if (getAdapter() != null && childAdapterPosition == getAdapter().getItemCount() - 1) {
-            State mState = new State();
-            Rect mTempRect = new Rect(0, 0, 0, 0);
-            getItemDecorationAt(getItemDecorationCount()-1).getItemOffsets(mTempRect, child, this, mState);
-            if (orientation==RecyclerView.VERTICAL){
-                originalEndOffset = -mTempRect.bottom;
-            }else{
-                originalEndOffset = -mTempRect.right;
-            }
-        }
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent e) {
+    public boolean onTouchEvent(MotionEvent e) {
         if (!needDamp()) {
-            return super.onInterceptTouchEvent(e);
-        }
-        if (animator != null && animator.isRunning()) {
-            return super.onInterceptTouchEvent(e);
+            return super.onTouchEvent(e);
         }
         if (!ensureLayoutManager()) {
-            return super.onInterceptTouchEvent(e);
+            Log.w(TAG,"layoutManager is null or item count is 0.");
+            return super.onTouchEvent(e);
         }
-        int action = e.getAction();
-        if (action == MotionEvent.ACTION_DOWN) {
-            downX = e.getX();
-            downY = e.getY();
-        }
-        return super.onInterceptTouchEvent(e);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent e) {
         if (animator != null && animator.isRunning()) {
-            return super.onTouchEvent(e);
-        }
-        if (layoutManager == null) {
-            return super.onTouchEvent(e);
-        }
-        if (layoutManager.getItemCount() == 0) {
             return super.onTouchEvent(e);
         }
         int action = e.getAction();
@@ -113,37 +60,40 @@ public class DampRecyclerView extends RecyclerView {
             case MotionEvent.ACTION_DOWN:
                 downX = e.getX();
                 downY = e.getY();
+                viewOffset = 0;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (!needStartDamp && !needEndDamp) {
-                    return super.onTouchEvent(e);
-                }
                 if (orientation == LinearLayoutManager.HORIZONTAL) {
                     float nowX = e.getX();
                     float dx = nowX - downX;
                     downX = nowX;
                     if (dx > 0 && !canScrollHorizontally(-1) && needStartDamp) {//在顶部
                         int dampX = (int) (dx * damp);
+                        viewOffset += dampX;
                         layoutManager.offsetChildrenHorizontal(dampX);
-                        Log.d(TAG, "onTouchEvent: 在顶部" + getStartOffset());
+                        Log.d(TAG, "onTouchEvent: 在顶部" + viewOffset);
                     } else {
                         if (dx < 0 && !canScrollHorizontally(1) && needEndDamp) {//在末尾
                             int dampX = (int) (dx * damp);
+                            viewOffset += dampX;
                             layoutManager.offsetChildrenHorizontal(dampX);
-                            Log.d(TAG, "onTouchEvent: 在底部" + getEndOffset());
+                            Log.d(TAG, "onTouchEvent: 在底部" + viewOffset);
                         }
                     }
                 } else {
                     float nowY = e.getY();
                     float dy = nowY - downY;
                     downY = nowY;
-                    int dampY = (int) (dy * damp);
                     if (dy > 0 && !canScrollVertically(-1) && needStartDamp) {//在顶部
+                        int dampY = (int) (dy * damp);
+                        viewOffset += dampY;
                         layoutManager.offsetChildrenVertical(dampY);
-                        Log.d(TAG, "onTouchEvent: 在顶部");
+                        Log.d(TAG, "onTouchEvent: 在顶部" + viewOffset);
                     } else if (dy < 0 && !canScrollVertically(1) && needEndDamp) {
+                        int dampY = (int) (dy * damp);
+                        viewOffset += dampY;
                         layoutManager.offsetChildrenVertical(dampY);
-                        Log.d(TAG, "onTouchEvent: 在底部");
+                        Log.d(TAG, "onTouchEvent: 在底部" + viewOffset);
                     }
                 }
                 break;
@@ -190,35 +140,8 @@ public class DampRecyclerView extends RecyclerView {
         if (animator != null && animator.isRunning()) {
             return;
         }
-        int toPosition = 0;
-        if (orientation == RecyclerView.VERTICAL) {
-            if (!canScrollVertically(-1)) {
-                //在顶部|在左侧
-                viewOffset = getStartOffset();
-                toPosition = originalStartOffset;
-                Log.d(TAG, "doDamp: start viewOffset = " + viewOffset + "  toPosition = " + toPosition);
-            } else if (!canScrollVertically(1)) {
-                //在底部|在右侧
-                viewOffset = getEndOffset();
-                toPosition = originalEndOffset;
-                Log.d(TAG, "doDamp: end viewOffset = " + viewOffset + "  toPosition = " + toPosition);
-            }
-        } else {
-            if (!canScrollHorizontally(-1)) {
-                //在顶部|在左侧
-                viewOffset = getStartOffset();
-                toPosition = originalStartOffset;
-                Log.d(TAG, "doDamp: start viewOffset = " + viewOffset + "  toPosition = " + toPosition);
-            } else if (!canScrollHorizontally(1)) {
-                //在底部|在右侧
-                viewOffset = getEndOffset();
-                toPosition = originalEndOffset;
-                Log.d(TAG, "doDamp: end viewOffset = " + viewOffset + "  toPosition = " + toPosition);
-            }
-        }
-
         final int viewOffset_ = viewOffset;
-        animator = ValueAnimator.ofInt(viewOffset_, toPosition);
+        animator = ValueAnimator.ofInt(viewOffset_, 0);
         animator.setDuration(200);
         animator.setInterpolator(new DecelerateInterpolator(2));
         animator.addUpdateListener(new AnimatorUpdateListener() {
@@ -235,36 +158,6 @@ public class DampRecyclerView extends RecyclerView {
             }
         });
         animator.start();
-    }
-
-    private int getEndOffset() {
-        if (layoutManager.getItemCount() == 0) {
-            return 0;
-        }
-        View childAt = layoutManager.getChildAt(getChildCount() - 1);
-        if (childAt == null) {
-            return 0;
-        }
-        if (orientation == RecyclerView.HORIZONTAL) {
-            return childAt.getRight() - getWidth();
-        } else {
-            return childAt.getBottom() - getHeight();
-        }
-    }
-
-    private int getStartOffset() {
-        if (layoutManager.getItemCount() == 0) {
-            return 0;
-        }
-        View childAt = layoutManager.getChildAt(0);
-        if (childAt == null) {
-            return 0;
-        }
-        if (orientation == RecyclerView.HORIZONTAL) {
-            return childAt.getLeft();
-        } else {
-            return childAt.getTop();
-        }
     }
 
     public void setNeedStartDamp(boolean needStartDamp) {
