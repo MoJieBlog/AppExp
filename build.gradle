@@ -4,11 +4,12 @@ buildscript {
     apply from: 'config.gradle'
     ext.kotlin_version = extKtVesion
     repositories {
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
         google()
         jcenter()
-       /* maven { url "https://maven.aliyun.com/repository/central" }
-        maven { url "https://maven.aliyun.com/repository/google" }
-        maven { url "https://maven.aliyun.com/repository/jcenter" }*/
+        mavenCentral()
     }
     dependencies {
         classpath extBuildGradle
@@ -21,8 +22,12 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
         google()
         jcenter()
+        mavenCentral()
     }
 }
 

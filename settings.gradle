@@ -1,3 +1,4 @@
+include ':basic-net:net'
 include ':app'
 
 include 'basic-dialog'
@@ -12,8 +13,12 @@ project(':basic-base').projectDir = new File(rootProject.projectDir,'./basic/bas
 include 'basic-utils'
 project(':basic-utils').projectDir = new File(rootProject.projectDir,'./basic/utils')
 
+include 'basic-net'
+project(':basic-net').projectDir = new File(rootProject.projectDir,'./basic/net')
+
 include 'basic-imageloader'
 project(':basic-imageloader').projectDir = new File(rootProject.projectDir,'./basic/imageloader')
+
 include ':customview'
 include ':copyui'
 include ':systemopt'

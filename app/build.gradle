@@ -74,6 +74,7 @@ dependencies {
     implementation project(path: ':basic-view')
     implementation project(path: ':basic-imageloader')
     implementation project(path: ':basic-dialog')
+    implementation project(path: ':basic-net')
     //implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     //Canary
     //releaseImplementation releaseLeakCanary

@@ -30,21 +30,14 @@ ext {
     extMultidex = "com.android.support:multidex:1.0.3"
 
     // okhttp 依赖
-    extOkhttp = 'com.squareup.okhttp3:okhttp:3.14.0'
+    extOkhttp = 'com.squareup.okhttp3:okhttp:4.7.2'
     //retrofit
     //extRetrofit = 'com.squareup.retrofit2:retrofit:2.0.2'
     // glide 依赖
     extGlide = 'com.github.bumptech.glide:glide:4.9.0'
     extGlideCompiler = 'com.github.bumptech.glide:compiler:4.9.0'
-    // Rx
-    //extRxJava = 'io.reactivex.rxjava2:rxjava:2.2.7'
-    //extRxAndroid = 'io.reactivex.rxjava2:rxandroid:2.1.1'
     // google gson
     extGson = 'com.google.code.gson:gson:2.8.5'
-    //butterKnife
-    extButterknife = "com.jakewharton:butterknife:9.0.0"
-    extButterknifeCompiler = "com.jakewharton:butterknife-compiler:9.0.0"
-    extButterknifeGradlePlugin = "com.jakewharton:butterknife-gradle-plugin:9.0.0"
     //eventBus
     extEventBus = 'org.greenrobot:eventbus:3.1.1'
     //leakCanary
