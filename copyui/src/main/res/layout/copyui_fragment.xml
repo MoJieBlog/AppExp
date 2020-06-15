@@ -65,6 +65,19 @@
                 android:textSize="17sp"
                 android:textColor="#ffffff"
                 android:background="@drawable/rect_gradient_ffa240_ff8c49_r4" />
+
+            <TextView
+                android:id="@+id/galleryTv"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="12dp"
+                android:text="画廊效果"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textColor="#ffffff"
+                android:background="@drawable/rect_gradient_ffa240_ff8c49_r4" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

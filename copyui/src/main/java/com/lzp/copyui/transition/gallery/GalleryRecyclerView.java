@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lzp.copyui.transition.gallery.itemdecoration.GarageItemDecoration;
+import com.lzp.copyui.gallery.GalleryRecyclerViewNew;
+import com.lzp.copyui.gallery.itemdecoration.GalleryItemDecoration;
 import com.utils.OsUtils;
 import com.utils.SizeUtils;
 
 /**
- * @describe 画廊效果的rcv 暂时只支持一屏只能看到三个
+ * @describe 画廊效果的rcv 建议使用{@link GalleryRecyclerViewNew}
  * @author: lixiaopeng
  * @Date: 2019-10-25
  */
@@ -28,7 +29,7 @@ public class GalleryRecyclerView extends RecyclerView {
 
     private LinearLayoutManager layoutManager;
     private LinearSnapHelper helper;
-    private GarageItemDecoration itemDecoration;
+    private GalleryItemDecoration itemDecoration;
 
     private int screentWidth;
     //默认宽度为屏幕宽度*0.8
@@ -52,7 +53,7 @@ public class GalleryRecyclerView extends RecyclerView {
 
         helper = new LinearSnapHelper();
         layoutManager = new LinearLayoutManager(context, HORIZONTAL, false);
-        itemDecoration = new GarageItemDecoration(context);
+        itemDecoration = new GalleryItemDecoration(context);
         itemDecoration.setPagerOffset(offset);
         addItemDecoration(itemDecoration);
         helper.attachToRecyclerView(this);
@@ -61,13 +62,6 @@ public class GalleryRecyclerView extends RecyclerView {
     }
 
     public void setListener() {
-        addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-
-            }
-        });
-
         addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -79,7 +73,6 @@ public class GalleryRecyclerView extends RecyclerView {
                         listener.onPageSelected(currentItemPosition);
                     }
                 }
-
             }
 
             @Override
@@ -126,11 +119,8 @@ public class GalleryRecyclerView extends RecyclerView {
     }
 
     public int getCurrentItemPosition() {
-        //TODO 一屏可以看到多个也可以用这个算法
-        int lastPosition = layoutManager.findLastCompletelyVisibleItemPosition();
-        int firstPosition = layoutManager.findFirstCompletelyVisibleItemPosition();
-        //因为选中的居中，所以中间的index为（最后一个index + 第一个index）/2
-        return (lastPosition + firstPosition) / 2;
+        View snapView = helper.findSnapView(layoutManager);
+        return layoutManager.getPosition(snapView);
     }
 
     public interface MONScrollListener {

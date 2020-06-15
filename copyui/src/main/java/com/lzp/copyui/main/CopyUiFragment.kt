@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.base.BaseFragment
 import com.lzp.copyui.R
+import com.lzp.copyui.gallery.GalleryActivity
 import com.lzp.copyui.message.MessageActivity
 import com.lzp.copyui.tabmanager.TabManagerActivity
 import com.lzp.copyui.transition.CarActivity
@@ -28,6 +29,7 @@ class CopyUiFragment : BaseFragment(), View.OnClickListener {
         switchMsgOpenTv.setOnClickListener(this)
         transitionTv.setOnClickListener(this)
         tabManagerTv.setOnClickListener(this)
+        galleryTv.setOnClickListener(this)
     }
 
     override fun clearListener() {
@@ -35,6 +37,7 @@ class CopyUiFragment : BaseFragment(), View.OnClickListener {
         switchMsgOpenTv.setOnClickListener(null)
         transitionTv.setOnClickListener(null)
         tabManagerTv.setOnClickListener(null)
+        galleryTv.setOnClickListener(null)
     }
 
     override fun onClick(v: View?) {
@@ -49,6 +52,10 @@ class CopyUiFragment : BaseFragment(), View.OnClickListener {
             }
             R.id.tabManagerTv -> {
                 val intent = Intent(activity, TabManagerActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.galleryTv->{
+                val intent = Intent(activity, GalleryActivity::class.java)
                 startActivity(intent)
             }
         }

@@ -14,5 +14,6 @@
 
         <activity android:name=".tabmanager.TabManagerActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".gallery.GalleryActivity" />
     </application>
 </manifest>
